@@ -6,5 +6,17 @@ module TA = struct
   end
 
   (* external add : int -> int -> int = "add" *)
-  let add _ _ = 0
+  let add _ _ =
+    let market_strength =
+      Ctypes.CArray.of_string "Market Strength" |> Ctypes.CArray.start
+    in
+    let ta_string_table :
+        Types_generated.ta_string_table Ctypes.structure Ctypes_static.ptr
+        Ctypes_static.ptr =
+      Ctypes.make C.Type.ta_string_table |> Ctypes.addr |> Ctypes.addr
+    in
+    let x = C.Functions.ta_func_table_alloc market_strength ta_string_table in
+    x
 end
+
+(* module C = Func *)

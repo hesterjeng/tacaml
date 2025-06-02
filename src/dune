@@ -1,6 +1,16 @@
 (library
  (name tacaml)
- (foreign_stubs
-  (language c)
-  (names stub)
-  (flags (-I/usr/include/ta-lib))))
+ (ctypes
+  (external_library_name libfoo)
+  (build_flags_resolver pkg_config)
+  (headers
+   (include "foo.h"))
+  (type_description
+   (instance Type)
+   (functor Type_description))
+  (function_description
+   (concurrency sequential)
+   (instance Functions)
+   (functor Function_description))
+  (generated_types Types_generated)
+  (generated_entry_point C)))

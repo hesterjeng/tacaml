@@ -1,4 +1,3 @@
 (executable
  (name tacaml)
- (libraries tacaml)
-)
+ (libraries tacaml))

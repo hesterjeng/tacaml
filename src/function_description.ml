@@ -23,4 +23,13 @@ module Functions (F : Ctypes.FOREIGN) = struct
     foreign "TA_FuncTableFree"
     @@ (ptr @@ Types.ta_string_table)
     @-> returning int
+
+  let ta_get_func_handle =
+    foreign "TA_GetFuncHandle"
+    @@ (const @@ ptr @@ char)
+    @-> (const @@ ptr @@ ptr @@ Types.ta_func_handle)
+    @-> returning int
+
+  (* let ta_func_flag_overlap = *)
+  (*   foreign "TA_FUNC_FLAG_OVERLAP" *)
 end

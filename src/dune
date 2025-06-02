@@ -1,10 +1,10 @@
 (library
  (name tacaml)
  (ctypes
-  (external_library_name libfoo)
+  (external_library_name ta-lib)
   (build_flags_resolver pkg_config)
   (headers
-   (include "foo.h"))
+   (include "ta_abstract.h"))
   (type_description
    (instance Type)
    (functor Type_description))

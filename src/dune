@@ -1,0 +1,6 @@
+(library
+ (name tacaml)
+ (foreign_stubs
+  (language c)
+  (names stub)
+  (flags (-I/usr/include/ta-lib))))

@@ -1,0 +1,9 @@
+_build/
+.envrc
+server.exe
+elisp/flycheck_top.el
+lib/javascript/css.css
+lib/javascript/plotly_latest.css
+dune-odep.svg
+data/*.json
+_html/

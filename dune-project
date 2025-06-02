@@ -1,0 +1,24 @@
+(lang dune 3.17)
+
+(generate_opam_files true)
+
+(authors "John Hester")
+
+(maintainers "John Hester")
+
+(name ta_caml)
+
+(source
+ (github username/reponame))
+
+(package
+ (name ta_caml)
+ (allow_empty)
+ (synopsis "Bindings to TA-lib")
+ (license "GPL-3.0-or-later")
+ (description "A longer description")
+ (depends ocaml)
+ (tags
+  ("add topics" "to describe" your project)))
+
+; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

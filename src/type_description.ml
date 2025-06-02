@@ -10,8 +10,8 @@ module Types (F : Ctypes.TYPE) = struct
   let ta_string_table : ta_string_table structure typ =
     structure "TA_StringTable"
 
-  let ta_func_handle = F.uint
-  let ta_func_flags = F.int
+  let ta_func_handle = typedef F.uint "TA_FuncHandle"
+  let ta_func_flags = typedef F.int "TA_FuncFlags"
 
   type ta_func_info
 
@@ -124,4 +124,62 @@ module Types (F : Ctypes.TYPE) = struct
         ]
     in
     res
+
+  type ta_output_parameter_type = TA_Output_Real | TA_Output_Integer
+
+  let ta_output_parameter_type =
+    let outputreal = constant "TA_Output_Real" int64_t in
+    let outputinteger = constant "TA_Output_Integer" int64_t in
+    let res =
+      enum "TA_OutputParameterType" ~typedef:true
+        [ (TA_Output_Real, outputreal); (TA_Output_Integer, outputinteger) ]
+    in
+    res
+
+  let ta_input_flags = typedef F.int "TA_InputFlags"
+  let ta_opt_input_flags = typedef F.int "TA_OptInputFlags"
+  let ta_output_flags = typedef F.int "TA_OutputFlags"
+
+  type ta_input_parameter_info
+
+  let ta_input_parameter_info : ta_input_parameter_info structure typ =
+    let structure = structure "TA_InputParameterInfo" in
+    let _ = field structure "type" @@ ta_input_parameter_type in
+    let _ = field structure "paramName" @@ ptr @@ const char in
+    let _ = field structure "flags" @@ ta_input_flags in
+    seal structure;
+    structure
+
+  type ta_opt_input_parameter_info
+
+  let ta_opt_input_parameter_info : ta_opt_input_parameter_info structure typ =
+    let structure = structure "TA_OptInputParameterInfo" in
+    let _ = field structure "type" @@ ta_opt_input_parameter_type in
+    let _ = field structure "paramName" @@ ptr @@ const char in
+    let _ = field structure "flags" @@ ta_opt_input_flags in
+    let _ = field structure "displayName" @@ ptr @@ const char in
+    let _ = field structure "dataSet" @@ ptr @@ const void in
+    let _ = field structure "defaultValue" @@ double in
+    let _ = field structure "hint" @@ ptr @@ const char in
+    let _ = field structure "helpFile" @@ ptr @@ const char in
+    seal structure;
+    structure
+
+  type ta_output_parameter_info
+
+  let ta_output_parameter_info : ta_output_parameter_info structure typ =
+    let structure = structure "TA_OutputParameterInfo" in
+    let _ = field structure "type" @@ ta_output_parameter_type in
+    let _ = field structure "paramName" @@ ptr @@ const char in
+    let _ = field structure "flags" @@ ta_output_flags in
+    seal structure;
+    structure
+
+  type ta_param_holder
+
+  let ta_param_holder : ta_param_holder structure typ =
+    let structure = structure "TA_ParamHolder" in
+    let _ = field structure "hiddenData" @@ ptr void in
+    seal structure;
+    structure
 end

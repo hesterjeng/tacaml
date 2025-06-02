@@ -10,7 +10,7 @@ module Types (F : Ctypes.TYPE) = struct
   let ta_string_table : ta_string_table structure typ =
     structure "TA_StringTable"
 
-  let ta_func_handle = F.const F.uint
+  let ta_func_handle = F.uint
   let ta_func_flags = F.int
 
   type ta_func_info

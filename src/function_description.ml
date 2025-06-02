@@ -15,7 +15,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
 
   let ta_func_table_alloc =
     foreign "TA_FuncTableAlloc"
-    @@ ptr char
+    @@ (ptr @@ const char)
     @-> (ptr @@ ptr @@ Types.ta_string_table)
     @-> returning int
 
@@ -26,10 +26,13 @@ module Functions (F : Ctypes.FOREIGN) = struct
 
   let ta_get_func_handle =
     foreign "TA_GetFuncHandle"
-    @@ (const @@ ptr @@ char)
-    @-> (const @@ ptr @@ ptr @@ Types.ta_func_handle)
+    @@ (ptr @@ const char)
+    @-> (ptr @@ ptr @@ const Types.ta_func_handle)
     @-> returning int
 
-  (* let ta_func_flag_overlap = *)
-  (*   foreign "TA_FUNC_FLAG_OVERLAP" *)
+  let ta_get_func_info =
+    foreign "TA_GetFuncInfo"
+    @@ (ptr @@ const Types.ta_func_handle)
+    @-> (ptr @@ ptr @@ const Types.ta_func_info)
+    @-> returning int
 end

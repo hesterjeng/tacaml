@@ -10,12 +10,11 @@ module TA = struct
     let market_strength =
       Ctypes.CArray.of_string "Market Strength" |> Ctypes.CArray.start
     in
-    let ta_string_table :
-        Types_generated.ta_string_table Ctypes.structure Ctypes_static.ptr
-        Ctypes_static.ptr =
-      Ctypes.make C.Type.ta_string_table |> Ctypes.addr |> Ctypes.addr
+    let ta_string_table =
+      (* Ctypes.make C.Type.ta_string_table |> Ctypes.addr |> *)
+      (* Ctypes.reference_type *)
     in
-    let x = C.Functions.ta_func_table_alloc market_strength ta_string_table in
+    let x = C.Functions.ta_func_table_alloc market_strength @@ ta_string_table in
     x
 end
 

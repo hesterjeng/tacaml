@@ -2,19 +2,30 @@
 
 open Ctypes
 
-module StringTable = struct
-  type core
-  type ty = core structure typ
-  type t = core structure ptr
+(* let initialize = foreign "TA_Initialize" (void @-> returning void) *)
 
-  let t : ty = structure "TA_StringTable"
-  let size_field = field t "size" uint
-  let string_field = field t "string" (ptr (ptr char))
-  let () = seal t
-end
+let sealed = ref false
 
 module Types (F : Ctypes.TYPE) = struct
   open F
+
+  module StringTable = struct
+    (* type core *)
+    (* type ty = core structure typ *)
+    (* type t = core structure ptr *)
+
+    type stringtable
+
+    let stringtable : stringtable structure typ = structure "TA_StringTable"
+    let size = field stringtable "size" uint
+    let string = field stringtable "string" (ptr (ptr char))
+
+    let () =
+      sealed := true;
+      seal stringtable
+
+    type t = stringtable ptr
+  end
 
   (* typedef struct TA_StringTable *)
   (* { *)

@@ -9,31 +9,35 @@ module TA = struct
   end
 
   module StringTable = struct
-    (* include C.Type.StringTable *)
-    module Self = Type_description.StringTable
-      (* C.Type.StringTable *)
+    include C.Type.StringTable
+    include C.Functions.StringTable
 
-    type t = Self.t
+    let size x =
+      let open Ctypes in
+      try
+        let res = Ctypes.getf !@x Types_generated.StringTable.size in
+        Unsigned.UInt.to_int res
+      with
+      | e ->
+        let typ = Ctypes.string_of_typ stringtable in
+        Format.printf "@[problem getting string table size. %s sealed: %b@]@."
+          typ !Type_description.sealed;
+        raise e
 
-    let string_field = Self.string_field
+    let string_field x =
+      let open Ctypes in
+      Ctypes.getf !@x Types_generated.StringTable.string
 
-    let declare () : t =
+    let declare () =
       let x = CT.structure "TA_StringTable" in
       let res = CT.from_voidp x CT.null in
       res
 
-    (* let size (x : t) = *)
-    (*   let open Ctypes in *)
-    (*   Format.printf "@[getting size@]@."; *)
-    (*   let res = CT.getf !@x C.Type.StringTable.size_field in *)
-    (*   Unsigned.UInt.to_int res *)
-
-    let to_list (table_ptr : t) : string list =
+    let to_list table_ptr : string list =
       let open Ctypes in
       let count = size table_ptr in
       Format.printf "@[count: %d@]@." count;
-      let table = !@table_ptr in
-      let strings_ptr = getf table string_field in
+      let strings_ptr = string_field table_ptr in
       let rec extract acc i =
         if i < 0 then acc
         else
@@ -49,19 +53,22 @@ module TA = struct
   end
 
   module GroupTable = struct
-    (* include C.Type.StringTable *)
-    module Self = C.Type.StringTable
+    type t = StringTable.stringtable Ctypes.structure Ctypes.ptr
 
-    type t = Self.t
+    let pp : t Format.printer =
+     fun fmt x ->
+      let count = StringTable.size x in
+      let l = StringTable.to_list x in
+      Format.fprintf fmt "@[%d %a@]@." count (List.pp String.pp) l
 
-    let t = Self.t
-
-    let allocate () =
+    let allocate () : t =
       let ta_string_table = StringTable.declare () in
-      let gt_ptr = ptr_ptr t ta_string_table in
-      let res = C.Functions.ta_group_table_alloc gt_ptr in
+      let gt_ptr = ptr_ptr StringTable.stringtable ta_string_table in
+      let res = StringTable.ta_group_table_alloc gt_ptr in
       match res with
-      | 0 -> ta_string_table
+      | 0 ->
+        Format.printf "@[Group table allocated@]@.";
+        ta_string_table
       | x ->
         Format.printf "@[%d@]@." x;
         invalid_arg "Bad response allocating GroupTable"
@@ -84,6 +91,15 @@ module TA = struct
     (*     Format.printf "@[%d@]@." x; *)
     (*     invalid_arg "Bad response allocating FuncTable" *)
   end
+end
+
+module Func = struct
+
+  (* let stoch start end_ highs lows closes = *)
+
+  (*   C.Functions.Func.ta_stoch *)
+  (*     (\* Int.min_int Int.min_int 0 Int.min_int 0 *\) *)
+
 end
 
 (* module C = Func *)

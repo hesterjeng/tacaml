@@ -6,10 +6,21 @@ module Types (F : Ctypes.TYPE) = struct
   open F
 
   type ta_string_table
+  (* typedef struct TA_StringTable *)
+  (* { *)
+  (*     unsigned int size;    /* Number of string. */ *)
+  (*     const char **string;  /* Pointer to the strings. */ *)
+
+  (*    /* Hidden data for internal use by TA-Lib. Do not modify. */ *)
+  (*    void *hiddenData; *)
+  (* } TA_StringTable; *)
 
   let ta_string_table : ta_string_table structure typ =
     structure "TA_StringTable"
 
+  let string_table_size = field ta_string_table "size" uint
+  let string_table_string = field ta_string_table "string" (ptr (ptr char))
+  let () = seal ta_string_table
   let ta_func_handle = typedef F.uint "TA_FuncHandle"
   let ta_func_flags = typedef F.int "TA_FuncFlags"
 

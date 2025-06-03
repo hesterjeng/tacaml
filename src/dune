@@ -4,7 +4,7 @@
   (external_library_name ta-lib)
   (build_flags_resolver pkg_config)
   (headers
-   (include "ta_abstract.h"))
+   (include "ta_abstract.h" "ta_common.h"))
   (type_description
    (instance Type)
    (functor Type_description))

@@ -6,6 +6,8 @@ module Types = Types_generated
 module Functions (F : Ctypes.FOREIGN) = struct
   open F
 
+  let initialize = foreign "TA_Initialize" (void @-> returning void)
+
   let ta_group_table_alloc =
     foreign "TA_GroupTableAlloc"
       ((ptr @@ ptr @@ Types.ta_string_table) @-> returning int)

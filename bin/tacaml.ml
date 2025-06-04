@@ -8,7 +8,7 @@ let top () =
   let* () = TA.initialize () in
   (* let* () = TA.sma 999 999 2 data output in *)
   let* res = TA.sma_top 2 data in
-  Format.printf "%f" res;
+  Format.printf "@[%f@]@." res;
   (* Format.printf "%a" Arr.pp output; *)
   Result.return @@ ()
 

@@ -1,8 +1,8 @@
 module TA = struct
-  module CT = Ctypes
+  module CT = C.Type
 
-  let ptr_of_string x = CT.CArray.of_string x |> CT.CArray.start
-  let ptr_ptr ty dec = CT.allocate (CT.ptr ty) dec
+  let ptr_of_string x = Ctypes.CArray.of_string x |> Ctypes.CArray.start
+  let ptr_ptr ty dec = Ctypes.allocate (CT.ptr ty) dec
 
   module Common = struct
     let initialize () = C.Functions.initialize ()
@@ -13,9 +13,9 @@ module TA = struct
     include C.Functions.StringTable
 
     let size x =
-      let open Ctypes in
+      (* let open CT in *)
       try
-        let res = Ctypes.getf !@x Types_generated.StringTable.size in
+        let res = Ctypes.getf Ctypes.(!@x) Types_generated.StringTable.size in
         Unsigned.UInt.to_int res
       with
       | e ->
@@ -25,23 +25,22 @@ module TA = struct
         raise e
 
     let string_field x =
-      let open Ctypes in
-      Ctypes.getf !@x Types_generated.StringTable.string
+      (* let open CT in *)
+      Ctypes.getf Ctypes.(!@x) Types_generated.StringTable.string
 
     let declare () =
       let x = CT.structure "TA_StringTable" in
-      let res = CT.from_voidp x CT.null in
+      let res = Ctypes.from_voidp x Ctypes.null in
       res
 
     let to_list table_ptr : string list =
-      let open Ctypes in
       let count = size table_ptr in
       Format.printf "@[count: %d@]@." count;
       let strings_ptr = string_field table_ptr in
       let rec extract acc i =
         if i < 0 then acc
         else
-          let cstr_ptr = !@(strings_ptr +@ i) in
+          let cstr_ptr = Ctypes.(!@(strings_ptr +@ i)) in
           let ocaml_str =
             Ctypes.string_from_ptr cstr_ptr
               ~length:
@@ -94,12 +93,8 @@ module TA = struct
 end
 
 module Func = struct
-
-  (* let stoch start end_ highs lows closes = *)
-
-  (*   C.Functions.Func.ta_stoch *)
-  (*     (\* Int.min_int Int.min_int 0 Int.min_int 0 *\) *)
-
+  (* let sma start_idx end_idx values = *)
+  (*   C.Functions.Func.ta_sma *)
 end
 
 (* module C = Func *)

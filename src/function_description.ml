@@ -70,5 +70,17 @@ module Functions (F : Ctypes.FOREIGN) = struct
       foreign "TA_STOCH" @@ int @-> int @-> ptr double @-> ptr double
       @-> ptr double @-> int @-> int @-> int @-> int @-> int @-> ptr int
       @-> ptr int @-> ptr double @-> ptr double @-> returning int
+
+    (* TA_LIB_API TA_RetCode TA_SMA( int    startIdx, *)
+    (*                               int    endIdx, *)
+    (*                                          const double inReal[], *)
+    (*                                          int           optInTimePeriod, /* From 2 to 100000 */ *)
+    (*                                          int          *outBegIdx, *)
+    (*                                          int          *outNBElement, *)
+    (*                                          double        outReal[] ); *)
+
+    let ta_sma =
+      foreign "TA_SMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+      @-> ptr int @-> ptr double @-> returning int
   end
 end

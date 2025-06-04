@@ -1,13 +1,17 @@
 [@@@warning "-33"]
 
-open Ctypes
+(* open Ctypes *)
 
 (* let initialize = foreign "TA_Initialize" (void @-> returning void) *)
 
 let sealed = ref false
 
 module Types (F : Ctypes.TYPE) = struct
-  open F
+  (* open F *)
+  include F
+
+  let ta_integer_default = constant "TA_INTEGER_DEFAULT" F.int
+  let ta_real_default = constant "TA_REAL_DEFAULT" F.double
 
   module StringTable = struct
     (* type core *)
@@ -16,7 +20,9 @@ module Types (F : Ctypes.TYPE) = struct
 
     type stringtable
 
-    let stringtable : stringtable structure typ = structure "TA_StringTable"
+    let stringtable : stringtable Ctypes_static.structure typ =
+      structure "TA_StringTable"
+
     let size = field stringtable "size" uint
     let string = field stringtable "string" (ptr (ptr char))
 
@@ -24,7 +30,7 @@ module Types (F : Ctypes.TYPE) = struct
       sealed := true;
       seal stringtable
 
-    type t = stringtable ptr
+    type t = stringtable Ctypes_static.ptr
   end
 
   (* typedef struct TA_StringTable *)

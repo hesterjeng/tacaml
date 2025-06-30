@@ -1,5 +1,5 @@
 (executable
- (name tacaml)
+ (name tacaml_run)
  (libraries tacaml))
 
 (env

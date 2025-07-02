@@ -7,13 +7,13 @@
 
 (maintainers "John Hester")
 
-(name ta_caml)
+(name tacaml)
 
 (source
  (github username/reponame))
 
 (package
- (name ta_caml)
+ (name tacaml)
  (allow_empty)
  (synopsis "Bindings to TA-lib")
  (license "GPL-3.0-or-later")

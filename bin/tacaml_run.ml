@@ -1,10 +1,10 @@
 module Arr = Tacaml__Arr
 
 let top () =
-  let ( let* ) = Result.( let* ) in
+  (* let ( let* ) = Result.( let* ) in *)
   let _data = Arr.init 1000 @@ fun i -> Float.of_int i in
   (* let output = Arr.create 1000 in *)
-  let* () = Tacaml.initialize () in
+  (* let* () = Tacaml.initialize () in *)
   (* let* () = TA.sma 999 999 2 data output in *)
   (* let* res = TA.sma_top 2 data in *)
   (* Format.printf "@[%f@]@." res; *)

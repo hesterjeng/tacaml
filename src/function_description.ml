@@ -341,4 +341,425 @@ module Functions (F : Ctypes.FOREIGN) = struct
     foreign "TA_CDLMATHOLD" @@ int @-> int @-> ptr double @-> ptr double
     @-> ptr double @-> ptr double @-> double @-> ptr int @-> ptr int @-> ptr int
     @-> returning int
+
+  let ta_cdlmorningdojistar =
+    foreign "TA_CDLMORNINGDOJISTAR"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> double @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlmorningstar =
+    foreign "TA_CDLMORNINGSTAR"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> double @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlonneck =
+    foreign "TA_CDLONNECK" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdlpiercing =
+    foreign "TA_CDLPIERCING" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdlrickshawman =
+    foreign "TA_CDLRICKSHAWMAN"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlrisefall3methods =
+    foreign "TA_CDLRISEFALL3METHODS"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlseparatinglines =
+    foreign "TA_CDLSEPARATINGLINES"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlshootingstar =
+    foreign "TA_CDLSHOOTINGSTAR"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlshortline =
+    foreign "TA_CDLSHORTLINE" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdlspinningtop =
+    foreign "TA_CDLSPINNINGTOP"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlstalledpattern =
+    foreign "TA_CDLSTALLEDPATTERN"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlsticksandwich =
+    foreign "TA_CDLSTICKSANDWICH"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdltakuri =
+    foreign "TA_CDLTAKURI" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdltasukigap =
+    foreign "TA_CDLTASUKIGAP" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdlthrusting =
+    foreign "TA_CDLTHRUSTING" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdltristar =
+    foreign "TA_CDLTRISTAR" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr double @-> ptr int @-> ptr int @-> ptr int
+    @-> returning int
+
+  let ta_cdlunique3river =
+    foreign "TA_CDLUNIQUE3RIVER"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlupsidegap2crows =
+    foreign "TA_CDLUPSIDEGAP2CROWS"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_cdlxsidegap3methods =
+    foreign "TA_CDLXSIDEGAP3METHODS"
+    @@ int @-> int @-> ptr double @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_ceil =
+    foreign "TA_CEIL" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_cmo =
+    foreign "TA_CMO" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_correl =
+    foreign "TA_CORREL" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_cos =
+    foreign "TA_COS" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_cosh =
+    foreign "TA_COSH" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_dema =
+    foreign "TA_DEMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_div =
+    foreign "TA_DIV" @@ int @-> int @-> ptr double @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_dx =
+    foreign "TA_DX" @@ int @-> int @-> ptr double @-> ptr double @-> ptr double
+    @-> int @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ema =
+    foreign "TA_EMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_exp =
+    foreign "TA_EXP" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_floor =
+    foreign "TA_FLOOR" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_ht_dcperiod =
+    foreign "TA_HT_DCPERIOD" @@ int @-> int @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ht_dcphase =
+    foreign "TA_HT_DCPHASE" @@ int @-> int @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ht_phasor =
+    foreign "TA_HT_PHASOR" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> ptr double @-> returning int
+
+  let ta_ht_sine =
+    foreign "TA_HT_SINE" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> ptr double @-> returning int
+
+  let ta_ht_trendline =
+    foreign "TA_HT_TRENDLINE" @@ int @-> int @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ht_trendmode =
+    foreign "TA_HT_TRENDMODE" @@ int @-> int @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr int @-> returning int
+
+  let ta_imi =
+    foreign "TA_IMI" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_kama =
+    foreign "TA_KAMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_linearreg =
+    foreign "TA_LINEARREG" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_linearreg_angle =
+    foreign "TA_LINEARREG_ANGLE"
+    @@ int @-> int @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_linearreg_intercept =
+    foreign "TA_LINEARREG_INTERCEPT"
+    @@ int @-> int @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_linearreg_slope =
+    foreign "TA_LINEARREG_SLOPE"
+    @@ int @-> int @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_ln =
+    foreign "TA_LN" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_log10 =
+    foreign "TA_LOG10" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_ma =
+    foreign "TA_MA" @@ int @-> int @-> ptr double @-> int @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_macd =
+    foreign "TA_MACD" @@ int @-> int @-> ptr double @-> int @-> int @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> ptr double @-> ptr double
+    @-> returning int
+
+  let ta_macdext =
+    foreign "TA_MACDEXT" @@ int @-> int @-> ptr double @-> int @-> int @-> int
+    @-> int @-> int @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> ptr double @-> ptr double @-> returning int
+
+  let ta_macdfix =
+    foreign "TA_MACDFIX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> ptr double @-> ptr double @-> returning int
+
+  let ta_mama =
+    foreign "TA_MAMA" @@ int @-> int @-> ptr double @-> double @-> double
+    @-> ptr int @-> ptr int @-> ptr double @-> ptr double @-> returning int
+
+  let ta_mavp =
+    foreign "TA_MAVP" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> int @-> int @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_max =
+    foreign "TA_MAX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_maxindex =
+    foreign "TA_MAXINDEX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr int @-> returning int
+
+  let ta_medprice =
+    foreign "TA_MEDPRICE" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_mfi =
+    foreign "TA_MFI" @@ int @-> int @-> ptr double @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_midpoint =
+    foreign "TA_MIDPOINT" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_midprice =
+    foreign "TA_MIDPRICE" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_min =
+    foreign "TA_MIN" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_minindex =
+    foreign "TA_MININDEX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr int @-> returning int
+
+  let ta_minmax =
+    foreign "TA_MINMAX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> ptr double @-> returning int
+
+  let ta_minmaxindex =
+    foreign "TA_MINMAXINDEX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr int @-> ptr int @-> returning int
+
+  let ta_minus_di =
+    foreign "TA_MINUS_DI" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_minus_dm =
+    foreign "TA_MINUS_DM" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_mom =
+    foreign "TA_MOM" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_mult =
+    foreign "TA_MULT" @@ int @-> int @-> ptr double @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_natr =
+    foreign "TA_NATR" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_obv =
+    foreign "TA_OBV" @@ int @-> int @-> ptr double @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_plus_di =
+    foreign "TA_PLUS_DI" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_plus_dm =
+    foreign "TA_PLUS_DM" @@ int @-> int @-> ptr double @-> ptr double @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ppo =
+    foreign "TA_PPO" @@ int @-> int @-> ptr double @-> int @-> int @-> int
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_roc =
+    foreign "TA_ROC" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_rocp =
+    foreign "TA_ROCP" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_rocr =
+    foreign "TA_ROCR" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_rocr100 =
+    foreign "TA_ROCR100" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_sar =
+    foreign "TA_SAR" @@ int @-> int @-> ptr double @-> ptr double @-> double
+    @-> double @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_sarext =
+    foreign "TA_SAREXT" @@ int @-> int @-> ptr double @-> ptr double @-> double
+    @-> double @-> double @-> double @-> double @-> double @-> double @-> double
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_sin =
+    foreign "TA_SIN" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_sinh =
+    foreign "TA_SINH" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_sqrt =
+    foreign "TA_SQRT" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_stddev =
+    foreign "TA_STDDEV" @@ int @-> int @-> ptr double @-> int @-> double
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_stochf =
+    foreign "TA_STOCHF" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> int @-> int @-> ptr int @-> ptr int
+    @-> ptr double @-> ptr double @-> returning int
+
+  let ta_stochrsi =
+    foreign "TA_STOCHRSI" @@ int @-> int @-> ptr double @-> int @-> int @-> int
+    @-> int @-> ptr int @-> ptr int @-> ptr double @-> ptr double
+    @-> returning int
+
+  let ta_sub =
+    foreign "TA_SUB" @@ int @-> int @-> ptr double @-> ptr double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_sum =
+    foreign "TA_SUM" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_t3 =
+    foreign "TA_T3" @@ int @-> int @-> ptr double @-> int @-> double @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_tan =
+    foreign "TA_TAN" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_tanh =
+    foreign "TA_TANH" @@ int @-> int @-> ptr double @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_tema =
+    foreign "TA_TEMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_trange =
+    foreign "TA_TRANGE" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_trima =
+    foreign "TA_TRIMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_trix =
+    foreign "TA_TRIX" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_tsf =
+    foreign "TA_TSF" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
+
+  let ta_typprice =
+    foreign "TA_TYPPRICE" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_ultosc =
+    foreign "TA_ULTOSC" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> int @-> int @-> ptr int @-> ptr int
+    @-> ptr double @-> returning int
+
+  let ta_var =
+    foreign "TA_VAR" @@ int @-> int @-> ptr double @-> int @-> double
+    @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_wclprice =
+    foreign "TA_WCLPRICE" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> ptr int @-> ptr int @-> ptr double @-> returning int
+
+  let ta_willr =
+    foreign "TA_WILLR" @@ int @-> int @-> ptr double @-> ptr double
+    @-> ptr double @-> int @-> ptr int @-> ptr int @-> ptr double
+    @-> returning int
+
+  let ta_wma =
+    foreign "TA_WMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
+    @-> ptr int @-> ptr double @-> returning int
 end

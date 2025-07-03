@@ -14,12 +14,12 @@
 
 (package
  (name tacaml)
- (allow_empty)
  (synopsis "Bindings to TA-lib")
  (license "GPL-3.0-or-later")
+ (homepage "https://github.com/hesterjeng/longleaf")
  (description "A longer description")
- (depends ocaml)
- (tags
-  ("add topics" "to describe" your project)))
+ (bug_reports "Github Issue")
+ (depends ocaml ctypes)
+)
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

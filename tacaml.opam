@@ -5,12 +5,12 @@ description: "A longer description"
 maintainer: ["John Hester"]
 authors: ["John Hester"]
 license: "GPL-3.0-or-later"
-tags: ["add topics" "to describe" "your" "project"]
-homepage: "https://github.com/username/reponame"
-bug-reports: "https://github.com/username/reponame/issues"
+homepage: "https://github.com/hesterjeng/longleaf"
+bug-reports: "Github Issue"
 depends: [
   "dune" {>= "3.17"}
   "ocaml"
+  "ctypes"
   "odoc" {with-doc}
 ]
 build: [

@@ -1,5 +1,6 @@
 (library
  (name tacaml)
+ (public_name tacaml)
  (libraries containers)
  (ctypes
   (external_library_name ta-lib)

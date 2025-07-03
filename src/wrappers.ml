@@ -18,7 +18,7 @@ let wrap f =
   let res = f () in
   match res with
   | 0 -> Ok ()
-  | err -> Error err
+  | err -> Error (`Code err)
 
 let ba = C.bigarray_start C.array1
 

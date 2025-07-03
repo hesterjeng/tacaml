@@ -1,8 +1,6 @@
-module Arr = Tacaml__Arr
-
 let top () =
   (* let ( let* ) = Result.( let* ) in *)
-  let _data = Arr.init 1000 @@ fun i -> Float.of_int i in
+  (* let _data = Arr.init 1000 @@ fun i -> Float.of_int i in *)
   (* let output = Arr.create 1000 in *)
   (* let* () = Tacaml.initialize () in *)
   (* let* () = TA.sma 999 999 2 data output in *)

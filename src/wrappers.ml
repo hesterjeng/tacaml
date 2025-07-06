@@ -22,1081 +22,1177 @@ let iba :
     int Ctypes.ptr =
   C.bigarray_start C.array1
 
-let ta_rsi (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_rsi startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_accbands (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod
-    outRealUpperBand outRealMiddleBand outRealLowerBand =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_accbands startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) optInTimePeriod outBegIdx outNBElement
-        (ba outRealUpperBand) (ba outRealMiddleBand) (ba outRealLowerBand))
-
-let ta_acos (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_acos startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_ad (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ad startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        (ba ohlcv.volume) outBegIdx outNBElement (ba outReal))
-
-let ta_add (startIdx, endIdx) inReal0 inReal1 outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_add startIdx endIdx (ba inReal0) (ba inReal1) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_adosc (startIdx, endIdx) (ohlcv : Ohlcv.t) optInFastPeriod
-    optInSlowPeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_adosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        (ba ohlcv.volume) optInFastPeriod optInSlowPeriod outBegIdx outNBElement
-        (ba outReal))
-
-let ta_adx (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_adx startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_adxr (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_adxr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_apo (startIdx, endIdx) inReal optInFastPeriod optInSlowPeriod
-    ?(optInMAType = Ma_type.EMA) outReal =
-  let optInMAType = Ma_type.to_int optInMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_apo startIdx endIdx (ba inReal) optInFastPeriod optInSlowPeriod
-        optInMAType outBegIdx outNBElement (ba outReal))
-
-let ta_aroon (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outAroonDown
-    outAroonUp =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_aroon startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) optInTimePeriod
-        outBegIdx outNBElement (ba outAroonDown) (ba outAroonUp))
-
-let ta_aroonosc (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_aroonosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_asin (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_asin startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_atan (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_atan startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_avgprice (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_avgprice startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (ba outReal))
-
-let ta_avgdev (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_avgdev startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_bbands (startIdx, endIdx) inReal optInTimePeriod optInNbDevUp
-    optInNbDevDn ?(optInMAType = Ma_type.EMA) outRealUpperBand outRealMiddleBand
-    outRealLowerBand =
-  let optInMAType = Ma_type.to_int optInMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_bbands startIdx endIdx (ba inReal) optInTimePeriod optInNbDevUp
-        optInNbDevDn optInMAType outBegIdx outNBElement (ba outRealUpperBand)
-        (ba outRealMiddleBand) (ba outRealLowerBand))
-
-let ta_beta (startIdx, endIdx) inReal0 inReal1 optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_beta startIdx endIdx (ba inReal0) (ba inReal1) optInTimePeriod
-        outBegIdx outNBElement (ba outReal))
-
-let ta_bop (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_bop startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) outBegIdx outNBElement (ba outReal))
-
-let ta_cci (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cci startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_cdl2crows (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl2crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3blackcrows (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3blackcrows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3inside (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3inside startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3linestrike (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3linestrike startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3outside (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3outside startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3starsinsouth (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3starsinsouth startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdl3whitesoldiers (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdl3whitesoldiers startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlabandonedbaby (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlabandonedbaby startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdladvanceblock (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdladvanceblock startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlbelthold (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlbelthold startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlbreakaway (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlbreakaway startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlclosingmarubozu (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlclosingmarubozu startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlconcealbabyswall (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlconcealbabyswall startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlcounterattack (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlcounterattack startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdldarkcloudcover (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdldarkcloudcover startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdldoji (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdldoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdldojistar (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdldojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdldragonflydoji (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdldragonflydoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlengulfing (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlengulfing startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdleveningdojistar (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdleveningdojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdleveningstar (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdleveningstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdlgapsidesidewhite (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlgapsidesidewhite startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlgravestonedoji (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlgravestonedoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhammer (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhammer startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhangingman (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhangingman startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlharami (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlharami startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlharamicross (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlharamicross startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhighwave (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhighwave startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhikkake (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhikkake startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhikkakemod (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhikkakemod startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlhomingpigeon (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlhomingpigeon startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlidentical3crows (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlidentical3crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlinneck (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlinneck startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlinvertedhammer (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlinvertedhammer startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlkicking (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlkicking startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlkickingbylength (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlkickingbylength startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlladderbottom (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlladderbottom startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdllongleggeddoji (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdllongleggeddoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdllongline (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdllongline startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlmarubozu (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlmarubozu startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlmatchinglow (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlmatchinglow startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlmathold (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlmathold startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdlmorningdojistar (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlmorningdojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdlmorningstar (startIdx, endIdx) (ohlcv : Ohlcv.t) optInPenetration
-    outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlmorningstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) optInPenetration outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_cdlonneck (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlonneck startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlpiercing (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlpiercing startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlrickshawman (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlrickshawman startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlrisefall3methods (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlrisefall3methods startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlseparatinglines (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlseparatinglines startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlshootingstar (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlshootingstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlshortline (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlshortline startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlspinningtop (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlspinningtop startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlstalledpattern (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlstalledpattern startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlsticksandwich (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlsticksandwich startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdltakuri (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdltakuri startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdltasukigap (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdltasukigap startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlthrusting (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlthrusting startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdltristar (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdltristar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlunique3river (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlunique3river startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlupsidegap2crows (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlupsidegap2crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_cdlxsidegap3methods (startIdx, endIdx) (ohlcv : Ohlcv.t) outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cdlxsidegap3methods startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
-        (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba outInteger))
-
-let ta_ceil (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ceil startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_cmo (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cmo startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_correl (startIdx, endIdx) inReal0 inReal1 optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_correl startIdx endIdx (ba inReal0) (ba inReal1) optInTimePeriod
-        outBegIdx outNBElement (ba outReal))
-
-let ta_cos (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cos startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_cosh (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_cosh startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_dema (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_dema startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_div (startIdx, endIdx) inReal0 inReal1 outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_div startIdx endIdx (ba inReal0) (ba inReal1) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_dx (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_dx startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_ema (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ema startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_exp (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_exp startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_floor (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_floor startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_ht_dcperiod (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_dcperiod startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_ht_dcphase (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_dcphase startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_ht_phasor (startIdx, endIdx) inReal outInPhase outQuadrature =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_phasor startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (ba outInPhase) (ba outQuadrature))
-
-let ta_ht_sine (startIdx, endIdx) inReal outSine outLeadSine =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_sine startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (ba outSine) (ba outLeadSine))
-
-let ta_ht_trendline (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_trendline startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_ht_trendmode (startIdx, endIdx) inReal outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ht_trendmode startIdx endIdx (ba inReal) outBegIdx outNBElement
-        (iba outInteger))
-
-let ta_imi (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_imi startIdx endIdx (ba ohlcv.open_) (ba ohlcv.close) optInTimePeriod
-        outBegIdx outNBElement (ba outReal))
-
-let ta_kama (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_kama startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_linearreg (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_linearreg startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_linearreg_angle (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_linearreg_angle startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_linearreg_intercept (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_linearreg_intercept startIdx endIdx (ba inReal) optInTimePeriod
-        outBegIdx outNBElement (ba outReal))
-
-let ta_linearreg_slope (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_linearreg_slope startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_ln (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ln startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_log10 (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_log10 startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_ma (startIdx, endIdx) inReal optInTimePeriod ?(optInMAType = Ma_type.EMA)
-    outReal =
-  let optInMAType = Ma_type.to_int optInMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ma startIdx endIdx (ba inReal) optInTimePeriod optInMAType outBegIdx
-        outNBElement (ba outReal))
-
-let ta_macd (startIdx, endIdx) inReal optInFastPeriod optInSlowPeriod
-    optInSignalPeriod outMACD outMACDSignal outMACDHist =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_macd startIdx endIdx (ba inReal) optInFastPeriod optInSlowPeriod
-        optInSignalPeriod outBegIdx outNBElement (ba outMACD) (ba outMACDSignal)
-        (ba outMACDHist))
-
-let ta_macdext (startIdx, endIdx) inReal optInFastPeriod
-    ?(optInFastMAType = Ma_type.EMA) optInSlowPeriod
-    ?(optInSlowMAType = Ma_type.EMA) optInSignalPeriod
-    ?(optInSignalMAType = Ma_type.EMA) outMACD outMACDSignal outMACDHist =
-  let optInFastMAType = Ma_type.to_int optInFastMAType in
-  let optInSlowMAType = Ma_type.to_int optInSlowMAType in
-  let optInSignalMAType = Ma_type.to_int optInSignalMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_macdext startIdx endIdx (ba inReal) optInFastPeriod optInFastMAType
-        optInSlowPeriod optInSlowMAType optInSignalPeriod optInSignalMAType
-        outBegIdx outNBElement (ba outMACD) (ba outMACDSignal) (ba outMACDHist))
-
-let ta_macdfix (startIdx, endIdx) inReal optInSignalPeriod outMACD outMACDSignal
-    outMACDHist =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_macdfix startIdx endIdx (ba inReal) optInSignalPeriod outBegIdx
-        outNBElement (ba outMACD) (ba outMACDSignal) (ba outMACDHist))
-
-let ta_mama (startIdx, endIdx) inReal optInFastLimit optInSlowLimit outMAMA
-    outFAMA =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_mama startIdx endIdx (ba inReal) optInFastLimit optInSlowLimit
-        outBegIdx outNBElement (ba outMAMA) (ba outFAMA))
-
-let ta_mavp (startIdx, endIdx) inReal inPeriods optInMinPeriod optInMaxPeriod
-    ?(optInMAType = Ma_type.EMA) outReal =
-  let optInMAType = Ma_type.to_int optInMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_mavp startIdx endIdx (ba inReal) (ba inPeriods) optInMinPeriod
-        optInMaxPeriod optInMAType outBegIdx outNBElement (ba outReal))
-
-let ta_max (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_max startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_maxindex (startIdx, endIdx) inReal optInTimePeriod outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_maxindex startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (iba outInteger))
-
-let ta_medprice (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_medprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) outBegIdx
-        outNBElement (ba outReal))
-
-let ta_mfi (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_mfi startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        (ba ohlcv.volume) optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_midpoint (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_midpoint startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_midprice (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_midprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_min (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_min startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_minindex (startIdx, endIdx) inReal optInTimePeriod outInteger =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_minindex startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (iba outInteger))
-
-let ta_minmax (startIdx, endIdx) inReal optInTimePeriod outMin outMax =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_minmax startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outMin) (ba outMax))
-
-let ta_minmaxindex (startIdx, endIdx) inReal optInTimePeriod outMinIdx outMaxIdx
-    =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_minmaxindex startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (iba outMinIdx) (iba outMaxIdx))
-
-let ta_minus_di (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_minus_di startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_minus_dm (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_minus_dm startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_mom (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_mom startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_mult (startIdx, endIdx) inReal0 inReal1 outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_mult startIdx endIdx (ba inReal0) (ba inReal1) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_natr (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_natr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_obv (startIdx, endIdx) inReal inVolume outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_obv startIdx endIdx (ba inReal) (ba inVolume) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_plus_di (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_plus_di startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_plus_dm (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_plus_dm startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_ppo (startIdx, endIdx) inReal optInFastPeriod optInSlowPeriod
-    ?(optInMAType = Ma_type.EMA) outReal =
-  let optInMAType = Ma_type.to_int optInMAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ppo startIdx endIdx (ba inReal) optInFastPeriod optInSlowPeriod
-        optInMAType outBegIdx outNBElement (ba outReal))
-
-let ta_roc (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_roc startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_rocp (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_rocp startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_rocr (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_rocr startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_rocr100 (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_rocr100 startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_sar (startIdx, endIdx) (ohlcv : Ohlcv.t) optInAcceleration optInMaximum
-    outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sar startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) optInAcceleration
-        optInMaximum outBegIdx outNBElement (ba outReal))
-
-let ta_sarext (startIdx, endIdx) (ohlcv : Ohlcv.t) optInStartValue
-    optInOffsetOnReverse optInAccelerationInitLong optInAccelerationLong
-    optInAccelerationMaxLong optInAccelerationInitShort optInAccelerationShort
-    optInAccelerationMaxShort outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sarext startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) optInStartValue
-        optInOffsetOnReverse optInAccelerationInitLong optInAccelerationLong
-        optInAccelerationMaxLong optInAccelerationInitShort
-        optInAccelerationShort optInAccelerationMaxShort outBegIdx outNBElement
-        (ba outReal))
-
-let ta_sin (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sin startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_sinh (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sinh startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_sma (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sma startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_sqrt (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sqrt startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_stddev (startIdx, endIdx) inReal optInTimePeriod optInNbDev outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_stddev startIdx endIdx (ba inReal) optInTimePeriod optInNbDev
-        outBegIdx outNBElement (ba outReal))
-
-let ta_stoch (startIdx, endIdx) (ohlcv : Ohlcv.t) optInFastK_Period
-    optInSlowK_Period ?(optInSlowK_MAType = Ma_type.EMA) optInSlowD_Period
-    ?(optInSlowD_MAType = Ma_type.EMA) outSlowK outSlowD =
-  let optInSlowK_MAType = Ma_type.to_int optInSlowK_MAType in
-  let optInSlowD_MAType = Ma_type.to_int optInSlowD_MAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_stoch startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInFastK_Period optInSlowK_Period optInSlowK_MAType optInSlowD_Period
-        optInSlowD_MAType outBegIdx outNBElement (ba outSlowK) (ba outSlowD))
-
-let ta_stochf (startIdx, endIdx) (ohlcv : Ohlcv.t) optInFastK_Period
-    optInFastD_Period ?(optInFastD_MAType = Ma_type.EMA) outFastK outFastD =
-  let optInFastD_MAType = Ma_type.to_int optInFastD_MAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_stochf startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) optInFastK_Period optInFastD_Period optInFastD_MAType
-        outBegIdx outNBElement (ba outFastK) (ba outFastD))
-
-let ta_stochrsi (startIdx, endIdx) inReal optInTimePeriod optInFastK_Period
-    optInFastD_Period ?(optInFastD_MAType = Ma_type.EMA) outFastK outFastD =
-  let optInFastD_MAType = Ma_type.to_int optInFastD_MAType in
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_stochrsi startIdx endIdx (ba inReal) optInTimePeriod
-        optInFastK_Period optInFastD_Period optInFastD_MAType outBegIdx
-        outNBElement (ba outFastK) (ba outFastD))
-
-let ta_sub (startIdx, endIdx) inReal0 inReal1 outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sub startIdx endIdx (ba inReal0) (ba inReal1) outBegIdx outNBElement
-        (ba outReal))
-
-let ta_sum (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_sum startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_t3 (startIdx, endIdx) inReal optInTimePeriod optInVFactor outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_t3 startIdx endIdx (ba inReal) optInTimePeriod optInVFactor outBegIdx
-        outNBElement (ba outReal))
-
-let ta_tan (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_tan startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_tanh (startIdx, endIdx) inReal outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_tanh startIdx endIdx (ba inReal) outBegIdx outNBElement (ba outReal))
-
-let ta_tema (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_tema startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_trange (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_trange startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) outBegIdx outNBElement (ba outReal))
-
-let ta_trima (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_trima startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_trix (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_trix startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_tsf (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_tsf startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-let ta_typprice (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_typprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) outBegIdx outNBElement (ba outReal))
-
-let ta_ultosc (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod1
-    optInTimePeriod2 optInTimePeriod3 outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_ultosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) optInTimePeriod1 optInTimePeriod2 optInTimePeriod3
-        outBegIdx outNBElement (ba outReal))
-
-let ta_var (startIdx, endIdx) inReal optInTimePeriod optInNbDev outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_var startIdx endIdx (ba inReal) optInTimePeriod optInNbDev outBegIdx
-        outNBElement (ba outReal))
-
-let ta_wclprice (startIdx, endIdx) (ohlcv : Ohlcv.t) outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_wclprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
-        (ba ohlcv.close) outBegIdx outNBElement (ba outReal))
-
-let ta_willr (startIdx, endIdx) (ohlcv : Ohlcv.t) optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_willr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
-        optInTimePeriod outBegIdx outNBElement (ba outReal))
-
-let ta_wma (startIdx, endIdx) inReal optInTimePeriod outReal =
-  wrap (fun outBegIdx outNBElement ->
-      F.ta_wma startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
-        outNBElement (ba outReal))
-
-module Lookback = struct
-  let accbands ~timeperiod = F.Lookback.accbands timeperiod
-  let acos () = F.Lookback.acos ()
-  let ad () = F.Lookback.ad ()
-  let add () = F.Lookback.add ()
-  let adosc ~fast_period ~slow_period = F.Lookback.adosc fast_period slow_period
-  let adx ~timeperiod = F.Lookback.adx timeperiod
-  let adxr ~timeperiod = F.Lookback.adxr timeperiod
-
-  let apo ~fast_period ~slow_period ~ma_type =
+type float_ba =
+  (float, Bigarray.float64_elt, Bigarray.c_layout) Bigarray.Array1.t
+
+type int_ba = (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Array1.t
+
+type 'a indicator_params =
+  | Accbands : {
+      timeperiod : int;
+    }
+      -> (float_ba * float_ba * float_ba) indicator_params
+  | Acos : unit -> float_ba indicator_params
+  | Ad : unit -> float_ba indicator_params
+  | Add : unit -> float_ba indicator_params
+  | Adosc : {
+      fast_period : int;
+      slow_period : int;
+    }
+      -> float_ba indicator_params
+  | Adx : { timeperiod : int } -> float_ba indicator_params
+  | Adxr : { timeperiod : int } -> float_ba indicator_params
+  | Apo : {
+      fast_period : int;
+      slow_period : int;
+      ma_type : Ma_type.t;
+    }
+      -> float_ba indicator_params
+  | Aroon : { timeperiod : int } -> (float_ba * float_ba) indicator_params
+  | Aroonosc : { timeperiod : int } -> float_ba indicator_params
+  | Asin : unit -> float_ba indicator_params
+  | Atan : unit -> float_ba indicator_params
+  | Atr : { timeperiod : int } -> float_ba indicator_params
+  | Avgprice : unit -> float_ba indicator_params
+  | Avgdev : { timeperiod : int } -> float_ba indicator_params
+  | Bbands : {
+      timeperiod : int;
+      nb_dev_up : float;
+      nb_dev_dn : float;
+      ma_type : Ma_type.t;
+    }
+      -> (float_ba * float_ba * float_ba) indicator_params
+  | Beta : { timeperiod : int } -> float_ba indicator_params
+  | Bop : unit -> float_ba indicator_params
+  | Cci : { timeperiod : int } -> float_ba indicator_params
+  | Cdl2crows : unit -> int_ba indicator_params
+  | Cdl3blackcrows : unit -> int_ba indicator_params
+  | Cdl3inside : unit -> int_ba indicator_params
+  | Cdl3linestrike : unit -> int_ba indicator_params
+  | Cdl3outside : unit -> int_ba indicator_params
+  | Cdl3starsinsouth : unit -> int_ba indicator_params
+  | Cdl3whitesoldiers : unit -> int_ba indicator_params
+  | Cdlabandonedbaby : { penetration : float } -> int_ba indicator_params
+  | Cdladvanceblock : unit -> int_ba indicator_params
+  | Cdlbelthold : unit -> int_ba indicator_params
+  | Cdlbreakaway : unit -> int_ba indicator_params
+  | Cdlclosingmarubozu : unit -> int_ba indicator_params
+  | Cdlconcealbabyswall : unit -> int_ba indicator_params
+  | Cdlcounterattack : unit -> int_ba indicator_params
+  | Cdldarkcloudcover : { penetration : float } -> int_ba indicator_params
+  | Cdldoji : unit -> int_ba indicator_params
+  | Cdldojistar : unit -> int_ba indicator_params
+  | Cdldragonflydoji : unit -> int_ba indicator_params
+  | Cdlengulfing : unit -> int_ba indicator_params
+  | Cdleveningdojistar : { penetration : float } -> int_ba indicator_params
+  | Cdleveningstar : { penetration : float } -> int_ba indicator_params
+  | Cdlgapsidesidewhite : unit -> int_ba indicator_params
+  | Cdlgravestonedoji : unit -> int_ba indicator_params
+  | Cdlhammer : unit -> int_ba indicator_params
+  | Cdlhangingman : unit -> int_ba indicator_params
+  | Cdlharami : unit -> int_ba indicator_params
+  | Cdlharamicross : unit -> int_ba indicator_params
+  | Cdlhighwave : unit -> int_ba indicator_params
+  | Cdlhikkake : unit -> int_ba indicator_params
+  | Cdlhikkakemod : unit -> int_ba indicator_params
+  | Cdlhomingpigeon : unit -> int_ba indicator_params
+  | Cdlidentical3crows : unit -> int_ba indicator_params
+  | Cdlinneck : unit -> int_ba indicator_params
+  | Cdlinvertedhammer : unit -> int_ba indicator_params
+  | Cdlkicking : unit -> int_ba indicator_params
+  | Cdlkickingbylength : unit -> int_ba indicator_params
+  | Cdlladderbottom : unit -> int_ba indicator_params
+  | Cdllongleggeddoji : unit -> int_ba indicator_params
+  | Cdllongline : unit -> int_ba indicator_params
+  | Cdlmarubozu : unit -> int_ba indicator_params
+  | Cdlmatchinglow : unit -> int_ba indicator_params
+  | Cdlmathold : { penetration : float } -> int_ba indicator_params
+  | Cdlmorningdojistar : { penetration : float } -> int_ba indicator_params
+  | Cdlmorningstar : { penetration : float } -> int_ba indicator_params
+  | Cdlonneck : unit -> int_ba indicator_params
+  | Cdlpiercing : unit -> int_ba indicator_params
+  | Cdlrickshawman : unit -> int_ba indicator_params
+  | Cdlrisefall3methods : unit -> int_ba indicator_params
+  | Cdlseparatinglines : unit -> int_ba indicator_params
+  | Cdlshootingstar : unit -> int_ba indicator_params
+  | Cdlshortline : unit -> int_ba indicator_params
+  | Cdlspinningtop : unit -> int_ba indicator_params
+  | Cdlstalledpattern : unit -> int_ba indicator_params
+  | Cdlsticksandwich : unit -> int_ba indicator_params
+  | Cdltakuri : unit -> int_ba indicator_params
+  | Cdltasukigap : unit -> int_ba indicator_params
+  | Cdlthrusting : unit -> int_ba indicator_params
+  | Cdltristar : unit -> int_ba indicator_params
+  | Cdlunique3river : unit -> int_ba indicator_params
+  | Cdlupsidegap2crows : unit -> int_ba indicator_params
+  | Cdlxsidegap3methods : unit -> int_ba indicator_params
+  | Ceil : unit -> float_ba indicator_params
+  | Cmo : { timeperiod : int } -> float_ba indicator_params
+  | Correl : { timeperiod : int } -> float_ba indicator_params
+  | Cos : unit -> float_ba indicator_params
+  | Cosh : unit -> float_ba indicator_params
+  | Dema : { timeperiod : int } -> float_ba indicator_params
+  | Div : unit -> float_ba indicator_params
+  | Dx : { timeperiod : int } -> float_ba indicator_params
+  | Ema : { timeperiod : int } -> float_ba indicator_params
+  | Exp : unit -> float_ba indicator_params
+  | Floor : unit -> float_ba indicator_params
+  | Ht_dcperiod : unit -> float_ba indicator_params
+  | Ht_dcphase : unit -> float_ba indicator_params
+  | Ht_phasor : unit -> (float_ba * float_ba) indicator_params
+  | Ht_sine : unit -> (float_ba * float_ba) indicator_params
+  | Ht_trendline : unit -> float_ba indicator_params
+  | Ht_trendmode : unit -> int_ba indicator_params
+  | Imi : { timeperiod : int } -> float_ba indicator_params
+  | Kama : { timeperiod : int } -> float_ba indicator_params
+  | Linearreg : { timeperiod : int } -> float_ba indicator_params
+  | Linearreg_angle : { timeperiod : int } -> float_ba indicator_params
+  | Linearreg_intercept : { timeperiod : int } -> float_ba indicator_params
+  | Linearreg_slope : { timeperiod : int } -> float_ba indicator_params
+  | Ln : unit -> float_ba indicator_params
+  | Log10 : unit -> float_ba indicator_params
+  | Ma : { timeperiod : int; ma_type : Ma_type.t } -> float_ba indicator_params
+  | Macd : {
+      fast_period : int;
+      slow_period : int;
+      signal_period : int;
+    }
+      -> (float_ba * float_ba * float_ba) indicator_params
+  | Macdext : {
+      fast_period : int;
+      fast_ma_type : Ma_type.t;
+      slow_period : int;
+      slow_ma_type : Ma_type.t;
+      signal_period : int;
+      signal_ma_type : Ma_type.t;
+    }
+      -> (float_ba * float_ba * float_ba) indicator_params
+  | Macdfix : {
+      signal_period : int;
+    }
+      -> (float_ba * float_ba * float_ba) indicator_params
+  | Mama : {
+      fast_limit : float;
+      slow_limit : float;
+    }
+      -> (float_ba * float_ba) indicator_params
+  | Mavp : {
+      min_period : int;
+      max_period : int;
+      ma_type : Ma_type.t;
+    }
+      -> float_ba indicator_params
+  | Max : { timeperiod : int } -> float_ba indicator_params
+  | Maxindex : { timeperiod : int } -> int_ba indicator_params
+  | Medprice : unit -> float_ba indicator_params
+  | Mfi : { timeperiod : int } -> float_ba indicator_params
+  | Midpoint : { timeperiod : int } -> float_ba indicator_params
+  | Midprice : { timeperiod : int } -> float_ba indicator_params
+  | Min : { timeperiod : int } -> float_ba indicator_params
+  | Minindex : { timeperiod : int } -> int_ba indicator_params
+  | Minmax : { timeperiod : int } -> (float_ba * float_ba) indicator_params
+  | Minmaxindex : { timeperiod : int } -> (int_ba * int_ba) indicator_params
+  | Minus_di : { timeperiod : int } -> float_ba indicator_params
+  | Minus_dm : { timeperiod : int } -> float_ba indicator_params
+  | Mom : { timeperiod : int } -> float_ba indicator_params
+  | Mult : unit -> float_ba indicator_params
+  | Natr : { timeperiod : int } -> float_ba indicator_params
+  | Obv : unit -> float_ba indicator_params
+  | Plus_di : { timeperiod : int } -> float_ba indicator_params
+  | Plus_dm : { timeperiod : int } -> float_ba indicator_params
+  | Ppo : {
+      fast_period : int;
+      slow_period : int;
+      ma_type : Ma_type.t;
+    }
+      -> float_ba indicator_params
+  | Roc : { timeperiod : int } -> float_ba indicator_params
+  | Rocp : { timeperiod : int } -> float_ba indicator_params
+  | Rocr : { timeperiod : int } -> float_ba indicator_params
+  | Rocr100 : { timeperiod : int } -> float_ba indicator_params
+  | Rsi : { timeperiod : int } -> float_ba indicator_params
+  | Sar : { acceleration : float; maximum : float } -> float_ba indicator_params
+  | Sarext : {
+      start_value : float;
+      offset_on_reverse : float;
+      acceleration_init_long : float;
+      acceleration_long : float;
+      acceleration_max_long : float;
+      acceleration_init_short : float;
+      acceleration_short : float;
+      acceleration_max_short : float;
+    }
+      -> float_ba indicator_params
+  | Sin : unit -> float_ba indicator_params
+  | Sinh : unit -> float_ba indicator_params
+  | Sma : { timeperiod : int } -> float_ba indicator_params
+  | Sqrt : unit -> float_ba indicator_params
+  | Stddev : { timeperiod : int; nb_dev : float } -> float_ba indicator_params
+  | Stoch : {
+      fast_k_period : int;
+      slow_k_period : int;
+      slow_k_ma_type : Ma_type.t;
+      slow_d_period : int;
+      slow_d_ma_type : Ma_type.t;
+    }
+      -> (float_ba * float_ba) indicator_params
+  | Stochf : {
+      fast_k_period : int;
+      fast_d_period : int;
+      fast_d_ma_type : Ma_type.t;
+    }
+      -> (float_ba * float_ba) indicator_params
+  | Stochrsi : {
+      timeperiod : int;
+      fast_k_period : int;
+      fast_d_period : int;
+      fast_d_ma_type : Ma_type.t;
+    }
+      -> (float_ba * float_ba) indicator_params
+  | Sub : unit -> float_ba indicator_params
+  | Sum : { timeperiod : int } -> float_ba indicator_params
+  | T3 : { timeperiod : int; v_factor : float } -> float_ba indicator_params
+  | Tan : unit -> float_ba indicator_params
+  | Tanh : unit -> float_ba indicator_params
+  | Tema : { timeperiod : int } -> float_ba indicator_params
+  | Trange : unit -> float_ba indicator_params
+  | Trima : { timeperiod : int } -> float_ba indicator_params
+  | Trix : { timeperiod : int } -> float_ba indicator_params
+  | Tsf : { timeperiod : int } -> float_ba indicator_params
+  | Typprice : unit -> float_ba indicator_params
+  | Ultosc : {
+      timeperiod1 : int;
+      timeperiod2 : int;
+      timeperiod3 : int;
+    }
+      -> float_ba indicator_params
+  | Var : { timeperiod : int; nb_dev : float } -> float_ba indicator_params
+  | Wclprice : unit -> float_ba indicator_params
+  | Willr : { timeperiod : int } -> float_ba indicator_params
+  | Wma : { timeperiod : int } -> float_ba indicator_params
+
+let lookback : type a. a indicator_params -> int =
+ fun params ->
+  match params with
+  | Accbands { timeperiod } -> F.Lookback.accbands timeperiod
+  | Acos () -> F.Lookback.acos ()
+  | Ad () -> F.Lookback.ad ()
+  | Add () -> F.Lookback.add ()
+  | Adosc { fast_period; slow_period } ->
+    F.Lookback.adosc fast_period slow_period
+  | Adx { timeperiod } -> F.Lookback.adx timeperiod
+  | Adxr { timeperiod } -> F.Lookback.adxr timeperiod
+  | Apo { fast_period; slow_period; ma_type } ->
     F.Lookback.apo fast_period slow_period (Ma_type.to_int ma_type)
-
-  let aroon ~timeperiod = F.Lookback.aroon timeperiod
-  let aroonosc ~timeperiod = F.Lookback.aroonosc timeperiod
-  let asin () = F.Lookback.asin ()
-  let atan () = F.Lookback.atan ()
-  let atr ~timeperiod = F.Lookback.atr timeperiod
-  let avgprice () = F.Lookback.avgprice ()
-  let avgdev ~timeperiod = F.Lookback.avgdev timeperiod
-
-  let bbands ~timeperiod ~nb_dev_up ~nb_dev_dn ~ma_type =
+  | Aroon { timeperiod } -> F.Lookback.aroon timeperiod
+  | Aroonosc { timeperiod } -> F.Lookback.aroonosc timeperiod
+  | Asin () -> F.Lookback.asin ()
+  | Atan () -> F.Lookback.atan ()
+  | Atr { timeperiod } -> F.Lookback.atr timeperiod
+  | Avgprice () -> F.Lookback.avgprice ()
+  | Avgdev { timeperiod } -> F.Lookback.avgdev timeperiod
+  | Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type } ->
     F.Lookback.bbands timeperiod nb_dev_up nb_dev_dn (Ma_type.to_int ma_type)
-
-  let beta ~timeperiod = F.Lookback.beta timeperiod
-  let bop () = F.Lookback.bop ()
-  let cci ~timeperiod = F.Lookback.cci timeperiod
-  let cdl2crows () = F.Lookback.cdl2crows ()
-  let cdl3blackcrows () = F.Lookback.cdl3blackcrows ()
-  let cdl3inside () = F.Lookback.cdl3inside ()
-  let cdl3linestrike () = F.Lookback.cdl3linestrike ()
-  let cdl3outside () = F.Lookback.cdl3outside ()
-  let cdl3starsinsouth () = F.Lookback.cdl3starsinsouth ()
-  let cdl3whitesoldiers () = F.Lookback.cdl3whitesoldiers ()
-
-  let cdlabandonedbaby ~penetration = F.Lookback.cdlabandonedbaby penetration
-
-  let cdladvanceblock () = F.Lookback.cdladvanceblock ()
-  let cdlbelthold () = F.Lookback.cdlbelthold ()
-  let cdlbreakaway () = F.Lookback.cdlbreakaway ()
-  let cdlclosingmarubozu () = F.Lookback.cdlclosingmarubozu ()
-  let cdlconcealbabyswall () = F.Lookback.cdlconcealbabyswall ()
-  let cdlcounterattack () = F.Lookback.cdlcounterattack ()
-
-  let cdldarkcloudcover ~penetration =
+  | Beta { timeperiod } -> F.Lookback.beta timeperiod
+  | Bop () -> F.Lookback.bop ()
+  | Cci { timeperiod } -> F.Lookback.cci timeperiod
+  | Cdl2crows () -> F.Lookback.cdl2crows ()
+  | Cdl3blackcrows () -> F.Lookback.cdl3blackcrows ()
+  | Cdl3inside () -> F.Lookback.cdl3inside ()
+  | Cdl3linestrike () -> F.Lookback.cdl3linestrike ()
+  | Cdl3outside () -> F.Lookback.cdl3outside ()
+  | Cdl3starsinsouth () -> F.Lookback.cdl3starsinsouth ()
+  | Cdl3whitesoldiers () -> F.Lookback.cdl3whitesoldiers ()
+  | Cdlabandonedbaby { penetration } -> F.Lookback.cdlabandonedbaby penetration
+  | Cdladvanceblock () -> F.Lookback.cdladvanceblock ()
+  | Cdlbelthold () -> F.Lookback.cdlbelthold ()
+  | Cdlbreakaway () -> F.Lookback.cdlbreakaway ()
+  | Cdlclosingmarubozu () -> F.Lookback.cdlclosingmarubozu ()
+  | Cdlconcealbabyswall () -> F.Lookback.cdlconcealbabyswall ()
+  | Cdlcounterattack () -> F.Lookback.cdlcounterattack ()
+  | Cdldarkcloudcover { penetration } ->
     F.Lookback.cdldarkcloudcover penetration
-
-  let cdldoji () = F.Lookback.cdldoji ()
-  let cdldojistar () = F.Lookback.cdldojistar ()
-  let cdldragonflydoji () = F.Lookback.cdldragonflydoji ()
-  let cdlengulfing () = F.Lookback.cdlengulfing ()
-
-  let cdleveningdojistar ~penetration =
+  | Cdldoji () -> F.Lookback.cdldoji ()
+  | Cdldojistar () -> F.Lookback.cdldojistar ()
+  | Cdldragonflydoji () -> F.Lookback.cdldragonflydoji ()
+  | Cdlengulfing () -> F.Lookback.cdlengulfing ()
+  | Cdleveningdojistar { penetration } ->
     F.Lookback.cdleveningdojistar penetration
-
-  let cdleveningstar ~penetration = F.Lookback.cdleveningstar penetration
-
-  let cdlgapsidesidewhite () = F.Lookback.cdlgapsidesidewhite ()
-  let cdlgravestonedoji () = F.Lookback.cdlgravestonedoji ()
-  let cdlhammer () = F.Lookback.cdlhammer ()
-  let cdlhangingman () = F.Lookback.cdlhangingman ()
-  let cdlharami () = F.Lookback.cdlharami ()
-  let cdlharamicross () = F.Lookback.cdlharamicross ()
-  let cdlhighwave () = F.Lookback.cdlhighwave ()
-  let cdlhikkake () = F.Lookback.cdlhikkake ()
-  let cdlhikkakemod () = F.Lookback.cdlhikkakemod ()
-  let cdlhomingpigeon () = F.Lookback.cdlhomingpigeon ()
-  let cdlidentical3crows () = F.Lookback.cdlidentical3crows ()
-  let cdlinneck () = F.Lookback.cdlinneck ()
-  let cdlinvertedhammer () = F.Lookback.cdlinvertedhammer ()
-  let cdlkicking () = F.Lookback.cdlkicking ()
-  let cdlkickingbylength () = F.Lookback.cdlkickingbylength ()
-  let cdlladderbottom () = F.Lookback.cdlladderbottom ()
-  let cdllongleggeddoji () = F.Lookback.cdllongleggeddoji ()
-  let cdllongline () = F.Lookback.cdllongline ()
-  let cdlmarubozu () = F.Lookback.cdlmarubozu ()
-  let cdlmatchinglow () = F.Lookback.cdlmatchinglow ()
-  let cdlmathold ~penetration = F.Lookback.cdlmathold penetration
-
-  let cdlmorningdojistar ~penetration =
+  | Cdleveningstar { penetration } -> F.Lookback.cdleveningstar penetration
+  | Cdlgapsidesidewhite () -> F.Lookback.cdlgapsidesidewhite ()
+  | Cdlgravestonedoji () -> F.Lookback.cdlgravestonedoji ()
+  | Cdlhammer () -> F.Lookback.cdlhammer ()
+  | Cdlhangingman () -> F.Lookback.cdlhangingman ()
+  | Cdlharami () -> F.Lookback.cdlharami ()
+  | Cdlharamicross () -> F.Lookback.cdlharamicross ()
+  | Cdlhighwave () -> F.Lookback.cdlhighwave ()
+  | Cdlhikkake () -> F.Lookback.cdlhikkake ()
+  | Cdlhikkakemod () -> F.Lookback.cdlhikkakemod ()
+  | Cdlhomingpigeon () -> F.Lookback.cdlhomingpigeon ()
+  | Cdlidentical3crows () -> F.Lookback.cdlidentical3crows ()
+  | Cdlinneck () -> F.Lookback.cdlinneck ()
+  | Cdlinvertedhammer () -> F.Lookback.cdlinvertedhammer ()
+  | Cdlkicking () -> F.Lookback.cdlkicking ()
+  | Cdlkickingbylength () -> F.Lookback.cdlkickingbylength ()
+  | Cdlladderbottom () -> F.Lookback.cdlladderbottom ()
+  | Cdllongleggeddoji () -> F.Lookback.cdllongleggeddoji ()
+  | Cdllongline () -> F.Lookback.cdllongline ()
+  | Cdlmarubozu () -> F.Lookback.cdlmarubozu ()
+  | Cdlmatchinglow () -> F.Lookback.cdlmatchinglow ()
+  | Cdlmathold { penetration } -> F.Lookback.cdlmathold penetration
+  | Cdlmorningdojistar { penetration } ->
     F.Lookback.cdlmorningdojistar penetration
-
-  let cdlmorningstar ~penetration = F.Lookback.cdlmorningstar penetration
-
-  let cdlonneck () = F.Lookback.cdlonneck ()
-  let cdlpiercing () = F.Lookback.cdlpiercing ()
-  let cdlrickshawman () = F.Lookback.cdlrickshawman ()
-  let cdlrisefall3methods () = F.Lookback.cdlrisefall3methods ()
-  let cdlseparatinglines () = F.Lookback.cdlseparatinglines ()
-  let cdlshootingstar () = F.Lookback.cdlshootingstar ()
-  let cdlshortline () = F.Lookback.cdlshortline ()
-  let cdlspinningtop () = F.Lookback.cdlspinningtop ()
-  let cdlstalledpattern () = F.Lookback.cdlstalledpattern ()
-  let cdlsticksandwich () = F.Lookback.cdlsticksandwich ()
-  let cdltakuri () = F.Lookback.cdltakuri ()
-  let cdltasukigap () = F.Lookback.cdltasukigap ()
-  let cdlthrusting () = F.Lookback.cdlthrusting ()
-  let cdltristar () = F.Lookback.cdltristar ()
-  let cdlunique3river () = F.Lookback.cdlunique3river ()
-  let cdlupsidegap2crows () = F.Lookback.cdlupsidegap2crows ()
-  let cdlxsidegap3methods () = F.Lookback.cdlxsidegap3methods ()
-  let ceil () = F.Lookback.ceil ()
-  let cmo ~timeperiod = F.Lookback.cmo timeperiod
-  let correl ~timeperiod = F.Lookback.correl timeperiod
-  let cos () = F.Lookback.cos ()
-  let cosh () = F.Lookback.cosh ()
-  let dema ~timeperiod = F.Lookback.dema timeperiod
-  let div () = F.Lookback.div ()
-  let dx ~timeperiod = F.Lookback.dx timeperiod
-  let ema ~timeperiod = F.Lookback.ema timeperiod
-  let exp () = F.Lookback.exp ()
-  let floor () = F.Lookback.floor ()
-  let ht_dcperiod () = F.Lookback.ht_dcperiod ()
-  let ht_dcphase () = F.Lookback.ht_dcphase ()
-  let ht_phasor () = F.Lookback.ht_phasor ()
-  let ht_sine () = F.Lookback.ht_sine ()
-  let ht_trendline () = F.Lookback.ht_trendline ()
-  let ht_trendmode () = F.Lookback.ht_trendmode ()
-  let kama ~timeperiod = F.Lookback.kama timeperiod
-  let linearreg ~timeperiod = F.Lookback.linearreg timeperiod
-  let linearreg_angle ~timeperiod = F.Lookback.linearreg_angle timeperiod
-
-  let linearreg_intercept ~timeperiod =
+  | Cdlmorningstar { penetration } -> F.Lookback.cdlmorningstar penetration
+  | Cdlonneck () -> F.Lookback.cdlonneck ()
+  | Cdlpiercing () -> F.Lookback.cdlpiercing ()
+  | Cdlrickshawman () -> F.Lookback.cdlrickshawman ()
+  | Cdlrisefall3methods () -> F.Lookback.cdlrisefall3methods ()
+  | Cdlseparatinglines () -> F.Lookback.cdlseparatinglines ()
+  | Cdlshootingstar () -> F.Lookback.cdlshootingstar ()
+  | Cdlshortline () -> F.Lookback.cdlshortline ()
+  | Cdlspinningtop () -> F.Lookback.cdlspinningtop ()
+  | Cdlstalledpattern () -> F.Lookback.cdlstalledpattern ()
+  | Cdlsticksandwich () -> F.Lookback.cdlsticksandwich ()
+  | Cdltakuri () -> F.Lookback.cdltakuri ()
+  | Cdltasukigap () -> F.Lookback.cdltasukigap ()
+  | Cdlthrusting () -> F.Lookback.cdlthrusting ()
+  | Cdltristar () -> F.Lookback.cdltristar ()
+  | Cdlunique3river () -> F.Lookback.cdlunique3river ()
+  | Cdlupsidegap2crows () -> F.Lookback.cdlupsidegap2crows ()
+  | Cdlxsidegap3methods () -> F.Lookback.cdlxsidegap3methods ()
+  | Ceil () -> F.Lookback.ceil ()
+  | Cmo { timeperiod } -> F.Lookback.cmo timeperiod
+  | Correl { timeperiod } -> F.Lookback.correl timeperiod
+  | Cos () -> F.Lookback.cos ()
+  | Cosh () -> F.Lookback.cosh ()
+  | Dema { timeperiod } -> F.Lookback.dema timeperiod
+  | Div () -> F.Lookback.div ()
+  | Dx { timeperiod } -> F.Lookback.dx timeperiod
+  | Ema { timeperiod } -> F.Lookback.ema timeperiod
+  | Exp () -> F.Lookback.exp ()
+  | Floor () -> F.Lookback.floor ()
+  | Ht_dcperiod () -> F.Lookback.ht_dcperiod ()
+  | Ht_dcphase () -> F.Lookback.ht_dcphase ()
+  | Ht_phasor () -> F.Lookback.ht_phasor ()
+  | Ht_sine () -> F.Lookback.ht_sine ()
+  | Ht_trendline () -> F.Lookback.ht_trendline ()
+  | Ht_trendmode () -> F.Lookback.ht_trendmode ()
+  | Imi { timeperiod } -> F.Lookback.imi timeperiod
+  | Kama { timeperiod } -> F.Lookback.kama timeperiod
+  | Linearreg { timeperiod } -> F.Lookback.linearreg timeperiod
+  | Linearreg_angle { timeperiod } -> F.Lookback.linearreg_angle timeperiod
+  | Linearreg_intercept { timeperiod } ->
     F.Lookback.linearreg_intercept timeperiod
-
-  let linearreg_slope ~timeperiod = F.Lookback.linearreg_slope timeperiod
-  let ln () = F.Lookback.ln ()
-  let log10 () = F.Lookback.log10 ()
-  let ma ~timeperiod ~ma_type = F.Lookback.ma timeperiod (Ma_type.to_int ma_type)
-
-  let macd ~fast_period ~slow_period ~signal_period =
+  | Linearreg_slope { timeperiod } -> F.Lookback.linearreg_slope timeperiod
+  | Ln () -> F.Lookback.ln ()
+  | Log10 () -> F.Lookback.log10 ()
+  | Ma { timeperiod; ma_type } ->
+    F.Lookback.ma timeperiod (Ma_type.to_int ma_type)
+  | Macd { fast_period; slow_period; signal_period } ->
     F.Lookback.macd fast_period slow_period signal_period
-
-  let macdext ~fast_period ~fast_ma_type ~slow_period ~slow_ma_type
-      ~signal_period ~signal_ma_type =
+  | Macdext
+      {
+        fast_period;
+        fast_ma_type;
+        slow_period;
+        slow_ma_type;
+        signal_period;
+        signal_ma_type;
+      } ->
     F.Lookback.macdext fast_period
       (Ma_type.to_int fast_ma_type)
       slow_period
       (Ma_type.to_int slow_ma_type)
       signal_period
       (Ma_type.to_int signal_ma_type)
-
-  let macdfix ~signal_period = F.Lookback.macdfix signal_period
-
-  let mama ~fast_limit ~slow_limit = F.Lookback.mama fast_limit slow_limit
-
-  let mavp ~min_period ~max_period ~ma_type =
+  | Macdfix { signal_period } -> F.Lookback.macdfix signal_period
+  | Mama { fast_limit; slow_limit } -> F.Lookback.mama fast_limit slow_limit
+  | Mavp { min_period; max_period; ma_type } ->
     F.Lookback.mavp min_period max_period (Ma_type.to_int ma_type)
-
-  let max ~timeperiod = F.Lookback.max timeperiod
-  let maxindex ~timeperiod = F.Lookback.maxindex timeperiod
-  let medprice () = F.Lookback.medprice ()
-  let mfi ~timeperiod = F.Lookback.mfi timeperiod
-  let midpoint ~timeperiod = F.Lookback.midpoint timeperiod
-  let midprice ~timeperiod = F.Lookback.midprice timeperiod
-  let min ~timeperiod = F.Lookback.min timeperiod
-  let minindex ~timeperiod = F.Lookback.minindex timeperiod
-  let minmax ~timeperiod = F.Lookback.minmax timeperiod
-  let minmaxindex ~timeperiod = F.Lookback.minmaxindex timeperiod
-  let minus_di ~timeperiod = F.Lookback.minus_di timeperiod
-  let minus_dm ~timeperiod = F.Lookback.minus_dm timeperiod
-  let mom ~timeperiod = F.Lookback.mom timeperiod
-  let mult () = F.Lookback.mult ()
-  let natr ~timeperiod = F.Lookback.natr timeperiod
-  let obv () = F.Lookback.obv ()
-  let plus_di ~timeperiod = F.Lookback.plus_di timeperiod
-  let plus_dm ~timeperiod = F.Lookback.plus_dm timeperiod
-
-  let ppo ~fast_period ~slow_period ~ma_type =
+  | Max { timeperiod } -> F.Lookback.max timeperiod
+  | Maxindex { timeperiod } -> F.Lookback.maxindex timeperiod
+  | Medprice () -> F.Lookback.medprice ()
+  | Mfi { timeperiod } -> F.Lookback.mfi timeperiod
+  | Midpoint { timeperiod } -> F.Lookback.midpoint timeperiod
+  | Midprice { timeperiod } -> F.Lookback.midprice timeperiod
+  | Min { timeperiod } -> F.Lookback.min timeperiod
+  | Minindex { timeperiod } -> F.Lookback.minindex timeperiod
+  | Minmax { timeperiod } -> F.Lookback.minmax timeperiod
+  | Minmaxindex { timeperiod } -> F.Lookback.minmaxindex timeperiod
+  | Minus_di { timeperiod } -> F.Lookback.minus_di timeperiod
+  | Minus_dm { timeperiod } -> F.Lookback.minus_dm timeperiod
+  | Mom { timeperiod } -> F.Lookback.mom timeperiod
+  | Mult () -> F.Lookback.mult ()
+  | Natr { timeperiod } -> F.Lookback.natr timeperiod
+  | Obv () -> F.Lookback.obv ()
+  | Plus_di { timeperiod } -> F.Lookback.plus_di timeperiod
+  | Plus_dm { timeperiod } -> F.Lookback.plus_dm timeperiod
+  | Ppo { fast_period; slow_period; ma_type } ->
     F.Lookback.ppo fast_period slow_period (Ma_type.to_int ma_type)
-
-  let roc ~timeperiod = F.Lookback.roc timeperiod
-  let rocp ~timeperiod = F.Lookback.rocp timeperiod
-  let rocr ~timeperiod = F.Lookback.rocr timeperiod
-  let rocr100 ~timeperiod = F.Lookback.rocr100 timeperiod
-  let rsi ~timeperiod = F.Lookback.rsi timeperiod
-
-  let sar ~acceleration ~maximum = F.Lookback.sar acceleration maximum
-
-  let sarext ~start_value ~offset_on_reverse ~acceleration_init_long
-      ~acceleration_long ~acceleration_max_long ~acceleration_init_short
-      ~acceleration_short ~acceleration_max_short =
+  | Roc { timeperiod } -> F.Lookback.roc timeperiod
+  | Rocp { timeperiod } -> F.Lookback.rocp timeperiod
+  | Rocr { timeperiod } -> F.Lookback.rocr timeperiod
+  | Rocr100 { timeperiod } -> F.Lookback.rocr100 timeperiod
+  | Rsi { timeperiod } -> F.Lookback.rsi timeperiod
+  | Sar { acceleration; maximum } -> F.Lookback.sar acceleration maximum
+  | Sarext
+      {
+        start_value;
+        offset_on_reverse;
+        acceleration_init_long;
+        acceleration_long;
+        acceleration_max_long;
+        acceleration_init_short;
+        acceleration_short;
+        acceleration_max_short;
+      } ->
     F.Lookback.sarext start_value offset_on_reverse acceleration_init_long
       acceleration_long acceleration_max_long acceleration_init_short
       acceleration_short acceleration_max_short
-
-  let sin () = F.Lookback.sin ()
-  let sinh () = F.Lookback.sinh ()
-  let sma ~timeperiod = F.Lookback.sma timeperiod
-  let sqrt () = F.Lookback.sqrt ()
-
-  let stddev ~timeperiod ~nb_dev = F.Lookback.stddev timeperiod nb_dev
-
-  let stoch ~fast_k_period ~slow_k_period ~slow_k_ma_type ~slow_d_period
-      ~slow_d_ma_type =
+  | Sin () -> F.Lookback.sin ()
+  | Sinh () -> F.Lookback.sinh ()
+  | Sma { timeperiod } -> F.Lookback.sma timeperiod
+  | Sqrt () -> F.Lookback.sqrt ()
+  | Stddev { timeperiod; nb_dev } -> F.Lookback.stddev timeperiod nb_dev
+  | Stoch
+      {
+        fast_k_period;
+        slow_k_period;
+        slow_k_ma_type;
+        slow_d_period;
+        slow_d_ma_type;
+      } ->
     F.Lookback.stoch fast_k_period slow_k_period
       (Ma_type.to_int slow_k_ma_type)
       slow_d_period
       (Ma_type.to_int slow_d_ma_type)
-
-  let stochf ~fast_k_period ~fast_d_period ~fast_d_ma_type =
+  | Stochf { fast_k_period; fast_d_period; fast_d_ma_type } ->
     F.Lookback.stochf fast_k_period fast_d_period
       (Ma_type.to_int fast_d_ma_type)
-
-  let stochrsi ~timeperiod ~fast_k_period ~fast_d_period ~fast_d_ma_type =
+  | Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type } ->
     F.Lookback.stochrsi timeperiod fast_k_period fast_d_period
       (Ma_type.to_int fast_d_ma_type)
-
-  let sub () = F.Lookback.sub ()
-  let sum ~timeperiod = F.Lookback.sum timeperiod
-
-  let t3 ~timeperiod ~v_factor = F.Lookback.t3 timeperiod v_factor
-
-  let tan () = F.Lookback.tan ()
-  let tanh () = F.Lookback.tanh ()
-  let tema ~timeperiod = F.Lookback.tema timeperiod
-  let trange () = F.Lookback.trange ()
-  let trima ~timeperiod = F.Lookback.trima timeperiod
-  let trix ~timeperiod = F.Lookback.trix timeperiod
-  let tsf ~timeperiod = F.Lookback.tsf timeperiod
-  let typprice () = F.Lookback.typprice ()
-
-  let ultosc ~timeperiod1 ~timeperiod2 ~timeperiod3 =
+  | Sub () -> F.Lookback.sub ()
+  | Sum { timeperiod } -> F.Lookback.sum timeperiod
+  | T3 { timeperiod; v_factor } -> F.Lookback.t3 timeperiod v_factor
+  | Tan () -> F.Lookback.tan ()
+  | Tanh () -> F.Lookback.tanh ()
+  | Tema { timeperiod } -> F.Lookback.tema timeperiod
+  | Trange () -> F.Lookback.trange ()
+  | Trima { timeperiod } -> F.Lookback.trima timeperiod
+  | Trix { timeperiod } -> F.Lookback.trix timeperiod
+  | Tsf { timeperiod } -> F.Lookback.tsf timeperiod
+  | Typprice () -> F.Lookback.typprice ()
+  | Ultosc { timeperiod1; timeperiod2; timeperiod3 } ->
     F.Lookback.ultosc timeperiod1 timeperiod2 timeperiod3
+  | Var { timeperiod; nb_dev } -> F.Lookback.var timeperiod nb_dev
+  | Wclprice () -> F.Lookback.wclprice ()
+  | Willr { timeperiod } -> F.Lookback.willr timeperiod
+  | Wma { timeperiod } -> F.Lookback.wma timeperiod
 
-  let var ~timeperiod ~nb_dev = F.Lookback.var timeperiod nb_dev
+type input_source =
+  | Ohlcv of Ohlcv.t
+  | Float of float_ba
+  | Float_float of float_ba * float_ba
+  | Float_ohlcv of float_ba * Ohlcv.t
 
-  let wclprice () = F.Lookback.wclprice ()
-  let willr ~timeperiod = F.Lookback.willr timeperiod
-  let wma ~timeperiod = F.Lookback.wma timeperiod
-end
+let calculate : type a.
+    int * int ->
+    input_source ->
+    a indicator_params ->
+    a ->
+    (int * int, [> `TALibCode of int ]) result =
+ fun (startIdx, endIdx) source params output ->
+  match (params, source, output) with
+  | Accbands { timeperiod }, Ohlcv ohlcv, (out1, out2, out3) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_accbands startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out1) (ba out2)
+          (ba out3))
+  | Acos (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_acos startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ad (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ad startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          (ba ohlcv.volume) outBegIdx outNBElement (ba out))
+  | Add (), Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_add startIdx endIdx (ba f1) (ba f2) outBegIdx outNBElement (ba out))
+  | Adosc { fast_period; slow_period }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_adosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) (ba ohlcv.volume) fast_period slow_period outBegIdx
+          outNBElement (ba out))
+  | Adx { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_adx startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          timeperiod outBegIdx outNBElement (ba out))
+  | Adxr { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_adxr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out))
+  | Apo { fast_period; slow_period; ma_type }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_apo startIdx endIdx (ba f) fast_period slow_period
+          (Ma_type.to_int ma_type) outBegIdx outNBElement (ba out))
+  | Aroon { timeperiod }, Ohlcv ohlcv, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_aroon startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) timeperiod
+          outBegIdx outNBElement (ba out1) (ba out2))
+  | Aroonosc { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_aroonosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) timeperiod
+          outBegIdx outNBElement (ba out))
+  | Asin (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_asin startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Atan (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_atan startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Atr { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_atr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          timeperiod outBegIdx outNBElement (ba out))
+  | Avgprice (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_avgprice startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (ba out))
+  | Avgdev { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_avgdev startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | ( Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type },
+      Float f,
+      (out1, out2, out3) ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_bbands startIdx endIdx (ba f) timeperiod nb_dev_up nb_dev_dn
+          (Ma_type.to_int ma_type) outBegIdx outNBElement (ba out1) (ba out2)
+          (ba out3))
+  | Beta { timeperiod }, Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_beta startIdx endIdx (ba f1) (ba f2) timeperiod outBegIdx
+          outNBElement (ba out))
+  | Bop (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_bop startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) outBegIdx outNBElement (ba out))
+  | Cci { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cci startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          timeperiod outBegIdx outNBElement (ba out))
+  | Cdl2crows (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl2crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3blackcrows (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3blackcrows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3inside (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3inside startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3linestrike (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3linestrike startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3outside (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3outside startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3starsinsouth (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3starsinsouth startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdl3whitesoldiers (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdl3whitesoldiers startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlabandonedbaby { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlabandonedbaby startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdladvanceblock (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdladvanceblock startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlbelthold (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlbelthold startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlbreakaway (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlbreakaway startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlclosingmarubozu (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlclosingmarubozu startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlconcealbabyswall (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlconcealbabyswall startIdx endIdx (ba ohlcv.open_)
+          (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement
+          (iba out))
+  | Cdlcounterattack (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlcounterattack startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdldarkcloudcover { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdldarkcloudcover startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdldoji (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdldoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdldojistar (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdldojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdldragonflydoji (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdldragonflydoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlengulfing (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlengulfing startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdleveningdojistar { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdleveningdojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdleveningstar { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdleveningstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdlgapsidesidewhite (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlgapsidesidewhite startIdx endIdx (ba ohlcv.open_)
+          (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement
+          (iba out))
+  | Cdlgravestonedoji (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlgravestonedoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhammer (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhammer startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhangingman (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhangingman startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlharami (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlharami startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlharamicross (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlharamicross startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhighwave (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhighwave startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhikkake (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhikkake startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhikkakemod (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhikkakemod startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlhomingpigeon (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlhomingpigeon startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlidentical3crows (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlidentical3crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlinneck (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlinneck startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlinvertedhammer (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlinvertedhammer startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlkicking (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlkicking startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlkickingbylength (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlkickingbylength startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlladderbottom (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlladderbottom startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdllongleggeddoji (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdllongleggeddoji startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdllongline (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdllongline startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlmarubozu (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlmarubozu startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlmatchinglow (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlmatchinglow startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlmathold { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlmathold startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdlmorningdojistar { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlmorningdojistar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdlmorningstar { penetration }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlmorningstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) penetration outBegIdx outNBElement
+          (iba out))
+  | Cdlonneck (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlonneck startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlpiercing (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlpiercing startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlrickshawman (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlrickshawman startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlrisefall3methods (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlrisefall3methods startIdx endIdx (ba ohlcv.open_)
+          (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement
+          (iba out))
+  | Cdlseparatinglines (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlseparatinglines startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlshootingstar (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlshootingstar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlshortline (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlshortline startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlspinningtop (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlspinningtop startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlstalledpattern (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlstalledpattern startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlsticksandwich (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlsticksandwich startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdltakuri (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdltakuri startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdltasukigap (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdltasukigap startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlthrusting (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlthrusting startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdltristar (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdltristar startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlunique3river (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlunique3river startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlupsidegap2crows (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlupsidegap2crows startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
+          (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement (iba out))
+  | Cdlxsidegap3methods (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cdlxsidegap3methods startIdx endIdx (ba ohlcv.open_)
+          (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement
+          (iba out))
+  | Ceil (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ceil startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Cmo { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cmo startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Correl { timeperiod }, Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_correl startIdx endIdx (ba f1) (ba f2) timeperiod outBegIdx
+          outNBElement (ba out))
+  | Cos (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cos startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Cosh (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_cosh startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Dema { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_dema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Div (), Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_div startIdx endIdx (ba f1) (ba f2) outBegIdx outNBElement (ba out))
+  | Dx { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_dx startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          timeperiod outBegIdx outNBElement (ba out))
+  | Ema { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Exp (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_exp startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Floor (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_floor startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ht_dcperiod (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_dcperiod startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ht_dcphase (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_dcphase startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ht_phasor (), Float f, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_phasor startIdx endIdx (ba f) outBegIdx outNBElement (ba out1)
+          (ba out2))
+  | Ht_sine (), Float f, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_sine startIdx endIdx (ba f) outBegIdx outNBElement (ba out1)
+          (ba out2))
+  | Ht_trendline (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_trendline startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ht_trendmode (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ht_trendmode startIdx endIdx (ba f) outBegIdx outNBElement
+          (iba out))
+  | Imi { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_imi startIdx endIdx (ba ohlcv.open_) (ba ohlcv.close) timeperiod
+          outBegIdx outNBElement (ba out))
+  | Kama { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_kama startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Linearreg { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_linearreg startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Linearreg_angle { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_linearreg_angle startIdx endIdx (ba f) timeperiod outBegIdx
+          outNBElement (ba out))
+  | Linearreg_intercept { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_linearreg_intercept startIdx endIdx (ba f) timeperiod outBegIdx
+          outNBElement (ba out))
+  | Linearreg_slope { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_linearreg_slope startIdx endIdx (ba f) timeperiod outBegIdx
+          outNBElement (ba out))
+  | Ln (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ln startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Log10 (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_log10 startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Ma { timeperiod; ma_type }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ma startIdx endIdx (ba f) timeperiod (Ma_type.to_int ma_type)
+          outBegIdx outNBElement (ba out))
+  | Macd { fast_period; slow_period; signal_period }, Float f, (out1, out2, out3)
+    ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_macd startIdx endIdx (ba f) fast_period slow_period signal_period
+          outBegIdx outNBElement (ba out1) (ba out2) (ba out3))
+  | ( Macdext
+        {
+          fast_period;
+          fast_ma_type;
+          slow_period;
+          slow_ma_type;
+          signal_period;
+          signal_ma_type;
+        },
+      Float f,
+      (out1, out2, out3) ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_macdext startIdx endIdx (ba f) fast_period
+          (Ma_type.to_int fast_ma_type)
+          slow_period
+          (Ma_type.to_int slow_ma_type)
+          signal_period
+          (Ma_type.to_int signal_ma_type)
+          outBegIdx outNBElement (ba out1) (ba out2) (ba out3))
+  | Macdfix { signal_period }, Float f, (out1, out2, out3) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_macdfix startIdx endIdx (ba f) signal_period outBegIdx outNBElement
+          (ba out1) (ba out2) (ba out3))
+  | Mama { fast_limit; slow_limit }, Float f, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_mama startIdx endIdx (ba f) fast_limit slow_limit outBegIdx
+          outNBElement (ba out1) (ba out2))
+  | Mavp { min_period; max_period; ma_type }, Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_mavp startIdx endIdx (ba f1) (ba f2) min_period max_period
+          (Ma_type.to_int ma_type) outBegIdx outNBElement (ba out))
+  | Max { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_max startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Maxindex { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_maxindex startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (iba out))
+  | Medprice (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_medprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) outBegIdx
+          outNBElement (ba out))
+  | Mfi { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_mfi startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) (ba ohlcv.close)
+          (ba ohlcv.volume) timeperiod outBegIdx outNBElement (ba out))
+  | Midpoint { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_midpoint startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Midprice { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_midprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) timeperiod
+          outBegIdx outNBElement (ba out))
+  | Min { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_min startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Minindex { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_minindex startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (iba out))
+  | Minmax { timeperiod }, Float f, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_minmax startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out1) (ba out2))
+  | Minmaxindex { timeperiod }, Float f, (out1, out2) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_minmaxindex startIdx endIdx (ba f) timeperiod outBegIdx
+          outNBElement (iba out1) (iba out2))
+  | Minus_di { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_minus_di startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out))
+  | Minus_dm { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_minus_dm startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) timeperiod
+          outBegIdx outNBElement (ba out))
+  | Mom { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_mom startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Mult (), Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_mult startIdx endIdx (ba f1) (ba f2) outBegIdx outNBElement
+          (ba out))
+  | Natr { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_natr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out))
+  | Obv (), Float_ohlcv (f, ohlcv), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_obv startIdx endIdx (ba f) (ba ohlcv.volume) outBegIdx outNBElement
+          (ba out))
+  | Plus_di { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_plus_di startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out))
+  | Plus_dm { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_plus_dm startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) timeperiod
+          outBegIdx outNBElement (ba out))
+  | Ppo { fast_period; slow_period; ma_type }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ppo startIdx endIdx (ba f) fast_period slow_period
+          (Ma_type.to_int ma_type) outBegIdx outNBElement (ba out))
+  | Roc { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_roc startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Rocp { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_rocp startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Rocr { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_rocr startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Rocr100 { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_rocr100 startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Rsi { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_rsi startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Sar { acceleration; maximum }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sar startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) acceleration
+          maximum outBegIdx outNBElement (ba out))
+  | ( Sarext
+        {
+          start_value;
+          offset_on_reverse;
+          acceleration_init_long;
+          acceleration_long;
+          acceleration_max_long;
+          acceleration_init_short;
+          acceleration_short;
+          acceleration_max_short;
+        },
+      Ohlcv ohlcv,
+      out ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sarext startIdx endIdx (ba ohlcv.high) (ba ohlcv.low) start_value
+          offset_on_reverse acceleration_init_long acceleration_long
+          acceleration_max_long acceleration_init_short acceleration_short
+          acceleration_max_short outBegIdx outNBElement (ba out))
+  | Sin (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sin startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Sinh (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sinh startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Sma { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sma startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Sqrt (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sqrt startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Stddev { timeperiod; nb_dev }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_stddev startIdx endIdx (ba f) timeperiod nb_dev outBegIdx
+          outNBElement (ba out))
+  | ( Stoch
+        {
+          fast_k_period;
+          slow_k_period;
+          slow_k_ma_type;
+          slow_d_period;
+          slow_d_ma_type;
+        },
+      Ohlcv ohlcv,
+      (out1, out2) ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_stoch startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) fast_k_period slow_k_period
+          (Ma_type.to_int slow_k_ma_type)
+          slow_d_period
+          (Ma_type.to_int slow_d_ma_type)
+          outBegIdx outNBElement (ba out1) (ba out2))
+  | ( Stochf { fast_k_period; fast_d_period; fast_d_ma_type },
+      Ohlcv ohlcv,
+      (out1, out2) ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_stochf startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) fast_k_period fast_d_period
+          (Ma_type.to_int fast_d_ma_type)
+          outBegIdx outNBElement (ba out1) (ba out2))
+  | ( Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type },
+      Float f,
+      (out1, out2) ) ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_stochrsi startIdx endIdx (ba f) timeperiod fast_k_period
+          fast_d_period
+          (Ma_type.to_int fast_d_ma_type)
+          outBegIdx outNBElement (ba out1) (ba out2))
+  | Sub (), Float_float (f1, f2), out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sub startIdx endIdx (ba f1) (ba f2) outBegIdx outNBElement (ba out))
+  | Sum { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_sum startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | T3 { timeperiod; v_factor }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_t3 startIdx endIdx (ba f) timeperiod v_factor outBegIdx
+          outNBElement (ba out))
+  | Tan (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_tan startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Tanh (), Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_tanh startIdx endIdx (ba f) outBegIdx outNBElement (ba out))
+  | Tema { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_tema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Trange (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_trange startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) outBegIdx outNBElement (ba out))
+  | Trima { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_trima startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Trix { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_trix startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Tsf { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_tsf startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | Typprice (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_typprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) outBegIdx outNBElement (ba out))
+  | Ultosc { timeperiod1; timeperiod2; timeperiod3 }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_ultosc startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod1 timeperiod2 timeperiod3 outBegIdx
+          outNBElement (ba out))
+  | Var { timeperiod; nb_dev }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_var startIdx endIdx (ba f) timeperiod nb_dev outBegIdx outNBElement
+          (ba out))
+  | Wclprice (), Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_wclprice startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) outBegIdx outNBElement (ba out))
+  | Willr { timeperiod }, Ohlcv ohlcv, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_willr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
+          (ba ohlcv.close) timeperiod outBegIdx outNBElement (ba out))
+  | Wma { timeperiod }, Float f, out ->
+    wrap (fun outBegIdx outNBElement ->
+        F.ta_wma startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          (ba out))
+  | _, _, _ -> Error `InvalidInput

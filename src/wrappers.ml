@@ -869,3 +869,234 @@ let ta_wma (startIdx, endIdx) inReal optInTimePeriod outReal =
   wrap (fun outBegIdx outNBElement ->
       F.ta_wma startIdx endIdx (ba inReal) optInTimePeriod outBegIdx
         outNBElement (ba outReal))
+
+module Lookback = struct
+  let accbands ~timeperiod = F.Lookback.accbands timeperiod
+  let acos () = F.Lookback.acos ()
+  let ad () = F.Lookback.ad ()
+  let add () = F.Lookback.add ()
+  let adosc ~fast_period ~slow_period = F.Lookback.adosc fast_period slow_period
+  let adx ~timeperiod = F.Lookback.adx timeperiod
+  let adxr ~timeperiod = F.Lookback.adxr timeperiod
+
+  let apo ~fast_period ~slow_period ~ma_type =
+    F.Lookback.apo fast_period slow_period (Ma_type.to_int ma_type)
+
+  let aroon ~timeperiod = F.Lookback.aroon timeperiod
+  let aroonosc ~timeperiod = F.Lookback.aroonosc timeperiod
+  let asin () = F.Lookback.asin ()
+  let atan () = F.Lookback.atan ()
+  let atr ~timeperiod = F.Lookback.atr timeperiod
+  let avgprice () = F.Lookback.avgprice ()
+  let avgdev ~timeperiod = F.Lookback.avgdev timeperiod
+
+  let bbands ~timeperiod ~nb_dev_up ~nb_dev_dn ~ma_type =
+    F.Lookback.bbands timeperiod nb_dev_up nb_dev_dn (Ma_type.to_int ma_type)
+
+  let beta ~timeperiod = F.Lookback.beta timeperiod
+  let bop () = F.Lookback.bop ()
+  let cci ~timeperiod = F.Lookback.cci timeperiod
+  let cdl2crows () = F.Lookback.cdl2crows ()
+  let cdl3blackcrows () = F.Lookback.cdl3blackcrows ()
+  let cdl3inside () = F.Lookback.cdl3inside ()
+  let cdl3linestrike () = F.Lookback.cdl3linestrike ()
+  let cdl3outside () = F.Lookback.cdl3outside ()
+  let cdl3starsinsouth () = F.Lookback.cdl3starsinsouth ()
+  let cdl3whitesoldiers () = F.Lookback.cdl3whitesoldiers ()
+
+  let cdlabandonedbaby ~penetration = F.Lookback.cdlabandonedbaby penetration
+
+  let cdladvanceblock () = F.Lookback.cdladvanceblock ()
+  let cdlbelthold () = F.Lookback.cdlbelthold ()
+  let cdlbreakaway () = F.Lookback.cdlbreakaway ()
+  let cdlclosingmarubozu () = F.Lookback.cdlclosingmarubozu ()
+  let cdlconcealbabyswall () = F.Lookback.cdlconcealbabyswall ()
+  let cdlcounterattack () = F.Lookback.cdlcounterattack ()
+
+  let cdldarkcloudcover ~penetration =
+    F.Lookback.cdldarkcloudcover penetration
+
+  let cdldoji () = F.Lookback.cdldoji ()
+  let cdldojistar () = F.Lookback.cdldojistar ()
+  let cdldragonflydoji () = F.Lookback.cdldragonflydoji ()
+  let cdlengulfing () = F.Lookback.cdlengulfing ()
+
+  let cdleveningdojistar ~penetration =
+    F.Lookback.cdleveningdojistar penetration
+
+  let cdleveningstar ~penetration = F.Lookback.cdleveningstar penetration
+
+  let cdlgapsidesidewhite () = F.Lookback.cdlgapsidesidewhite ()
+  let cdlgravestonedoji () = F.Lookback.cdlgravestonedoji ()
+  let cdlhammer () = F.Lookback.cdlhammer ()
+  let cdlhangingman () = F.Lookback.cdlhangingman ()
+  let cdlharami () = F.Lookback.cdlharami ()
+  let cdlharamicross () = F.Lookback.cdlharamicross ()
+  let cdlhighwave () = F.Lookback.cdlhighwave ()
+  let cdlhikkake () = F.Lookback.cdlhikkake ()
+  let cdlhikkakemod () = F.Lookback.cdlhikkakemod ()
+  let cdlhomingpigeon () = F.Lookback.cdlhomingpigeon ()
+  let cdlidentical3crows () = F.Lookback.cdlidentical3crows ()
+  let cdlinneck () = F.Lookback.cdlinneck ()
+  let cdlinvertedhammer () = F.Lookback.cdlinvertedhammer ()
+  let cdlkicking () = F.Lookback.cdlkicking ()
+  let cdlkickingbylength () = F.Lookback.cdlkickingbylength ()
+  let cdlladderbottom () = F.Lookback.cdlladderbottom ()
+  let cdllongleggeddoji () = F.Lookback.cdllongleggeddoji ()
+  let cdllongline () = F.Lookback.cdllongline ()
+  let cdlmarubozu () = F.Lookback.cdlmarubozu ()
+  let cdlmatchinglow () = F.Lookback.cdlmatchinglow ()
+  let cdlmathold ~penetration = F.Lookback.cdlmathold penetration
+
+  let cdlmorningdojistar ~penetration =
+    F.Lookback.cdlmorningdojistar penetration
+
+  let cdlmorningstar ~penetration = F.Lookback.cdlmorningstar penetration
+
+  let cdlonneck () = F.Lookback.cdlonneck ()
+  let cdlpiercing () = F.Lookback.cdlpiercing ()
+  let cdlrickshawman () = F.Lookback.cdlrickshawman ()
+  let cdlrisefall3methods () = F.Lookback.cdlrisefall3methods ()
+  let cdlseparatinglines () = F.Lookback.cdlseparatinglines ()
+  let cdlshootingstar () = F.Lookback.cdlshootingstar ()
+  let cdlshortline () = F.Lookback.cdlshortline ()
+  let cdlspinningtop () = F.Lookback.cdlspinningtop ()
+  let cdlstalledpattern () = F.Lookback.cdlstalledpattern ()
+  let cdlsticksandwich () = F.Lookback.cdlsticksandwich ()
+  let cdltakuri () = F.Lookback.cdltakuri ()
+  let cdltasukigap () = F.Lookback.cdltasukigap ()
+  let cdlthrusting () = F.Lookback.cdlthrusting ()
+  let cdltristar () = F.Lookback.cdltristar ()
+  let cdlunique3river () = F.Lookback.cdlunique3river ()
+  let cdlupsidegap2crows () = F.Lookback.cdlupsidegap2crows ()
+  let cdlxsidegap3methods () = F.Lookback.cdlxsidegap3methods ()
+  let ceil () = F.Lookback.ceil ()
+  let cmo ~timeperiod = F.Lookback.cmo timeperiod
+  let correl ~timeperiod = F.Lookback.correl timeperiod
+  let cos () = F.Lookback.cos ()
+  let cosh () = F.Lookback.cosh ()
+  let dema ~timeperiod = F.Lookback.dema timeperiod
+  let div () = F.Lookback.div ()
+  let dx ~timeperiod = F.Lookback.dx timeperiod
+  let ema ~timeperiod = F.Lookback.ema timeperiod
+  let exp () = F.Lookback.exp ()
+  let floor () = F.Lookback.floor ()
+  let ht_dcperiod () = F.Lookback.ht_dcperiod ()
+  let ht_dcphase () = F.Lookback.ht_dcphase ()
+  let ht_phasor () = F.Lookback.ht_phasor ()
+  let ht_sine () = F.Lookback.ht_sine ()
+  let ht_trendline () = F.Lookback.ht_trendline ()
+  let ht_trendmode () = F.Lookback.ht_trendmode ()
+  let kama ~timeperiod = F.Lookback.kama timeperiod
+  let linearreg ~timeperiod = F.Lookback.linearreg timeperiod
+  let linearreg_angle ~timeperiod = F.Lookback.linearreg_angle timeperiod
+
+  let linearreg_intercept ~timeperiod =
+    F.Lookback.linearreg_intercept timeperiod
+
+  let linearreg_slope ~timeperiod = F.Lookback.linearreg_slope timeperiod
+  let ln () = F.Lookback.ln ()
+  let log10 () = F.Lookback.log10 ()
+  let ma ~timeperiod ~ma_type = F.Lookback.ma timeperiod (Ma_type.to_int ma_type)
+
+  let macd ~fast_period ~slow_period ~signal_period =
+    F.Lookback.macd fast_period slow_period signal_period
+
+  let macdext ~fast_period ~fast_ma_type ~slow_period ~slow_ma_type
+      ~signal_period ~signal_ma_type =
+    F.Lookback.macdext fast_period
+      (Ma_type.to_int fast_ma_type)
+      slow_period
+      (Ma_type.to_int slow_ma_type)
+      signal_period
+      (Ma_type.to_int signal_ma_type)
+
+  let macdfix ~signal_period = F.Lookback.macdfix signal_period
+
+  let mama ~fast_limit ~slow_limit = F.Lookback.mama fast_limit slow_limit
+
+  let mavp ~min_period ~max_period ~ma_type =
+    F.Lookback.mavp min_period max_period (Ma_type.to_int ma_type)
+
+  let max ~timeperiod = F.Lookback.max timeperiod
+  let maxindex ~timeperiod = F.Lookback.maxindex timeperiod
+  let medprice () = F.Lookback.medprice ()
+  let mfi ~timeperiod = F.Lookback.mfi timeperiod
+  let midpoint ~timeperiod = F.Lookback.midpoint timeperiod
+  let midprice ~timeperiod = F.Lookback.midprice timeperiod
+  let min ~timeperiod = F.Lookback.min timeperiod
+  let minindex ~timeperiod = F.Lookback.minindex timeperiod
+  let minmax ~timeperiod = F.Lookback.minmax timeperiod
+  let minmaxindex ~timeperiod = F.Lookback.minmaxindex timeperiod
+  let minus_di ~timeperiod = F.Lookback.minus_di timeperiod
+  let minus_dm ~timeperiod = F.Lookback.minus_dm timeperiod
+  let mom ~timeperiod = F.Lookback.mom timeperiod
+  let mult () = F.Lookback.mult ()
+  let natr ~timeperiod = F.Lookback.natr timeperiod
+  let obv () = F.Lookback.obv ()
+  let plus_di ~timeperiod = F.Lookback.plus_di timeperiod
+  let plus_dm ~timeperiod = F.Lookback.plus_dm timeperiod
+
+  let ppo ~fast_period ~slow_period ~ma_type =
+    F.Lookback.ppo fast_period slow_period (Ma_type.to_int ma_type)
+
+  let roc ~timeperiod = F.Lookback.roc timeperiod
+  let rocp ~timeperiod = F.Lookback.rocp timeperiod
+  let rocr ~timeperiod = F.Lookback.rocr timeperiod
+  let rocr100 ~timeperiod = F.Lookback.rocr100 timeperiod
+  let rsi ~timeperiod = F.Lookback.rsi timeperiod
+
+  let sar ~acceleration ~maximum = F.Lookback.sar acceleration maximum
+
+  let sarext ~start_value ~offset_on_reverse ~acceleration_init_long
+      ~acceleration_long ~acceleration_max_long ~acceleration_init_short
+      ~acceleration_short ~acceleration_max_short =
+    F.Lookback.sarext start_value offset_on_reverse acceleration_init_long
+      acceleration_long acceleration_max_long acceleration_init_short
+      acceleration_short acceleration_max_short
+
+  let sin () = F.Lookback.sin ()
+  let sinh () = F.Lookback.sinh ()
+  let sma ~timeperiod = F.Lookback.sma timeperiod
+  let sqrt () = F.Lookback.sqrt ()
+
+  let stddev ~timeperiod ~nb_dev = F.Lookback.stddev timeperiod nb_dev
+
+  let stoch ~fast_k_period ~slow_k_period ~slow_k_ma_type ~slow_d_period
+      ~slow_d_ma_type =
+    F.Lookback.stoch fast_k_period slow_k_period
+      (Ma_type.to_int slow_k_ma_type)
+      slow_d_period
+      (Ma_type.to_int slow_d_ma_type)
+
+  let stochf ~fast_k_period ~fast_d_period ~fast_d_ma_type =
+    F.Lookback.stochf fast_k_period fast_d_period
+      (Ma_type.to_int fast_d_ma_type)
+
+  let stochrsi ~timeperiod ~fast_k_period ~fast_d_period ~fast_d_ma_type =
+    F.Lookback.stochrsi timeperiod fast_k_period fast_d_period
+      (Ma_type.to_int fast_d_ma_type)
+
+  let sub () = F.Lookback.sub ()
+  let sum ~timeperiod = F.Lookback.sum timeperiod
+
+  let t3 ~timeperiod ~v_factor = F.Lookback.t3 timeperiod v_factor
+
+  let tan () = F.Lookback.tan ()
+  let tanh () = F.Lookback.tanh ()
+  let tema ~timeperiod = F.Lookback.tema timeperiod
+  let trange () = F.Lookback.trange ()
+  let trima ~timeperiod = F.Lookback.trima timeperiod
+  let trix ~timeperiod = F.Lookback.trix timeperiod
+  let tsf ~timeperiod = F.Lookback.tsf timeperiod
+  let typprice () = F.Lookback.typprice ()
+
+  let ultosc ~timeperiod1 ~timeperiod2 ~timeperiod3 =
+    F.Lookback.ultosc timeperiod1 timeperiod2 timeperiod3
+
+  let var ~timeperiod ~nb_dev = F.Lookback.var timeperiod nb_dev
+
+  let wclprice () = F.Lookback.wclprice ()
+  let willr ~timeperiod = F.Lookback.willr timeperiod
+  let wma ~timeperiod = F.Lookback.wma timeperiod
+end

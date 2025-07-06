@@ -762,4 +762,303 @@ module Functions (F : Ctypes.FOREIGN) = struct
   let ta_wma =
     foreign "TA_WMA" @@ int @-> int @-> ptr double @-> int @-> ptr int
     @-> ptr int @-> ptr double @-> returning int
+
+  module Lookback = struct
+    let accbands = foreign "TA_ACCBANDS_Lookback" (int @-> returning int)
+    let acos = foreign "TA_ACOS_Lookback" (void @-> returning int)
+    let ad = foreign "TA_AD_Lookback" (void @-> returning int)
+    let add = foreign "TA_ADD_Lookback" (void @-> returning int)
+    let adosc = foreign "TA_ADOSC_Lookback" (int @-> int @-> returning int)
+    let adx = foreign "TA_ADX_Lookback" (int @-> returning int)
+    let adxr = foreign "TA_ADXR_Lookback" (int @-> returning int)
+    let apo = foreign "TA_APO_Lookback" (int @-> int @-> int @-> returning int)
+    let aroon = foreign "TA_AROON_Lookback" (int @-> returning int)
+    let aroonosc = foreign "TA_AROONOSC_Lookback" (int @-> returning int)
+    let asin = foreign "TA_ASIN_Lookback" (void @-> returning int)
+    let atan = foreign "TA_ATAN_Lookback" (void @-> returning int)
+    let atr = foreign "TA_ATR_Lookback" (int @-> returning int)
+    let avgprice = foreign "TA_AVGPRICE_Lookback" (void @-> returning int)
+    let avgdev = foreign "TA_AVGDEV_Lookback" (int @-> returning int)
+
+    let bbands =
+      foreign "TA_BBANDS_Lookback"
+        (int @-> double @-> double @-> int @-> returning int)
+
+    let beta = foreign "TA_BETA_Lookback" (int @-> returning int)
+    let bop = foreign "TA_BOP_Lookback" (void @-> returning int)
+    let cci = foreign "TA_CCI_Lookback" (int @-> returning int)
+    let cdl2crows = foreign "TA_CDL2CROWS_Lookback" (void @-> returning int)
+
+    let cdl3blackcrows =
+      foreign "TA_CDL3BLACKCROWS_Lookback" (void @-> returning int)
+
+    let cdl3inside = foreign "TA_CDL3INSIDE_Lookback" (void @-> returning int)
+
+    let cdl3linestrike =
+      foreign "TA_CDL3LINESTRIKE_Lookback" (void @-> returning int)
+
+    let cdl3outside = foreign "TA_CDL3OUTSIDE_Lookback" (void @-> returning int)
+
+    let cdl3starsinsouth =
+      foreign "TA_CDL3STARSINSOUTH_Lookback" (void @-> returning int)
+
+    let cdl3whitesoldiers =
+      foreign "TA_CDL3WHITESOLDIERS_Lookback" (void @-> returning int)
+
+    let cdlabandonedbaby =
+      foreign "TA_CDLABANDONEDBABY_Lookback" (double @-> returning int)
+
+    let cdladvanceblock =
+      foreign "TA_CDLADVANCEBLOCK_Lookback" (void @-> returning int)
+
+    let cdlbelthold = foreign "TA_CDLBELTHOLD_Lookback" (void @-> returning int)
+
+    let cdlbreakaway =
+      foreign "TA_CDLBREAKAWAY_Lookback" (void @-> returning int)
+
+    let cdlclosingmarubozu =
+      foreign "TA_CDLCLOSINGMARUBOZU_Lookback" (void @-> returning int)
+
+    let cdlconcealbabyswall =
+      foreign "TA_CDLCONCEALBABYSWALL_Lookback" (void @-> returning int)
+
+    let cdlcounterattack =
+      foreign "TA_CDLCOUNTERATTACK_Lookback" (void @-> returning int)
+
+    let cdldarkcloudcover =
+      foreign "TA_CDLDARKCLOUDCOVER_Lookback" (double @-> returning int)
+
+    let cdldoji = foreign "TA_CDLDOJI_Lookback" (void @-> returning int)
+    let cdldojistar = foreign "TA_CDLDOJISTAR_Lookback" (void @-> returning int)
+
+    let cdldragonflydoji =
+      foreign "TA_CDLDRAGONFLYDOJI_Lookback" (void @-> returning int)
+
+    let cdlengulfing =
+      foreign "TA_CDLENGULFING_Lookback" (void @-> returning int)
+
+    let cdleveningdojistar =
+      foreign "TA_CDLEVENINGDOJISTAR_Lookback" (double @-> returning int)
+
+    let cdleveningstar =
+      foreign "TA_CDLEVENINGSTAR_Lookback" (double @-> returning int)
+
+    let cdlgapsidesidewhite =
+      foreign "TA_CDLGAPSIDESIDEWHITE_Lookback" (void @-> returning int)
+
+    let cdlgravestonedoji =
+      foreign "TA_CDLGRAVESTONEDOJI_Lookback" (void @-> returning int)
+
+    let cdlhammer = foreign "TA_CDLHAMMER_Lookback" (void @-> returning int)
+
+    let cdlhangingman =
+      foreign "TA_CDLHANGINGMAN_Lookback" (void @-> returning int)
+
+    let cdlharami = foreign "TA_CDLHARAMI_Lookback" (void @-> returning int)
+
+    let cdlharamicross =
+      foreign "TA_CDLHARAMICROSS_Lookback" (void @-> returning int)
+
+    let cdlhighwave = foreign "TA_CDLHIGHWAVE_Lookback" (void @-> returning int)
+    let cdlhikkake = foreign "TA_CDLHIKKAKE_Lookback" (void @-> returning int)
+
+    let cdlhikkakemod =
+      foreign "TA_CDLHIKKAKEMOD_Lookback" (void @-> returning int)
+
+    let cdlhomingpigeon =
+      foreign "TA_CDLHOMINGPIGEON_Lookback" (void @-> returning int)
+
+    let cdlidentical3crows =
+      foreign "TA_CDLIDENTICAL3CROWS_Lookback" (void @-> returning int)
+
+    let cdlinneck = foreign "TA_CDLINNECK_Lookback" (void @-> returning int)
+
+    let cdlinvertedhammer =
+      foreign "TA_CDLINVERTEDHAMMER_Lookback" (void @-> returning int)
+
+    let cdlkicking = foreign "TA_CDLKICKING_Lookback" (void @-> returning int)
+
+    let cdlkickingbylength =
+      foreign "TA_CDLKICKINGBYLENGTH_Lookback" (void @-> returning int)
+
+    let cdlladderbottom =
+      foreign "TA_CDLLADDERBOTTOM_Lookback" (void @-> returning int)
+
+    let cdllongleggeddoji =
+      foreign "TA_CDLLONGLEGGEDDOJI_Lookback" (void @-> returning int)
+
+    let cdllongline = foreign "TA_CDLLONGLINE_Lookback" (void @-> returning int)
+    let cdlmarubozu = foreign "TA_CDLMARUBOZU_Lookback" (void @-> returning int)
+
+    let cdlmatchinglow =
+      foreign "TA_CDLMATCHINGLOW_Lookback" (void @-> returning int)
+
+    let cdlmathold = foreign "TA_CDLMATHOLD_Lookback" (double @-> returning int)
+
+    let cdlmorningdojistar =
+      foreign "TA_CDLMORNINGDOJISTAR_Lookback" (double @-> returning int)
+
+    let cdlmorningstar =
+      foreign "TA_CDLMORNINGSTAR_Lookback" (double @-> returning int)
+
+    let cdlonneck = foreign "TA_CDLONNECK_Lookback" (void @-> returning int)
+    let cdlpiercing = foreign "TA_CDLPIERCING_Lookback" (void @-> returning int)
+
+    let cdlrickshawman =
+      foreign "TA_CDLRICKSHAWMAN_Lookback" (void @-> returning int)
+
+    let cdlrisefall3methods =
+      foreign "TA_CDLRISEFALL3METHODS_Lookback" (void @-> returning int)
+
+    let cdlseparatinglines =
+      foreign "TA_CDLSEPARATINGLINES_Lookback" (void @-> returning int)
+
+    let cdlshootingstar =
+      foreign "TA_CDLSHOOTINGSTAR_Lookback" (void @-> returning int)
+
+    let cdlshortline =
+      foreign "TA_CDLSHORTLINE_Lookback" (void @-> returning int)
+
+    let cdlspinningtop =
+      foreign "TA_CDLSPINNINGTOP_Lookback" (void @-> returning int)
+
+    let cdlstalledpattern =
+      foreign "TA_CDLSTALLEDPATTERN_Lookback" (void @-> returning int)
+
+    let cdlsticksandwich =
+      foreign "TA_CDLSTICKSANDWICH_Lookback" (void @-> returning int)
+
+    let cdltakuri = foreign "TA_CDLTAKURI_Lookback" (void @-> returning int)
+
+    let cdltasukigap =
+      foreign "TA_CDLTASUKIGAP_Lookback" (void @-> returning int)
+
+    let cdlthrusting =
+      foreign "TA_CDLTHRUSTING_Lookback" (void @-> returning int)
+
+    let cdltristar = foreign "TA_CDLTRISTAR_Lookback" (void @-> returning int)
+
+    let cdlunique3river =
+      foreign "TA_CDLUNIQUE3RIVER_Lookback" (void @-> returning int)
+
+    let cdlupsidegap2crows =
+      foreign "TA_CDLUPSIDEGAP2CROWS_Lookback" (void @-> returning int)
+
+    let cdlxsidegap3methods =
+      foreign "TA_CDLXSIDEGAP3METHODS_Lookback" (void @-> returning int)
+
+    let ceil = foreign "TA_CEIL_Lookback" (void @-> returning int)
+    let cmo = foreign "TA_CMO_Lookback" (int @-> returning int)
+    let correl = foreign "TA_CORREL_Lookback" (int @-> returning int)
+    let cos = foreign "TA_COS_Lookback" (void @-> returning int)
+    let cosh = foreign "TA_COSH_Lookback" (void @-> returning int)
+    let dema = foreign "TA_DEMA_Lookback" (int @-> returning int)
+    let div = foreign "TA_DIV_Lookback" (void @-> returning int)
+    let dx = foreign "TA_DX_Lookback" (int @-> returning int)
+    let ema = foreign "TA_EMA_Lookback" (int @-> returning int)
+    let exp = foreign "TA_EXP_Lookback" (void @-> returning int)
+    let floor = foreign "TA_FLOOR_Lookback" (void @-> returning int)
+    let ht_dcperiod = foreign "TA_HT_DCPERIOD_Lookback" (void @-> returning int)
+    let ht_dcphase = foreign "TA_HT_DCPHASE_Lookback" (void @-> returning int)
+    let ht_phasor = foreign "TA_HT_PHASOR_Lookback" (void @-> returning int)
+    let ht_sine = foreign "TA_HT_SINE_Lookback" (void @-> returning int)
+
+    let ht_trendline =
+      foreign "TA_HT_TRENDLINE_Lookback" (void @-> returning int)
+
+    let ht_trendmode =
+      foreign "TA_HT_TRENDMODE_Lookback" (void @-> returning int)
+
+    let kama = foreign "TA_KAMA_Lookback" (int @-> returning int)
+    let linearreg = foreign "TA_LINEARREG_Lookback" (int @-> returning int)
+
+    let linearreg_angle =
+      foreign "TA_LINEARREG_ANGLE_Lookback" (int @-> returning int)
+
+    let linearreg_intercept =
+      foreign "TA_LINEARREG_INTERCEPT_Lookback" (int @-> returning int)
+
+    let linearreg_slope =
+      foreign "TA_LINEARREG_SLOPE_Lookback" (int @-> returning int)
+
+    let ln = foreign "TA_LN_Lookback" (void @-> returning int)
+    let log10 = foreign "TA_LOG10_Lookback" (void @-> returning int)
+    let ma = foreign "TA_MA_Lookback" (int @-> int @-> returning int)
+    let macd = foreign "TA_MACD_Lookback" (int @-> int @-> int @-> returning int)
+
+    let macdext =
+      foreign "TA_MACDEXT_Lookback"
+        (int @-> int @-> int @-> int @-> int @-> int @-> returning int)
+
+    let macdfix = foreign "TA_MACDFIX_Lookback" (int @-> returning int)
+    let mama = foreign "TA_MAMA_Lookback" (double @-> double @-> returning int)
+    let mavp = foreign "TA_MAVP_Lookback" (int @-> int @-> int @-> returning int)
+    let max = foreign "TA_MAX_Lookback" (int @-> returning int)
+    let maxindex = foreign "TA_MAXINDEX_Lookback" (int @-> returning int)
+    let medprice = foreign "TA_MEDPRICE_Lookback" (void @-> returning int)
+    let mfi = foreign "TA_MFI_Lookback" (int @-> returning int)
+    let midpoint = foreign "TA_MIDPOINT_Lookback" (int @-> returning int)
+    let midprice = foreign "TA_MIDPRICE_Lookback" (int @-> returning int)
+    let min = foreign "TA_MIN_Lookback" (int @-> returning int)
+    let minindex = foreign "TA_MININDEX_Lookback" (int @-> returning int)
+    let minmax = foreign "TA_MINMAX_Lookback" (int @-> returning int)
+    let minmaxindex = foreign "TA_MINMAXINDEX_Lookback" (int @-> returning int)
+    let minus_di = foreign "TA_MINUS_DI_Lookback" (int @-> returning int)
+    let minus_dm = foreign "TA_MINUS_DM_Lookback" (int @-> returning int)
+    let mom = foreign "TA_MOM_Lookback" (int @-> returning int)
+    let mult = foreign "TA_MULT_Lookback" (void @-> returning int)
+    let natr = foreign "TA_NATR_Lookback" (int @-> returning int)
+    let obv = foreign "TA_OBV_Lookback" (void @-> returning int)
+    let plus_di = foreign "TA_PLUS_DI_Lookback" (int @-> returning int)
+    let plus_dm = foreign "TA_PLUS_DM_Lookback" (int @-> returning int)
+    let ppo = foreign "TA_PPO_Lookback" (int @-> int @-> int @-> returning int)
+    let roc = foreign "TA_ROC_Lookback" (int @-> returning int)
+    let rocp = foreign "TA_ROCP_Lookback" (int @-> returning int)
+    let rocr = foreign "TA_ROCR_Lookback" (int @-> returning int)
+    let rocr100 = foreign "TA_ROCR100_Lookback" (int @-> returning int)
+    let rsi = foreign "TA_RSI_Lookback" (int @-> returning int)
+    let sar = foreign "TA_SAR_Lookback" (double @-> double @-> returning int)
+
+    let sarext =
+      foreign "TA_SAREXT_Lookback"
+        (double @-> double @-> double @-> double @-> double @-> double
+       @-> double @-> double @-> returning int)
+
+    let sin = foreign "TA_SIN_Lookback" (void @-> returning int)
+    let sinh = foreign "TA_SINH_Lookback" (void @-> returning int)
+    let sma = foreign "TA_SMA_Lookback" (int @-> returning int)
+    let sqrt = foreign "TA_SQRT_Lookback" (void @-> returning int)
+    let stddev = foreign "TA_STDDEV_Lookback" (int @-> double @-> returning int)
+
+    let stoch =
+      foreign "TA_STOCH_Lookback"
+        (int @-> int @-> int @-> int @-> int @-> returning int)
+
+    let stochf =
+      foreign "TA_STOCHF_Lookback" (int @-> int @-> int @-> returning int)
+
+    let stochrsi =
+      foreign "TA_STOCHRSI_Lookback"
+        (int @-> int @-> int @-> int @-> returning int)
+
+    let sub = foreign "TA_SUB_Lookback" (void @-> returning int)
+    let sum = foreign "TA_SUM_Lookback" (int @-> returning int)
+    let t3 = foreign "TA_T3_Lookback" (int @-> double @-> returning int)
+    let tan = foreign "TA_TAN_Lookback" (void @-> returning int)
+    let tanh = foreign "TA_TANH_Lookback" (void @-> returning int)
+    let tema = foreign "TA_TEMA_Lookback" (int @-> returning int)
+    let trange = foreign "TA_TRANGE_Lookback" (void @-> returning int)
+    let trima = foreign "TA_TRIMA_Lookback" (int @-> returning int)
+    let trix = foreign "TA_TRIX_Lookback" (int @-> returning int)
+    let tsf = foreign "TA_TSF_Lookback" (int @-> returning int)
+    let typprice = foreign "TA_TYPPRICE_Lookback" (void @-> returning int)
+
+    let ultosc =
+      foreign "TA_ULTOSC_Lookback" (int @-> int @-> int @-> returning int)
+
+    let var = foreign "TA_VAR_Lookback" (int @-> double @-> returning int)
+    let wclprice = foreign "TA_WCLPRICE_Lookback" (void @-> returning int)
+    let willr = foreign "TA_WILLR_Lookback" (int @-> returning int)
+    let wma = foreign "TA_WMA_Lookback" (int @-> returning int)
+  end
 end

@@ -1520,21 +1520,21 @@ let calculate : type a b.
   with
   | BadInput -> Result.fail @@ `TALibCode (-2)
 
-type pack = Pack : ('a, 'b) t -> pack
-type l = pack list
+(* type pack = Pack : ('a, 'b) t -> pack *)
+(* type l = pack list *)
+(* type _ eval = { input : 'a; output : 'b; params : ('a, 'b) t } *)
 
-let pack x = Pack x
-let calculate_pack : type a b. pack -> _ = fun (Pack x) -> calculate x
+(* let pack x = Pack x *)
+(* let calculate_pack : type a b. pack -> _ = fun (Pack x) -> calculate x *)
 
-let example =
-  pack
-  @@ Stochrsi
-       {
-         timeperiod = 14;
-         fast_k_period = 3;
-         fast_d_period = 3;
-         fast_d_ma_type = EMA;
-       }
+(* let example = *)
+(*   Stochrsi *)
+(*        { *)
+(*          timeperiod = 14; *)
+(*          fast_k_period = 3; *)
+(*          fast_d_period = 3; *)
+(*          fast_d_ma_type = EMA; *)
+(*        } *)
 
-let e2 = pack @@ Wma { timeperiod = 8 }
-let l = [ example; e2 ]
+(* let e2 = Wma { timeperiod = 8 } *)
+(* (\* let l = [ example; e2 ] *\) *)

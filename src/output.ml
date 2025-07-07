@@ -1,17 +1,10 @@
 open Wrappers
 
-type simple =
+type t =
   | FloatOutputs of { start_row : int; count : int }
   | IntOutputs of { start_row : int; count : int }
 
-type t =
-  | OneF of int
-  | TwoF of (int * int)
-  | ThreeF of (int * int * int)
-  | OneI of int
-  | TwoI of (int * int)
-
-let get_simple : type a b. (a, b) Wrappers.t -> simple =
+let get : type a b. (a, b) Wrappers.t -> t =
  fun params ->
   match params with
   (* Float Outputs *)
@@ -178,20 +171,6 @@ let get_simple : type a b. (a, b) Wrappers.t -> simple =
   | Minindex _ -> IntOutputs { start_row = 63; count = 1 }
   | Minmaxindex _ -> IntOutputs { start_row = 64; count = 2 }
 
-let of_simple (x : simple) =
-  match x with
-  | FloatOutputs { start_row; count } -> (
-    match count with
-    | 1 -> OneF start_row
-    | 2 -> TwoF (start_row, start_row + 1)
-    | 3 -> ThreeF (start_row, start_row + 1, start_row + 2)
-    | _ -> invalid_arg "Impossible float output parameters")
-  | IntOutputs { start_row; count } -> (
-    match count with
-    | 1 -> OneI start_row
-    | 2 -> TwoI (start_row, start_row + 1)
-    | _ -> invalid_arg "Impossible float output parameters")
-
-let get (x : ('a, 'b) Wrappers.t) =
-  let simple = get_simple x in
-  of_simple simple
+let calculate_ohlcv ?i (indicator : (Ohlcv.t, 'a) Wrappers.t) =
+  let output = get indicator in
+  calculate indicator ?i

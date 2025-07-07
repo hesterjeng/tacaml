@@ -494,15 +494,10 @@ let range ?i x =
 exception BadInput
 
 let calculate : type a b.
-    (a, b) t ->
-    ?i:int ->
-    source:('c -> a) ->
-    output:('c -> b) ->
-    'c ->
-    (int * int, [> `TALibCode of int ]) result =
- fun params ?i ~source ~output data ->
-  let source = source data in
-  let output = output data in
+    (a, b) t -> ?i:int -> a -> b -> (int * int, [> `TALibCode of int ]) result =
+ fun params ?i source output ->
+  (* let source = source data in *)
+  (* let output = output data in *)
   try
     let startIdx =
       match i with

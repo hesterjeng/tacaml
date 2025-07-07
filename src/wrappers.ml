@@ -1527,14 +1527,14 @@ let calculate : type a b.
 (* let pack x = Pack x *)
 (* let calculate_pack : type a b. pack -> _ = fun (Pack x) -> calculate x *)
 
-(* let example = *)
-(*   Stochrsi *)
-(*        { *)
-(*          timeperiod = 14; *)
-(*          fast_k_period = 3; *)
-(*          fast_d_period = 3; *)
-(*          fast_d_ma_type = EMA; *)
-(*        } *)
+let example =
+  Stochrsi
+    {
+      timeperiod = 14;
+      fast_k_period = 3;
+      fast_d_period = 3;
+      fast_d_ma_type = EMA;
+    }
 
-(* let e2 = Wma { timeperiod = 8 } *)
+let e2 = Wma { timeperiod = 8 }
 (* (\* let l = [ example; e2 ] *\) *)

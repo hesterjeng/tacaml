@@ -35,11 +35,7 @@ type ('a, 'b) t =
   | Acos : unit -> (float_ba, float_ba) t
   | Ad : unit -> (Ohlcv.t, float_ba) t
   | Add : unit -> (float_ba * float_ba, float_ba) t
-  | Adosc : {
-      fast_period : int;
-      slow_period : int;
-    }
-      -> (Ohlcv.t, float_ba) t
+  | Adosc : { fast_period : int; slow_period : int } -> (Ohlcv.t, float_ba) t
   | Adx : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Adxr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Apo : {
@@ -48,10 +44,7 @@ type ('a, 'b) t =
       ma_type : Ma_type.t;
     }
       -> (float_ba, float_ba) t
-  | Aroon : {
-      timeperiod : int;
-    }
-      -> (Ohlcv.t, float_ba * float_ba) t
+  | Aroon : { timeperiod : int } -> (Ohlcv.t, float_ba * float_ba) t
   | Aroonosc : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Asin : unit -> (float_ba, float_ba) t
   | Atan : unit -> (float_ba, float_ba) t
@@ -65,10 +58,7 @@ type ('a, 'b) t =
       ma_type : Ma_type.t;
     }
       -> (float_ba, float_ba * float_ba * float_ba) t
-  | Beta : {
-      timeperiod : int;
-    }
-      -> (float_ba * float_ba, float_ba) t
+  | Beta : { timeperiod : int } -> (float_ba * float_ba, float_ba) t
   | Bop : unit -> (Ohlcv.t, float_ba) t
   | Cci : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Cdl2crows : unit -> (Ohlcv.t, int_ba) t
@@ -78,32 +68,20 @@ type ('a, 'b) t =
   | Cdl3outside : unit -> (Ohlcv.t, int_ba) t
   | Cdl3starsinsouth : unit -> (Ohlcv.t, int_ba) t
   | Cdl3whitesoldiers : unit -> (Ohlcv.t, int_ba) t
-  | Cdlabandonedbaby : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
+  | Cdlabandonedbaby : { penetration : float } -> (Ohlcv.t, int_ba) t
   | Cdladvanceblock : unit -> (Ohlcv.t, int_ba) t
   | Cdlbelthold : unit -> (Ohlcv.t, int_ba) t
   | Cdlbreakaway : unit -> (Ohlcv.t, int_ba) t
   | Cdlclosingmarubozu : unit -> (Ohlcv.t, int_ba) t
   | Cdlconcealbabyswall : unit -> (Ohlcv.t, int_ba) t
   | Cdlcounterattack : unit -> (Ohlcv.t, int_ba) t
-  | Cdldarkcloudcover : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
+  | Cdldarkcloudcover : { penetration : float } -> (Ohlcv.t, int_ba) t
   | Cdldoji : unit -> (Ohlcv.t, int_ba) t
   | Cdldojistar : unit -> (Ohlcv.t, int_ba) t
   | Cdldragonflydoji : unit -> (Ohlcv.t, int_ba) t
   | Cdlengulfing : unit -> (Ohlcv.t, int_ba) t
-  | Cdleveningdojistar : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
-  | Cdleveningstar : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
+  | Cdleveningdojistar : { penetration : float } -> (Ohlcv.t, int_ba) t
+  | Cdleveningstar : { penetration : float } -> (Ohlcv.t, int_ba) t
   | Cdlgapsidesidewhite : unit -> (Ohlcv.t, int_ba) t
   | Cdlgravestonedoji : unit -> (Ohlcv.t, int_ba) t
   | Cdlhammer : unit -> (Ohlcv.t, int_ba) t
@@ -125,14 +103,8 @@ type ('a, 'b) t =
   | Cdlmarubozu : unit -> (Ohlcv.t, int_ba) t
   | Cdlmatchinglow : unit -> (Ohlcv.t, int_ba) t
   | Cdlmathold : { penetration : float } -> (Ohlcv.t, int_ba) t
-  | Cdlmorningdojistar : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
-  | Cdlmorningstar : {
-      penetration : float;
-    }
-      -> (Ohlcv.t, int_ba) t
+  | Cdlmorningdojistar : { penetration : float } -> (Ohlcv.t, int_ba) t
+  | Cdlmorningstar : { penetration : float } -> (Ohlcv.t, int_ba) t
   | Cdlonneck : unit -> (Ohlcv.t, int_ba) t
   | Cdlpiercing : unit -> (Ohlcv.t, int_ba) t
   | Cdlrickshawman : unit -> (Ohlcv.t, int_ba) t
@@ -152,10 +124,7 @@ type ('a, 'b) t =
   | Cdlxsidegap3methods : unit -> (Ohlcv.t, int_ba) t
   | Ceil : unit -> (float_ba, float_ba) t
   | Cmo : { timeperiod : int } -> (float_ba, float_ba) t
-  | Correl : {
-      timeperiod : int;
-    }
-      -> (float_ba * float_ba, float_ba) t
+  | Correl : { timeperiod : int } -> (float_ba * float_ba, float_ba) t
   | Cos : unit -> (float_ba, float_ba) t
   | Cosh : unit -> (float_ba, float_ba) t
   | Dema : { timeperiod : int } -> (float_ba, float_ba) t
@@ -173,25 +142,12 @@ type ('a, 'b) t =
   | Imi : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Kama : { timeperiod : int } -> (float_ba, float_ba) t
   | Linearreg : { timeperiod : int } -> (float_ba, float_ba) t
-  | Linearreg_angle : {
-      timeperiod : int;
-    }
-      -> (float_ba, float_ba) t
-  | Linearreg_intercept : {
-      timeperiod : int;
-    }
-      -> (float_ba, float_ba) t
-  | Linearreg_slope : {
-      timeperiod : int;
-    }
-      -> (float_ba, float_ba) t
+  | Linearreg_angle : { timeperiod : int } -> (float_ba, float_ba) t
+  | Linearreg_intercept : { timeperiod : int } -> (float_ba, float_ba) t
+  | Linearreg_slope : { timeperiod : int } -> (float_ba, float_ba) t
   | Ln : unit -> (float_ba, float_ba) t
   | Log10 : unit -> (float_ba, float_ba) t
-  | Ma : {
-      timeperiod : int;
-      ma_type : Ma_type.t;
-    }
-      -> (float_ba, float_ba) t
+  | Ma : { timeperiod : int; ma_type : Ma_type.t } -> (float_ba, float_ba) t
   | Macd : {
       fast_period : int;
       slow_period : int;
@@ -230,14 +186,8 @@ type ('a, 'b) t =
   | Midprice : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Min : { timeperiod : int } -> (float_ba, float_ba) t
   | Minindex : { timeperiod : int } -> (float_ba, int_ba) t
-  | Minmax : {
-      timeperiod : int;
-    }
-      -> (float_ba, float_ba * float_ba) t
-  | Minmaxindex : {
-      timeperiod : int;
-    }
-      -> (float_ba, int_ba * int_ba) t
+  | Minmax : { timeperiod : int } -> (float_ba, float_ba * float_ba) t
+  | Minmaxindex : { timeperiod : int } -> (float_ba, int_ba * int_ba) t
   | Minus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Minus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Mom : { timeperiod : int } -> (float_ba, float_ba) t
@@ -257,11 +207,7 @@ type ('a, 'b) t =
   | Rocr : { timeperiod : int } -> (float_ba, float_ba) t
   | Rocr100 : { timeperiod : int } -> (float_ba, float_ba) t
   | Rsi : { timeperiod : int } -> (float_ba, float_ba) t
-  | Sar : {
-      acceleration : float;
-      maximum : float;
-    }
-      -> (Ohlcv.t, float_ba) t
+  | Sar : { acceleration : float; maximum : float } -> (Ohlcv.t, float_ba) t
   | Sarext : {
       start_value : float;
       offset_on_reverse : float;
@@ -277,11 +223,7 @@ type ('a, 'b) t =
   | Sinh : unit -> (float_ba, float_ba) t
   | Sma : { timeperiod : int } -> (float_ba, float_ba) t
   | Sqrt : unit -> (float_ba, float_ba) t
-  | Stddev : {
-      timeperiod : int;
-      nb_dev : float;
-    }
-      -> (float_ba, float_ba) t
+  | Stddev : { timeperiod : int; nb_dev : float } -> (float_ba, float_ba) t
   | Stoch : {
       fast_k_period : int;
       slow_k_period : int;
@@ -305,11 +247,7 @@ type ('a, 'b) t =
       -> (float_ba, float_ba * float_ba) t
   | Sub : unit -> (float_ba * float_ba, float_ba) t
   | Sum : { timeperiod : int } -> (float_ba, float_ba) t
-  | T3 : {
-      timeperiod : int;
-      v_factor : float;
-    }
-      -> (float_ba, float_ba) t
+  | T3 : { timeperiod : int; v_factor : float } -> (float_ba, float_ba) t
   | Tan : unit -> (float_ba, float_ba) t
   | Tanh : unit -> (float_ba, float_ba) t
   | Tema : { timeperiod : int } -> (float_ba, float_ba) t
@@ -324,11 +262,7 @@ type ('a, 'b) t =
       timeperiod3 : int;
     }
       -> (Ohlcv.t, float_ba) t
-  | Var : {
-      timeperiod : int;
-      nb_dev : float;
-    }
-      -> (float_ba, float_ba) t
+  | Var : { timeperiod : int; nb_dev : float } -> (float_ba, float_ba) t
   | Wclprice : unit -> (Ohlcv.t, float_ba) t
   | Willr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Wma : { timeperiod : int } -> (float_ba, float_ba) t
@@ -560,14 +494,14 @@ let range ?i x =
 exception BadInput
 
 let calculate : type a b.
-    (a, b) t ->
-    ?i:int ->
-    a ->
-    b ->
-    (int * int, [> `TALibCode of int ]) result =
+    (a, b) t -> ?i:int -> a -> b -> (int * int, [> `TALibCode of int ]) result =
  fun params ?i source output ->
   try
-    let startIdx = Option.get_or ~default:0 i in
+    let startIdx =
+      match i with
+      | Some i -> i
+      | None -> 0
+    in
     let offset = lookback params in
     let slice arr =
       match i with
@@ -1586,22 +1520,21 @@ let calculate : type a b.
   with
   | BadInput -> Result.fail @@ `TALibCode (-2)
 
-type pack = | Pack : ('a, 'b) t -> pack
+type pack = Pack : ('a, 'b) t -> pack
+type l = pack list
 
 let pack x = Pack x
+let calculate_pack : type a b. pack -> _ = fun (Pack x) -> calculate x
 
 let example =
-  pack @@
-  Stochrsi
-    {
-      timeperiod = 14;
-      fast_k_period = 3;
-      fast_d_period = 3;
-      fast_d_ma_type = EMA;
-    }
+  pack
+  @@ Stochrsi
+       {
+         timeperiod = 14;
+         fast_k_period = 3;
+         fast_d_period = 3;
+         fast_d_ma_type = EMA;
+       }
 
-let e2 =
-  pack @@
-  Wma { timeperiod = 8 }
-
+let e2 = pack @@ Wma { timeperiod = 8 }
 let l = [ example; e2 ]

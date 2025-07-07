@@ -27,177 +27,177 @@ type float_ba =
 
 type int_ba = (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Array1.t
 
-type ('a, 'b) indicator_params =
+type ('a, 'b) t =
   | Accbands : {
       timeperiod : int;
     }
-      -> (Ohlcv.t, float_ba * float_ba * float_ba) indicator_params
-  | Acos : unit -> (float_ba, float_ba) indicator_params
-  | Ad : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Add : unit -> (float_ba * float_ba, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba * float_ba * float_ba) t
+  | Acos : unit -> (float_ba, float_ba) t
+  | Ad : unit -> (Ohlcv.t, float_ba) t
+  | Add : unit -> (float_ba * float_ba, float_ba) t
   | Adosc : {
       fast_period : int;
       slow_period : int;
     }
-      -> (Ohlcv.t, float_ba) indicator_params
-  | Adx : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Adxr : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba) t
+  | Adx : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Adxr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Apo : {
       fast_period : int;
       slow_period : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
   | Aroon : {
       timeperiod : int;
     }
-      -> (Ohlcv.t, float_ba * float_ba) indicator_params
-  | Aroonosc : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Asin : unit -> (float_ba, float_ba) indicator_params
-  | Atan : unit -> (float_ba, float_ba) indicator_params
-  | Atr : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Avgprice : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Avgdev : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba * float_ba) t
+  | Aroonosc : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Asin : unit -> (float_ba, float_ba) t
+  | Atan : unit -> (float_ba, float_ba) t
+  | Atr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Avgprice : unit -> (Ohlcv.t, float_ba) t
+  | Avgdev : { timeperiod : int } -> (float_ba, float_ba) t
   | Bbands : {
       timeperiod : int;
       nb_dev_up : float;
       nb_dev_dn : float;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba * float_ba) t
   | Beta : {
       timeperiod : int;
     }
-      -> (float_ba * float_ba, float_ba) indicator_params
-  | Bop : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Cci : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Cdl2crows : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3blackcrows : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3inside : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3linestrike : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3outside : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3starsinsouth : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdl3whitesoldiers : unit -> (Ohlcv.t, int_ba) indicator_params
+      -> (float_ba * float_ba, float_ba) t
+  | Bop : unit -> (Ohlcv.t, float_ba) t
+  | Cci : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Cdl2crows : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3blackcrows : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3inside : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3linestrike : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3outside : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3starsinsouth : unit -> (Ohlcv.t, int_ba) t
+  | Cdl3whitesoldiers : unit -> (Ohlcv.t, int_ba) t
   | Cdlabandonedbaby : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
-  | Cdladvanceblock : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlbelthold : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlbreakaway : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlclosingmarubozu : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlconcealbabyswall : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlcounterattack : unit -> (Ohlcv.t, int_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
+  | Cdladvanceblock : unit -> (Ohlcv.t, int_ba) t
+  | Cdlbelthold : unit -> (Ohlcv.t, int_ba) t
+  | Cdlbreakaway : unit -> (Ohlcv.t, int_ba) t
+  | Cdlclosingmarubozu : unit -> (Ohlcv.t, int_ba) t
+  | Cdlconcealbabyswall : unit -> (Ohlcv.t, int_ba) t
+  | Cdlcounterattack : unit -> (Ohlcv.t, int_ba) t
   | Cdldarkcloudcover : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
-  | Cdldoji : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdldojistar : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdldragonflydoji : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlengulfing : unit -> (Ohlcv.t, int_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
+  | Cdldoji : unit -> (Ohlcv.t, int_ba) t
+  | Cdldojistar : unit -> (Ohlcv.t, int_ba) t
+  | Cdldragonflydoji : unit -> (Ohlcv.t, int_ba) t
+  | Cdlengulfing : unit -> (Ohlcv.t, int_ba) t
   | Cdleveningdojistar : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
   | Cdleveningstar : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlgapsidesidewhite : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlgravestonedoji : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhammer : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhangingman : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlharami : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlharamicross : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhighwave : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhikkake : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhikkakemod : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlhomingpigeon : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlidentical3crows : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlinneck : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlinvertedhammer : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlkicking : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlkickingbylength : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlladderbottom : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdllongleggeddoji : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdllongline : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlmarubozu : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlmatchinglow : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlmathold : { penetration : float } -> (Ohlcv.t, int_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
+  | Cdlgapsidesidewhite : unit -> (Ohlcv.t, int_ba) t
+  | Cdlgravestonedoji : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhammer : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhangingman : unit -> (Ohlcv.t, int_ba) t
+  | Cdlharami : unit -> (Ohlcv.t, int_ba) t
+  | Cdlharamicross : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhighwave : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhikkake : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhikkakemod : unit -> (Ohlcv.t, int_ba) t
+  | Cdlhomingpigeon : unit -> (Ohlcv.t, int_ba) t
+  | Cdlidentical3crows : unit -> (Ohlcv.t, int_ba) t
+  | Cdlinneck : unit -> (Ohlcv.t, int_ba) t
+  | Cdlinvertedhammer : unit -> (Ohlcv.t, int_ba) t
+  | Cdlkicking : unit -> (Ohlcv.t, int_ba) t
+  | Cdlkickingbylength : unit -> (Ohlcv.t, int_ba) t
+  | Cdlladderbottom : unit -> (Ohlcv.t, int_ba) t
+  | Cdllongleggeddoji : unit -> (Ohlcv.t, int_ba) t
+  | Cdllongline : unit -> (Ohlcv.t, int_ba) t
+  | Cdlmarubozu : unit -> (Ohlcv.t, int_ba) t
+  | Cdlmatchinglow : unit -> (Ohlcv.t, int_ba) t
+  | Cdlmathold : { penetration : float } -> (Ohlcv.t, int_ba) t
   | Cdlmorningdojistar : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
   | Cdlmorningstar : {
       penetration : float;
     }
-      -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlonneck : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlpiercing : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlrickshawman : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlrisefall3methods : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlseparatinglines : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlshootingstar : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlshortline : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlspinningtop : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlstalledpattern : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlsticksandwich : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdltakuri : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdltasukigap : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlthrusting : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdltristar : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlunique3river : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlupsidegap2crows : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Cdlxsidegap3methods : unit -> (Ohlcv.t, int_ba) indicator_params
-  | Ceil : unit -> (float_ba, float_ba) indicator_params
-  | Cmo : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (Ohlcv.t, int_ba) t
+  | Cdlonneck : unit -> (Ohlcv.t, int_ba) t
+  | Cdlpiercing : unit -> (Ohlcv.t, int_ba) t
+  | Cdlrickshawman : unit -> (Ohlcv.t, int_ba) t
+  | Cdlrisefall3methods : unit -> (Ohlcv.t, int_ba) t
+  | Cdlseparatinglines : unit -> (Ohlcv.t, int_ba) t
+  | Cdlshootingstar : unit -> (Ohlcv.t, int_ba) t
+  | Cdlshortline : unit -> (Ohlcv.t, int_ba) t
+  | Cdlspinningtop : unit -> (Ohlcv.t, int_ba) t
+  | Cdlstalledpattern : unit -> (Ohlcv.t, int_ba) t
+  | Cdlsticksandwich : unit -> (Ohlcv.t, int_ba) t
+  | Cdltakuri : unit -> (Ohlcv.t, int_ba) t
+  | Cdltasukigap : unit -> (Ohlcv.t, int_ba) t
+  | Cdlthrusting : unit -> (Ohlcv.t, int_ba) t
+  | Cdltristar : unit -> (Ohlcv.t, int_ba) t
+  | Cdlunique3river : unit -> (Ohlcv.t, int_ba) t
+  | Cdlupsidegap2crows : unit -> (Ohlcv.t, int_ba) t
+  | Cdlxsidegap3methods : unit -> (Ohlcv.t, int_ba) t
+  | Ceil : unit -> (float_ba, float_ba) t
+  | Cmo : { timeperiod : int } -> (float_ba, float_ba) t
   | Correl : {
       timeperiod : int;
     }
-      -> (float_ba * float_ba, float_ba) indicator_params
-  | Cos : unit -> (float_ba, float_ba) indicator_params
-  | Cosh : unit -> (float_ba, float_ba) indicator_params
-  | Dema : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Div : unit -> (float_ba * float_ba, float_ba) indicator_params
-  | Dx : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Ema : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Exp : unit -> (float_ba, float_ba) indicator_params
-  | Floor : unit -> (float_ba, float_ba) indicator_params
-  | Ht_dcperiod : unit -> (float_ba, float_ba) indicator_params
-  | Ht_dcphase : unit -> (float_ba, float_ba) indicator_params
-  | Ht_phasor : unit -> (float_ba, float_ba * float_ba) indicator_params
-  | Ht_sine : unit -> (float_ba, float_ba * float_ba) indicator_params
-  | Ht_trendline : unit -> (float_ba, float_ba) indicator_params
-  | Ht_trendmode : unit -> (float_ba, int_ba) indicator_params
-  | Imi : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Kama : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Linearreg : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (float_ba * float_ba, float_ba) t
+  | Cos : unit -> (float_ba, float_ba) t
+  | Cosh : unit -> (float_ba, float_ba) t
+  | Dema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Div : unit -> (float_ba * float_ba, float_ba) t
+  | Dx : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Ema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Exp : unit -> (float_ba, float_ba) t
+  | Floor : unit -> (float_ba, float_ba) t
+  | Ht_dcperiod : unit -> (float_ba, float_ba) t
+  | Ht_dcphase : unit -> (float_ba, float_ba) t
+  | Ht_phasor : unit -> (float_ba, float_ba * float_ba) t
+  | Ht_sine : unit -> (float_ba, float_ba * float_ba) t
+  | Ht_trendline : unit -> (float_ba, float_ba) t
+  | Ht_trendmode : unit -> (float_ba, int_ba) t
+  | Imi : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Kama : { timeperiod : int } -> (float_ba, float_ba) t
+  | Linearreg : { timeperiod : int } -> (float_ba, float_ba) t
   | Linearreg_angle : {
       timeperiod : int;
     }
-      -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
   | Linearreg_intercept : {
       timeperiod : int;
     }
-      -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
   | Linearreg_slope : {
       timeperiod : int;
     }
-      -> (float_ba, float_ba) indicator_params
-  | Ln : unit -> (float_ba, float_ba) indicator_params
-  | Log10 : unit -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
+  | Ln : unit -> (float_ba, float_ba) t
+  | Log10 : unit -> (float_ba, float_ba) t
   | Ma : {
       timeperiod : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
   | Macd : {
       fast_period : int;
       slow_period : int;
       signal_period : int;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba * float_ba) t
   | Macdext : {
       fast_period : int;
       fast_ma_type : Ma_type.t;
@@ -206,62 +206,62 @@ type ('a, 'b) indicator_params =
       signal_period : int;
       signal_ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba * float_ba) t
   | Macdfix : {
       signal_period : int;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba * float_ba) t
   | Mama : {
       fast_limit : float;
       slow_limit : float;
     }
-      -> (float_ba, float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba) t
   | Mavp : {
       min_period : int;
       max_period : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba * float_ba, float_ba) indicator_params
-  | Max : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Maxindex : { timeperiod : int } -> (float_ba, int_ba) indicator_params
-  | Medprice : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Mfi : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Midpoint : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Midprice : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Min : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Minindex : { timeperiod : int } -> (float_ba, int_ba) indicator_params
+      -> (float_ba * float_ba, float_ba) t
+  | Max : { timeperiod : int } -> (float_ba, float_ba) t
+  | Maxindex : { timeperiod : int } -> (float_ba, int_ba) t
+  | Medprice : unit -> (Ohlcv.t, float_ba) t
+  | Mfi : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Midpoint : { timeperiod : int } -> (float_ba, float_ba) t
+  | Midprice : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Min : { timeperiod : int } -> (float_ba, float_ba) t
+  | Minindex : { timeperiod : int } -> (float_ba, int_ba) t
   | Minmax : {
       timeperiod : int;
     }
-      -> (float_ba, float_ba * float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba) t
   | Minmaxindex : {
       timeperiod : int;
     }
-      -> (float_ba, int_ba * int_ba) indicator_params
-  | Minus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Minus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Mom : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Mult : unit -> (float_ba * float_ba, float_ba) indicator_params
-  | Natr : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Obv : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Plus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Plus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
+      -> (float_ba, int_ba * int_ba) t
+  | Minus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Minus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Mom : { timeperiod : int } -> (float_ba, float_ba) t
+  | Mult : unit -> (float_ba * float_ba, float_ba) t
+  | Natr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Obv : unit -> (Ohlcv.t, float_ba) t
+  | Plus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Plus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Ppo : {
       fast_period : int;
       slow_period : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba) indicator_params
-  | Roc : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Rocp : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Rocr : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Rocr100 : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Rsi : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
+  | Roc : { timeperiod : int } -> (float_ba, float_ba) t
+  | Rocp : { timeperiod : int } -> (float_ba, float_ba) t
+  | Rocr : { timeperiod : int } -> (float_ba, float_ba) t
+  | Rocr100 : { timeperiod : int } -> (float_ba, float_ba) t
+  | Rsi : { timeperiod : int } -> (float_ba, float_ba) t
   | Sar : {
       acceleration : float;
       maximum : float;
     }
-      -> (Ohlcv.t, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba) t
   | Sarext : {
       start_value : float;
       offset_on_reverse : float;
@@ -272,16 +272,16 @@ type ('a, 'b) indicator_params =
       acceleration_short : float;
       acceleration_max_short : float;
     }
-      -> (Ohlcv.t, float_ba) indicator_params
-  | Sin : unit -> (float_ba, float_ba) indicator_params
-  | Sinh : unit -> (float_ba, float_ba) indicator_params
-  | Sma : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Sqrt : unit -> (float_ba, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba) t
+  | Sin : unit -> (float_ba, float_ba) t
+  | Sinh : unit -> (float_ba, float_ba) t
+  | Sma : { timeperiod : int } -> (float_ba, float_ba) t
+  | Sqrt : unit -> (float_ba, float_ba) t
   | Stddev : {
       timeperiod : int;
       nb_dev : float;
     }
-      -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
   | Stoch : {
       fast_k_period : int;
       slow_k_period : int;
@@ -289,51 +289,51 @@ type ('a, 'b) indicator_params =
       slow_d_period : int;
       slow_d_ma_type : Ma_type.t;
     }
-      -> (Ohlcv.t, float_ba * float_ba) indicator_params
+      -> (Ohlcv.t, float_ba * float_ba) t
   | Stochf : {
       fast_k_period : int;
       fast_d_period : int;
       fast_d_ma_type : Ma_type.t;
     }
-      -> (Ohlcv.t, float_ba * float_ba) indicator_params
+      -> (Ohlcv.t, float_ba * float_ba) t
   | Stochrsi : {
       timeperiod : int;
       fast_k_period : int;
       fast_d_period : int;
       fast_d_ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba) indicator_params
-  | Sub : unit -> (float_ba * float_ba, float_ba) indicator_params
-  | Sum : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba * float_ba) t
+  | Sub : unit -> (float_ba * float_ba, float_ba) t
+  | Sum : { timeperiod : int } -> (float_ba, float_ba) t
   | T3 : {
       timeperiod : int;
       v_factor : float;
     }
-      -> (float_ba, float_ba) indicator_params
-  | Tan : unit -> (float_ba, float_ba) indicator_params
-  | Tanh : unit -> (float_ba, float_ba) indicator_params
-  | Tema : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Trange : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Trima : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Trix : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Tsf : { timeperiod : int } -> (float_ba, float_ba) indicator_params
-  | Typprice : unit -> (Ohlcv.t, float_ba) indicator_params
+      -> (float_ba, float_ba) t
+  | Tan : unit -> (float_ba, float_ba) t
+  | Tanh : unit -> (float_ba, float_ba) t
+  | Tema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Trange : unit -> (Ohlcv.t, float_ba) t
+  | Trima : { timeperiod : int } -> (float_ba, float_ba) t
+  | Trix : { timeperiod : int } -> (float_ba, float_ba) t
+  | Tsf : { timeperiod : int } -> (float_ba, float_ba) t
+  | Typprice : unit -> (Ohlcv.t, float_ba) t
   | Ultosc : {
       timeperiod1 : int;
       timeperiod2 : int;
       timeperiod3 : int;
     }
-      -> (Ohlcv.t, float_ba) indicator_params
+      -> (Ohlcv.t, float_ba) t
   | Var : {
       timeperiod : int;
       nb_dev : float;
     }
-      -> (float_ba, float_ba) indicator_params
-  | Wclprice : unit -> (Ohlcv.t, float_ba) indicator_params
-  | Willr : { timeperiod : int } -> (Ohlcv.t, float_ba) indicator_params
-  | Wma : { timeperiod : int } -> (float_ba, float_ba) indicator_params
+      -> (float_ba, float_ba) t
+  | Wclprice : unit -> (Ohlcv.t, float_ba) t
+  | Willr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Wma : { timeperiod : int } -> (float_ba, float_ba) t
 
-let lookback : type a b. (a, b) indicator_params -> int =
+let lookback : type a b. (a, b) t -> int =
  fun params ->
   match params with
   | Accbands { timeperiod } -> F.Lookback.accbands timeperiod
@@ -560,7 +560,7 @@ let range ?i x =
 exception BadInput
 
 let calculate : type a b.
-    (a, b) indicator_params ->
+    (a, b) t ->
     ?i:int ->
     a ->
     b ->
@@ -1585,3 +1585,23 @@ let calculate : type a b.
             (ba (slice out)))
   with
   | BadInput -> Result.fail @@ `TALibCode (-2)
+
+type pack = | Pack : ('a, 'b) t -> pack
+
+let pack x = Pack x
+
+let example =
+  pack @@
+  Stochrsi
+    {
+      timeperiod = 14;
+      fast_k_period = 3;
+      fast_d_period = 3;
+      fast_d_ma_type = EMA;
+    }
+
+let e2 =
+  pack @@
+  Wma { timeperiod = 8 }
+
+let l = [ example; e2 ]

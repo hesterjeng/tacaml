@@ -43,21 +43,21 @@ type ('a, 'b) t =
       slow_period : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba) t
+      -> (Ohlcv.t, float_ba) t
   | Aroon : { timeperiod : int } -> (Ohlcv.t, float_ba * float_ba) t
   | Aroonosc : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Asin : unit -> (float_ba, float_ba) t
   | Atan : unit -> (float_ba, float_ba) t
   | Atr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Avgprice : unit -> (Ohlcv.t, float_ba) t
-  | Avgdev : { timeperiod : int } -> (float_ba, float_ba) t
+  | Avgdev : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Bbands : {
       timeperiod : int;
       nb_dev_up : float;
       nb_dev_dn : float;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba * float_ba) t
   | Beta : { timeperiod : int } -> (float_ba * float_ba, float_ba) t
   | Bop : unit -> (Ohlcv.t, float_ba) t
   | Cci : { timeperiod : int } -> (Ohlcv.t, float_ba) t
@@ -123,37 +123,37 @@ type ('a, 'b) t =
   | Cdlupsidegap2crows : unit -> (Ohlcv.t, int_ba) t
   | Cdlxsidegap3methods : unit -> (Ohlcv.t, int_ba) t
   | Ceil : unit -> (float_ba, float_ba) t
-  | Cmo : { timeperiod : int } -> (float_ba, float_ba) t
+  | Cmo : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Correl : { timeperiod : int } -> (float_ba * float_ba, float_ba) t
   | Cos : unit -> (float_ba, float_ba) t
   | Cosh : unit -> (float_ba, float_ba) t
-  | Dema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Dema : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Div : unit -> (float_ba * float_ba, float_ba) t
   | Dx : { timeperiod : int } -> (Ohlcv.t, float_ba) t
-  | Ema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Ema : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Exp : unit -> (float_ba, float_ba) t
   | Floor : unit -> (float_ba, float_ba) t
-  | Ht_dcperiod : unit -> (float_ba, float_ba) t
-  | Ht_dcphase : unit -> (float_ba, float_ba) t
-  | Ht_phasor : unit -> (float_ba, float_ba * float_ba) t
-  | Ht_sine : unit -> (float_ba, float_ba * float_ba) t
-  | Ht_trendline : unit -> (float_ba, float_ba) t
-  | Ht_trendmode : unit -> (float_ba, int_ba) t
+  | Ht_dcperiod : unit -> (Ohlcv.t, float_ba) t
+  | Ht_dcphase : unit -> (Ohlcv.t, float_ba) t
+  | Ht_phasor : unit -> (Ohlcv.t, float_ba * float_ba) t
+  | Ht_sine : unit -> (Ohlcv.t, float_ba * float_ba) t
+  | Ht_trendline : unit -> (Ohlcv.t, float_ba) t
+  | Ht_trendmode : unit -> (Ohlcv.t, int_ba) t
   | Imi : { timeperiod : int } -> (Ohlcv.t, float_ba) t
-  | Kama : { timeperiod : int } -> (float_ba, float_ba) t
-  | Linearreg : { timeperiod : int } -> (float_ba, float_ba) t
-  | Linearreg_angle : { timeperiod : int } -> (float_ba, float_ba) t
-  | Linearreg_intercept : { timeperiod : int } -> (float_ba, float_ba) t
-  | Linearreg_slope : { timeperiod : int } -> (float_ba, float_ba) t
+  | Kama : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Linearreg : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Linearreg_angle : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Linearreg_intercept : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Linearreg_slope : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Ln : unit -> (float_ba, float_ba) t
   | Log10 : unit -> (float_ba, float_ba) t
-  | Ma : { timeperiod : int; ma_type : Ma_type.t } -> (float_ba, float_ba) t
+  | Ma : { timeperiod : int; ma_type : Ma_type.t } -> (Ohlcv.t, float_ba) t
   | Macd : {
       fast_period : int;
       slow_period : int;
       signal_period : int;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba * float_ba) t
   | Macdext : {
       fast_period : int;
       fast_ma_type : Ma_type.t;
@@ -162,16 +162,16 @@ type ('a, 'b) t =
       signal_period : int;
       signal_ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba * float_ba) t
   | Macdfix : {
       signal_period : int;
     }
-      -> (float_ba, float_ba * float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba * float_ba) t
   | Mama : {
       fast_limit : float;
       slow_limit : float;
     }
-      -> (float_ba, float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba) t
   | Mavp : {
       min_period : int;
       max_period : int;
@@ -190,7 +190,7 @@ type ('a, 'b) t =
   | Minmaxindex : { timeperiod : int } -> (float_ba, int_ba * int_ba) t
   | Minus_di : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Minus_dm : { timeperiod : int } -> (Ohlcv.t, float_ba) t
-  | Mom : { timeperiod : int } -> (float_ba, float_ba) t
+  | Mom : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Mult : unit -> (float_ba * float_ba, float_ba) t
   | Natr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Obv : unit -> (Ohlcv.t, float_ba) t
@@ -201,12 +201,12 @@ type ('a, 'b) t =
       slow_period : int;
       ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba) t
-  | Roc : { timeperiod : int } -> (float_ba, float_ba) t
-  | Rocp : { timeperiod : int } -> (float_ba, float_ba) t
-  | Rocr : { timeperiod : int } -> (float_ba, float_ba) t
-  | Rocr100 : { timeperiod : int } -> (float_ba, float_ba) t
-  | Rsi : { timeperiod : int } -> (float_ba, float_ba) t
+      -> (Ohlcv.t, float_ba) t
+  | Roc : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Rocp : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Rocr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Rocr100 : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Rsi : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Sar : { acceleration : float; maximum : float } -> (Ohlcv.t, float_ba) t
   | Sarext : {
       start_value : float;
@@ -221,7 +221,7 @@ type ('a, 'b) t =
       -> (Ohlcv.t, float_ba) t
   | Sin : unit -> (float_ba, float_ba) t
   | Sinh : unit -> (float_ba, float_ba) t
-  | Sma : { timeperiod : int } -> (float_ba, float_ba) t
+  | Sma : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Sqrt : unit -> (float_ba, float_ba) t
   | Stddev : { timeperiod : int; nb_dev : float } -> (float_ba, float_ba) t
   | Stoch : {
@@ -244,17 +244,17 @@ type ('a, 'b) t =
       fast_d_period : int;
       fast_d_ma_type : Ma_type.t;
     }
-      -> (float_ba, float_ba * float_ba) t
+      -> (Ohlcv.t, float_ba * float_ba) t
   | Sub : unit -> (float_ba * float_ba, float_ba) t
-  | Sum : { timeperiod : int } -> (float_ba, float_ba) t
-  | T3 : { timeperiod : int; v_factor : float } -> (float_ba, float_ba) t
+  | Sum : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | T3 : { timeperiod : int; v_factor : float } -> (Ohlcv.t, float_ba) t
   | Tan : unit -> (float_ba, float_ba) t
   | Tanh : unit -> (float_ba, float_ba) t
-  | Tema : { timeperiod : int } -> (float_ba, float_ba) t
+  | Tema : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Trange : unit -> (Ohlcv.t, float_ba) t
-  | Trima : { timeperiod : int } -> (float_ba, float_ba) t
-  | Trix : { timeperiod : int } -> (float_ba, float_ba) t
-  | Tsf : { timeperiod : int } -> (float_ba, float_ba) t
+  | Trima : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Trix : { timeperiod : int } -> (Ohlcv.t, float_ba) t
+  | Tsf : { timeperiod : int } -> (Ohlcv.t, float_ba) t
   | Typprice : unit -> (Ohlcv.t, float_ba) t
   | Ultosc : {
       timeperiod1 : int;
@@ -262,10 +262,10 @@ type ('a, 'b) t =
       timeperiod3 : int;
     }
       -> (Ohlcv.t, float_ba) t
-  | Var : { timeperiod : int; nb_dev : float } -> (float_ba, float_ba) t
+  | Var : { timeperiod : int; nb_dev : float } -> (Ohlcv.t, float_ba) t
   | Wclprice : unit -> (Ohlcv.t, float_ba) t
   | Willr : { timeperiod : int } -> (Ohlcv.t, float_ba) t
-  | Wma : { timeperiod : int } -> (float_ba, float_ba) t
+  | Wma : { timeperiod : int } -> (Ohlcv.t, float_ba) t
 
 let lookback : type a b. (a, b) t -> int =
  fun params ->
@@ -494,8 +494,15 @@ let range ?i x =
 exception BadInput
 
 let calculate : type a b.
-    (a, b) t -> ?i:int -> a -> b -> (int * int, [> `TALibCode of int ]) result =
- fun params ?i source output ->
+    (a, b) t ->
+    ?i:int ->
+    source:('c -> a) ->
+    output:('c -> b) ->
+    'c ->
+    (int * int, [> `TALibCode of int ]) result =
+ fun params ?i ~source ~output data ->
+  let source = source data in
+  let output = output data in
   try
     let startIdx =
       match i with
@@ -555,7 +562,8 @@ let calculate : type a b.
           F.ta_adxr startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
             (ba ohlcv.close) timeperiod outBegIdx outNBElement
             (ba (slice out)))
-    | Apo { fast_period; slow_period; ma_type }, f, out ->
+    | Apo { fast_period; slow_period; ma_type }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_apo startIdx endIdx (ba f) fast_period slow_period
@@ -596,13 +604,16 @@ let calculate : type a b.
           F.ta_avgprice startIdx endIdx (ba ohlcv.open_) (ba ohlcv.high)
             (ba ohlcv.low) (ba ohlcv.close) outBegIdx outNBElement
             (ba (slice out)))
-    | Avgdev { timeperiod }, f, out ->
+    | Avgdev { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_avgdev startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
             (ba (slice out)))
-    | Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type }, f, (out1, out2, out3)
-      ->
+    | ( Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type },
+        ohlcv,
+        (out1, out2, out3) ) ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_bbands startIdx endIdx (ba f) timeperiod nb_dev_up nb_dev_dn
@@ -1016,7 +1027,8 @@ let calculate : type a b.
       wrap (fun outBegIdx outNBElement ->
           F.ta_ceil startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Cmo { timeperiod }, f, out ->
+    | Cmo { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_cmo startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
@@ -1037,7 +1049,8 @@ let calculate : type a b.
       wrap (fun outBegIdx outNBElement ->
           F.ta_cosh startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Dema { timeperiod }, f, out ->
+    | Dema { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_dema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
@@ -1053,7 +1066,8 @@ let calculate : type a b.
           F.ta_dx startIdx endIdx (ba ohlcv.high) (ba ohlcv.low)
             (ba ohlcv.close) timeperiod outBegIdx outNBElement
             (ba (slice out)))
-    | Ema { timeperiod }, f, out ->
+    | Ema { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
@@ -1068,34 +1082,40 @@ let calculate : type a b.
       wrap (fun outBegIdx outNBElement ->
           F.ta_floor startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Ht_dcperiod (), f, out ->
+    | Ht_dcperiod (), ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_dcperiod startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Ht_dcphase (), f, out ->
+    | Ht_dcphase (), ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_dcphase startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Ht_phasor (), f, (out1, out2) ->
+    | Ht_phasor (), ohlcv, (out1, out2) ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_phasor startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out1))
             (ba (slice out2)))
-    | Ht_sine (), f, (out1, out2) ->
+    | Ht_sine (), ohlcv, (out1, out2) ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_sine startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out1))
             (ba (slice out2)))
-    | Ht_trendline (), f, out ->
+    | Ht_trendline (), ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_trendline startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Ht_trendmode (), f, out ->
+    | Ht_trendmode (), ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ht_trendmode startIdx endIdx (ba f) outBegIdx outNBElement
@@ -1106,30 +1126,35 @@ let calculate : type a b.
           F.ta_imi startIdx endIdx (ba ohlcv.open_) (ba ohlcv.close) timeperiod
             outBegIdx outNBElement
             (ba (slice out)))
-    | Kama { timeperiod }, f, out ->
+    | Kama { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_kama startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
             (ba (slice out)))
-    | Linearreg { timeperiod }, f, out ->
+    | Linearreg { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_linearreg startIdx endIdx (ba f) timeperiod outBegIdx
             outNBElement
             (ba (slice out)))
-    | Linearreg_angle { timeperiod }, f, out ->
+    | Linearreg_angle { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_linearreg_angle startIdx endIdx (ba f) timeperiod outBegIdx
             outNBElement
             (ba (slice out)))
-    | Linearreg_intercept { timeperiod }, f, out ->
+    | Linearreg_intercept { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_linearreg_intercept startIdx endIdx (ba f) timeperiod outBegIdx
             outNBElement
             (ba (slice out)))
-    | Linearreg_slope { timeperiod }, f, out ->
+    | Linearreg_slope { timeperiod }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_linearreg_slope startIdx endIdx (ba f) timeperiod outBegIdx
@@ -1144,13 +1169,16 @@ let calculate : type a b.
       wrap (fun outBegIdx outNBElement ->
           F.ta_log10 startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
-    | Ma { timeperiod; ma_type }, f, out ->
+    | Ma { timeperiod; ma_type }, ohlcv, out ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_ma startIdx endIdx (ba f) timeperiod (Ma_type.to_int ma_type)
             outBegIdx outNBElement
             (ba (slice out)))
-    | Macd { fast_period; slow_period; signal_period }, f, (out1, out2, out3) ->
+    | Macd { fast_period; slow_period; signal_period }, ohlcv, (out1, out2, out3)
+      ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_macd startIdx endIdx (ba f) fast_period slow_period signal_period
@@ -1167,8 +1195,9 @@ let calculate : type a b.
             signal_period;
             signal_ma_type;
           },
-        f,
+        ohlcv,
         (out1, out2, out3) ) ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_macdext startIdx endIdx (ba f) fast_period
@@ -1181,7 +1210,8 @@ let calculate : type a b.
             (ba (slice out1))
             (ba (slice out2))
             (ba (slice out3)))
-    | Macdfix { signal_period }, f, (out1, out2, out3) ->
+    | Macdfix { signal_period }, ohlcv, (out1, out2, out3) ->
+      let f = ohlcv.close in
       let endIdx = range ?i f in
       wrap (fun outBegIdx outNBElement ->
           F.ta_macdfix startIdx endIdx (ba f) signal_period outBegIdx
@@ -1190,9 +1220,9 @@ let calculate : type a b.
             (ba (slice out2))
             (ba (slice out3)))
     | Mama { fast_limit; slow_limit }, f, (out1, out2) ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_mama startIdx endIdx (ba f) fast_limit slow_limit outBegIdx
+          F.ta_mama startIdx endIdx (ba f.close) fast_limit slow_limit outBegIdx
             outNBElement
             (ba (slice out1))
             (ba (slice out2)))
@@ -1271,9 +1301,10 @@ let calculate : type a b.
             timeperiod outBegIdx outNBElement
             (ba (slice out)))
     | Mom { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_mom startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_mom startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Mult (), (f1, f2), out ->
       let endIdx = range ?i f1 in
@@ -1305,35 +1336,40 @@ let calculate : type a b.
             outBegIdx outNBElement
             (ba (slice out)))
     | Ppo { fast_period; slow_period; ma_type }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_ppo startIdx endIdx (ba f) fast_period slow_period
+          F.ta_ppo startIdx endIdx (ba f.close) fast_period slow_period
             (Ma_type.to_int ma_type) outBegIdx outNBElement
             (ba (slice out)))
     | Roc { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_roc startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_roc startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Rocp { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_rocp startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_rocp startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Rocr { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_rocr startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_rocr startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Rocr100 { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_rocr100 startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_rocr100 startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Rsi { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_rsi startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_rsi startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Sar { acceleration; maximum }, ohlcv, out ->
       let endIdx = range ?i ohlcv.high in
@@ -1372,9 +1408,10 @@ let calculate : type a b.
           F.ta_sinh startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
     | Sma { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_sma startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_sma startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Sqrt (), f, out ->
       let endIdx = range ?i f in
@@ -1421,9 +1458,9 @@ let calculate : type a b.
     | ( Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type },
         f,
         (out1, out2) ) ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_stochrsi startIdx endIdx (ba f) timeperiod fast_k_period
+          F.ta_stochrsi startIdx endIdx (ba f.close) timeperiod fast_k_period
             fast_d_period
             (Ma_type.to_int fast_d_ma_type)
             outBegIdx outNBElement
@@ -1435,14 +1472,15 @@ let calculate : type a b.
           F.ta_sub startIdx endIdx (ba f1) (ba f2) outBegIdx outNBElement
             (ba (slice out)))
     | Sum { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_sum startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_sum startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | T3 { timeperiod; v_factor }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_t3 startIdx endIdx (ba f) timeperiod v_factor outBegIdx
+          F.ta_t3 startIdx endIdx (ba f.close) timeperiod v_factor outBegIdx
             outNBElement
             (ba (slice out)))
     | Tan (), f, out ->
@@ -1456,9 +1494,10 @@ let calculate : type a b.
           F.ta_tanh startIdx endIdx (ba f) outBegIdx outNBElement
             (ba (slice out)))
     | Tema { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_tema startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_tema startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Trange (), ohlcv, out ->
       let endIdx = range ?i ohlcv.high in
@@ -1467,19 +1506,22 @@ let calculate : type a b.
             (ba ohlcv.close) outBegIdx outNBElement
             (ba (slice out)))
     | Trima { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_trima startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_trima startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Trix { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_trix startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_trix startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Tsf { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_tsf startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_tsf startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
     | Typprice (), ohlcv, out ->
       let endIdx = range ?i ohlcv.high in
@@ -1495,9 +1537,9 @@ let calculate : type a b.
             outNBElement
             (ba (slice out)))
     | Var { timeperiod; nb_dev }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_var startIdx endIdx (ba f) timeperiod nb_dev outBegIdx
+          F.ta_var startIdx endIdx (ba f.close) timeperiod nb_dev outBegIdx
             outNBElement
             (ba (slice out)))
     | Wclprice (), ohlcv, out ->
@@ -1513,9 +1555,10 @@ let calculate : type a b.
             (ba ohlcv.close) timeperiod outBegIdx outNBElement
             (ba (slice out)))
     | Wma { timeperiod }, f, out ->
-      let endIdx = range ?i f in
+      let endIdx = range ?i f.close in
       wrap (fun outBegIdx outNBElement ->
-          F.ta_wma startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
+          F.ta_wma startIdx endIdx (ba f.close) timeperiod outBegIdx
+            outNBElement
             (ba (slice out)))
   with
   | BadInput -> Error (`TALibCode (-2))
@@ -1535,6 +1578,8 @@ let example =
       fast_d_period = 3;
       fast_d_ma_type = EMA;
     }
+
+(* let example_calc ?i = calculate ?i example *)
 
 let e2 = Wma { timeperiod = 8 }
 (* (\* let l = [ example; e2 ] *\) *)

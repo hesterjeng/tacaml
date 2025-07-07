@@ -1518,7 +1518,7 @@ let calculate : type a b.
           F.ta_wma startIdx endIdx (ba f) timeperiod outBegIdx outNBElement
             (ba (slice out)))
   with
-  | BadInput -> Result.fail @@ `TALibCode (-2)
+  | BadInput -> Error (`TALibCode (-2))
 
 (* type pack = Pack : ('a, 'b) t -> pack *)
 (* type l = pack list *)

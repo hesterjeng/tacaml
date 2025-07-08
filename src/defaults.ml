@@ -1,7 +1,6 @@
 open Wrappers
 open Ma_type
-
-type pack = Pack : ('a, 'b) Wrappers.t -> pack
+open Pack
 
 let accbands = Pack (Accbands { timeperiod = 20 })
 let acos = Pack (Acos ())

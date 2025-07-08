@@ -170,7 +170,3 @@ let get : type a b. (a, b) Wrappers.t -> t =
   | Maxindex _ -> IntOutputs { start_row = 62; count = 1 }
   | Minindex _ -> IntOutputs { start_row = 63; count = 1 }
   | Minmaxindex _ -> IntOutputs { start_row = 64; count = 2 }
-
-let calculate_ohlcv ?i (indicator : (Ohlcv.t, 'a) Wrappers.t) =
-  let output = get indicator in
-  calculate indicator ?i

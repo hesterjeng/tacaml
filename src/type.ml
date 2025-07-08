@@ -293,7 +293,7 @@ module Float = struct
 end
 
 module Int = struct
-  type int_indicator =
+  type t =
     | Cdl2Crows
     | Cdl3BlackCrows
     | Cdl3Inside

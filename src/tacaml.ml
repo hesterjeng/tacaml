@@ -8,6 +8,8 @@ module Indicator = Type
 
 type t = Pack.t
 
+let input x = Pack.input_flag_from_wrapper x
+let output x = Pack.output_flag_from_wrapper x
 let initialize = Wrappers.ta_initialize
 let calculate = Pack.calculate
 let all = Defaults.all

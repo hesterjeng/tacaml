@@ -534,3 +534,7 @@ module Int = struct
     | MinMaxIndex_Min -> 63
     | MinMaxIndex_Max -> 64
 end
+
+type t =
+  | F of Float.t
+  | I of Int.t

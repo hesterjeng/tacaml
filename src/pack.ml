@@ -595,11 +595,14 @@ let calculate ?i (Pack params) (source : Input_source.t)
   | Wrappers.Wma _, Input_source.Ohlcv source, Output_destination.FloatBA output
     ->
     Wrappers.calculate ?i params source output
-  | wrapper, _, _ ->
+  | wrapper, i, o ->
     let str = Wrappers.to_string wrapper in
+    let inp = Input_source.to_string i in
+    let out = Output_destination.to_string o in
     let msg =
       Format.asprintf
-        "%s: Invalid input or output source/destinations chosen in TA-Lib" str
+        "%s %s %s: Invalid input or output source/destinations chosen in TA-Lib"
+        str inp out
     in
     Error (`FatalError msg)
 

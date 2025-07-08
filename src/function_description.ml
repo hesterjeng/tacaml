@@ -969,6 +969,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
     let ht_trendmode =
       foreign "TA_HT_TRENDMODE_Lookback" (void @-> returning int)
 
+    let imi = foreign "TA_IMI_Lookback" (int @-> returning int)
     let kama = foreign "TA_KAMA_Lookback" (int @-> returning int)
     let linearreg = foreign "TA_LINEARREG_Lookback" (int @-> returning int)
 

@@ -17,7 +17,7 @@
     - {!module:Tacaml.Defaults}: Provides default values and lists of all
       supported indicators.
     - {!module:Tacaml.Indicator}: Defines the types of indicator outputs (Float,
-      Int, Bool).
+      Int).
 
     Before using any TA-Lib functions, you must call {!val:Tacaml.initialize}.
 *)
@@ -38,26 +38,31 @@ type t = Pack.t
 (** The main type representing a packed indicator for calculation. It
     encapsulates an indicator, its input source, and its output destination. *)
 
-val input : ('a, 'b) Wrappers.t -> Input_source.Flag.t
-(** [input x] returns the input flag from a wrapper. This function is used
-    internally by the packing system. *)
+val input : t -> Input_source.Flag.t
+(** [input x] returns the input flag from an indicator. *)
 
-val output : ('a, 'b) Wrappers.t -> Output_destination.Flag.t
-(** [output x] returns the output flag from a wrapper. This function is used
-    internally by the packing system. *)
+val output : t -> Output_destination.Flag.t
+(** [output x] returns the output flag from an indicator. *)
 
-val initialize : unit -> (unit, int) result
+val initialize : unit -> (unit, string) result
 (** [initialize ()] initializes the TA-Lib library. This function must be called
     once before any other TA-Lib function is used. It returns [Ok ()] on
     success, or an [Error] with a TA-Lib error code on failure. *)
 
-val calculate : t -> (int * int, int) result
-(** [calculate packed_indicator] performs the calculation for the given packed
-    indicator.  It
-    returns [Ok (start_idx, num_elements)] on success, where [start_idx] is the
-    starting index of the output and [num_elements] is the number of elements
-    calculated. On failure, it returns an [Error] with a TA-Lib error code. *)
+val calculate :
+  ?i:int ->
+  t ->
+  Input.t ->
+  Output.t ->
+  (int * int, [> `FatalError of string | `TALibCode of int ]) result
+(** [calculate packed_indicator input output] performs the calculation for the
+    given packed indicator. It returns [Ok (start_idx, num_elements)] on
+    success, where [start_idx] is the starting index of the output and
+    [num_elements] is the number of elements calculated. On failure, it returns
+    an [Error] with a TA-Lib error code. If i is passed, it will only calculate
+    the indicators for position i, otherwise it will calculate them for the
+    entire input. *)
 
-val all : Pack.t list
+val all : t list
 (** [all] provides a list of all supported TA-Lib indicators. This is useful for
     introspection or dynamic indicator selection. *)

@@ -53,6 +53,12 @@ Alternatively, you can use `just` commands if you have `just` installed:
 just install
 ```
 
+Or, you can install it in `opam`:
+
+```bash
+opam install .
+```
+
 ## Usage
 
 The `Tacaml` module is the primary entry point for the library. It exposes submodules for raw C bindings (`Tacaml.C`), type-safe wrappers (`Tacaml.Safe`), input/output handling, and more.

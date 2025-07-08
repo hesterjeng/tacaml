@@ -70,18 +70,19 @@ let () =
 
 ### Calculating Indicators
 
-`tacaml` provides a type-safe way to calculate indicators using the `Pack` system. You define an indicator using `Tacaml.Safe`, specify input sources, and define output destinations.
+`tacaml` provides a type-safe way to calculate indicators. You first define an indicator using `Tacaml.Safe`, then prepare your input data and output destinations.
 
 ```ocaml
 (* Example: Calculate Simple Moving Average (SMA) *)
 open Tacaml
+open Bigarray
 
 let calculate_sma () = 
   let open Result.Syntax in
   let* () = initialize () in
 
   (* Define input data (e.g., a Bigarray of floats) *)
-  let input_data = Bigarray.Array1.of_array Bigarray.float32 Bigarray.c_layout
+  let input_data = Array1.of_array float32 c_layout
     [| 1.0; 2.0; 3.0; 4.0; 5.0; 6.0; 7.0; 8.0; 9.0; 10.0 |]
   in
   let input_source = Input.Source.float input_data in
@@ -90,29 +91,28 @@ let calculate_sma () =
   let sma_indicator = Safe.Sma { period = 3 } in
 
   (* Define output destination *)
-  let output_array = Bigarray.Array1.create Bigarray.float32 Bigarray.c_layout (Bigarray.Array1.dim input_data) in
+  let output_array = Array1.create float32 c_layout (Array1.dim input_data) in
   let output_destination = Output.Destination.float output_array in
 
-  (* Pack the indicator with input and output *)
-  let packed_indicator = Pack.create sma_indicator input_source output_destination in
-
   (* Calculate the indicator *)
-  let* (start_idx, num_elements) = calculate packed_indicator in
+  let* (start_idx, num_elements) = calculate sma_indicator input_source output_destination in
 
   Printf.printf "SMA calculated. Start index: %d, Number of elements: %d\n" start_idx num_elements;
   (* Print the output array (for demonstration) *)
-  for i = 0 to Bigarray.Array1.dim output_array - 1 do
-    Printf.printf "Output[%d]: %f\n" i (Bigarray.Array1.get output_array i)
+  for i = 0 to Array1.dim output_array - 1 do
+    Printf.printf "Output[%d]: %f\n" i (Array1.get output_array i)
   done;
   Ok ()
 
 let () = 
   match calculate_sma () with
   | Ok () -> print_endline "SMA calculation complete."
-  | Error e -> Printf.eprintf "SMA calculation failed: %d\n" e
+  | Error (`TALibCode e) -> Printf.eprintf "SMA calculation failed with TA-Lib error: %d\n" e
+  | Error (`FatalError msg) -> Printf.eprintf "SMA calculation failed with fatal error: %s\n" msg
 ```
 
 For more examples and detailed usage, refer to the `src/` directory and the generated `odoc` documentation.
+
 
 ## Development
 

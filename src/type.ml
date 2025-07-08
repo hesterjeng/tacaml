@@ -95,6 +95,7 @@ module Float = struct
     | Mult
     | Sub
     | Sum
+  [@@deriving show]
 
   let of_int = function
     | 0 -> UpperBBand
@@ -357,6 +358,7 @@ module Int = struct
     | CdlXSideGap3Methods
     | MaxIndex
     | MinIndex
+  [@@deriving show]
 
   let of_int = function
     | 0 -> Cdl2Crows

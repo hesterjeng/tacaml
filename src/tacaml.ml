@@ -5,3 +5,4 @@ module Output = Output
 module Pack = Pack
 module Input_source = Input_source
 module Output_destination = Output_destination
+module Type = Type

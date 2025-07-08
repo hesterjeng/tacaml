@@ -720,3 +720,5 @@ type t = F of Float.t | I of Int.t
 let to_string = function
   | F f -> "F " ^ Float.to_string f
   | I i -> "I " ^ Int.to_string i
+
+let pp = fun fmt x -> Format.fprintf fmt "@[%s@]" (to_string x)

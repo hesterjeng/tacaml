@@ -430,6 +430,8 @@ let to_string : type a b. (a, b) t -> string = function
   | Willr _ -> "Willr"
   | Wma _ -> "Wma"
 
+let pp = fun fmt x -> Format.fprintf fmt "@[%s@]" (to_string x)
+
 let lookback : type a b. (a, b) t -> int =
  fun params ->
   match params with

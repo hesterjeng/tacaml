@@ -383,3 +383,56 @@ let all =
     willr;
     wma;
   ]
+
+let common_indicators =
+  [
+    accbands;
+    ad;
+    adosc;
+    adx;
+    adxr;
+    apo;
+    aroon;
+    aroonosc;
+    atr;
+    avgprice;
+    bbands;
+    bop;
+    cci;
+    cdlengulfing;
+    cdldoji;
+    cdlhammer;
+    cdlharami;
+    cdlmorningstar;
+    cdlshootingstar;
+    cdlspinningtop;
+    cmo;
+    dema;
+    dx;
+    ema;
+    ht_trendline;
+    imi;
+    kama;
+    ma;
+    macd;
+    mfi;
+    mom;
+    natr;
+    obv;
+    plus_di;
+    plus_dm;
+    ppo;
+    roc;
+    rsi;
+    sar;
+    sma;
+    stoch;
+    stochf;
+    stochrsi;
+    tema;
+    trange;
+    trix;
+    ultosc;
+    willr;
+    wma;
+  ]

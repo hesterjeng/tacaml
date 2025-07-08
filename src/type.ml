@@ -9,7 +9,6 @@ module Float = struct
     | Kama
     | Ma
     | Mama
-    | Fama
     | Mavp
     | Midpoint
     | Midprice
@@ -27,9 +26,15 @@ module Float = struct
     | Cci
     | Cmo
     | Dx
-    | Macd
-    | MacdExt
-    | MacdFix
+    | Macd_MACD
+    | Macd_MACDSignal
+    | Macd_MACDHist
+    | MacdExt_MACD
+    | MacdExt_MACDSignal
+    | MacdExt_MACDHist
+    | MacdFix_MACD
+    | MacdFix_MACDSignal
+    | MacdFix_MACDHist
     | Mfi
     | MinusDI
     | MinusDM
@@ -42,6 +47,10 @@ module Float = struct
     | Rocr
     | Rocr100
     | Rsi
+    | Stoch_SlowK
+    | Stoch_SlowD
+    | StochF_FastK
+    | StochF_FastD
     | StochRsi_FastK
     | StochRsi_FastD
     | Trix
@@ -64,12 +73,16 @@ module Float = struct
     | HtSine_Sine
     | HtSine_LeadSine
     | HtTrendMode
+    | Aroon_Down
+    | Aroon_Up
     | Beta
     | Correl
     | Linearreg
     | LinearregAngle
     | LinearregIntercept
     | LinearregSlope
+    | MinMax_Min
+    | MinMax_Max
     | Stddev
     | Tsf
     | Var
@@ -106,92 +119,105 @@ module Float = struct
     | 6 -> Kama
     | 7 -> Ma
     | 8 -> Mama
-    | 9 -> Fama
-    | 10 -> Mavp
-    | 11 -> Midpoint
-    | 12 -> Midprice
-    | 13 -> Sar
-    | 14 -> Sarext
-    | 15 -> Sma
-    | 16 -> T3
-    | 17 -> Tema
-    | 18 -> Trima
-    | 19 -> Wma
-    | 20 -> Adx
-    | 21 -> Adxr
-    | 22 -> Apo
-    | 23 -> AroonOsc
-    | 24 -> Cci
-    | 25 -> Cmo
-    | 26 -> Dx
-    | 27 -> Macd
-    | 28 -> MacdExt
-    | 29 -> MacdFix
-    | 30 -> Mfi
-    | 31 -> MinusDI
-    | 32 -> MinusDM
-    | 33 -> Mom
-    | 34 -> PlusDI
-    | 35 -> PlusDM
-    | 36 -> Ppo
-    | 37 -> Roc
-    | 38 -> Rocp
-    | 39 -> Rocr
-    | 40 -> Rocr100
-    | 41 -> Rsi
-    | 42 -> StochRsi_FastK
-    | 43 -> StochRsi_FastD
-    | 44 -> Trix
-    | 45 -> Ultosc
-    | 46 -> Willr
-    | 47 -> Ad
-    | 48 -> Adosc
-    | 49 -> Obv
-    | 50 -> Atr
-    | 51 -> Natr
-    | 52 -> Trange
-    | 53 -> AvgPrice
-    | 54 -> MedPrice
-    | 55 -> TypPrice
-    | 56 -> WclPrice
-    | 57 -> HtDcPeriod
-    | 58 -> HtDcPhase
-    | 59 -> HtPhasor_InPhase
-    | 60 -> HtPhasor_Quadrature
-    | 61 -> HtSine_Sine
-    | 62 -> HtSine_LeadSine
-    | 63 -> HtTrendMode
-    | 64 -> Beta
-    | 65 -> Correl
-    | 66 -> Linearreg
-    | 67 -> LinearregAngle
-    | 68 -> LinearregIntercept
-    | 69 -> LinearregSlope
-    | 70 -> Stddev
-    | 71 -> Tsf
-    | 72 -> Var
-    | 73 -> Acos
-    | 74 -> Asin
-    | 75 -> Atan
-    | 76 -> Ceil
-    | 77 -> Cos
-    | 78 -> Cosh
-    | 79 -> Exp
-    | 80 -> Floor
-    | 81 -> Ln
-    | 82 -> Log10
-    | 83 -> Sin
-    | 84 -> Sinh
-    | 85 -> Sqrt
-    | 86 -> Tan
-    | 87 -> Tanh
-    | 88 -> Add
-    | 89 -> Div
-    | 90 -> Max
-    | 91 -> Min
-    | 92 -> Mult
-    | 93 -> Sub
-    | 94 -> Sum
+    | 9 -> Mavp
+    | 10 -> Midpoint
+    | 11 -> Midprice
+    | 12 -> Sar
+    | 13 -> Sarext
+    | 14 -> Sma
+    | 15 -> T3
+    | 16 -> Tema
+    | 17 -> Trima
+    | 18 -> Wma
+    | 19 -> Adx
+    | 20 -> Adxr
+    | 21 -> Apo
+    | 22 -> AroonOsc
+    | 23 -> Cci
+    | 24 -> Cmo
+    | 25 -> Dx
+    | 26 -> Macd_MACD
+    | 27 -> Macd_MACDSignal
+    | 28 -> Macd_MACDHist
+    | 29 -> MacdExt_MACD
+    | 30 -> MacdExt_MACDSignal
+    | 31 -> MacdExt_MACDHist
+    | 32 -> MacdFix_MACD
+    | 33 -> MacdFix_MACDSignal
+    | 34 -> MacdFix_MACDHist
+    | 35 -> Mfi
+    | 36 -> MinusDI
+    | 37 -> MinusDM
+    | 38 -> Mom
+    | 39 -> PlusDI
+    | 40 -> PlusDM
+    | 41 -> Ppo
+    | 42 -> Roc
+    | 43 -> Rocp
+    | 44 -> Rocr
+    | 45 -> Rocr100
+    | 46 -> Rsi
+    | 47 -> Stoch_SlowK
+    | 48 -> Stoch_SlowD
+    | 49 -> StochF_FastK
+    | 50 -> StochF_FastD
+    | 51 -> StochRsi_FastK
+    | 52 -> StochRsi_FastD
+    | 53 -> Trix
+    | 54 -> Ultosc
+    | 55 -> Willr
+    | 56 -> Ad
+    | 57 -> Adosc
+    | 58 -> Obv
+    | 59 -> Atr
+    | 60 -> Natr
+    | 61 -> Trange
+    | 62 -> AvgPrice
+    | 63 -> MedPrice
+    | 64 -> TypPrice
+    | 65 -> WclPrice
+    | 66 -> HtDcPeriod
+    | 67 -> HtDcPhase
+    | 68 -> HtPhasor_InPhase
+    | 69 -> HtPhasor_Quadrature
+    | 70 -> HtSine_Sine
+    | 71 -> HtSine_LeadSine
+    | 72 -> HtTrendMode
+    | 73 -> Aroon_Down
+    | 74 -> Aroon_Up
+    | 75 -> Beta
+    | 76 -> Correl
+    | 77 -> Linearreg
+    | 78 -> LinearregAngle
+    | 79 -> LinearregIntercept
+    | 80 -> LinearregSlope
+    | 81 -> MinMax_Min
+    | 82 -> MinMax_Max
+    | 83 -> Stddev
+    | 84 -> Tsf
+    | 85 -> Var
+    | 86 -> Acos
+    | 87 -> Asin
+    | 88 -> Atan
+    | 89 -> Ceil
+    | 90 -> Cos
+    | 91 -> Cosh
+    | 92 -> Exp
+    | 93 -> Floor
+    | 94 -> Ln
+    | 95 -> Log10
+    | 96 -> Sin
+    | 97 -> Sinh
+    | 98 -> Sqrt
+    | 99 -> Tan
+    | 100 -> Tanh
+    | 101 -> Add
+    | 102 -> Div
+    | 103 -> Max
+    | 104 -> Min
+    | 105 -> Mult
+    | 106 -> Sub
+    | 107 -> Sum
     | _ -> failwith "Unknown float indicator"
 
   let to_int = function
@@ -204,92 +230,105 @@ module Float = struct
     | Kama -> 6
     | Ma -> 7
     | Mama -> 8
-    | Fama -> 9
-    | Mavp -> 10
-    | Midpoint -> 11
-    | Midprice -> 12
-    | Sar -> 13
-    | Sarext -> 14
-    | Sma -> 15
-    | T3 -> 16
-    | Tema -> 17
-    | Trima -> 18
-    | Wma -> 19
-    | Adx -> 20
-    | Adxr -> 21
-    | Apo -> 22
-    | AroonOsc -> 23
-    | Cci -> 24
-    | Cmo -> 25
-    | Dx -> 26
-    | Macd -> 27
-    | MacdExt -> 28
-    | MacdFix -> 29
-    | Mfi -> 30
-    | MinusDI -> 31
-    | MinusDM -> 32
-    | Mom -> 33
-    | PlusDI -> 34
-    | PlusDM -> 35
-    | Ppo -> 36
-    | Roc -> 37
-    | Rocp -> 38
-    | Rocr -> 39
-    | Rocr100 -> 40
-    | Rsi -> 41
-    | StochRsi_FastK -> 42
-    | StochRsi_FastD -> 43
-    | Trix -> 44
-    | Ultosc -> 45
-    | Willr -> 46
-    | Ad -> 47
-    | Adosc -> 48
-    | Obv -> 49
-    | Atr -> 50
-    | Natr -> 51
-    | Trange -> 52
-    | AvgPrice -> 53
-    | MedPrice -> 54
-    | TypPrice -> 55
-    | WclPrice -> 56
-    | HtDcPeriod -> 57
-    | HtDcPhase -> 58
-    | HtPhasor_InPhase -> 59
-    | HtPhasor_Quadrature -> 60
-    | HtSine_Sine -> 61
-    | HtSine_LeadSine -> 62
-    | HtTrendMode -> 63
-    | Beta -> 64
-    | Correl -> 65
-    | Linearreg -> 66
-    | LinearregAngle -> 67
-    | LinearregIntercept -> 68
-    | LinearregSlope -> 69
-    | Stddev -> 70
-    | Tsf -> 71
-    | Var -> 72
-    | Acos -> 73
-    | Asin -> 74
-    | Atan -> 75
-    | Ceil -> 76
-    | Cos -> 77
-    | Cosh -> 78
-    | Exp -> 79
-    | Floor -> 80
-    | Ln -> 81
-    | Log10 -> 82
-    | Sin -> 83
-    | Sinh -> 84
-    | Sqrt -> 85
-    | Tan -> 86
-    | Tanh -> 87
-    | Add -> 88
-    | Div -> 89
-    | Max -> 90
-    | Min -> 91
-    | Mult -> 92
-    | Sub -> 93
-    | Sum -> 94
+    | Mavp -> 9
+    | Midpoint -> 10
+    | Midprice -> 11
+    | Sar -> 12
+    | Sarext -> 13
+    | Sma -> 14
+    | T3 -> 15
+    | Tema -> 16
+    | Trima -> 17
+    | Wma -> 18
+    | Adx -> 19
+    | Adxr -> 20
+    | Apo -> 21
+    | AroonOsc -> 22
+    | Cci -> 23
+    | Cmo -> 24
+    | Dx -> 25
+    | Macd_MACD -> 26
+    | Macd_MACDSignal -> 27
+    | Macd_MACDHist -> 28
+    | MacdExt_MACD -> 29
+    | MacdExt_MACDSignal -> 30
+    | MacdExt_MACDHist -> 31
+    | MacdFix_MACD -> 32
+    | MacdFix_MACDSignal -> 33
+    | MacdFix_MACDHist -> 34
+    | Mfi -> 35
+    | MinusDI -> 36
+    | MinusDM -> 37
+    | Mom -> 38
+    | PlusDI -> 39
+    | PlusDM -> 40
+    | Ppo -> 41
+    | Roc -> 42
+    | Rocp -> 43
+    | Rocr -> 44
+    | Rocr100 -> 45
+    | Rsi -> 46
+    | Stoch_SlowK -> 47
+    | Stoch_SlowD -> 48
+    | StochF_FastK -> 49
+    | StochF_FastD -> 50
+    | StochRsi_FastK -> 51
+    | StochRsi_FastD -> 52
+    | Trix -> 53
+    | Ultosc -> 54
+    | Willr -> 55
+    | Ad -> 56
+    | Adosc -> 57
+    | Obv -> 58
+    | Atr -> 59
+    | Natr -> 60
+    | Trange -> 61
+    | AvgPrice -> 62
+    | MedPrice -> 63
+    | TypPrice -> 64
+    | WclPrice -> 65
+    | HtDcPeriod -> 66
+    | HtDcPhase -> 67
+    | HtPhasor_InPhase -> 68
+    | HtPhasor_Quadrature -> 69
+    | HtSine_Sine -> 70
+    | HtSine_LeadSine -> 71
+    | HtTrendMode -> 72
+    | Aroon_Down -> 73
+    | Aroon_Up -> 74
+    | Beta -> 75
+    | Correl -> 76
+    | Linearreg -> 77
+    | LinearregAngle -> 78
+    | LinearregIntercept -> 79
+    | LinearregSlope -> 80
+    | MinMax_Min -> 81
+    | MinMax_Max -> 82
+    | Stddev -> 83
+    | Tsf -> 84
+    | Var -> 85
+    | Acos -> 86
+    | Asin -> 87
+    | Atan -> 88
+    | Ceil -> 89
+    | Cos -> 90
+    | Cosh -> 91
+    | Exp -> 92
+    | Floor -> 93
+    | Ln -> 94
+    | Log10 -> 95
+    | Sin -> 96
+    | Sinh -> 97
+    | Sqrt -> 98
+    | Tan -> 99
+    | Tanh -> 100
+    | Add -> 101
+    | Div -> 102
+    | Max -> 103
+    | Min -> 104
+    | Mult -> 105
+    | Sub -> 106
+    | Sum -> 107
 end
 
 module Int = struct
@@ -357,6 +396,8 @@ module Int = struct
     | CdlXSideGap3Methods
     | MaxIndex
     | MinIndex
+    | MinMaxIndex_Min
+    | MinMaxIndex_Max
 
   let of_int = function
     | 0 -> Cdl2Crows
@@ -422,6 +463,8 @@ module Int = struct
     | 60 -> CdlXSideGap3Methods
     | 61 -> MaxIndex
     | 62 -> MinIndex
+    | 63 -> MinMaxIndex_Min
+    | 64 -> MinMaxIndex_Max
     | _ -> failwith "Unknown int indicator"
 
   let to_int = function
@@ -488,4 +531,6 @@ module Int = struct
     | CdlXSideGap3Methods -> 60
     | MaxIndex -> 61
     | MinIndex -> 62
+    | MinMaxIndex_Min -> 63
+    | MinMaxIndex_Max -> 64
 end

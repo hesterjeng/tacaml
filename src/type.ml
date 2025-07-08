@@ -72,7 +72,6 @@ module Float = struct
     | HtPhasor_Quadrature
     | HtSine_Sine
     | HtSine_LeadSine
-    | HtTrendMode
     | Aroon_Down
     | Aroon_Up
     | Beta
@@ -182,7 +181,7 @@ module Float = struct
     | 69 -> HtPhasor_Quadrature
     | 70 -> HtSine_Sine
     | 71 -> HtSine_LeadSine
-    | 72 -> HtTrendMode
+    (* | 72 -> HtTrendMode *)
     | 73 -> Aroon_Down
     | 74 -> Aroon_Up
     | 75 -> Beta
@@ -293,7 +292,7 @@ module Float = struct
     | HtPhasor_Quadrature -> 69
     | HtSine_Sine -> 70
     | HtSine_LeadSine -> 71
-    | HtTrendMode -> 72
+    (* | HtTrendMode -> 72 *)
     | Aroon_Down -> 73
     | Aroon_Up -> 74
     | Beta -> 75
@@ -403,7 +402,7 @@ module Float = struct
     | HtPhasor_Quadrature -> "HtPhasor_Quadrature"
     | HtSine_Sine -> "HtSine_Sine"
     | HtSine_LeadSine -> "HtSine_LeadSine"
-    | HtTrendMode -> "HtTrendMode"
+    (* | HtTrendMode -> "HtTrendMode" *)
     | Aroon_Down -> "Aroon_Down"
     | Aroon_Up -> "Aroon_Up"
     | Beta -> "Beta"
@@ -443,6 +442,7 @@ end
 
 module Int = struct
   type t =
+    | HtTrendMode
     | Cdl2Crows
     | Cdl3BlackCrows
     | Cdl3Inside
@@ -575,6 +575,7 @@ module Int = struct
     | 62 -> MinIndex
     | 63 -> MinMaxIndex_Min
     | 64 -> MinMaxIndex_Max
+    | 65 -> HtTrendMode
     | _ -> failwith "Unknown int indicator"
 
   let to_int = function
@@ -643,8 +644,10 @@ module Int = struct
     | MinIndex -> 62
     | MinMaxIndex_Min -> 63
     | MinMaxIndex_Max -> 64
+    | HtTrendMode -> 65
 
   let to_string = function
+    | HtTrendMode -> "HtTrendMode"
     | Cdl2Crows -> "Cdl2Crows"
     | Cdl3BlackCrows -> "Cdl3BlackCrows"
     | Cdl3Inside -> "Cdl3Inside"

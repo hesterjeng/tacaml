@@ -8,5 +8,6 @@ module Defaults = Defaults
 
 type t = Pack.t
 
+let initialize = Wrappers.ta_initialize
 let calculate = Pack.calculate
 let all = Defaults.all

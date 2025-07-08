@@ -597,4 +597,5 @@ let calculate ?i (Pack params) (source : Input_source.t)
     Wrappers.calculate ?i params source output
   | _ ->
     Error
-      (`Fatal "Invalid input or output source/destinations chosen in TA-Lib")
+      (`FatalError
+         "Invalid input or output source/destinations chosen in TA-Lib")

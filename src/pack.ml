@@ -888,7 +888,7 @@ let output_flag_from_wrapper : t -> Output_destination.Flag.t =
     Output_destination.Flag.FloatBA2Flag
       (F Type.Float.HtSine_Sine, F Type.Float.HtSine_LeadSine)
   | Wrappers.Ht_trendline _ -> FloatBAFlag (F Type.Float.HtTrendline)
-  | Wrappers.Ht_trendmode _ -> FloatBAFlag (I Type.Int.HtTrendMode)
+  | Wrappers.Ht_trendmode _ -> IntBAFlag (I Type.Int.HtTrendMode)
   | Wrappers.Imi _ -> FloatBAFlag (F Type.Float.Mom)
   | Wrappers.Kama _ -> FloatBAFlag (F Type.Float.Kama)
   | Wrappers.Linearreg _ -> FloatBAFlag (F Type.Float.Linearreg)

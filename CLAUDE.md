@@ -11,7 +11,8 @@ This is `tacaml`, OCaml bindings for the TA-Lib (Technical Analysis Library) at 
 ### Core Components
 
 - **src/tacaml.ml**: Main module that exposes the public API with submodules (C, Safe, Input, Output, Defaults, Indicator)
-- **src/wrappers.ml**: Safe wrappers around raw C functions with proper error handling and type safety
+- **src/wrappers.ml**: Type definitions for all indicators using GADTs, including `to_string`, `pp`, and `lookback` functions
+- **src/calculate.ml**: Core calculation engine that handles the actual TA-Lib function calls for each indicator
 - **src/pack.ml**: Type-safe packing system that matches input sources to output destinations for each indicator
 - **src/functions.ml**: Enumeration of all supported TA-Lib functions (160+ indicators)
 - **src/type.ml**: Type definitions for different output types (Float, Int, Bool modules)
@@ -28,8 +29,16 @@ This is `tacaml`, OCaml bindings for the TA-Lib (Technical Analysis Library) at 
 1. **Input Sources** (`Input_source.t`): Wrapper around different input types (OHLCV data, float arrays, etc.)
 2. **Indicators** (`Wrappers.t`): Type-safe indicator definitions with parameters
 3. **Pack system** (`Pack.t`): Combines indicator with input/output types
-4. **Calculation**: `Pack.calculate` function executes the indicator with proper type checking
+4. **Calculation**: `Pack.calculate` function calls `Calculate.calculate` to execute the indicator with proper type checking
 5. **Output Destinations** (`Output_destination.t`): Type-safe output containers
+
+### Code Organization
+
+The codebase has been refactored to separate concerns:
+
+- **wrappers.ml**: Contains only the GADT type definitions, helper functions (`to_string`, `pp`, `lookback`), and type declarations
+- **calculate.ml**: Contains the actual calculation logic with pattern matching on all 160+ indicators
+- **pack.ml**: Imports `Calculate.calculate` and handles the type-safe dispatch between input sources and output destinations
 
 ## Build System
 

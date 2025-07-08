@@ -767,3 +767,206 @@ let input_flag_from_wrapper : t -> Input_source.Flag.t =
   | Wrappers.Mult _
   | Wrappers.Sub _ ->
     FloatBA2Flag
+
+let output_flag_from_wrapper : t -> Output_destination.Flag.t =
+ fun (Pack wrapper_params) ->
+  match wrapper_params with
+  | Wrappers.Accbands _ ->
+    Output_destination.Flag.FloatBA3Flag
+      ( F Type.Float.UpperBBand,
+        F Type.Float.MiddleBBand,
+        F Type.Float.LowerBBand )
+  | Wrappers.Acos _ -> FloatBAFlag (F Type.Float.Acos)
+  | Wrappers.Ad _ -> FloatBAFlag (F Type.Float.Ad)
+  | Wrappers.Add _ -> FloatBAFlag (F Type.Float.Add)
+  | Wrappers.Adosc _ -> FloatBAFlag (F Type.Float.Adosc)
+  | Wrappers.Adx _ -> FloatBAFlag (F Type.Float.Adx)
+  | Wrappers.Adxr _ -> FloatBAFlag (F Type.Float.Adxr)
+  | Wrappers.Apo _ -> FloatBAFlag (F Type.Float.Apo)
+  | Wrappers.Aroon _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.Aroon_Down, F Type.Float.Aroon_Up)
+  | Wrappers.Aroonosc _ -> FloatBAFlag (F Type.Float.AroonOsc)
+  | Wrappers.Asin _ -> FloatBAFlag (F Type.Float.Asin)
+  | Wrappers.Atan _ -> FloatBAFlag (F Type.Float.Atan)
+  | Wrappers.Atr _ -> FloatBAFlag (F Type.Float.Atr)
+  | Wrappers.Avgprice _ -> FloatBAFlag (F Type.Float.AvgPrice)
+  | Wrappers.Avgdev _ -> FloatBAFlag (F Type.Float.Stddev)
+  | Wrappers.Bbands _ ->
+    Output_destination.Flag.FloatBA3Flag
+      ( F Type.Float.UpperBBand,
+        F Type.Float.MiddleBBand,
+        F Type.Float.LowerBBand )
+  | Wrappers.Beta _ -> FloatBAFlag (F Type.Float.Beta)
+  | Wrappers.Bop _ -> FloatBAFlag (F Type.Float.Willr)
+  | Wrappers.Cci _ -> FloatBAFlag (F Type.Float.Cci)
+  | Wrappers.Cdl2crows _ -> IntBAFlag (I Type.Int.Cdl2Crows)
+  | Wrappers.Cdl3blackcrows _ -> IntBAFlag (I Type.Int.Cdl3BlackCrows)
+  | Wrappers.Cdl3inside _ -> IntBAFlag (I Type.Int.Cdl3Inside)
+  | Wrappers.Cdl3linestrike _ -> IntBAFlag (I Type.Int.Cdl3LineStrike)
+  | Wrappers.Cdl3outside _ -> IntBAFlag (I Type.Int.Cdl3Outside)
+  | Wrappers.Cdl3starsinsouth _ -> IntBAFlag (I Type.Int.Cdl3StarsInSouth)
+  | Wrappers.Cdl3whitesoldiers _ -> IntBAFlag (I Type.Int.Cdl3WhiteSoldiers)
+  | Wrappers.Cdlabandonedbaby _ -> IntBAFlag (I Type.Int.CdlAbandonedBaby)
+  | Wrappers.Cdladvanceblock _ -> IntBAFlag (I Type.Int.CdlAdvanceBlock)
+  | Wrappers.Cdlbelthold _ -> IntBAFlag (I Type.Int.CdlBeltHold)
+  | Wrappers.Cdlbreakaway _ -> IntBAFlag (I Type.Int.CdlBreakaway)
+  | Wrappers.Cdlclosingmarubozu _ -> IntBAFlag (I Type.Int.CdlClosingMarubozu)
+  | Wrappers.Cdlconcealbabyswall _ -> IntBAFlag (I Type.Int.CdlConcealBabySwall)
+  | Wrappers.Cdlcounterattack _ -> IntBAFlag (I Type.Int.CdlCounterAttack)
+  | Wrappers.Cdldarkcloudcover _ -> IntBAFlag (I Type.Int.CdlDarkCloudCover)
+  | Wrappers.Cdldoji _ -> IntBAFlag (I Type.Int.CdlDoji)
+  | Wrappers.Cdldojistar _ -> IntBAFlag (I Type.Int.CdlDojiStar)
+  | Wrappers.Cdldragonflydoji _ -> IntBAFlag (I Type.Int.CdlDragonflyDoji)
+  | Wrappers.Cdlengulfing _ -> IntBAFlag (I Type.Int.CdlEngulfing)
+  | Wrappers.Cdleveningdojistar _ -> IntBAFlag (I Type.Int.CdlEveningDojiStar)
+  | Wrappers.Cdleveningstar _ -> IntBAFlag (I Type.Int.CdlEveningStar)
+  | Wrappers.Cdlgapsidesidewhite _ -> IntBAFlag (I Type.Int.CdlGapSideSideWhite)
+  | Wrappers.Cdlgravestonedoji _ -> IntBAFlag (I Type.Int.CdlGravestoneDoji)
+  | Wrappers.Cdlhammer _ -> IntBAFlag (I Type.Int.CdlHammer)
+  | Wrappers.Cdlhangingman _ -> IntBAFlag (I Type.Int.CdlHangingMan)
+  | Wrappers.Cdlharami _ -> IntBAFlag (I Type.Int.CdlHarami)
+  | Wrappers.Cdlharamicross _ -> IntBAFlag (I Type.Int.CdlHaramiCross)
+  | Wrappers.Cdlhighwave _ -> IntBAFlag (I Type.Int.CdlHighWave)
+  | Wrappers.Cdlhikkake _ -> IntBAFlag (I Type.Int.CdlHikkake)
+  | Wrappers.Cdlhikkakemod _ -> IntBAFlag (I Type.Int.CdlHikkakeMod)
+  | Wrappers.Cdlhomingpigeon _ -> IntBAFlag (I Type.Int.CdlHomingPigeon)
+  | Wrappers.Cdlidentical3crows _ -> IntBAFlag (I Type.Int.CdlIdentical3Crows)
+  | Wrappers.Cdlinneck _ -> IntBAFlag (I Type.Int.CdlInNeck)
+  | Wrappers.Cdlinvertedhammer _ -> IntBAFlag (I Type.Int.CdlInvertedHammer)
+  | Wrappers.Cdlkicking _ -> IntBAFlag (I Type.Int.CdlKicking)
+  | Wrappers.Cdlkickingbylength _ -> IntBAFlag (I Type.Int.CdlKickingByLength)
+  | Wrappers.Cdlladderbottom _ -> IntBAFlag (I Type.Int.CdlLadderBottom)
+  | Wrappers.Cdllongleggeddoji _ -> IntBAFlag (I Type.Int.CdlLongLeggedDoji)
+  | Wrappers.Cdllongline _ -> IntBAFlag (I Type.Int.CdlLongLine)
+  | Wrappers.Cdlmarubozu _ -> IntBAFlag (I Type.Int.CdlMarubozu)
+  | Wrappers.Cdlmatchinglow _ -> IntBAFlag (I Type.Int.CdlMatchingLow)
+  | Wrappers.Cdlmathold _ -> IntBAFlag (I Type.Int.CdlMatHold)
+  | Wrappers.Cdlmorningdojistar _ -> IntBAFlag (I Type.Int.CdlMorningDojiStar)
+  | Wrappers.Cdlmorningstar _ -> IntBAFlag (I Type.Int.CdlMorningStar)
+  | Wrappers.Cdlonneck _ -> IntBAFlag (I Type.Int.CdlOnNeck)
+  | Wrappers.Cdlpiercing _ -> IntBAFlag (I Type.Int.CdlPiercing)
+  | Wrappers.Cdlrickshawman _ -> IntBAFlag (I Type.Int.CdlRickshawMan)
+  | Wrappers.Cdlrisefall3methods _ -> IntBAFlag (I Type.Int.CdlRiseFall3Methods)
+  | Wrappers.Cdlseparatinglines _ -> IntBAFlag (I Type.Int.CdlSeparatingLines)
+  | Wrappers.Cdlshootingstar _ -> IntBAFlag (I Type.Int.CdlShootingStar)
+  | Wrappers.Cdlshortline _ -> IntBAFlag (I Type.Int.CdlShortLine)
+  | Wrappers.Cdlspinningtop _ -> IntBAFlag (I Type.Int.CdlSpinningTop)
+  | Wrappers.Cdlstalledpattern _ -> IntBAFlag (I Type.Int.CdlStalledPattern)
+  | Wrappers.Cdlsticksandwich _ -> IntBAFlag (I Type.Int.CdlStickSandwich)
+  | Wrappers.Cdltakuri _ -> IntBAFlag (I Type.Int.CdlTakuri)
+  | Wrappers.Cdltasukigap _ -> IntBAFlag (I Type.Int.CdlTasukiGap)
+  | Wrappers.Cdlthrusting _ -> IntBAFlag (I Type.Int.CdlThrusting)
+  | Wrappers.Cdltristar _ -> IntBAFlag (I Type.Int.CdlTristar)
+  | Wrappers.Cdlunique3river _ -> IntBAFlag (I Type.Int.CdlUnique3River)
+  | Wrappers.Cdlupsidegap2crows _ -> IntBAFlag (I Type.Int.CdlUpsideGap2Crows)
+  | Wrappers.Cdlxsidegap3methods _ -> IntBAFlag (I Type.Int.CdlXSideGap3Methods)
+  | Wrappers.Ceil _ -> FloatBAFlag (F Type.Float.Ceil)
+  | Wrappers.Cmo _ -> FloatBAFlag (F Type.Float.Cmo)
+  | Wrappers.Correl _ -> FloatBAFlag (F Type.Float.Correl)
+  | Wrappers.Cos _ -> FloatBAFlag (F Type.Float.Cos)
+  | Wrappers.Cosh _ -> FloatBAFlag (F Type.Float.Cosh)
+  | Wrappers.Dema _ -> FloatBAFlag (F Type.Float.Dema)
+  | Wrappers.Div _ -> FloatBAFlag (F Type.Float.Div)
+  | Wrappers.Dx _ -> FloatBAFlag (F Type.Float.Dx)
+  | Wrappers.Ema _ -> FloatBAFlag (F Type.Float.Ema)
+  | Wrappers.Exp _ -> FloatBAFlag (F Type.Float.Exp)
+  | Wrappers.Floor _ -> FloatBAFlag (F Type.Float.Floor)
+  | Wrappers.Ht_dcperiod _ -> FloatBAFlag (F Type.Float.HtDcPeriod)
+  | Wrappers.Ht_dcphase _ -> FloatBAFlag (F Type.Float.HtDcPhase)
+  | Wrappers.Ht_phasor _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.HtPhasor_InPhase, F Type.Float.HtPhasor_Quadrature)
+  | Wrappers.Ht_sine _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.HtSine_Sine, F Type.Float.HtSine_LeadSine)
+  | Wrappers.Ht_trendline _ -> FloatBAFlag (F Type.Float.HtTrendline)
+  | Wrappers.Ht_trendmode _ -> FloatBAFlag (F Type.Float.HtTrendMode)
+  | Wrappers.Imi _ -> FloatBAFlag (F Type.Float.Mom)
+  | Wrappers.Kama _ -> FloatBAFlag (F Type.Float.Kama)
+  | Wrappers.Linearreg _ -> FloatBAFlag (F Type.Float.Linearreg)
+  | Wrappers.Linearreg_angle _ -> FloatBAFlag (F Type.Float.LinearregAngle)
+  | Wrappers.Linearreg_intercept _ ->
+    FloatBAFlag (F Type.Float.LinearregIntercept)
+  | Wrappers.Linearreg_slope _ -> FloatBAFlag (F Type.Float.LinearregSlope)
+  | Wrappers.Ln _ -> FloatBAFlag (F Type.Float.Ln)
+  | Wrappers.Log10 _ -> FloatBAFlag (F Type.Float.Log10)
+  | Wrappers.Ma _ -> FloatBAFlag (F Type.Float.Ma)
+  | Wrappers.Macd _ ->
+    Output_destination.Flag.FloatBA3Flag
+      ( F Type.Float.Macd_MACD,
+        F Type.Float.Macd_MACDSignal,
+        F Type.Float.Macd_MACDHist )
+  | Wrappers.Macdext _ ->
+    Output_destination.Flag.FloatBA3Flag
+      ( F Type.Float.MacdExt_MACD,
+        F Type.Float.MacdExt_MACDSignal,
+        F Type.Float.MacdExt_MACDHist )
+  | Wrappers.Macdfix _ ->
+    Output_destination.Flag.FloatBA3Flag
+      ( F Type.Float.MacdFix_MACD,
+        F Type.Float.MacdFix_MACDSignal,
+        F Type.Float.MacdFix_MACDHist )
+  | Wrappers.Mama _ ->
+    Output_destination.Flag.FloatBA2Flag (F Type.Float.Mama, F Type.Float.Mama)
+  | Wrappers.Mavp _ -> FloatBAFlag (F Type.Float.Mavp)
+  | Wrappers.Max _ -> FloatBAFlag (F Type.Float.Max)
+  | Wrappers.Maxindex _ -> IntBAFlag (I Type.Int.MaxIndex)
+  | Wrappers.Medprice _ -> FloatBAFlag (F Type.Float.MedPrice)
+  | Wrappers.Mfi _ -> FloatBAFlag (F Type.Float.Mfi)
+  | Wrappers.Midpoint _ -> FloatBAFlag (F Type.Float.Midpoint)
+  | Wrappers.Midprice _ -> FloatBAFlag (F Type.Float.Midprice)
+  | Wrappers.Min _ -> FloatBAFlag (F Type.Float.Min)
+  | Wrappers.Minindex _ -> IntBAFlag (I Type.Int.MinIndex)
+  | Wrappers.Minmax _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.MinMax_Min, F Type.Float.MinMax_Max)
+  | Wrappers.Minmaxindex _ ->
+    Output_destination.Flag.IntBA2Flag
+      (I Type.Int.MinMaxIndex_Min, I Type.Int.MinMaxIndex_Max)
+  | Wrappers.Minus_di _ -> FloatBAFlag (F Type.Float.MinusDI)
+  | Wrappers.Minus_dm _ -> FloatBAFlag (F Type.Float.MinusDM)
+  | Wrappers.Mom _ -> FloatBAFlag (F Type.Float.Mom)
+  | Wrappers.Mult _ -> FloatBAFlag (F Type.Float.Mult)
+  | Wrappers.Natr _ -> FloatBAFlag (F Type.Float.Natr)
+  | Wrappers.Obv _ -> FloatBAFlag (F Type.Float.Obv)
+  | Wrappers.Plus_di _ -> FloatBAFlag (F Type.Float.PlusDI)
+  | Wrappers.Plus_dm _ -> FloatBAFlag (F Type.Float.PlusDM)
+  | Wrappers.Ppo _ -> FloatBAFlag (F Type.Float.Ppo)
+  | Wrappers.Roc _ -> FloatBAFlag (F Type.Float.Roc)
+  | Wrappers.Rocp _ -> FloatBAFlag (F Type.Float.Rocp)
+  | Wrappers.Rocr _ -> FloatBAFlag (F Type.Float.Rocr)
+  | Wrappers.Rocr100 _ -> FloatBAFlag (F Type.Float.Rocr100)
+  | Wrappers.Rsi _ -> FloatBAFlag (F Type.Float.Rsi)
+  | Wrappers.Sar _ -> FloatBAFlag (F Type.Float.Sar)
+  | Wrappers.Sarext _ -> FloatBAFlag (F Type.Float.Sarext)
+  | Wrappers.Sin _ -> FloatBAFlag (F Type.Float.Sin)
+  | Wrappers.Sinh _ -> FloatBAFlag (F Type.Float.Sinh)
+  | Wrappers.Sma _ -> FloatBAFlag (F Type.Float.Sma)
+  | Wrappers.Sqrt _ -> FloatBAFlag (F Type.Float.Sqrt)
+  | Wrappers.Stddev _ -> FloatBAFlag (F Type.Float.Stddev)
+  | Wrappers.Stoch _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.Stoch_SlowK, F Type.Float.Stoch_SlowD)
+  | Wrappers.Stochf _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.StochF_FastK, F Type.Float.StochF_FastD)
+  | Wrappers.Stochrsi _ ->
+    Output_destination.Flag.FloatBA2Flag
+      (F Type.Float.StochRsi_FastK, F Type.Float.StochRsi_FastD)
+  | Wrappers.Sub _ -> FloatBAFlag (F Type.Float.Sub)
+  | Wrappers.Sum _ -> FloatBAFlag (F Type.Float.Sum)
+  | Wrappers.T3 _ -> FloatBAFlag (F Type.Float.T3)
+  | Wrappers.Tan _ -> FloatBAFlag (F Type.Float.Tan)
+  | Wrappers.Tanh _ -> FloatBAFlag (F Type.Float.Tanh)
+  | Wrappers.Tema _ -> FloatBAFlag (F Type.Float.Tema)
+  | Wrappers.Trange _ -> FloatBAFlag (F Type.Float.Trange)
+  | Wrappers.Trima _ -> FloatBAFlag (F Type.Float.Trima)
+  | Wrappers.Trix _ -> FloatBAFlag (F Type.Float.Trix)
+  | Wrappers.Tsf _ -> FloatBAFlag (F Type.Float.Tsf)
+  | Wrappers.Typprice _ -> FloatBAFlag (F Type.Float.TypPrice)
+  | Wrappers.Ultosc _ -> FloatBAFlag (F Type.Float.Ultosc)
+  | Wrappers.Var _ -> FloatBAFlag (F Type.Float.Var)
+  | Wrappers.Wclprice _ -> FloatBAFlag (F Type.Float.WclPrice)
+  | Wrappers.Willr _ -> FloatBAFlag (F Type.Float.Willr)
+  | Wrappers.Wma _ -> FloatBAFlag (F Type.Float.Wma)

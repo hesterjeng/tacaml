@@ -26,11 +26,11 @@
 
 module Ohlcv : module type of Ohlcv
 module C : module type of C.Functions
-module Safe : module type of Wrappers
-module Input : module type of Input_source
-module Output : module type of Output_destination
+module Safe : module type of Safe
+module Input : module type of Input
+module Output : module type of Output
 module Defaults : module type of Defaults
-module Indicator : module type of Type
+module Indicator : module type of Indicator
 
 (**/**)
 
@@ -38,10 +38,10 @@ type t = Pack.t
 (** The main type representing a packed indicator for calculation. It
     encapsulates an indicator, its input source, and its output destination. *)
 
-val input : t -> Input_source.Flag.t
+val input : t -> Input.Flag.t
 (** [input x] returns the input flag from an indicator. *)
 
-val output : t -> Output_destination.Flag.t
+val output : t -> Output.Flag.t
 (** [output x] returns the output flag from an indicator. *)
 
 val initialize : unit -> (unit, string) result

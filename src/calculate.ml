@@ -1,4 +1,4 @@
-open Wrappers
+open Safe
 module C = Ctypes
 
 let ba = C.bigarray_start C.array1

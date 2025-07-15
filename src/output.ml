@@ -1,172 +1,24 @@
-open Wrappers
+open Safe
 
 type t =
-  | FloatOutputs of { start_row : int; count : int }
-  | IntOutputs of { start_row : int; count : int }
+  | FloatBA of float_ba
+  | FloatBA2 of float_ba * float_ba
+  | FloatBA3 of float_ba * float_ba * float_ba
+  | IntBA of int_ba
+  | IntBA2 of int_ba * int_ba
 
-let get : type a b. (a, b) Wrappers.t -> t =
- fun params ->
-  match params with
-  (* Float Outputs *)
-  | Accbands _ -> FloatOutputs { start_row = 0; count = 3 }
-  | Acos _ -> FloatOutputs { start_row = 3; count = 1 }
-  | Ad _ -> FloatOutputs { start_row = 4; count = 1 }
-  | Add _ -> FloatOutputs { start_row = 5; count = 1 }
-  | Adosc _ -> FloatOutputs { start_row = 6; count = 1 }
-  | Adx _ -> FloatOutputs { start_row = 7; count = 1 }
-  | Adxr _ -> FloatOutputs { start_row = 8; count = 1 }
-  | Apo _ -> FloatOutputs { start_row = 9; count = 1 }
-  | Aroon _ -> FloatOutputs { start_row = 10; count = 2 }
-  | Aroonosc _ -> FloatOutputs { start_row = 12; count = 1 }
-  | Asin _ -> FloatOutputs { start_row = 13; count = 1 }
-  | Atan _ -> FloatOutputs { start_row = 14; count = 1 }
-  | Atr _ -> FloatOutputs { start_row = 15; count = 1 }
-  | Avgprice _ -> FloatOutputs { start_row = 16; count = 1 }
-  | Avgdev _ -> FloatOutputs { start_row = 17; count = 1 }
-  | Bbands _ -> FloatOutputs { start_row = 18; count = 3 }
-  | Beta _ -> FloatOutputs { start_row = 21; count = 1 }
-  | Bop _ -> FloatOutputs { start_row = 22; count = 1 }
-  | Cci _ -> FloatOutputs { start_row = 23; count = 1 }
-  | Ceil _ -> FloatOutputs { start_row = 24; count = 1 }
-  | Cmo _ -> FloatOutputs { start_row = 25; count = 1 }
-  | Correl _ -> FloatOutputs { start_row = 26; count = 1 }
-  | Cos _ -> FloatOutputs { start_row = 27; count = 1 }
-  | Cosh _ -> FloatOutputs { start_row = 28; count = 1 }
-  | Dema _ -> FloatOutputs { start_row = 29; count = 1 }
-  | Div _ -> FloatOutputs { start_row = 30; count = 1 }
-  | Dx _ -> FloatOutputs { start_row = 31; count = 1 }
-  | Ema _ -> FloatOutputs { start_row = 32; count = 1 }
-  | Exp _ -> FloatOutputs { start_row = 33; count = 1 }
-  | Floor _ -> FloatOutputs { start_row = 34; count = 1 }
-  | Ht_dcperiod _ -> FloatOutputs { start_row = 35; count = 1 }
-  | Ht_dcphase _ -> FloatOutputs { start_row = 36; count = 1 }
-  | Ht_phasor _ -> FloatOutputs { start_row = 37; count = 2 }
-  | Ht_sine _ -> FloatOutputs { start_row = 39; count = 2 }
-  | Ht_trendline _ -> FloatOutputs { start_row = 41; count = 1 }
-  | Imi _ -> FloatOutputs { start_row = 42; count = 1 }
-  | Kama _ -> FloatOutputs { start_row = 43; count = 1 }
-  | Linearreg _ -> FloatOutputs { start_row = 44; count = 1 }
-  | Linearreg_angle _ -> FloatOutputs { start_row = 45; count = 1 }
-  | Linearreg_intercept _ -> FloatOutputs { start_row = 46; count = 1 }
-  | Linearreg_slope _ -> FloatOutputs { start_row = 47; count = 1 }
-  | Ln _ -> FloatOutputs { start_row = 48; count = 1 }
-  | Log10 _ -> FloatOutputs { start_row = 49; count = 1 }
-  | Ma _ -> FloatOutputs { start_row = 50; count = 1 }
-  | Macd _ -> FloatOutputs { start_row = 51; count = 3 }
-  | Macdext _ -> FloatOutputs { start_row = 54; count = 3 }
-  | Macdfix _ -> FloatOutputs { start_row = 57; count = 3 }
-  | Mama _ -> FloatOutputs { start_row = 60; count = 2 }
-  | Mavp _ -> FloatOutputs { start_row = 62; count = 1 }
-  | Max _ -> FloatOutputs { start_row = 63; count = 1 }
-  | Medprice _ -> FloatOutputs { start_row = 64; count = 1 }
-  | Mfi _ -> FloatOutputs { start_row = 65; count = 1 }
-  | Midpoint _ -> FloatOutputs { start_row = 66; count = 1 }
-  | Midprice _ -> FloatOutputs { start_row = 67; count = 1 }
-  | Min _ -> FloatOutputs { start_row = 68; count = 1 }
-  | Minmax _ -> FloatOutputs { start_row = 69; count = 2 }
-  | Minus_di _ -> FloatOutputs { start_row = 71; count = 1 }
-  | Minus_dm _ -> FloatOutputs { start_row = 72; count = 1 }
-  | Mom _ -> FloatOutputs { start_row = 73; count = 1 }
-  | Mult _ -> FloatOutputs { start_row = 74; count = 1 }
-  | Natr _ -> FloatOutputs { start_row = 75; count = 1 }
-  | Obv _ -> FloatOutputs { start_row = 76; count = 1 }
-  | Plus_di _ -> FloatOutputs { start_row = 77; count = 1 }
-  | Plus_dm _ -> FloatOutputs { start_row = 78; count = 1 }
-  | Ppo _ -> FloatOutputs { start_row = 79; count = 1 }
-  | Roc _ -> FloatOutputs { start_row = 80; count = 1 }
-  | Rocp _ -> FloatOutputs { start_row = 81; count = 1 }
-  | Rocr _ -> FloatOutputs { start_row = 82; count = 1 }
-  | Rocr100 _ -> FloatOutputs { start_row = 83; count = 1 }
-  | Rsi _ -> FloatOutputs { start_row = 84; count = 1 }
-  | Sar _ -> FloatOutputs { start_row = 85; count = 1 }
-  | Sarext _ -> FloatOutputs { start_row = 86; count = 1 }
-  | Sin _ -> FloatOutputs { start_row = 87; count = 1 }
-  | Sinh _ -> FloatOutputs { start_row = 88; count = 1 }
-  | Sma _ -> FloatOutputs { start_row = 89; count = 1 }
-  | Sqrt _ -> FloatOutputs { start_row = 90; count = 1 }
-  | Stddev _ -> FloatOutputs { start_row = 91; count = 1 }
-  | Stoch _ -> FloatOutputs { start_row = 92; count = 2 }
-  | Stochf _ -> FloatOutputs { start_row = 94; count = 2 }
-  | Stochrsi _ -> FloatOutputs { start_row = 96; count = 2 }
-  | Sub _ -> FloatOutputs { start_row = 98; count = 1 }
-  | Sum _ -> FloatOutputs { start_row = 99; count = 1 }
-  | T3 _ -> FloatOutputs { start_row = 100; count = 1 }
-  | Tan _ -> FloatOutputs { start_row = 101; count = 1 }
-  | Tanh _ -> FloatOutputs { start_row = 102; count = 1 }
-  | Tema _ -> FloatOutputs { start_row = 103; count = 1 }
-  | Trange _ -> FloatOutputs { start_row = 104; count = 1 }
-  | Trima _ -> FloatOutputs { start_row = 105; count = 1 }
-  | Trix _ -> FloatOutputs { start_row = 106; count = 1 }
-  | Tsf _ -> FloatOutputs { start_row = 107; count = 1 }
-  | Typprice _ -> FloatOutputs { start_row = 108; count = 1 }
-  | Ultosc _ -> FloatOutputs { start_row = 109; count = 1 }
-  | Var _ -> FloatOutputs { start_row = 110; count = 1 }
-  | Wclprice _ -> FloatOutputs { start_row = 111; count = 1 }
-  | Willr _ -> FloatOutputs { start_row = 112; count = 1 }
-  | Wma _ -> FloatOutputs { start_row = 113; count = 1 }
-  (* Int Outputs *)
-  | Cdl2crows _ -> IntOutputs { start_row = 0; count = 1 }
-  | Cdl3blackcrows _ -> IntOutputs { start_row = 1; count = 1 }
-  | Cdl3inside _ -> IntOutputs { start_row = 2; count = 1 }
-  | Cdl3linestrike _ -> IntOutputs { start_row = 3; count = 1 }
-  | Cdl3outside _ -> IntOutputs { start_row = 4; count = 1 }
-  | Cdl3starsinsouth _ -> IntOutputs { start_row = 5; count = 1 }
-  | Cdl3whitesoldiers _ -> IntOutputs { start_row = 6; count = 1 }
-  | Cdlabandonedbaby _ -> IntOutputs { start_row = 7; count = 1 }
-  | Cdladvanceblock _ -> IntOutputs { start_row = 8; count = 1 }
-  | Cdlbelthold _ -> IntOutputs { start_row = 9; count = 1 }
-  | Cdlbreakaway _ -> IntOutputs { start_row = 10; count = 1 }
-  | Cdlclosingmarubozu _ -> IntOutputs { start_row = 11; count = 1 }
-  | Cdlconcealbabyswall _ -> IntOutputs { start_row = 12; count = 1 }
-  | Cdlcounterattack _ -> IntOutputs { start_row = 13; count = 1 }
-  | Cdldarkcloudcover _ -> IntOutputs { start_row = 14; count = 1 }
-  | Cdldoji _ -> IntOutputs { start_row = 15; count = 1 }
-  | Cdldojistar _ -> IntOutputs { start_row = 16; count = 1 }
-  | Cdldragonflydoji _ -> IntOutputs { start_row = 17; count = 1 }
-  | Cdlengulfing _ -> IntOutputs { start_row = 18; count = 1 }
-  | Cdleveningdojistar _ -> IntOutputs { start_row = 19; count = 1 }
-  | Cdleveningstar _ -> IntOutputs { start_row = 20; count = 1 }
-  | Cdlgapsidesidewhite _ -> IntOutputs { start_row = 21; count = 1 }
-  | Cdlgravestonedoji _ -> IntOutputs { start_row = 22; count = 1 }
-  | Cdlhammer _ -> IntOutputs { start_row = 23; count = 1 }
-  | Cdlhangingman _ -> IntOutputs { start_row = 24; count = 1 }
-  | Cdlharami _ -> IntOutputs { start_row = 25; count = 1 }
-  | Cdlharamicross _ -> IntOutputs { start_row = 26; count = 1 }
-  | Cdlhighwave _ -> IntOutputs { start_row = 27; count = 1 }
-  | Cdlhikkake _ -> IntOutputs { start_row = 28; count = 1 }
-  | Cdlhikkakemod _ -> IntOutputs { start_row = 29; count = 1 }
-  | Cdlhomingpigeon _ -> IntOutputs { start_row = 30; count = 1 }
-  | Cdlidentical3crows _ -> IntOutputs { start_row = 31; count = 1 }
-  | Cdlinneck _ -> IntOutputs { start_row = 32; count = 1 }
-  | Cdlinvertedhammer _ -> IntOutputs { start_row = 33; count = 1 }
-  | Cdlkicking _ -> IntOutputs { start_row = 34; count = 1 }
-  | Cdlkickingbylength _ -> IntOutputs { start_row = 35; count = 1 }
-  | Cdlladderbottom _ -> IntOutputs { start_row = 36; count = 1 }
-  | Cdllongleggeddoji _ -> IntOutputs { start_row = 37; count = 1 }
-  | Cdllongline _ -> IntOutputs { start_row = 38; count = 1 }
-  | Cdlmarubozu _ -> IntOutputs { start_row = 39; count = 1 }
-  | Cdlmatchinglow _ -> IntOutputs { start_row = 40; count = 1 }
-  | Cdlmathold _ -> IntOutputs { start_row = 41; count = 1 }
-  | Cdlmorningdojistar _ -> IntOutputs { start_row = 42; count = 1 }
-  | Cdlmorningstar _ -> IntOutputs { start_row = 43; count = 1 }
-  | Cdlonneck _ -> IntOutputs { start_row = 44; count = 1 }
-  | Cdlpiercing _ -> IntOutputs { start_row = 45; count = 1 }
-  | Cdlrickshawman _ -> IntOutputs { start_row = 46; count = 1 }
-  | Cdlrisefall3methods _ -> IntOutputs { start_row = 47; count = 1 }
-  | Cdlseparatinglines _ -> IntOutputs { start_row = 48; count = 1 }
-  | Cdlshootingstar _ -> IntOutputs { start_row = 49; count = 1 }
-  | Cdlshortline _ -> IntOutputs { start_row = 50; count = 1 }
-  | Cdlspinningtop _ -> IntOutputs { start_row = 51; count = 1 }
-  | Cdlstalledpattern _ -> IntOutputs { start_row = 52; count = 1 }
-  | Cdlsticksandwich _ -> IntOutputs { start_row = 53; count = 1 }
-  | Cdltakuri _ -> IntOutputs { start_row = 54; count = 1 }
-  | Cdltasukigap _ -> IntOutputs { start_row = 55; count = 1 }
-  | Cdlthrusting _ -> IntOutputs { start_row = 56; count = 1 }
-  | Cdltristar _ -> IntOutputs { start_row = 57; count = 1 }
-  | Cdlunique3river _ -> IntOutputs { start_row = 58; count = 1 }
-  | Cdlupsidegap2crows _ -> IntOutputs { start_row = 59; count = 1 }
-  | Cdlxsidegap3methods _ -> IntOutputs { start_row = 60; count = 1 }
-  | Ht_trendmode _ -> IntOutputs { start_row = 61; count = 1 }
-  | Maxindex _ -> IntOutputs { start_row = 62; count = 1 }
-  | Minindex _ -> IntOutputs { start_row = 63; count = 1 }
-  | Minmaxindex _ -> IntOutputs { start_row = 64; count = 2 }
+module Flag = struct
+  type t =
+    | FloatBAFlag of Indicator.t
+    | FloatBA2Flag of Indicator.t * Indicator.t
+    | FloatBA3Flag of Indicator.t * Indicator.t * Indicator.t
+    | IntBAFlag of Indicator.t
+    | IntBA2Flag of Indicator.t * Indicator.t
+end
+
+let to_string = function
+  | FloatBA _ -> "FloatBA"
+  | FloatBA2 _ -> "FloatBA2"
+  | FloatBA3 _ -> "FloatBA3"
+  | IntBA _ -> "IntBA"
+  | IntBA2 _ -> "IntBA2"

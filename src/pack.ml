@@ -1,605 +1,338 @@
-type t = Pack : ('a, 'b) Wrappers.t -> t
+module S = Safe
+
+type t = Pack : ('a, 'b) S.t -> t
 
 let pack x = Pack x
 let calculate = Calculate.calculate
 
-let calculate ?i (Pack params) (source : Input_source.t)
-    (output : Output_destination.t) =
+let calculate ?i (Pack params) (source : Input.t) (output : Output.t) =
   match (params, source, output) with
-  | ( Wrappers.Accbands _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA3 (x, y, z) ) ->
+  | S.Accbands _, Input.Ohlcv source, Output.FloatBA3 (x, y, z) ->
     calculate ?i params source (x, y, z)
-  | ( Wrappers.Acos _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Acos _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Ad _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Ad _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Add _,
-      Input_source.FloatBA2 (s1, s2),
-      Output_destination.FloatBA output ) ->
+  | S.Add _, Input.FloatBA2 (s1, s2), Output.FloatBA output ->
     calculate ?i params (s1, s2) output
-  | ( Wrappers.Adosc _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Adosc _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Adx _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Adx _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Adxr _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Adxr _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Apo _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Apo _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Aroon _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA2 (o1, o2) ) ->
+  | S.Aroon _, Input.Ohlcv source, Output.FloatBA2 (o1, o2) ->
     calculate ?i params source (o1, o2)
-  | ( Wrappers.Aroonosc _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Aroonosc _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Asin _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Asin _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Atan _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Atan _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Atr _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Atr _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Avgprice _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Avgprice _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Avgdev _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Avgdev _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Bbands _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA3 (o1, o2, o3) ) ->
+  | S.Bbands _, Input.Ohlcv source, Output.FloatBA3 (o1, o2, o3) ->
     calculate ?i params source (o1, o2, o3)
-  | ( Wrappers.Beta _,
-      Input_source.FloatBA2 (s1, s2),
-      Output_destination.FloatBA output ) ->
+  | S.Beta _, Input.FloatBA2 (s1, s2), Output.FloatBA output ->
     calculate ?i params (s1, s2) output
-  | Wrappers.Bop _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Bop _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Cci _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl2crows _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3blackcrows _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3inside _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3linestrike _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3outside _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3starsinsouth _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdl3whitesoldiers _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlabandonedbaby _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdladvanceblock _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlbelthold _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlbreakaway _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlclosingmarubozu _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlconcealbabyswall _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlcounterattack _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdldarkcloudcover _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdldoji _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdldojistar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdldragonflydoji _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlengulfing _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdleveningdojistar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdleveningstar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlgapsidesidewhite _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlgravestonedoji _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhammer _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhangingman _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlharami _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlharamicross _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhighwave _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhikkake _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhikkakemod _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlhomingpigeon _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlidentical3crows _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlinneck _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlinvertedhammer _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlkicking _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlkickingbylength _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdlladderbottom _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
-    calculate ?i params source output
-  | ( Wrappers.Cdllongleggeddoji _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cci _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdllongline _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl2crows _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlmarubozu _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3blackcrows _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlmatchinglow _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3inside _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlmathold _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3linestrike _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlmorningdojistar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3outside _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlmorningstar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3starsinsouth _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlonneck _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdl3whitesoldiers _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlpiercing _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlabandonedbaby _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlrickshawman _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdladvanceblock _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlrisefall3methods _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlbelthold _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlseparatinglines _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlbreakaway _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlshootingstar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlclosingmarubozu _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlshortline _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlconcealbabyswall _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlspinningtop _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlcounterattack _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlstalledpattern _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdldarkcloudcover _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlsticksandwich _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdldoji _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdltakuri _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdldojistar _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdltasukigap _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdldragonflydoji _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlthrusting _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlengulfing _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdltristar _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdleveningdojistar _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlunique3river _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdleveningstar _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlupsidegap2crows _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlgapsidesidewhite _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cdlxsidegap3methods _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Cdlgravestonedoji _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ceil _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Cdlhammer _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | Wrappers.Cmo _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Cdlhangingman _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | Wrappers.Correl _, FloatBA2 (s0, s1), Output_destination.FloatBA output ->
+  | S.Cdlharami _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlharamicross _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlhighwave _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlhikkake _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlhikkakemod _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlhomingpigeon _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlidentical3crows _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlinneck _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlinvertedhammer _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlkicking _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlkickingbylength _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlladderbottom _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdllongleggeddoji _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdllongline _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlmarubozu _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlmatchinglow _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlmathold _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlmorningdojistar _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlmorningstar _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlonneck _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlpiercing _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlrickshawman _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlrisefall3methods _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlseparatinglines _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlshootingstar _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlshortline _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlspinningtop _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlstalledpattern _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlsticksandwich _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdltakuri _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdltasukigap _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlthrusting _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdltristar _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlunique3river _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlupsidegap2crows _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Cdlxsidegap3methods _, Input.Ohlcv source, Output.IntBA output ->
+    calculate ?i params source output
+  | S.Ceil _, Input.FloatBA source, Output.FloatBA output ->
+    calculate ?i params source output
+  | S.Cmo _, Input.Ohlcv source, Output.FloatBA output ->
+    calculate ?i params source output
+  | S.Correl _, FloatBA2 (s0, s1), Output.FloatBA output ->
     calculate ?i params (s0, s1) output
-  | ( Wrappers.Cos _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Cos _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Cosh _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Cosh _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Dema _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Dema _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Div _, FloatBA2 (s0, s1), Output_destination.FloatBA output ->
+  | S.Div _, FloatBA2 (s0, s1), Output.FloatBA output ->
     calculate ?i params (s0, s1) output
-  | Wrappers.Dx _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Dx _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Ema _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Ema _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Exp _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Exp _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Floor _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Floor _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ht_dcperiod _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Ht_dcperiod _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ht_dcphase _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Ht_dcphase _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Ht_phasor _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Ht_phasor _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | Wrappers.Ht_sine _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Ht_sine _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | ( Wrappers.Ht_trendline _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Ht_trendline _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ht_trendmode _,
-      Input_source.Ohlcv source,
-      Output_destination.IntBA output ) ->
+  | S.Ht_trendmode _, Input.Ohlcv source, Output.IntBA output ->
     calculate ?i params source output
-  | Wrappers.Imi _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Imi _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Kama _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Kama _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Linearreg _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Linearreg _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Linearreg_angle _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Linearreg_angle _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Linearreg_intercept _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Linearreg_intercept _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Linearreg_slope _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Linearreg_slope _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ln _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Ln _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Log10 _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Log10 _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Ma _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Ma _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Macd _, Input_source.Ohlcv source, FloatBA3 (o0, o1, o2) ->
+  | S.Macd _, Input.Ohlcv source, FloatBA3 (o0, o1, o2) ->
     calculate ?i params source (o0, o1, o2)
-  | Wrappers.Macdext _, Input_source.Ohlcv source, FloatBA3 (o0, o1, o2) ->
+  | S.Macdext _, Input.Ohlcv source, FloatBA3 (o0, o1, o2) ->
     calculate ?i params source (o0, o1, o2)
-  | Wrappers.Macdfix _, Input_source.Ohlcv source, FloatBA3 (o0, o1, o2) ->
+  | S.Macdfix _, Input.Ohlcv source, FloatBA3 (o0, o1, o2) ->
     calculate ?i params source (o0, o1, o2)
-  | Wrappers.Mama _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Mama _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | Wrappers.Mavp _, FloatBA2 (s0, s1), Output_destination.FloatBA output ->
+  | S.Mavp _, FloatBA2 (s0, s1), Output.FloatBA output ->
     calculate ?i params (s0, s1) output
-  | ( Wrappers.Max _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Max _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Maxindex _,
-      Input_source.FloatBA source,
-      Output_destination.IntBA output ) ->
+  | S.Maxindex _, Input.FloatBA source, Output.IntBA output ->
     calculate ?i params source output
-  | ( Wrappers.Medprice _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Medprice _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Mfi _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Mfi _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Midpoint _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Midpoint _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Midprice _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Midprice _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Min _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Min _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Minindex _,
-      Input_source.FloatBA source,
-      Output_destination.IntBA output ) ->
+  | S.Minindex _, Input.FloatBA source, Output.IntBA output ->
     calculate ?i params source output
-  | Wrappers.Minmax _, Input_source.FloatBA source, FloatBA2 (o0, o1) ->
+  | S.Minmax _, Input.FloatBA source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | ( Wrappers.Minmaxindex _,
-      Input_source.FloatBA source,
-      Output_destination.IntBA2 (o0, o1) ) ->
+  | S.Minmaxindex _, Input.FloatBA source, Output.IntBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | ( Wrappers.Minus_di _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Minus_di _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Minus_dm _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Minus_dm _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Mom _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Mom _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Mult _, FloatBA2 (s0, s1), Output_destination.FloatBA output ->
+  | S.Mult _, FloatBA2 (s0, s1), Output.FloatBA output ->
     calculate ?i params (s0, s1) output
-  | ( Wrappers.Natr _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Natr _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Obv _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Obv _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Plus_di _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Plus_di _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Plus_dm _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Plus_dm _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Ppo _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Ppo _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Roc _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Roc _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Rocp _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Rocp _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Rocr _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Rocr _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Rocr100 _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Rocr100 _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Rsi _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Rsi _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Sar _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Sar _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Sarext _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Sarext _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Sin _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Sin _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Sinh _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Sinh _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Sma _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Sma _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Sqrt _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Sqrt _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Stddev _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Stddev _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Stoch _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Stoch _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | Wrappers.Stochf _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Stochf _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | Wrappers.Stochrsi _, Input_source.Ohlcv source, FloatBA2 (o0, o1) ->
+  | S.Stochrsi _, Input.Ohlcv source, FloatBA2 (o0, o1) ->
     calculate ?i params source (o0, o1)
-  | Wrappers.Sub _, FloatBA2 (s0, s1), Output_destination.FloatBA output ->
+  | S.Sub _, FloatBA2 (s0, s1), Output.FloatBA output ->
     calculate ?i params (s0, s1) output
-  | Wrappers.Sum _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Sum _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.T3 _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.T3 _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Tan _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Tan _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Tanh _,
-      Input_source.FloatBA source,
-      Output_destination.FloatBA output ) ->
+  | S.Tanh _, Input.FloatBA source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Tema _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Tema _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Trange _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Trange _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Trima _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Trima _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Trix _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Trix _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Tsf _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Tsf _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Typprice _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Typprice _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Ultosc _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Ultosc _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Var _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Var _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Wclprice _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Wclprice _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | ( Wrappers.Willr _,
-      Input_source.Ohlcv source,
-      Output_destination.FloatBA output ) ->
+  | S.Willr _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
-  | Wrappers.Wma _, Input_source.Ohlcv source, Output_destination.FloatBA output
-    ->
+  | S.Wma _, Input.Ohlcv source, Output.FloatBA output ->
     calculate ?i params source output
   | wrapper, i, o ->
-    let str = Wrappers.to_string wrapper in
-    let inp = Input_source.to_string i in
-    let out = Output_destination.to_string o in
+    let str = S.to_string wrapper in
+    let inp = Input.to_string i in
+    let out = Output.to_string o in
     let msg =
       Format.asprintf
         "%s %s %s: Invalid input or output source/destinations chosen in TA-Lib"
@@ -607,373 +340,373 @@ let calculate ?i (Pack params) (source : Input_source.t)
     in
     Error (`FatalError msg)
 
-let input_flag_from_wrapper : t -> Input_source.Flag.t =
+let input_flag_from_wrapper : t -> Input.Flag.t =
  fun (Pack wrapper_params) ->
   match wrapper_params with
-  | Wrappers.Medprice _
-  | Wrappers.Dema _
-  | Wrappers.Accbands _
-  | Wrappers.Ad _
-  | Wrappers.Adosc _
-  | Wrappers.Adx _
-  | Wrappers.Adxr _
-  | Wrappers.Apo _
-  | Wrappers.Aroon _
-  | Wrappers.Aroonosc _
-  | Wrappers.Atr _
-  | Wrappers.Avgprice _
-  | Wrappers.Avgdev _
-  | Wrappers.Bbands _
-  | Wrappers.Bop _
-  | Wrappers.Cci _
-  | Wrappers.Cdl2crows _
-  | Wrappers.Cdl3blackcrows _
-  | Wrappers.Cdl3inside _
-  | Wrappers.Cdl3linestrike _
-  | Wrappers.Cdl3outside _
-  | Wrappers.Cdl3starsinsouth _
-  | Wrappers.Cdl3whitesoldiers _
-  | Wrappers.Cdlabandonedbaby _
-  | Wrappers.Cdladvanceblock _
-  | Wrappers.Cdlbelthold _
-  | Wrappers.Cdlbreakaway _
-  | Wrappers.Cdlclosingmarubozu _
-  | Wrappers.Cdlconcealbabyswall _
-  | Wrappers.Cdlcounterattack _
-  | Wrappers.Cdldarkcloudcover _
-  | Wrappers.Cdldoji _
-  | Wrappers.Cdldojistar _
-  | Wrappers.Cdldragonflydoji _
-  | Wrappers.Cdlengulfing _
-  | Wrappers.Cdleveningdojistar _
-  | Wrappers.Cdleveningstar _
-  | Wrappers.Cdlgapsidesidewhite _
-  | Wrappers.Cdlgravestonedoji _
-  | Wrappers.Cdlhammer _
-  | Wrappers.Cdlhangingman _
-  | Wrappers.Cdlharami _
-  | Wrappers.Cdlharamicross _
-  | Wrappers.Cdlhighwave _
-  | Wrappers.Cdlhikkake _
-  | Wrappers.Cdlhikkakemod _
-  | Wrappers.Cdlhomingpigeon _
-  | Wrappers.Cdlidentical3crows _
-  | Wrappers.Cdlinneck _
-  | Wrappers.Cdlinvertedhammer _
-  | Wrappers.Cdlkicking _
-  | Wrappers.Cdlkickingbylength _
-  | Wrappers.Cdlladderbottom _
-  | Wrappers.Cdllongleggeddoji _
-  | Wrappers.Cdllongline _
-  | Wrappers.Cdlmarubozu _
-  | Wrappers.Cdlmatchinglow _
-  | Wrappers.Cdlmathold _
-  | Wrappers.Cdlmorningdojistar _
-  | Wrappers.Cdlmorningstar _
-  | Wrappers.Cdlonneck _
-  | Wrappers.Cdlpiercing _
-  | Wrappers.Cdlrickshawman _
-  | Wrappers.Cdlrisefall3methods _
-  | Wrappers.Cdlseparatinglines _
-  | Wrappers.Cdlshootingstar _
-  | Wrappers.Cdlshortline _
-  | Wrappers.Cdlspinningtop _
-  | Wrappers.Cdlstalledpattern _
-  | Wrappers.Cdlsticksandwich _
-  | Wrappers.Cdltakuri _
-  | Wrappers.Cdltasukigap _
-  | Wrappers.Cdlthrusting _
-  | Wrappers.Cdltristar _
-  | Wrappers.Cdlunique3river _
-  | Wrappers.Cdlupsidegap2crows _
-  | Wrappers.Cdlxsidegap3methods _
-  | Wrappers.Cmo _
-  | Wrappers.Dx _
-  | Wrappers.Ema _
-  | Wrappers.Ht_dcperiod _
-  | Wrappers.Ht_dcphase _
-  | Wrappers.Ht_phasor _
-  | Wrappers.Ht_sine _
-  | Wrappers.Ht_trendline _
-  | Wrappers.Ht_trendmode _
-  | Wrappers.Imi _
-  | Wrappers.Kama _
-  | Wrappers.Linearreg _
-  | Wrappers.Linearreg_angle _
-  | Wrappers.Linearreg_intercept _
-  | Wrappers.Linearreg_slope _
-  | Wrappers.Ma _
-  | Wrappers.Macd _
-  | Wrappers.Macdext _
-  | Wrappers.Macdfix _
-  | Wrappers.Mama _
-  | Wrappers.Mfi _
-  | Wrappers.Midprice _
-  | Wrappers.Minus_di _
-  | Wrappers.Minus_dm _
-  | Wrappers.Mom _
-  | Wrappers.Natr _
-  | Wrappers.Obv _
-  | Wrappers.Plus_di _
-  | Wrappers.Plus_dm _
-  | Wrappers.Ppo _
-  | Wrappers.Roc _
-  | Wrappers.Rocp _
-  | Wrappers.Rocr _
-  | Wrappers.Rocr100 _
-  | Wrappers.Rsi _
-  | Wrappers.Sar _
-  | Wrappers.Sarext _
-  | Wrappers.Sma _
-  | Wrappers.Stoch _
-  | Wrappers.Stochf _
-  | Wrappers.Stochrsi _
-  | Wrappers.Sum _
-  | Wrappers.T3 _
-  | Wrappers.Tema _
-  | Wrappers.Trange _
-  | Wrappers.Trima _
-  | Wrappers.Trix _
-  | Wrappers.Tsf _
-  | Wrappers.Typprice _
-  | Wrappers.Ultosc _
-  | Wrappers.Var _
-  | Wrappers.Wclprice _
-  | Wrappers.Willr _
-  | Wrappers.Wma _ ->
+  | S.Medprice _
+  | S.Dema _
+  | S.Accbands _
+  | S.Ad _
+  | S.Adosc _
+  | S.Adx _
+  | S.Adxr _
+  | S.Apo _
+  | S.Aroon _
+  | S.Aroonosc _
+  | S.Atr _
+  | S.Avgprice _
+  | S.Avgdev _
+  | S.Bbands _
+  | S.Bop _
+  | S.Cci _
+  | S.Cdl2crows _
+  | S.Cdl3blackcrows _
+  | S.Cdl3inside _
+  | S.Cdl3linestrike _
+  | S.Cdl3outside _
+  | S.Cdl3starsinsouth _
+  | S.Cdl3whitesoldiers _
+  | S.Cdlabandonedbaby _
+  | S.Cdladvanceblock _
+  | S.Cdlbelthold _
+  | S.Cdlbreakaway _
+  | S.Cdlclosingmarubozu _
+  | S.Cdlconcealbabyswall _
+  | S.Cdlcounterattack _
+  | S.Cdldarkcloudcover _
+  | S.Cdldoji _
+  | S.Cdldojistar _
+  | S.Cdldragonflydoji _
+  | S.Cdlengulfing _
+  | S.Cdleveningdojistar _
+  | S.Cdleveningstar _
+  | S.Cdlgapsidesidewhite _
+  | S.Cdlgravestonedoji _
+  | S.Cdlhammer _
+  | S.Cdlhangingman _
+  | S.Cdlharami _
+  | S.Cdlharamicross _
+  | S.Cdlhighwave _
+  | S.Cdlhikkake _
+  | S.Cdlhikkakemod _
+  | S.Cdlhomingpigeon _
+  | S.Cdlidentical3crows _
+  | S.Cdlinneck _
+  | S.Cdlinvertedhammer _
+  | S.Cdlkicking _
+  | S.Cdlkickingbylength _
+  | S.Cdlladderbottom _
+  | S.Cdllongleggeddoji _
+  | S.Cdllongline _
+  | S.Cdlmarubozu _
+  | S.Cdlmatchinglow _
+  | S.Cdlmathold _
+  | S.Cdlmorningdojistar _
+  | S.Cdlmorningstar _
+  | S.Cdlonneck _
+  | S.Cdlpiercing _
+  | S.Cdlrickshawman _
+  | S.Cdlrisefall3methods _
+  | S.Cdlseparatinglines _
+  | S.Cdlshootingstar _
+  | S.Cdlshortline _
+  | S.Cdlspinningtop _
+  | S.Cdlstalledpattern _
+  | S.Cdlsticksandwich _
+  | S.Cdltakuri _
+  | S.Cdltasukigap _
+  | S.Cdlthrusting _
+  | S.Cdltristar _
+  | S.Cdlunique3river _
+  | S.Cdlupsidegap2crows _
+  | S.Cdlxsidegap3methods _
+  | S.Cmo _
+  | S.Dx _
+  | S.Ema _
+  | S.Ht_dcperiod _
+  | S.Ht_dcphase _
+  | S.Ht_phasor _
+  | S.Ht_sine _
+  | S.Ht_trendline _
+  | S.Ht_trendmode _
+  | S.Imi _
+  | S.Kama _
+  | S.Linearreg _
+  | S.Linearreg_angle _
+  | S.Linearreg_intercept _
+  | S.Linearreg_slope _
+  | S.Ma _
+  | S.Macd _
+  | S.Macdext _
+  | S.Macdfix _
+  | S.Mama _
+  | S.Mfi _
+  | S.Midprice _
+  | S.Minus_di _
+  | S.Minus_dm _
+  | S.Mom _
+  | S.Natr _
+  | S.Obv _
+  | S.Plus_di _
+  | S.Plus_dm _
+  | S.Ppo _
+  | S.Roc _
+  | S.Rocp _
+  | S.Rocr _
+  | S.Rocr100 _
+  | S.Rsi _
+  | S.Sar _
+  | S.Sarext _
+  | S.Sma _
+  | S.Stoch _
+  | S.Stochf _
+  | S.Stochrsi _
+  | S.Sum _
+  | S.T3 _
+  | S.Tema _
+  | S.Trange _
+  | S.Trima _
+  | S.Trix _
+  | S.Tsf _
+  | S.Typprice _
+  | S.Ultosc _
+  | S.Var _
+  | S.Wclprice _
+  | S.Willr _
+  | S.Wma _ ->
     OhlcvFlag
-  | Wrappers.Sin _
-  | Wrappers.Sinh _
-  | Wrappers.Acos _
-  | Wrappers.Asin _
-  | Wrappers.Atan _
-  | Wrappers.Ceil _
-  | Wrappers.Cos _
-  | Wrappers.Cosh _
-  | Wrappers.Exp _
-  | Wrappers.Floor _
-  | Wrappers.Ln _
-  | Wrappers.Log10 _
-  | Wrappers.Max _
-  | Wrappers.Maxindex _
-  | Wrappers.Midpoint _
-  | Wrappers.Min _
-  | Wrappers.Minindex _
-  | Wrappers.Minmax _
-  | Wrappers.Minmaxindex _
-  | Wrappers.Sqrt _
-  | Wrappers.Stddev _
-  | Wrappers.Tan _
-  | Wrappers.Tanh _ ->
+  | S.Sin _
+  | S.Sinh _
+  | S.Acos _
+  | S.Asin _
+  | S.Atan _
+  | S.Ceil _
+  | S.Cos _
+  | S.Cosh _
+  | S.Exp _
+  | S.Floor _
+  | S.Ln _
+  | S.Log10 _
+  | S.Max _
+  | S.Maxindex _
+  | S.Midpoint _
+  | S.Min _
+  | S.Minindex _
+  | S.Minmax _
+  | S.Minmaxindex _
+  | S.Sqrt _
+  | S.Stddev _
+  | S.Tan _
+  | S.Tanh _ ->
     FloatBAFlag
-  | Wrappers.Add _
-  | Wrappers.Beta _
-  | Wrappers.Correl _
-  | Wrappers.Div _
-  | Wrappers.Mavp _
-  | Wrappers.Mult _
-  | Wrappers.Sub _ ->
+  | S.Add _
+  | S.Beta _
+  | S.Correl _
+  | S.Div _
+  | S.Mavp _
+  | S.Mult _
+  | S.Sub _ ->
     FloatBA2Flag
 
-let output_flag_from_wrapper : t -> Output_destination.Flag.t =
+let output_flag_from_wrapper : t -> Output.Flag.t =
  fun (Pack wrapper_params) ->
   match wrapper_params with
-  | Wrappers.Accbands _ ->
-    Output_destination.Flag.FloatBA3Flag
-      ( F Type.Float.UpperBBand,
-        F Type.Float.MiddleBBand,
-        F Type.Float.LowerBBand )
-  | Wrappers.Acos _ -> FloatBAFlag (F Type.Float.Acos)
-  | Wrappers.Ad _ -> FloatBAFlag (F Type.Float.Ad)
-  | Wrappers.Add _ -> FloatBAFlag (F Type.Float.Add)
-  | Wrappers.Adosc _ -> FloatBAFlag (F Type.Float.Adosc)
-  | Wrappers.Adx _ -> FloatBAFlag (F Type.Float.Adx)
-  | Wrappers.Adxr _ -> FloatBAFlag (F Type.Float.Adxr)
-  | Wrappers.Apo _ -> FloatBAFlag (F Type.Float.Apo)
-  | Wrappers.Aroon _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.Aroon_Down, F Type.Float.Aroon_Up)
-  | Wrappers.Aroonosc _ -> FloatBAFlag (F Type.Float.AroonOsc)
-  | Wrappers.Asin _ -> FloatBAFlag (F Type.Float.Asin)
-  | Wrappers.Atan _ -> FloatBAFlag (F Type.Float.Atan)
-  | Wrappers.Atr _ -> FloatBAFlag (F Type.Float.Atr)
-  | Wrappers.Avgprice _ -> FloatBAFlag (F Type.Float.AvgPrice)
-  | Wrappers.Avgdev _ -> FloatBAFlag (F Type.Float.Stddev)
-  | Wrappers.Bbands _ ->
-    Output_destination.Flag.FloatBA3Flag
-      ( F Type.Float.UpperBBand,
-        F Type.Float.MiddleBBand,
-        F Type.Float.LowerBBand )
-  | Wrappers.Beta _ -> FloatBAFlag (F Type.Float.Beta)
-  | Wrappers.Bop _ -> FloatBAFlag (F Type.Float.Willr)
-  | Wrappers.Cci _ -> FloatBAFlag (F Type.Float.Cci)
-  | Wrappers.Cdl2crows _ -> IntBAFlag (I Type.Int.Cdl2Crows)
-  | Wrappers.Cdl3blackcrows _ -> IntBAFlag (I Type.Int.Cdl3BlackCrows)
-  | Wrappers.Cdl3inside _ -> IntBAFlag (I Type.Int.Cdl3Inside)
-  | Wrappers.Cdl3linestrike _ -> IntBAFlag (I Type.Int.Cdl3LineStrike)
-  | Wrappers.Cdl3outside _ -> IntBAFlag (I Type.Int.Cdl3Outside)
-  | Wrappers.Cdl3starsinsouth _ -> IntBAFlag (I Type.Int.Cdl3StarsInSouth)
-  | Wrappers.Cdl3whitesoldiers _ -> IntBAFlag (I Type.Int.Cdl3WhiteSoldiers)
-  | Wrappers.Cdlabandonedbaby _ -> IntBAFlag (I Type.Int.CdlAbandonedBaby)
-  | Wrappers.Cdladvanceblock _ -> IntBAFlag (I Type.Int.CdlAdvanceBlock)
-  | Wrappers.Cdlbelthold _ -> IntBAFlag (I Type.Int.CdlBeltHold)
-  | Wrappers.Cdlbreakaway _ -> IntBAFlag (I Type.Int.CdlBreakaway)
-  | Wrappers.Cdlclosingmarubozu _ -> IntBAFlag (I Type.Int.CdlClosingMarubozu)
-  | Wrappers.Cdlconcealbabyswall _ -> IntBAFlag (I Type.Int.CdlConcealBabySwall)
-  | Wrappers.Cdlcounterattack _ -> IntBAFlag (I Type.Int.CdlCounterAttack)
-  | Wrappers.Cdldarkcloudcover _ -> IntBAFlag (I Type.Int.CdlDarkCloudCover)
-  | Wrappers.Cdldoji _ -> IntBAFlag (I Type.Int.CdlDoji)
-  | Wrappers.Cdldojistar _ -> IntBAFlag (I Type.Int.CdlDojiStar)
-  | Wrappers.Cdldragonflydoji _ -> IntBAFlag (I Type.Int.CdlDragonflyDoji)
-  | Wrappers.Cdlengulfing _ -> IntBAFlag (I Type.Int.CdlEngulfing)
-  | Wrappers.Cdleveningdojistar _ -> IntBAFlag (I Type.Int.CdlEveningDojiStar)
-  | Wrappers.Cdleveningstar _ -> IntBAFlag (I Type.Int.CdlEveningStar)
-  | Wrappers.Cdlgapsidesidewhite _ -> IntBAFlag (I Type.Int.CdlGapSideSideWhite)
-  | Wrappers.Cdlgravestonedoji _ -> IntBAFlag (I Type.Int.CdlGravestoneDoji)
-  | Wrappers.Cdlhammer _ -> IntBAFlag (I Type.Int.CdlHammer)
-  | Wrappers.Cdlhangingman _ -> IntBAFlag (I Type.Int.CdlHangingMan)
-  | Wrappers.Cdlharami _ -> IntBAFlag (I Type.Int.CdlHarami)
-  | Wrappers.Cdlharamicross _ -> IntBAFlag (I Type.Int.CdlHaramiCross)
-  | Wrappers.Cdlhighwave _ -> IntBAFlag (I Type.Int.CdlHighWave)
-  | Wrappers.Cdlhikkake _ -> IntBAFlag (I Type.Int.CdlHikkake)
-  | Wrappers.Cdlhikkakemod _ -> IntBAFlag (I Type.Int.CdlHikkakeMod)
-  | Wrappers.Cdlhomingpigeon _ -> IntBAFlag (I Type.Int.CdlHomingPigeon)
-  | Wrappers.Cdlidentical3crows _ -> IntBAFlag (I Type.Int.CdlIdentical3Crows)
-  | Wrappers.Cdlinneck _ -> IntBAFlag (I Type.Int.CdlInNeck)
-  | Wrappers.Cdlinvertedhammer _ -> IntBAFlag (I Type.Int.CdlInvertedHammer)
-  | Wrappers.Cdlkicking _ -> IntBAFlag (I Type.Int.CdlKicking)
-  | Wrappers.Cdlkickingbylength _ -> IntBAFlag (I Type.Int.CdlKickingByLength)
-  | Wrappers.Cdlladderbottom _ -> IntBAFlag (I Type.Int.CdlLadderBottom)
-  | Wrappers.Cdllongleggeddoji _ -> IntBAFlag (I Type.Int.CdlLongLeggedDoji)
-  | Wrappers.Cdllongline _ -> IntBAFlag (I Type.Int.CdlLongLine)
-  | Wrappers.Cdlmarubozu _ -> IntBAFlag (I Type.Int.CdlMarubozu)
-  | Wrappers.Cdlmatchinglow _ -> IntBAFlag (I Type.Int.CdlMatchingLow)
-  | Wrappers.Cdlmathold _ -> IntBAFlag (I Type.Int.CdlMatHold)
-  | Wrappers.Cdlmorningdojistar _ -> IntBAFlag (I Type.Int.CdlMorningDojiStar)
-  | Wrappers.Cdlmorningstar _ -> IntBAFlag (I Type.Int.CdlMorningStar)
-  | Wrappers.Cdlonneck _ -> IntBAFlag (I Type.Int.CdlOnNeck)
-  | Wrappers.Cdlpiercing _ -> IntBAFlag (I Type.Int.CdlPiercing)
-  | Wrappers.Cdlrickshawman _ -> IntBAFlag (I Type.Int.CdlRickshawMan)
-  | Wrappers.Cdlrisefall3methods _ -> IntBAFlag (I Type.Int.CdlRiseFall3Methods)
-  | Wrappers.Cdlseparatinglines _ -> IntBAFlag (I Type.Int.CdlSeparatingLines)
-  | Wrappers.Cdlshootingstar _ -> IntBAFlag (I Type.Int.CdlShootingStar)
-  | Wrappers.Cdlshortline _ -> IntBAFlag (I Type.Int.CdlShortLine)
-  | Wrappers.Cdlspinningtop _ -> IntBAFlag (I Type.Int.CdlSpinningTop)
-  | Wrappers.Cdlstalledpattern _ -> IntBAFlag (I Type.Int.CdlStalledPattern)
-  | Wrappers.Cdlsticksandwich _ -> IntBAFlag (I Type.Int.CdlStickSandwich)
-  | Wrappers.Cdltakuri _ -> IntBAFlag (I Type.Int.CdlTakuri)
-  | Wrappers.Cdltasukigap _ -> IntBAFlag (I Type.Int.CdlTasukiGap)
-  | Wrappers.Cdlthrusting _ -> IntBAFlag (I Type.Int.CdlThrusting)
-  | Wrappers.Cdltristar _ -> IntBAFlag (I Type.Int.CdlTristar)
-  | Wrappers.Cdlunique3river _ -> IntBAFlag (I Type.Int.CdlUnique3River)
-  | Wrappers.Cdlupsidegap2crows _ -> IntBAFlag (I Type.Int.CdlUpsideGap2Crows)
-  | Wrappers.Cdlxsidegap3methods _ -> IntBAFlag (I Type.Int.CdlXSideGap3Methods)
-  | Wrappers.Ceil _ -> FloatBAFlag (F Type.Float.Ceil)
-  | Wrappers.Cmo _ -> FloatBAFlag (F Type.Float.Cmo)
-  | Wrappers.Correl _ -> FloatBAFlag (F Type.Float.Correl)
-  | Wrappers.Cos _ -> FloatBAFlag (F Type.Float.Cos)
-  | Wrappers.Cosh _ -> FloatBAFlag (F Type.Float.Cosh)
-  | Wrappers.Dema _ -> FloatBAFlag (F Type.Float.Dema)
-  | Wrappers.Div _ -> FloatBAFlag (F Type.Float.Div)
-  | Wrappers.Dx _ -> FloatBAFlag (F Type.Float.Dx)
-  | Wrappers.Ema _ -> FloatBAFlag (F Type.Float.Ema)
-  | Wrappers.Exp _ -> FloatBAFlag (F Type.Float.Exp)
-  | Wrappers.Floor _ -> FloatBAFlag (F Type.Float.Floor)
-  | Wrappers.Ht_dcperiod _ -> FloatBAFlag (F Type.Float.HtDcPeriod)
-  | Wrappers.Ht_dcphase _ -> FloatBAFlag (F Type.Float.HtDcPhase)
-  | Wrappers.Ht_phasor _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.HtPhasor_InPhase, F Type.Float.HtPhasor_Quadrature)
-  | Wrappers.Ht_sine _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.HtSine_Sine, F Type.Float.HtSine_LeadSine)
-  | Wrappers.Ht_trendline _ -> FloatBAFlag (F Type.Float.HtTrendline)
-  | Wrappers.Ht_trendmode _ -> IntBAFlag (I Type.Int.HtTrendMode)
-  | Wrappers.Imi _ -> FloatBAFlag (F Type.Float.Mom)
-  | Wrappers.Kama _ -> FloatBAFlag (F Type.Float.Kama)
-  | Wrappers.Linearreg _ -> FloatBAFlag (F Type.Float.Linearreg)
-  | Wrappers.Linearreg_angle _ -> FloatBAFlag (F Type.Float.LinearregAngle)
-  | Wrappers.Linearreg_intercept _ ->
-    FloatBAFlag (F Type.Float.LinearregIntercept)
-  | Wrappers.Linearreg_slope _ -> FloatBAFlag (F Type.Float.LinearregSlope)
-  | Wrappers.Ln _ -> FloatBAFlag (F Type.Float.Ln)
-  | Wrappers.Log10 _ -> FloatBAFlag (F Type.Float.Log10)
-  | Wrappers.Ma _ -> FloatBAFlag (F Type.Float.Ma)
-  | Wrappers.Macd _ ->
-    Output_destination.Flag.FloatBA3Flag
-      ( F Type.Float.Macd_MACD,
-        F Type.Float.Macd_MACDSignal,
-        F Type.Float.Macd_MACDHist )
-  | Wrappers.Macdext _ ->
-    Output_destination.Flag.FloatBA3Flag
-      ( F Type.Float.MacdExt_MACD,
-        F Type.Float.MacdExt_MACDSignal,
-        F Type.Float.MacdExt_MACDHist )
-  | Wrappers.Macdfix _ ->
-    Output_destination.Flag.FloatBA3Flag
-      ( F Type.Float.MacdFix_MACD,
-        F Type.Float.MacdFix_MACDSignal,
-        F Type.Float.MacdFix_MACDHist )
-  | Wrappers.Mama _ ->
-    Output_destination.Flag.FloatBA2Flag (F Type.Float.Mama, F Type.Float.Mama)
-  | Wrappers.Mavp _ -> FloatBAFlag (F Type.Float.Mavp)
-  | Wrappers.Max _ -> FloatBAFlag (F Type.Float.Max)
-  | Wrappers.Maxindex _ -> IntBAFlag (I Type.Int.MaxIndex)
-  | Wrappers.Medprice _ -> FloatBAFlag (F Type.Float.MedPrice)
-  | Wrappers.Mfi _ -> FloatBAFlag (F Type.Float.Mfi)
-  | Wrappers.Midpoint _ -> FloatBAFlag (F Type.Float.Midpoint)
-  | Wrappers.Midprice _ -> FloatBAFlag (F Type.Float.Midprice)
-  | Wrappers.Min _ -> FloatBAFlag (F Type.Float.Min)
-  | Wrappers.Minindex _ -> IntBAFlag (I Type.Int.MinIndex)
-  | Wrappers.Minmax _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.MinMax_Min, F Type.Float.MinMax_Max)
-  | Wrappers.Minmaxindex _ ->
-    Output_destination.Flag.IntBA2Flag
-      (I Type.Int.MinMaxIndex_Min, I Type.Int.MinMaxIndex_Max)
-  | Wrappers.Minus_di _ -> FloatBAFlag (F Type.Float.MinusDI)
-  | Wrappers.Minus_dm _ -> FloatBAFlag (F Type.Float.MinusDM)
-  | Wrappers.Mom _ -> FloatBAFlag (F Type.Float.Mom)
-  | Wrappers.Mult _ -> FloatBAFlag (F Type.Float.Mult)
-  | Wrappers.Natr _ -> FloatBAFlag (F Type.Float.Natr)
-  | Wrappers.Obv _ -> FloatBAFlag (F Type.Float.Obv)
-  | Wrappers.Plus_di _ -> FloatBAFlag (F Type.Float.PlusDI)
-  | Wrappers.Plus_dm _ -> FloatBAFlag (F Type.Float.PlusDM)
-  | Wrappers.Ppo _ -> FloatBAFlag (F Type.Float.Ppo)
-  | Wrappers.Roc _ -> FloatBAFlag (F Type.Float.Roc)
-  | Wrappers.Rocp _ -> FloatBAFlag (F Type.Float.Rocp)
-  | Wrappers.Rocr _ -> FloatBAFlag (F Type.Float.Rocr)
-  | Wrappers.Rocr100 _ -> FloatBAFlag (F Type.Float.Rocr100)
-  | Wrappers.Rsi _ -> FloatBAFlag (F Type.Float.Rsi)
-  | Wrappers.Sar _ -> FloatBAFlag (F Type.Float.Sar)
-  | Wrappers.Sarext _ -> FloatBAFlag (F Type.Float.Sarext)
-  | Wrappers.Sin _ -> FloatBAFlag (F Type.Float.Sin)
-  | Wrappers.Sinh _ -> FloatBAFlag (F Type.Float.Sinh)
-  | Wrappers.Sma _ -> FloatBAFlag (F Type.Float.Sma)
-  | Wrappers.Sqrt _ -> FloatBAFlag (F Type.Float.Sqrt)
-  | Wrappers.Stddev _ -> FloatBAFlag (F Type.Float.Stddev)
-  | Wrappers.Stoch _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.Stoch_SlowK, F Type.Float.Stoch_SlowD)
-  | Wrappers.Stochf _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.StochF_FastK, F Type.Float.StochF_FastD)
-  | Wrappers.Stochrsi _ ->
-    Output_destination.Flag.FloatBA2Flag
-      (F Type.Float.StochRsi_FastK, F Type.Float.StochRsi_FastD)
-  | Wrappers.Sub _ -> FloatBAFlag (F Type.Float.Sub)
-  | Wrappers.Sum _ -> FloatBAFlag (F Type.Float.Sum)
-  | Wrappers.T3 _ -> FloatBAFlag (F Type.Float.T3)
-  | Wrappers.Tan _ -> FloatBAFlag (F Type.Float.Tan)
-  | Wrappers.Tanh _ -> FloatBAFlag (F Type.Float.Tanh)
-  | Wrappers.Tema _ -> FloatBAFlag (F Type.Float.Tema)
-  | Wrappers.Trange _ -> FloatBAFlag (F Type.Float.Trange)
-  | Wrappers.Trima _ -> FloatBAFlag (F Type.Float.Trima)
-  | Wrappers.Trix _ -> FloatBAFlag (F Type.Float.Trix)
-  | Wrappers.Tsf _ -> FloatBAFlag (F Type.Float.Tsf)
-  | Wrappers.Typprice _ -> FloatBAFlag (F Type.Float.TypPrice)
-  | Wrappers.Ultosc _ -> FloatBAFlag (F Type.Float.Ultosc)
-  | Wrappers.Var _ -> FloatBAFlag (F Type.Float.Var)
-  | Wrappers.Wclprice _ -> FloatBAFlag (F Type.Float.WclPrice)
-  | Wrappers.Willr _ -> FloatBAFlag (F Type.Float.Willr)
-  | Wrappers.Wma _ -> FloatBAFlag (F Type.Float.Wma)
+  | S.Accbands _ ->
+    Output.Flag.FloatBA3Flag
+      ( F Indicator.Float.UpperBBand,
+        F Indicator.Float.MiddleBBand,
+        F Indicator.Float.LowerBBand )
+  | S.Acos _ -> FloatBAFlag (F Indicator.Float.Acos)
+  | S.Ad _ -> FloatBAFlag (F Indicator.Float.Ad)
+  | S.Add _ -> FloatBAFlag (F Indicator.Float.Add)
+  | S.Adosc _ -> FloatBAFlag (F Indicator.Float.Adosc)
+  | S.Adx _ -> FloatBAFlag (F Indicator.Float.Adx)
+  | S.Adxr _ -> FloatBAFlag (F Indicator.Float.Adxr)
+  | S.Apo _ -> FloatBAFlag (F Indicator.Float.Apo)
+  | S.Aroon _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.Aroon_Down, F Indicator.Float.Aroon_Up)
+  | S.Aroonosc _ -> FloatBAFlag (F Indicator.Float.AroonOsc)
+  | S.Asin _ -> FloatBAFlag (F Indicator.Float.Asin)
+  | S.Atan _ -> FloatBAFlag (F Indicator.Float.Atan)
+  | S.Atr _ -> FloatBAFlag (F Indicator.Float.Atr)
+  | S.Avgprice _ -> FloatBAFlag (F Indicator.Float.AvgPrice)
+  | S.Avgdev _ -> FloatBAFlag (F Indicator.Float.Stddev)
+  | S.Bbands _ ->
+    Output.Flag.FloatBA3Flag
+      ( F Indicator.Float.UpperBBand,
+        F Indicator.Float.MiddleBBand,
+        F Indicator.Float.LowerBBand )
+  | S.Beta _ -> FloatBAFlag (F Indicator.Float.Beta)
+  | S.Bop _ -> FloatBAFlag (F Indicator.Float.Willr)
+  | S.Cci _ -> FloatBAFlag (F Indicator.Float.Cci)
+  | S.Cdl2crows _ -> IntBAFlag (I Indicator.Int.Cdl2Crows)
+  | S.Cdl3blackcrows _ -> IntBAFlag (I Indicator.Int.Cdl3BlackCrows)
+  | S.Cdl3inside _ -> IntBAFlag (I Indicator.Int.Cdl3Inside)
+  | S.Cdl3linestrike _ -> IntBAFlag (I Indicator.Int.Cdl3LineStrike)
+  | S.Cdl3outside _ -> IntBAFlag (I Indicator.Int.Cdl3Outside)
+  | S.Cdl3starsinsouth _ -> IntBAFlag (I Indicator.Int.Cdl3StarsInSouth)
+  | S.Cdl3whitesoldiers _ -> IntBAFlag (I Indicator.Int.Cdl3WhiteSoldiers)
+  | S.Cdlabandonedbaby _ -> IntBAFlag (I Indicator.Int.CdlAbandonedBaby)
+  | S.Cdladvanceblock _ -> IntBAFlag (I Indicator.Int.CdlAdvanceBlock)
+  | S.Cdlbelthold _ -> IntBAFlag (I Indicator.Int.CdlBeltHold)
+  | S.Cdlbreakaway _ -> IntBAFlag (I Indicator.Int.CdlBreakaway)
+  | S.Cdlclosingmarubozu _ -> IntBAFlag (I Indicator.Int.CdlClosingMarubozu)
+  | S.Cdlconcealbabyswall _ -> IntBAFlag (I Indicator.Int.CdlConcealBabySwall)
+  | S.Cdlcounterattack _ -> IntBAFlag (I Indicator.Int.CdlCounterAttack)
+  | S.Cdldarkcloudcover _ -> IntBAFlag (I Indicator.Int.CdlDarkCloudCover)
+  | S.Cdldoji _ -> IntBAFlag (I Indicator.Int.CdlDoji)
+  | S.Cdldojistar _ -> IntBAFlag (I Indicator.Int.CdlDojiStar)
+  | S.Cdldragonflydoji _ -> IntBAFlag (I Indicator.Int.CdlDragonflyDoji)
+  | S.Cdlengulfing _ -> IntBAFlag (I Indicator.Int.CdlEngulfing)
+  | S.Cdleveningdojistar _ -> IntBAFlag (I Indicator.Int.CdlEveningDojiStar)
+  | S.Cdleveningstar _ -> IntBAFlag (I Indicator.Int.CdlEveningStar)
+  | S.Cdlgapsidesidewhite _ -> IntBAFlag (I Indicator.Int.CdlGapSideSideWhite)
+  | S.Cdlgravestonedoji _ -> IntBAFlag (I Indicator.Int.CdlGravestoneDoji)
+  | S.Cdlhammer _ -> IntBAFlag (I Indicator.Int.CdlHammer)
+  | S.Cdlhangingman _ -> IntBAFlag (I Indicator.Int.CdlHangingMan)
+  | S.Cdlharami _ -> IntBAFlag (I Indicator.Int.CdlHarami)
+  | S.Cdlharamicross _ -> IntBAFlag (I Indicator.Int.CdlHaramiCross)
+  | S.Cdlhighwave _ -> IntBAFlag (I Indicator.Int.CdlHighWave)
+  | S.Cdlhikkake _ -> IntBAFlag (I Indicator.Int.CdlHikkake)
+  | S.Cdlhikkakemod _ -> IntBAFlag (I Indicator.Int.CdlHikkakeMod)
+  | S.Cdlhomingpigeon _ -> IntBAFlag (I Indicator.Int.CdlHomingPigeon)
+  | S.Cdlidentical3crows _ -> IntBAFlag (I Indicator.Int.CdlIdentical3Crows)
+  | S.Cdlinneck _ -> IntBAFlag (I Indicator.Int.CdlInNeck)
+  | S.Cdlinvertedhammer _ -> IntBAFlag (I Indicator.Int.CdlInvertedHammer)
+  | S.Cdlkicking _ -> IntBAFlag (I Indicator.Int.CdlKicking)
+  | S.Cdlkickingbylength _ -> IntBAFlag (I Indicator.Int.CdlKickingByLength)
+  | S.Cdlladderbottom _ -> IntBAFlag (I Indicator.Int.CdlLadderBottom)
+  | S.Cdllongleggeddoji _ -> IntBAFlag (I Indicator.Int.CdlLongLeggedDoji)
+  | S.Cdllongline _ -> IntBAFlag (I Indicator.Int.CdlLongLine)
+  | S.Cdlmarubozu _ -> IntBAFlag (I Indicator.Int.CdlMarubozu)
+  | S.Cdlmatchinglow _ -> IntBAFlag (I Indicator.Int.CdlMatchingLow)
+  | S.Cdlmathold _ -> IntBAFlag (I Indicator.Int.CdlMatHold)
+  | S.Cdlmorningdojistar _ -> IntBAFlag (I Indicator.Int.CdlMorningDojiStar)
+  | S.Cdlmorningstar _ -> IntBAFlag (I Indicator.Int.CdlMorningStar)
+  | S.Cdlonneck _ -> IntBAFlag (I Indicator.Int.CdlOnNeck)
+  | S.Cdlpiercing _ -> IntBAFlag (I Indicator.Int.CdlPiercing)
+  | S.Cdlrickshawman _ -> IntBAFlag (I Indicator.Int.CdlRickshawMan)
+  | S.Cdlrisefall3methods _ -> IntBAFlag (I Indicator.Int.CdlRiseFall3Methods)
+  | S.Cdlseparatinglines _ -> IntBAFlag (I Indicator.Int.CdlSeparatingLines)
+  | S.Cdlshootingstar _ -> IntBAFlag (I Indicator.Int.CdlShootingStar)
+  | S.Cdlshortline _ -> IntBAFlag (I Indicator.Int.CdlShortLine)
+  | S.Cdlspinningtop _ -> IntBAFlag (I Indicator.Int.CdlSpinningTop)
+  | S.Cdlstalledpattern _ -> IntBAFlag (I Indicator.Int.CdlStalledPattern)
+  | S.Cdlsticksandwich _ -> IntBAFlag (I Indicator.Int.CdlStickSandwich)
+  | S.Cdltakuri _ -> IntBAFlag (I Indicator.Int.CdlTakuri)
+  | S.Cdltasukigap _ -> IntBAFlag (I Indicator.Int.CdlTasukiGap)
+  | S.Cdlthrusting _ -> IntBAFlag (I Indicator.Int.CdlThrusting)
+  | S.Cdltristar _ -> IntBAFlag (I Indicator.Int.CdlTristar)
+  | S.Cdlunique3river _ -> IntBAFlag (I Indicator.Int.CdlUnique3River)
+  | S.Cdlupsidegap2crows _ -> IntBAFlag (I Indicator.Int.CdlUpsideGap2Crows)
+  | S.Cdlxsidegap3methods _ -> IntBAFlag (I Indicator.Int.CdlXSideGap3Methods)
+  | S.Ceil _ -> FloatBAFlag (F Indicator.Float.Ceil)
+  | S.Cmo _ -> FloatBAFlag (F Indicator.Float.Cmo)
+  | S.Correl _ -> FloatBAFlag (F Indicator.Float.Correl)
+  | S.Cos _ -> FloatBAFlag (F Indicator.Float.Cos)
+  | S.Cosh _ -> FloatBAFlag (F Indicator.Float.Cosh)
+  | S.Dema _ -> FloatBAFlag (F Indicator.Float.Dema)
+  | S.Div _ -> FloatBAFlag (F Indicator.Float.Div)
+  | S.Dx _ -> FloatBAFlag (F Indicator.Float.Dx)
+  | S.Ema _ -> FloatBAFlag (F Indicator.Float.Ema)
+  | S.Exp _ -> FloatBAFlag (F Indicator.Float.Exp)
+  | S.Floor _ -> FloatBAFlag (F Indicator.Float.Floor)
+  | S.Ht_dcperiod _ -> FloatBAFlag (F Indicator.Float.HtDcPeriod)
+  | S.Ht_dcphase _ -> FloatBAFlag (F Indicator.Float.HtDcPhase)
+  | S.Ht_phasor _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.HtPhasor_InPhase, F Indicator.Float.HtPhasor_Quadrature)
+  | S.Ht_sine _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.HtSine_Sine, F Indicator.Float.HtSine_LeadSine)
+  | S.Ht_trendline _ -> FloatBAFlag (F Indicator.Float.HtTrendline)
+  | S.Ht_trendmode _ -> IntBAFlag (I Indicator.Int.HtTrendMode)
+  | S.Imi _ -> FloatBAFlag (F Indicator.Float.Mom)
+  | S.Kama _ -> FloatBAFlag (F Indicator.Float.Kama)
+  | S.Linearreg _ -> FloatBAFlag (F Indicator.Float.Linearreg)
+  | S.Linearreg_angle _ -> FloatBAFlag (F Indicator.Float.LinearregAngle)
+  | S.Linearreg_intercept _ ->
+    FloatBAFlag (F Indicator.Float.LinearregIntercept)
+  | S.Linearreg_slope _ -> FloatBAFlag (F Indicator.Float.LinearregSlope)
+  | S.Ln _ -> FloatBAFlag (F Indicator.Float.Ln)
+  | S.Log10 _ -> FloatBAFlag (F Indicator.Float.Log10)
+  | S.Ma _ -> FloatBAFlag (F Indicator.Float.Ma)
+  | S.Macd _ ->
+    Output.Flag.FloatBA3Flag
+      ( F Indicator.Float.Macd_MACD,
+        F Indicator.Float.Macd_MACDSignal,
+        F Indicator.Float.Macd_MACDHist )
+  | S.Macdext _ ->
+    Output.Flag.FloatBA3Flag
+      ( F Indicator.Float.MacdExt_MACD,
+        F Indicator.Float.MacdExt_MACDSignal,
+        F Indicator.Float.MacdExt_MACDHist )
+  | S.Macdfix _ ->
+    Output.Flag.FloatBA3Flag
+      ( F Indicator.Float.MacdFix_MACD,
+        F Indicator.Float.MacdFix_MACDSignal,
+        F Indicator.Float.MacdFix_MACDHist )
+  | S.Mama _ ->
+    Output.Flag.FloatBA2Flag (F Indicator.Float.Mama, F Indicator.Float.Mama)
+  | S.Mavp _ -> FloatBAFlag (F Indicator.Float.Mavp)
+  | S.Max _ -> FloatBAFlag (F Indicator.Float.Max)
+  | S.Maxindex _ -> IntBAFlag (I Indicator.Int.MaxIndex)
+  | S.Medprice _ -> FloatBAFlag (F Indicator.Float.MedPrice)
+  | S.Mfi _ -> FloatBAFlag (F Indicator.Float.Mfi)
+  | S.Midpoint _ -> FloatBAFlag (F Indicator.Float.Midpoint)
+  | S.Midprice _ -> FloatBAFlag (F Indicator.Float.Midprice)
+  | S.Min _ -> FloatBAFlag (F Indicator.Float.Min)
+  | S.Minindex _ -> IntBAFlag (I Indicator.Int.MinIndex)
+  | S.Minmax _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.MinMax_Min, F Indicator.Float.MinMax_Max)
+  | S.Minmaxindex _ ->
+    Output.Flag.IntBA2Flag
+      (I Indicator.Int.MinMaxIndex_Min, I Indicator.Int.MinMaxIndex_Max)
+  | S.Minus_di _ -> FloatBAFlag (F Indicator.Float.MinusDI)
+  | S.Minus_dm _ -> FloatBAFlag (F Indicator.Float.MinusDM)
+  | S.Mom _ -> FloatBAFlag (F Indicator.Float.Mom)
+  | S.Mult _ -> FloatBAFlag (F Indicator.Float.Mult)
+  | S.Natr _ -> FloatBAFlag (F Indicator.Float.Natr)
+  | S.Obv _ -> FloatBAFlag (F Indicator.Float.Obv)
+  | S.Plus_di _ -> FloatBAFlag (F Indicator.Float.PlusDI)
+  | S.Plus_dm _ -> FloatBAFlag (F Indicator.Float.PlusDM)
+  | S.Ppo _ -> FloatBAFlag (F Indicator.Float.Ppo)
+  | S.Roc _ -> FloatBAFlag (F Indicator.Float.Roc)
+  | S.Rocp _ -> FloatBAFlag (F Indicator.Float.Rocp)
+  | S.Rocr _ -> FloatBAFlag (F Indicator.Float.Rocr)
+  | S.Rocr100 _ -> FloatBAFlag (F Indicator.Float.Rocr100)
+  | S.Rsi _ -> FloatBAFlag (F Indicator.Float.Rsi)
+  | S.Sar _ -> FloatBAFlag (F Indicator.Float.Sar)
+  | S.Sarext _ -> FloatBAFlag (F Indicator.Float.Sarext)
+  | S.Sin _ -> FloatBAFlag (F Indicator.Float.Sin)
+  | S.Sinh _ -> FloatBAFlag (F Indicator.Float.Sinh)
+  | S.Sma _ -> FloatBAFlag (F Indicator.Float.Sma)
+  | S.Sqrt _ -> FloatBAFlag (F Indicator.Float.Sqrt)
+  | S.Stddev _ -> FloatBAFlag (F Indicator.Float.Stddev)
+  | S.Stoch _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.Stoch_SlowK, F Indicator.Float.Stoch_SlowD)
+  | S.Stochf _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.StochF_FastK, F Indicator.Float.StochF_FastD)
+  | S.Stochrsi _ ->
+    Output.Flag.FloatBA2Flag
+      (F Indicator.Float.StochRsi_FastK, F Indicator.Float.StochRsi_FastD)
+  | S.Sub _ -> FloatBAFlag (F Indicator.Float.Sub)
+  | S.Sum _ -> FloatBAFlag (F Indicator.Float.Sum)
+  | S.T3 _ -> FloatBAFlag (F Indicator.Float.T3)
+  | S.Tan _ -> FloatBAFlag (F Indicator.Float.Tan)
+  | S.Tanh _ -> FloatBAFlag (F Indicator.Float.Tanh)
+  | S.Tema _ -> FloatBAFlag (F Indicator.Float.Tema)
+  | S.Trange _ -> FloatBAFlag (F Indicator.Float.Trange)
+  | S.Trima _ -> FloatBAFlag (F Indicator.Float.Trima)
+  | S.Trix _ -> FloatBAFlag (F Indicator.Float.Trix)
+  | S.Tsf _ -> FloatBAFlag (F Indicator.Float.Tsf)
+  | S.Typprice _ -> FloatBAFlag (F Indicator.Float.TypPrice)
+  | S.Ultosc _ -> FloatBAFlag (F Indicator.Float.Ultosc)
+  | S.Var _ -> FloatBAFlag (F Indicator.Float.Var)
+  | S.Wclprice _ -> FloatBAFlag (F Indicator.Float.WclPrice)
+  | S.Willr _ -> FloatBAFlag (F Indicator.Float.Willr)
+  | S.Wma _ -> FloatBAFlag (F Indicator.Float.Wma)

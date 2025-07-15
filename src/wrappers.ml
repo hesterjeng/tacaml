@@ -643,10 +643,3 @@ let lookback : type a b. (a, b) t -> int =
   | Wclprice () -> F.Lookback.wclprice ()
   | Willr { timeperiod } -> F.Lookback.willr timeperiod
   | Wma { timeperiod } -> F.Lookback.wma timeperiod
-
-let range ?i x =
-  match i with
-  | Some i -> i
-  | None -> Bigarray.Array1.dim x - 1
-
-exception BadInput

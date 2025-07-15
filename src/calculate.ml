@@ -3,6 +3,13 @@ module C = Ctypes
 
 let ba = C.bigarray_start C.array1
 
+let range ?i x =
+  match i with
+  | Some i -> i
+  | None -> Bigarray.Array1.dim x - 1
+
+exception BadInput
+
 let iba :
     (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Array1.t ->
     int Ctypes.ptr =

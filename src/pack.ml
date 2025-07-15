@@ -710,3 +710,9 @@ let output_flag_from_wrapper : t -> Output.Flag.t =
   | S.Wclprice _ -> FloatBAFlag (F Indicator.Float.WclPrice)
   | S.Willr _ -> FloatBAFlag (F Indicator.Float.Willr)
   | S.Wma _ -> FloatBAFlag (F Indicator.Float.Wma)
+
+let to_string (Pack x : t) =
+  let str = Safe.to_string x in
+  str
+
+let pp = fun fmt (Pack x : t) -> Format.fprintf fmt "%a" Safe.pp x

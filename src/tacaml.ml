@@ -13,3 +13,5 @@ let output x = Pack.output_flag_from_wrapper x
 let initialize = Safe.ta_initialize
 let calculate = Pack.calculate
 let all = Defaults.all
+let to_string = Pack.to_string
+let pp = Pack.pp

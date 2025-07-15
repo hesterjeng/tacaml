@@ -66,3 +66,6 @@ val calculate :
 val all : t list
 (** [all] provides a list of all supported TA-Lib indicators. This is useful for
     introspection or dynamic indicator selection. *)
+
+val to_string : t -> string
+val pp : Format.formatter -> t -> unit

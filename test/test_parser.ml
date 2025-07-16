@@ -48,13 +48,14 @@ let error_tests =
   [
     test_parse_error "InvalidIndicator ()" "Unknown or unsupported constructor";
     test_parse_error "Avgprice { timeperiod = 8 }"
-      "Record must be enclosed in braces";
+      "Unknown or unsupported constructor";
     test_parse_error "Sma { invalid_field = 20 }"
       "Expected: { timeperiod = int }";
     test_parse_error "Sma { timeperiod = abc }" "Invalid integer";
-    test_parse_error "Apo { fast_period = 12; ma_type = INVALID }"
+    test_parse_error
+      "Apo { fast_period = 12; slow_period = 26; ma_type = INVALID }"
       "Invalid Ma_type";
-    test_parse_error "Sar { acceleration = abc }" "Invalid float";
+    test_parse_error "Sar { acceleration = abc; maximum = 0.2 }" "Invalid float";
     test_parse_error "Accbands timeperiod = 8 }"
       "Record must be enclosed in braces";
   ]

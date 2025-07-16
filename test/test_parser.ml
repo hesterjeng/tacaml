@@ -3,7 +3,7 @@ open Alcotest
 let test_successful_parse input expected_name =
   let test_name = "parse_" ^ expected_name in
   test_case test_name `Quick (fun () ->
-      match Tacaml.Parser.of_string input with
+      match Tacaml.of_string input with
       | Ok pack ->
         let actual = Tacaml.to_string pack in
         check string "parsed indicator name" expected_name actual
@@ -14,7 +14,7 @@ let test_parse_error input expected_error_prefix =
     "parse_error_" ^ String.sub input 0 (min 10 (String.length input))
   in
   test_case test_name `Quick (fun () ->
-      match Tacaml.Parser.of_string input with
+      match Tacaml.of_string input with
       | Ok pack ->
         fail ("Expected error but got success: " ^ Tacaml.to_string pack)
       | Error e ->

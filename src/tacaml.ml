@@ -16,3 +16,4 @@ let calculate = Pack.calculate
 let all = Defaults.all
 let to_string = Pack.to_string
 let pp = Pack.pp
+let of_string = Parser.parse_pack

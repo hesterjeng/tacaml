@@ -31,7 +31,6 @@ module Input : module type of Input
 module Output : module type of Output
 module Defaults : module type of Defaults
 module Indicator : module type of Indicator
-module Parser : module type of Parser
 
 (**/**)
 
@@ -70,3 +69,4 @@ val all : t list
 
 val to_string : t -> string
 val pp : Format.formatter -> t -> unit
+val of_string : string -> (t, string) result

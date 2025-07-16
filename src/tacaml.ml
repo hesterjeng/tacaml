@@ -5,6 +5,7 @@ module Input = Input
 module Output = Output
 module Defaults = Defaults
 module Indicator = Indicator
+module Parser = Parser
 
 type t = Pack.t
 

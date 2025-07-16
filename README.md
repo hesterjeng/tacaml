@@ -119,6 +119,89 @@ let () =
 
 For more examples and detailed usage, refer to the `src/` directory and the generated `odoc` documentation.
 
+### String-based Indicator Parsing
+
+`tacaml` provides a convenient `of_string` function for parsing indicators from string representations. This is particularly useful for configuration files, command-line arguments, or dynamic indicator creation.
+
+```ocaml
+(* Parse indicators from strings *)
+let parse_indicators () =
+  let indicators = [
+    "Sma { timeperiod = 20 }";
+    "Rsi { timeperiod = 14 }";
+    "Macd { fast_period = 12; slow_period = 26; signal_period = 9 }";
+    "Bbands { timeperiod = 20; nb_dev_up = 2.0; nb_dev_dn = 2.0; ma_type = SMA }";
+    "Cdldoji ()";
+    "Stoch { fast_k_period = 5; slow_k_period = 3; slow_k_ma_type = SMA; slow_d_period = 3; slow_d_ma_type = SMA }";
+  ] in
+  
+  List.iter (fun indicator_str ->
+    match Tacaml.of_string indicator_str with
+    | Ok indicator -> 
+      Printf.printf "Parsed: %s -> %s\n" indicator_str (Tacaml.to_string indicator)
+    | Error msg -> 
+      Printf.printf "Failed to parse '%s': %s\n" indicator_str msg
+  ) indicators
+```
+
+#### Supported String Formats
+
+The parser supports all 160+ TA-Lib indicators with their respective parameter formats:
+
+**Unit Constructors** (no parameters):
+```ocaml
+"Avgprice ()"
+"Obv ()"
+"Cdldoji ()"        (* Candlestick patterns *)
+"Ht_dcperiod ()"    (* Hilbert Transform indicators *)
+```
+
+**Simple Time Period Constructors**:
+```ocaml
+"Sma { timeperiod = 20 }"
+"Rsi { timeperiod = 14 }"
+"Cci { timeperiod = 20 }"
+"Dema { timeperiod = 30 }"
+"Willr { timeperiod = 14 }"
+```
+
+**Complex Multi-Parameter Constructors**:
+```ocaml
+"Bbands { timeperiod = 20; nb_dev_up = 2.0; nb_dev_dn = 2.0; ma_type = SMA }"
+"Macd { fast_period = 12; slow_period = 26; signal_period = 9 }"
+"Apo { fast_period = 12; slow_period = 26; ma_type = EMA }"
+"Sar { acceleration = 0.02; maximum = 0.2 }"
+"T3 { timeperiod = 5; v_factor = 0.7 }"
+"Mama { fast_limit = 0.5; slow_limit = 0.05 }"
+"Ultosc { timeperiod1 = 7; timeperiod2 = 14; timeperiod3 = 28 }"
+```
+
+**Stochastic Oscillators**:
+```ocaml
+"Stoch { fast_k_period = 5; slow_k_period = 3; slow_k_ma_type = SMA; slow_d_period = 3; slow_d_ma_type = SMA }"
+"Stochf { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA }"
+"Stochrsi { timeperiod = 14; fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA }"
+```
+
+**Candlestick Patterns with Penetration**:
+```ocaml
+"Cdlabandonedbaby { penetration = 0.3 }"
+"Cdldarkcloudcover { penetration = 0.5 }"
+"Cdlmorningstar { penetration = 0.3 }"
+```
+
+**Moving Average Types**:
+The parser supports all TA-Lib moving average types: `SMA`, `EMA`, `WMA`, `DEMA`, `TEMA`, `TRIMA`, `KAMA`, `MAMA`, `T3`.
+
+#### Error Handling
+
+The parser provides detailed error messages for debugging:
+```ocaml
+match Tacaml.of_string "Sma { invalid_field = 20 }" with
+| Ok _ -> ()
+| Error msg -> Printf.printf "Parse error: %s\n" msg
+(* Output: Parse error: Expected: { timeperiod = int } *)
+```
 
 ## Development
 

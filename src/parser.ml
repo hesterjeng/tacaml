@@ -15,20 +15,6 @@ let parse_field_assignment s =
     Ok (field, value)
   | _ -> Error ("Invalid field assignment: " ^ s)
 
-(* Parse Ma_type from string *)
-let parse_ma_type s =
-  match String.uppercase_ascii (trim_whitespace s) with
-  | "SMA" -> Ok Ma_type.SMA
-  | "EMA" -> Ok Ma_type.EMA
-  | "WMA" -> Ok Ma_type.WMA
-  | "DEMA" -> Ok Ma_type.DEMA
-  | "TEMA" -> Ok Ma_type.TEMA
-  | "TRIMA" -> Ok Ma_type.TRIMA
-  | "KAMA" -> Ok Ma_type.KAMA
-  | "MAMA" -> Ok Ma_type.MAMA
-  | "T3" -> Ok Ma_type.T3
-  | _ -> Error ("Invalid Ma_type: " ^ s)
-
 (* Parse int from string *)
 let parse_int s =
   try Ok (int_of_string (trim_whitespace s)) with
@@ -104,7 +90,7 @@ let parse_apo fields =
   | [ ("fast_period", fp); ("ma_type", mt); ("slow_period", sp) ] ->
     let* fast_period = parse_int fp in
     let* slow_period = parse_int sp in
-    let* ma_type = parse_ma_type mt in
+    let* ma_type = Ma_type.parse mt in
     Ok (Safe.Apo { fast_period; slow_period; ma_type })
   | _ ->
     Error
@@ -122,7 +108,7 @@ let parse_bbands fields =
     let* timeperiod = parse_int tp in
     let* nb_dev_up = parse_float ndu in
     let* nb_dev_dn = parse_float ndd in
-    let* ma_type = parse_ma_type mt in
+    let* ma_type = Ma_type.parse mt in
     Ok (Safe.Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type })
   | _ ->
     Error
@@ -136,7 +122,7 @@ let parse_ma fields =
   match sorted_fields with
   | [ ("ma_type", mt); ("timeperiod", tp) ] ->
     let* timeperiod = parse_int tp in
-    let* ma_type = parse_ma_type mt in
+    let* ma_type = Ma_type.parse mt in
     Ok (Safe.Ma { timeperiod; ma_type })
   | _ -> Error "Ma expects: { timeperiod = int; ma_type = Ma_type.t }"
 
@@ -180,9 +166,9 @@ let parse_stoch fields =
   ] ->
     let* fast_k_period = parse_int fkp in
     let* slow_k_period = parse_int skp in
-    let* slow_k_ma_type = parse_ma_type skmt in
+    let* slow_k_ma_type = Ma_type.parse skmt in
     let* slow_d_period = parse_int sdp in
-    let* slow_d_ma_type = parse_ma_type sdmt in
+    let* slow_d_ma_type = Ma_type.parse sdmt in
     Ok
       (Safe.Stoch
          {

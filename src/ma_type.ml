@@ -34,3 +34,17 @@ let of_int = function
   | 7 -> Ok MAMA
   | 8 -> Ok T3
   | i -> Error (`BadMAType i)
+
+(* Parse Ma_type from string *)
+let parse s =
+  match String.uppercase_ascii (String.trim s) with
+  | "SMA" -> Ok SMA
+  | "EMA" -> Ok EMA
+  | "WMA" -> Ok WMA
+  | "DEMA" -> Ok DEMA
+  | "TEMA" -> Ok TEMA
+  | "TRIMA" -> Ok TRIMA
+  | "KAMA" -> Ok KAMA
+  | "MAMA" -> Ok MAMA
+  | "T3" -> Ok T3
+  | _ -> Error ("Invalid Ma_type: " ^ s)

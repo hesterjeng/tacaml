@@ -190,21 +190,12 @@ let parse_stochf fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [
-   ("fast_d_ma_type", fdmt);
-   ("fast_d_period", fdp);
-   ("fast_k_period", fkp);
-  ] ->
+  | [ ("fast_d_ma_type", fdmt); ("fast_d_period", fdp); ("fast_k_period", fkp) ]
+    ->
     let* fast_k_period = parse_int fkp in
     let* fast_d_period = parse_int fdp in
     let* fast_d_ma_type = Ma_type.parse fdmt in
-    Ok
-      (Safe.Stochf
-         {
-           fast_k_period;
-           fast_d_period;
-           fast_d_ma_type;
-         })
+    Ok (Safe.Stochf { fast_k_period; fast_d_period; fast_d_ma_type })
   | _ ->
     Error
       "Stochf expects: { fast_k_period = int; fast_d_period = int; \
@@ -228,12 +219,7 @@ let parse_stochrsi fields =
     let* fast_d_ma_type = Ma_type.parse fdmt in
     Ok
       (Safe.Stochrsi
-         {
-           timeperiod;
-           fast_k_period;
-           fast_d_period;
-           fast_d_ma_type;
-         })
+         { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type })
   | _ ->
     Error
       "Stochrsi expects: { timeperiod = int; fast_k_period = int; \
@@ -281,11 +267,10 @@ let parse_macdfix fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("signal_period", sp)] ->
+  | [ ("signal_period", sp) ] ->
     let* signal_period = parse_int sp in
     Ok (Safe.Macdfix { signal_period })
-  | _ ->
-    Error "Macdfix expects: { signal_period = int }"
+  | _ -> Error "Macdfix expects: { signal_period = int }"
 
 (* Helper function to parse Mama parameters *)
 let parse_mama fields =
@@ -293,12 +278,11 @@ let parse_mama fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("fast_limit", fl); ("slow_limit", sl)] ->
+  | [ ("fast_limit", fl); ("slow_limit", sl) ] ->
     let* fast_limit = parse_float fl in
     let* slow_limit = parse_float sl in
     Ok (Safe.Mama { fast_limit; slow_limit })
-  | _ ->
-    Error "Mama expects: { fast_limit = float; slow_limit = float }"
+  | _ -> Error "Mama expects: { fast_limit = float; slow_limit = float }"
 
 (* Helper function to parse Mavp parameters *)
 let parse_mavp fields =
@@ -306,13 +290,15 @@ let parse_mavp fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("ma_type", mt); ("max_period", maxp); ("min_period", minp)] ->
+  | [ ("ma_type", mt); ("max_period", maxp); ("min_period", minp) ] ->
     let* min_period = parse_int minp in
     let* max_period = parse_int maxp in
     let* ma_type = Ma_type.parse mt in
     Ok (Safe.Mavp { min_period; max_period; ma_type })
   | _ ->
-    Error "Mavp expects: { min_period = int; max_period = int; ma_type = Ma_type.t }"
+    Error
+      "Mavp expects: { min_period = int; max_period = int; ma_type = Ma_type.t \
+       }"
 
 (* Helper function to parse Sarext parameters *)
 let parse_sarext fields =
@@ -363,13 +349,15 @@ let parse_ppo fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("fast_period", fp); ("ma_type", mt); ("slow_period", sp)] ->
+  | [ ("fast_period", fp); ("ma_type", mt); ("slow_period", sp) ] ->
     let* fast_period = parse_int fp in
     let* slow_period = parse_int sp in
     let* ma_type = Ma_type.parse mt in
     Ok (Safe.Ppo { fast_period; slow_period; ma_type })
   | _ ->
-    Error "Ppo expects: { fast_period = int; slow_period = int; ma_type = Ma_type.t }"
+    Error
+      "Ppo expects: { fast_period = int; slow_period = int; ma_type = \
+       Ma_type.t }"
 
 (* Helper function to parse T3 parameters *)
 let parse_t3 fields =
@@ -377,12 +365,11 @@ let parse_t3 fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("timeperiod", tp); ("v_factor", vf)] ->
+  | [ ("timeperiod", tp); ("v_factor", vf) ] ->
     let* timeperiod = parse_int tp in
     let* v_factor = parse_float vf in
     Ok (Safe.T3 { timeperiod; v_factor })
-  | _ ->
-    Error "T3 expects: { timeperiod = int; v_factor = float }"
+  | _ -> Error "T3 expects: { timeperiod = int; v_factor = float }"
 
 (* Helper function to parse Stddev parameters *)
 let parse_stddev fields =
@@ -390,12 +377,11 @@ let parse_stddev fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("nb_dev", nd); ("timeperiod", tp)] ->
+  | [ ("nb_dev", nd); ("timeperiod", tp) ] ->
     let* timeperiod = parse_int tp in
     let* nb_dev = parse_float nd in
     Ok (Safe.Stddev { timeperiod; nb_dev })
-  | _ ->
-    Error "Stddev expects: { timeperiod = int; nb_dev = float }"
+  | _ -> Error "Stddev expects: { timeperiod = int; nb_dev = float }"
 
 (* Helper function to parse Var parameters *)
 let parse_var fields =
@@ -403,12 +389,11 @@ let parse_var fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("nb_dev", nd); ("timeperiod", tp)] ->
+  | [ ("nb_dev", nd); ("timeperiod", tp) ] ->
     let* timeperiod = parse_int tp in
     let* nb_dev = parse_float nd in
     Ok (Safe.Var { timeperiod; nb_dev })
-  | _ ->
-    Error "Var expects: { timeperiod = int; nb_dev = float }"
+  | _ -> Error "Var expects: { timeperiod = int; nb_dev = float }"
 
 (* Helper function to parse Ultosc parameters *)
 let parse_ultosc fields =
@@ -416,13 +401,15 @@ let parse_ultosc fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("timeperiod1", tp1); ("timeperiod2", tp2); ("timeperiod3", tp3)] ->
+  | [ ("timeperiod1", tp1); ("timeperiod2", tp2); ("timeperiod3", tp3) ] ->
     let* timeperiod1 = parse_int tp1 in
     let* timeperiod2 = parse_int tp2 in
     let* timeperiod3 = parse_int tp3 in
     Ok (Safe.Ultosc { timeperiod1; timeperiod2; timeperiod3 })
   | _ ->
-    Error "Ultosc expects: { timeperiod1 = int; timeperiod2 = int; timeperiod3 = int }"
+    Error
+      "Ultosc expects: { timeperiod1 = int; timeperiod2 = int; timeperiod3 = \
+       int }"
 
 (* Helper function to parse candlestick patterns with penetration *)
 let parse_penetration fields =
@@ -430,11 +417,10 @@ let parse_penetration fields =
     List.sort (fun (a, _) (b, _) -> String.compare a b) fields
   in
   match sorted_fields with
-  | [("penetration", p)] ->
+  | [ ("penetration", p) ] ->
     let* penetration = parse_float p in
     Ok penetration
-  | _ ->
-    Error "Penetration expects: { penetration = float }"
+  | _ -> Error "Penetration expects: { penetration = float }"
 
 (* Main parser function *)
 let parse_pack (s : string) : (Pack.t, string) result =
@@ -576,64 +562,121 @@ let parse_pack (s : string) : (Pack.t, string) result =
       let* result = parse_stoch fields in
       Ok (Pack.pack result)
     (* Additional unit constructors *)
-    | "Cdl2crows" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl2crows ()))
-    | "Cdl3blackcrows" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3blackcrows ()))
-    | "Cdl3inside" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3inside ()))
-    | "Cdl3linestrike" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3linestrike ()))
-    | "Cdl3outside" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3outside ()))
-    | "Cdl3starsinsouth" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3starsinsouth ()))
-    | "Cdl3whitesoldiers" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdl3whitesoldiers ()))
-    | "Cdladvanceblock" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdladvanceblock ()))
-    | "Cdlbelthold" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlbelthold ()))
-    | "Cdlbreakaway" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlbreakaway ()))
-    | "Cdlclosingmarubozu" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlclosingmarubozu ()))
-    | "Cdlconcealbabyswall" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlconcealbabyswall ()))
-    | "Cdlcounterattack" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlcounterattack ()))
+    | "Cdl2crows" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl2crows ()))
+    | "Cdl3blackcrows" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3blackcrows ()))
+    | "Cdl3inside" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3inside ()))
+    | "Cdl3linestrike" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3linestrike ()))
+    | "Cdl3outside" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3outside ()))
+    | "Cdl3starsinsouth" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3starsinsouth ()))
+    | "Cdl3whitesoldiers" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdl3whitesoldiers ()))
+    | "Cdladvanceblock" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdladvanceblock ()))
+    | "Cdlbelthold" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlbelthold ()))
+    | "Cdlbreakaway" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlbreakaway ()))
+    | "Cdlclosingmarubozu" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlclosingmarubozu ()))
+    | "Cdlconcealbabyswall" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlconcealbabyswall ()))
+    | "Cdlcounterattack" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlcounterattack ()))
     | "Cdldoji" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdldoji ()))
-    | "Cdldojistar" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdldojistar ()))
-    | "Cdldragonflydoji" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdldragonflydoji ()))
-    | "Cdlengulfing" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlengulfing ()))
-    | "Cdlgapsidesidewhite" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlgapsidesidewhite ()))
-    | "Cdlgravestonedoji" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlgravestonedoji ()))
-    | "Cdlhammer" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhammer ()))
-    | "Cdlhangingman" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhangingman ()))
-    | "Cdlharami" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlharami ()))
-    | "Cdlharamicross" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlharamicross ()))
-    | "Cdlhighwave" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhighwave ()))
-    | "Cdlhikkake" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhikkake ()))
-    | "Cdlhikkakemod" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhikkakemod ()))
-    | "Cdlhomingpigeon" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlhomingpigeon ()))
-    | "Cdlidentical3crows" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlidentical3crows ()))
-    | "Cdlinneck" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlinneck ()))
-    | "Cdlinvertedhammer" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlinvertedhammer ()))
-    | "Cdlkicking" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlkicking ()))
-    | "Cdlkickingbylength" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlkickingbylength ()))
-    | "Cdlladderbottom" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlladderbottom ()))
-    | "Cdllongleggeddoji" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdllongleggeddoji ()))
-    | "Cdllongline" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdllongline ()))
-    | "Cdlmarubozu" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlmarubozu ()))
-    | "Cdlmatchinglow" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlmatchinglow ()))
-    | "Cdlonneck" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlonneck ()))
-    | "Cdlpiercing" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlpiercing ()))
-    | "Cdlrickshawman" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlrickshawman ()))
-    | "Cdlrisefall3methods" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlrisefall3methods ()))
-    | "Cdlseparatinglines" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlseparatinglines ()))
-    | "Cdlshootingstar" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlshootingstar ()))
-    | "Cdlshortline" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlshortline ()))
-    | "Cdlspinningtop" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlspinningtop ()))
-    | "Cdlstalledpattern" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlstalledpattern ()))
-    | "Cdlsticksandwich" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlsticksandwich ()))
-    | "Cdltakuri" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdltakuri ()))
-    | "Cdltasukigap" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdltasukigap ()))
-    | "Cdlthrusting" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlthrusting ()))
-    | "Cdltristar" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdltristar ()))
-    | "Cdlunique3river" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlunique3river ()))
-    | "Cdlupsidegap2crows" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlupsidegap2crows ()))
-    | "Cdlxsidegap3methods" when String.equal args "()" -> Ok (Pack.pack (Safe.Cdlxsidegap3methods ()))
-    | "Ht_dcperiod" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_dcperiod ()))
-    | "Ht_dcphase" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_dcphase ()))
-    | "Ht_trendline" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_trendline ()))
-    | "Ht_trendmode" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_trendmode ()))
+    | "Cdldojistar" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdldojistar ()))
+    | "Cdldragonflydoji" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdldragonflydoji ()))
+    | "Cdlengulfing" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlengulfing ()))
+    | "Cdlgapsidesidewhite" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlgapsidesidewhite ()))
+    | "Cdlgravestonedoji" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlgravestonedoji ()))
+    | "Cdlhammer" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhammer ()))
+    | "Cdlhangingman" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhangingman ()))
+    | "Cdlharami" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlharami ()))
+    | "Cdlharamicross" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlharamicross ()))
+    | "Cdlhighwave" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhighwave ()))
+    | "Cdlhikkake" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhikkake ()))
+    | "Cdlhikkakemod" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhikkakemod ()))
+    | "Cdlhomingpigeon" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlhomingpigeon ()))
+    | "Cdlidentical3crows" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlidentical3crows ()))
+    | "Cdlinneck" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlinneck ()))
+    | "Cdlinvertedhammer" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlinvertedhammer ()))
+    | "Cdlkicking" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlkicking ()))
+    | "Cdlkickingbylength" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlkickingbylength ()))
+    | "Cdlladderbottom" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlladderbottom ()))
+    | "Cdllongleggeddoji" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdllongleggeddoji ()))
+    | "Cdllongline" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdllongline ()))
+    | "Cdlmarubozu" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlmarubozu ()))
+    | "Cdlmatchinglow" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlmatchinglow ()))
+    | "Cdlonneck" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlonneck ()))
+    | "Cdlpiercing" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlpiercing ()))
+    | "Cdlrickshawman" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlrickshawman ()))
+    | "Cdlrisefall3methods" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlrisefall3methods ()))
+    | "Cdlseparatinglines" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlseparatinglines ()))
+    | "Cdlshootingstar" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlshootingstar ()))
+    | "Cdlshortline" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlshortline ()))
+    | "Cdlspinningtop" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlspinningtop ()))
+    | "Cdlstalledpattern" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlstalledpattern ()))
+    | "Cdlsticksandwich" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlsticksandwich ()))
+    | "Cdltakuri" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdltakuri ()))
+    | "Cdltasukigap" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdltasukigap ()))
+    | "Cdlthrusting" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlthrusting ()))
+    | "Cdltristar" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdltristar ()))
+    | "Cdlunique3river" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlunique3river ()))
+    | "Cdlupsidegap2crows" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlupsidegap2crows ()))
+    | "Cdlxsidegap3methods" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Cdlxsidegap3methods ()))
+    | "Ht_dcperiod" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Ht_dcperiod ()))
+    | "Ht_dcphase" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Ht_dcphase ()))
+    | "Ht_trendline" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Ht_trendline ()))
+    | "Ht_trendmode" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Ht_trendmode ()))
     (* Additional record constructors with timeperiod *)
     | "Avgdev" ->
       let* fields = parse_record_fields args in
@@ -1026,7 +1069,8 @@ let parse_pack (s : string) : (Pack.t, string) result =
       let* penetration = parse_penetration fields in
       Ok (Pack.pack (Safe.Cdlmorningstar { penetration }))
     (* Additional two-array constructors *)
-    | "Ht_phasor" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_phasor ()))
+    | "Ht_phasor" when String.equal args "()" ->
+      Ok (Pack.pack (Safe.Ht_phasor ()))
     | "Ht_sine" when String.equal args "()" -> Ok (Pack.pack (Safe.Ht_sine ()))
     (* Add more constructors as needed *)
     | _ -> Error ("Unknown or unsupported constructor: " ^ constructor_name))

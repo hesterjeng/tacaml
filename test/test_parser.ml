@@ -65,20 +65,31 @@ let successful_parse_tests =
     test_successful_parse "Trima { timeperiod = 30 }" "Trima";
     test_successful_parse "Wma { timeperiod = 30 }" "Wma";
     (* Complex constructors *)
-    test_successful_parse "Ppo { fast_period = 12; slow_period = 26; ma_type = SMA }" "Ppo";
+    test_successful_parse
+      "Ppo { fast_period = 12; slow_period = 26; ma_type = SMA }" "Ppo";
     test_successful_parse "T3 { timeperiod = 5; v_factor = 0.7 }" "T3";
     test_successful_parse "Mama { fast_limit = 0.5; slow_limit = 0.05 }" "Mama";
-    test_successful_parse "Ultosc { timeperiod1 = 7; timeperiod2 = 14; timeperiod3 = 28 }" "Ultosc";
+    test_successful_parse
+      "Ultosc { timeperiod1 = 7; timeperiod2 = 14; timeperiod3 = 28 }" "Ultosc";
     test_successful_parse "Stddev { timeperiod = 5; nb_dev = 1.0 }" "Stddev";
     test_successful_parse "Var { timeperiod = 5; nb_dev = 1.0 }" "Var";
-    test_successful_parse "Stochf { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA }" "Stochf";
-    test_successful_parse "Stochrsi { timeperiod = 14; fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA }" "Stochrsi";
+    test_successful_parse
+      "Stochf { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA }"
+      "Stochf";
+    test_successful_parse
+      "Stochrsi { timeperiod = 14; fast_k_period = 5; fast_d_period = 3; \
+       fast_d_ma_type = SMA }"
+      "Stochrsi";
     test_successful_parse "Macdfix { signal_period = 9 }" "Macdfix";
-    test_successful_parse "Mavp { min_period = 2; max_period = 30; ma_type = SMA }" "Mavp";
+    test_successful_parse
+      "Mavp { min_period = 2; max_period = 30; ma_type = SMA }" "Mavp";
     (* Candlestick patterns with penetration *)
-    test_successful_parse "Cdlabandonedbaby { penetration = 0.3 }" "Cdlabandonedbaby";
-    test_successful_parse "Cdldarkcloudcover { penetration = 0.5 }" "Cdldarkcloudcover";
-    test_successful_parse "Cdlmorningstar { penetration = 0.3 }" "Cdlmorningstar";
+    test_successful_parse "Cdlabandonedbaby { penetration = 0.3 }"
+      "Cdlabandonedbaby";
+    test_successful_parse "Cdldarkcloudcover { penetration = 0.5 }"
+      "Cdldarkcloudcover";
+    test_successful_parse "Cdlmorningstar { penetration = 0.3 }"
+      "Cdlmorningstar";
   ]
 
 let error_tests =

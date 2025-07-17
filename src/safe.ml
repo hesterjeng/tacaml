@@ -425,6 +425,243 @@ let to_string : type a b. (a, b) t -> string = function
 
 let pp = fun fmt x -> Format.fprintf fmt "@[%s@]" (to_string x)
 
+let hash : type a b. (a, b) t -> int = function
+  | Accbands { timeperiod } ->
+    Hash.combine2 (Hash.string "Accbands") (Hash.int timeperiod)
+  | Acos () -> Hash.string "Acos"
+  | Ad () -> Hash.string "Ad"
+  | Add () -> Hash.string "Add"
+  | Adosc { fast_period; slow_period } ->
+    Hash.combine3 (Hash.string "Adosc") (Hash.int fast_period) (Hash.int slow_period)
+  | Adx { timeperiod } ->
+    Hash.combine2 (Hash.string "Adx") (Hash.int timeperiod)
+  | Adxr { timeperiod } ->
+    Hash.combine2 (Hash.string "Adxr") (Hash.int timeperiod)
+  | Apo { fast_period; slow_period; ma_type } ->
+    Hash.combine4 (Hash.string "Apo") (Hash.int fast_period) (Hash.int slow_period) (Hash.int (Ma_type.to_int ma_type))
+  | Aroon { timeperiod } ->
+    Hash.combine2 (Hash.string "Aroon") (Hash.int timeperiod)
+  | Aroonosc { timeperiod } ->
+    Hash.combine2 (Hash.string "Aroonosc") (Hash.int timeperiod)
+  | Asin () -> Hash.string "Asin"
+  | Atan () -> Hash.string "Atan"
+  | Atr { timeperiod } ->
+    Hash.combine2 (Hash.string "Atr") (Hash.int timeperiod)
+  | Avgprice () -> Hash.string "Avgprice"
+  | Avgdev { timeperiod } ->
+    Hash.combine2 (Hash.string "Avgdev") (Hash.int timeperiod)
+  | Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type } ->
+    Hash.combine5 (Hash.string "Bbands") (Hash.int timeperiod) (Hash.poly nb_dev_up) (Hash.poly nb_dev_dn) (Hash.int (Ma_type.to_int ma_type))
+  | Beta { timeperiod } ->
+    Hash.combine2 (Hash.string "Beta") (Hash.int timeperiod)
+  | Bop () -> Hash.string "Bop"
+  | Cci { timeperiod } ->
+    Hash.combine2 (Hash.string "Cci") (Hash.int timeperiod)
+  | Cdl2crows () -> Hash.string "Cdl2crows"
+  | Cdl3blackcrows () -> Hash.string "Cdl3blackcrows"
+  | Cdl3inside () -> Hash.string "Cdl3inside"
+  | Cdl3linestrike () -> Hash.string "Cdl3linestrike"
+  | Cdl3outside () -> Hash.string "Cdl3outside"
+  | Cdl3starsinsouth () -> Hash.string "Cdl3starsinsouth"
+  | Cdl3whitesoldiers () -> Hash.string "Cdl3whitesoldiers"
+  | Cdlabandonedbaby { penetration } ->
+    Hash.combine2 (Hash.string "Cdlabandonedbaby") (Hash.poly penetration)
+  | Cdladvanceblock () -> Hash.string "Cdladvanceblock"
+  | Cdlbelthold () -> Hash.string "Cdlbelthold"
+  | Cdlbreakaway () -> Hash.string "Cdlbreakaway"
+  | Cdlclosingmarubozu () -> Hash.string "Cdlclosingmarubozu"
+  | Cdlconcealbabyswall () -> Hash.string "Cdlconcealbabyswall"
+  | Cdlcounterattack () -> Hash.string "Cdlcounterattack"
+  | Cdldarkcloudcover { penetration } ->
+    Hash.combine2 (Hash.string "Cdldarkcloudcover") (Hash.poly penetration)
+  | Cdldoji () -> Hash.string "Cdldoji"
+  | Cdldojistar () -> Hash.string "Cdldojistar"
+  | Cdldragonflydoji () -> Hash.string "Cdldragonflydoji"
+  | Cdlengulfing () -> Hash.string "Cdlengulfing"
+  | Cdleveningdojistar { penetration } ->
+    Hash.combine2 (Hash.string "Cdleveningdojistar") (Hash.poly penetration)
+  | Cdleveningstar { penetration } ->
+    Hash.combine2 (Hash.string "Cdleveningstar") (Hash.poly penetration)
+  | Cdlgapsidesidewhite () -> Hash.string "Cdlgapsidesidewhite"
+  | Cdlgravestonedoji () -> Hash.string "Cdlgravestonedoji"
+  | Cdlhammer () -> Hash.string "Cdlhammer"
+  | Cdlhangingman () -> Hash.string "Cdlhangingman"
+  | Cdlharami () -> Hash.string "Cdlharami"
+  | Cdlharamicross () -> Hash.string "Cdlharamicross"
+  | Cdlhighwave () -> Hash.string "Cdlhighwave"
+  | Cdlhikkake () -> Hash.string "Cdlhikkake"
+  | Cdlhikkakemod () -> Hash.string "Cdlhikkakemod"
+  | Cdlhomingpigeon () -> Hash.string "Cdlhomingpigeon"
+  | Cdlidentical3crows () -> Hash.string "Cdlidentical3crows"
+  | Cdlinneck () -> Hash.string "Cdlinneck"
+  | Cdlinvertedhammer () -> Hash.string "Cdlinvertedhammer"
+  | Cdlkicking () -> Hash.string "Cdlkicking"
+  | Cdlkickingbylength () -> Hash.string "Cdlkickingbylength"
+  | Cdlladderbottom () -> Hash.string "Cdlladderbottom"
+  | Cdllongleggeddoji () -> Hash.string "Cdllongleggeddoji"
+  | Cdllongline () -> Hash.string "Cdllongline"
+  | Cdlmarubozu () -> Hash.string "Cdlmarubozu"
+  | Cdlmatchinglow () -> Hash.string "Cdlmatchinglow"
+  | Cdlmathold { penetration } ->
+    Hash.combine2 (Hash.string "Cdlmathold") (Hash.poly penetration)
+  | Cdlmorningdojistar { penetration } ->
+    Hash.combine2 (Hash.string "Cdlmorningdojistar") (Hash.poly penetration)
+  | Cdlmorningstar { penetration } ->
+    Hash.combine2 (Hash.string "Cdlmorningstar") (Hash.poly penetration)
+  | Cdlonneck () -> Hash.string "Cdlonneck"
+  | Cdlpiercing () -> Hash.string "Cdlpiercing"
+  | Cdlrickshawman () -> Hash.string "Cdlrickshawman"
+  | Cdlrisefall3methods () -> Hash.string "Cdlrisefall3methods"
+  | Cdlseparatinglines () -> Hash.string "Cdlseparatinglines"
+  | Cdlshootingstar () -> Hash.string "Cdlshootingstar"
+  | Cdlshortline () -> Hash.string "Cdlshortline"
+  | Cdlspinningtop () -> Hash.string "Cdlspinningtop"
+  | Cdlstalledpattern () -> Hash.string "Cdlstalledpattern"
+  | Cdlsticksandwich () -> Hash.string "Cdlsticksandwich"
+  | Cdltakuri () -> Hash.string "Cdltakuri"
+  | Cdltasukigap () -> Hash.string "Cdltasukigap"
+  | Cdlthrusting () -> Hash.string "Cdlthrusting"
+  | Cdltristar () -> Hash.string "Cdltristar"
+  | Cdlunique3river () -> Hash.string "Cdlunique3river"
+  | Cdlupsidegap2crows () -> Hash.string "Cdlupsidegap2crows"
+  | Cdlxsidegap3methods () -> Hash.string "Cdlxsidegap3methods"
+  | Ceil () -> Hash.string "Ceil"
+  | Cmo { timeperiod } ->
+    Hash.combine2 (Hash.string "Cmo") (Hash.int timeperiod)
+  | Correl { timeperiod } ->
+    Hash.combine2 (Hash.string "Correl") (Hash.int timeperiod)
+  | Cos () -> Hash.string "Cos"
+  | Cosh () -> Hash.string "Cosh"
+  | Dema { timeperiod } ->
+    Hash.combine2 (Hash.string "Dema") (Hash.int timeperiod)
+  | Div () -> Hash.string "Div"
+  | Dx { timeperiod } ->
+    Hash.combine2 (Hash.string "Dx") (Hash.int timeperiod)
+  | Ema { timeperiod } ->
+    Hash.combine2 (Hash.string "Ema") (Hash.int timeperiod)
+  | Exp () -> Hash.string "Exp"
+  | Floor () -> Hash.string "Floor"
+  | Ht_dcperiod () -> Hash.string "Ht_dcperiod"
+  | Ht_dcphase () -> Hash.string "Ht_dcphase"
+  | Ht_phasor () -> Hash.string "Ht_phasor"
+  | Ht_sine () -> Hash.string "Ht_sine"
+  | Ht_trendline () -> Hash.string "Ht_trendline"
+  | Ht_trendmode () -> Hash.string "Ht_trendmode"
+  | Imi { timeperiod } ->
+    Hash.combine2 (Hash.string "Imi") (Hash.int timeperiod)
+  | Kama { timeperiod } ->
+    Hash.combine2 (Hash.string "Kama") (Hash.int timeperiod)
+  | Linearreg { timeperiod } ->
+    Hash.combine2 (Hash.string "Linearreg") (Hash.int timeperiod)
+  | Linearreg_angle { timeperiod } ->
+    Hash.combine2 (Hash.string "Linearreg_angle") (Hash.int timeperiod)
+  | Linearreg_intercept { timeperiod } ->
+    Hash.combine2 (Hash.string "Linearreg_intercept") (Hash.int timeperiod)
+  | Linearreg_slope { timeperiod } ->
+    Hash.combine2 (Hash.string "Linearreg_slope") (Hash.int timeperiod)
+  | Ln () -> Hash.string "Ln"
+  | Log10 () -> Hash.string "Log10"
+  | Ma { timeperiod; ma_type } ->
+    Hash.combine3 (Hash.string "Ma") (Hash.int timeperiod) (Hash.int (Ma_type.to_int ma_type))
+  | Macd { fast_period; slow_period; signal_period } ->
+    Hash.combine4 (Hash.string "Macd") (Hash.int fast_period) (Hash.int slow_period) (Hash.int signal_period)
+  | Macdext { fast_period; fast_ma_type; slow_period; slow_ma_type; signal_period; signal_ma_type } ->
+    Hash.combine6 (Hash.string "Macdext") (Hash.int fast_period) (Hash.int (Ma_type.to_int fast_ma_type)) (Hash.int slow_period) (Hash.int (Ma_type.to_int slow_ma_type)) (Hash.combine2 (Hash.int signal_period) (Hash.int (Ma_type.to_int signal_ma_type)))
+  | Macdfix { signal_period } ->
+    Hash.combine2 (Hash.string "Macdfix") (Hash.int signal_period)
+  | Mama { fast_limit; slow_limit } ->
+    Hash.combine3 (Hash.string "Mama") (Hash.poly fast_limit) (Hash.poly slow_limit)
+  | Mavp { min_period; max_period; ma_type } ->
+    Hash.combine4 (Hash.string "Mavp") (Hash.int min_period) (Hash.int max_period) (Hash.int (Ma_type.to_int ma_type))
+  | Max { timeperiod } ->
+    Hash.combine2 (Hash.string "Max") (Hash.int timeperiod)
+  | Maxindex { timeperiod } ->
+    Hash.combine2 (Hash.string "Maxindex") (Hash.int timeperiod)
+  | Medprice () -> Hash.string "Medprice"
+  | Mfi { timeperiod } ->
+    Hash.combine2 (Hash.string "Mfi") (Hash.int timeperiod)
+  | Midpoint { timeperiod } ->
+    Hash.combine2 (Hash.string "Midpoint") (Hash.int timeperiod)
+  | Midprice { timeperiod } ->
+    Hash.combine2 (Hash.string "Midprice") (Hash.int timeperiod)
+  | Min { timeperiod } ->
+    Hash.combine2 (Hash.string "Min") (Hash.int timeperiod)
+  | Minindex { timeperiod } ->
+    Hash.combine2 (Hash.string "Minindex") (Hash.int timeperiod)
+  | Minmax { timeperiod } ->
+    Hash.combine2 (Hash.string "Minmax") (Hash.int timeperiod)
+  | Minmaxindex { timeperiod } ->
+    Hash.combine2 (Hash.string "Minmaxindex") (Hash.int timeperiod)
+  | Minus_di { timeperiod } ->
+    Hash.combine2 (Hash.string "Minus_di") (Hash.int timeperiod)
+  | Minus_dm { timeperiod } ->
+    Hash.combine2 (Hash.string "Minus_dm") (Hash.int timeperiod)
+  | Mom { timeperiod } ->
+    Hash.combine2 (Hash.string "Mom") (Hash.int timeperiod)
+  | Mult () -> Hash.string "Mult"
+  | Natr { timeperiod } ->
+    Hash.combine2 (Hash.string "Natr") (Hash.int timeperiod)
+  | Obv () -> Hash.string "Obv"
+  | Plus_di { timeperiod } ->
+    Hash.combine2 (Hash.string "Plus_di") (Hash.int timeperiod)
+  | Plus_dm { timeperiod } ->
+    Hash.combine2 (Hash.string "Plus_dm") (Hash.int timeperiod)
+  | Ppo { fast_period; slow_period; ma_type } ->
+    Hash.combine4 (Hash.string "Ppo") (Hash.int fast_period) (Hash.int slow_period) (Hash.int (Ma_type.to_int ma_type))
+  | Roc { timeperiod } ->
+    Hash.combine2 (Hash.string "Roc") (Hash.int timeperiod)
+  | Rocp { timeperiod } ->
+    Hash.combine2 (Hash.string "Rocp") (Hash.int timeperiod)
+  | Rocr { timeperiod } ->
+    Hash.combine2 (Hash.string "Rocr") (Hash.int timeperiod)
+  | Rocr100 { timeperiod } ->
+    Hash.combine2 (Hash.string "Rocr100") (Hash.int timeperiod)
+  | Rsi { timeperiod } ->
+    Hash.combine2 (Hash.string "Rsi") (Hash.int timeperiod)
+  | Sar { acceleration; maximum } ->
+    Hash.combine3 (Hash.string "Sar") (Hash.poly acceleration) (Hash.poly maximum)
+  | Sarext { start_value; offset_on_reverse; acceleration_init_long; acceleration_long; acceleration_max_long; acceleration_init_short; acceleration_short; acceleration_max_short } ->
+    Hash.combine2 (Hash.string "Sarext") (Hash.combine6 (Hash.poly start_value) (Hash.poly offset_on_reverse) (Hash.poly acceleration_init_long) (Hash.poly acceleration_long) (Hash.poly acceleration_max_long) (Hash.combine3 (Hash.poly acceleration_init_short) (Hash.poly acceleration_short) (Hash.poly acceleration_max_short)))
+  | Sin () -> Hash.string "Sin"
+  | Sinh () -> Hash.string "Sinh"
+  | Sma { timeperiod } ->
+    Hash.combine2 (Hash.string "Sma") (Hash.int timeperiod)
+  | Sqrt () -> Hash.string "Sqrt"
+  | Stddev { timeperiod; nb_dev } ->
+    Hash.combine3 (Hash.string "Stddev") (Hash.int timeperiod) (Hash.poly nb_dev)
+  | Stoch { fast_k_period; slow_k_period; slow_k_ma_type; slow_d_period; slow_d_ma_type } ->
+    Hash.combine6 (Hash.string "Stoch") (Hash.int fast_k_period) (Hash.int slow_k_period) (Hash.int (Ma_type.to_int slow_k_ma_type)) (Hash.int slow_d_period) (Hash.int (Ma_type.to_int slow_d_ma_type))
+  | Stochf { fast_k_period; fast_d_period; fast_d_ma_type } ->
+    Hash.combine4 (Hash.string "Stochf") (Hash.int fast_k_period) (Hash.int fast_d_period) (Hash.int (Ma_type.to_int fast_d_ma_type))
+  | Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type } ->
+    Hash.combine5 (Hash.string "Stochrsi") (Hash.int timeperiod) (Hash.int fast_k_period) (Hash.int fast_d_period) (Hash.int (Ma_type.to_int fast_d_ma_type))
+  | Sub () -> Hash.string "Sub"
+  | Sum { timeperiod } ->
+    Hash.combine2 (Hash.string "Sum") (Hash.int timeperiod)
+  | T3 { timeperiod; v_factor } ->
+    Hash.combine3 (Hash.string "T3") (Hash.int timeperiod) (Hash.poly v_factor)
+  | Tan () -> Hash.string "Tan"
+  | Tanh () -> Hash.string "Tanh"
+  | Tema { timeperiod } ->
+    Hash.combine2 (Hash.string "Tema") (Hash.int timeperiod)
+  | Trange () -> Hash.string "Trange"
+  | Trima { timeperiod } ->
+    Hash.combine2 (Hash.string "Trima") (Hash.int timeperiod)
+  | Trix { timeperiod } ->
+    Hash.combine2 (Hash.string "Trix") (Hash.int timeperiod)
+  | Tsf { timeperiod } ->
+    Hash.combine2 (Hash.string "Tsf") (Hash.int timeperiod)
+  | Typprice () -> Hash.string "Typprice"
+  | Ultosc { timeperiod1; timeperiod2; timeperiod3 } ->
+    Hash.combine4 (Hash.string "Ultosc") (Hash.int timeperiod1) (Hash.int timeperiod2) (Hash.int timeperiod3)
+  | Var { timeperiod; nb_dev } ->
+    Hash.combine3 (Hash.string "Var") (Hash.int timeperiod) (Hash.poly nb_dev)
+  | Wclprice () -> Hash.string "Wclprice"
+  | Willr { timeperiod } ->
+    Hash.combine2 (Hash.string "Willr") (Hash.int timeperiod)
+  | Wma { timeperiod } ->
+    Hash.combine2 (Hash.string "Wma") (Hash.int timeperiod)
+
 let lookback : type a b. (a, b) t -> int =
  fun params ->
   match params with

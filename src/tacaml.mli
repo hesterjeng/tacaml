@@ -70,3 +70,5 @@ val all : t list
 val to_string : t -> string
 val pp : Format.formatter -> t -> unit
 val of_string : string -> (t, string) result
+val of_indicator : Indicator.t -> t
+val get_indicators : t -> Indicator.t list

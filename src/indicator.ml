@@ -275,3 +275,5 @@ module Int = struct
 end
 
 type t = F of Float.t | I of Int.t [@@deriving hash, compare, show]
+
+let equal x y = compare x y = 0

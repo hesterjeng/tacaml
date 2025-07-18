@@ -432,13 +432,16 @@ let hash : type a b. (a, b) t -> int = function
   | Ad () -> Hash.string "Ad"
   | Add () -> Hash.string "Add"
   | Adosc { fast_period; slow_period } ->
-    Hash.combine3 (Hash.string "Adosc") (Hash.int fast_period) (Hash.int slow_period)
+    Hash.combine3 (Hash.string "Adosc") (Hash.int fast_period)
+      (Hash.int slow_period)
   | Adx { timeperiod } ->
     Hash.combine2 (Hash.string "Adx") (Hash.int timeperiod)
   | Adxr { timeperiod } ->
     Hash.combine2 (Hash.string "Adxr") (Hash.int timeperiod)
   | Apo { fast_period; slow_period; ma_type } ->
-    Hash.combine4 (Hash.string "Apo") (Hash.int fast_period) (Hash.int slow_period) (Hash.int (Ma_type.to_int ma_type))
+    Hash.combine4 (Hash.string "Apo") (Hash.int fast_period)
+      (Hash.int slow_period)
+      (Hash.int (Ma_type.to_int ma_type))
   | Aroon { timeperiod } ->
     Hash.combine2 (Hash.string "Aroon") (Hash.int timeperiod)
   | Aroonosc { timeperiod } ->
@@ -451,7 +454,9 @@ let hash : type a b. (a, b) t -> int = function
   | Avgdev { timeperiod } ->
     Hash.combine2 (Hash.string "Avgdev") (Hash.int timeperiod)
   | Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type } ->
-    Hash.combine5 (Hash.string "Bbands") (Hash.int timeperiod) (Hash.poly nb_dev_up) (Hash.poly nb_dev_dn) (Hash.int (Ma_type.to_int ma_type))
+    Hash.combine5 (Hash.string "Bbands") (Hash.int timeperiod)
+      (Hash.poly nb_dev_up) (Hash.poly nb_dev_dn)
+      (Hash.int (Ma_type.to_int ma_type))
   | Beta { timeperiod } ->
     Hash.combine2 (Hash.string "Beta") (Hash.int timeperiod)
   | Bop () -> Hash.string "Bop"
@@ -535,8 +540,7 @@ let hash : type a b. (a, b) t -> int = function
   | Dema { timeperiod } ->
     Hash.combine2 (Hash.string "Dema") (Hash.int timeperiod)
   | Div () -> Hash.string "Div"
-  | Dx { timeperiod } ->
-    Hash.combine2 (Hash.string "Dx") (Hash.int timeperiod)
+  | Dx { timeperiod } -> Hash.combine2 (Hash.string "Dx") (Hash.int timeperiod)
   | Ema { timeperiod } ->
     Hash.combine2 (Hash.string "Ema") (Hash.int timeperiod)
   | Exp () -> Hash.string "Exp"
@@ -562,17 +566,35 @@ let hash : type a b. (a, b) t -> int = function
   | Ln () -> Hash.string "Ln"
   | Log10 () -> Hash.string "Log10"
   | Ma { timeperiod; ma_type } ->
-    Hash.combine3 (Hash.string "Ma") (Hash.int timeperiod) (Hash.int (Ma_type.to_int ma_type))
+    Hash.combine3 (Hash.string "Ma") (Hash.int timeperiod)
+      (Hash.int (Ma_type.to_int ma_type))
   | Macd { fast_period; slow_period; signal_period } ->
-    Hash.combine4 (Hash.string "Macd") (Hash.int fast_period) (Hash.int slow_period) (Hash.int signal_period)
-  | Macdext { fast_period; fast_ma_type; slow_period; slow_ma_type; signal_period; signal_ma_type } ->
-    Hash.combine6 (Hash.string "Macdext") (Hash.int fast_period) (Hash.int (Ma_type.to_int fast_ma_type)) (Hash.int slow_period) (Hash.int (Ma_type.to_int slow_ma_type)) (Hash.combine2 (Hash.int signal_period) (Hash.int (Ma_type.to_int signal_ma_type)))
+    Hash.combine4 (Hash.string "Macd") (Hash.int fast_period)
+      (Hash.int slow_period) (Hash.int signal_period)
+  | Macdext
+      {
+        fast_period;
+        fast_ma_type;
+        slow_period;
+        slow_ma_type;
+        signal_period;
+        signal_ma_type;
+      } ->
+    Hash.combine6 (Hash.string "Macdext") (Hash.int fast_period)
+      (Hash.int (Ma_type.to_int fast_ma_type))
+      (Hash.int slow_period)
+      (Hash.int (Ma_type.to_int slow_ma_type))
+      (Hash.combine2 (Hash.int signal_period)
+         (Hash.int (Ma_type.to_int signal_ma_type)))
   | Macdfix { signal_period } ->
     Hash.combine2 (Hash.string "Macdfix") (Hash.int signal_period)
   | Mama { fast_limit; slow_limit } ->
-    Hash.combine3 (Hash.string "Mama") (Hash.poly fast_limit) (Hash.poly slow_limit)
+    Hash.combine3 (Hash.string "Mama") (Hash.poly fast_limit)
+      (Hash.poly slow_limit)
   | Mavp { min_period; max_period; ma_type } ->
-    Hash.combine4 (Hash.string "Mavp") (Hash.int min_period) (Hash.int max_period) (Hash.int (Ma_type.to_int ma_type))
+    Hash.combine4 (Hash.string "Mavp") (Hash.int min_period)
+      (Hash.int max_period)
+      (Hash.int (Ma_type.to_int ma_type))
   | Max { timeperiod } ->
     Hash.combine2 (Hash.string "Max") (Hash.int timeperiod)
   | Maxindex { timeperiod } ->
@@ -607,7 +629,9 @@ let hash : type a b. (a, b) t -> int = function
   | Plus_dm { timeperiod } ->
     Hash.combine2 (Hash.string "Plus_dm") (Hash.int timeperiod)
   | Ppo { fast_period; slow_period; ma_type } ->
-    Hash.combine4 (Hash.string "Ppo") (Hash.int fast_period) (Hash.int slow_period) (Hash.int (Ma_type.to_int ma_type))
+    Hash.combine4 (Hash.string "Ppo") (Hash.int fast_period)
+      (Hash.int slow_period)
+      (Hash.int (Ma_type.to_int ma_type))
   | Roc { timeperiod } ->
     Hash.combine2 (Hash.string "Roc") (Hash.int timeperiod)
   | Rocp { timeperiod } ->
@@ -619,22 +643,58 @@ let hash : type a b. (a, b) t -> int = function
   | Rsi { timeperiod } ->
     Hash.combine2 (Hash.string "Rsi") (Hash.int timeperiod)
   | Sar { acceleration; maximum } ->
-    Hash.combine3 (Hash.string "Sar") (Hash.poly acceleration) (Hash.poly maximum)
-  | Sarext { start_value; offset_on_reverse; acceleration_init_long; acceleration_long; acceleration_max_long; acceleration_init_short; acceleration_short; acceleration_max_short } ->
-    Hash.combine2 (Hash.string "Sarext") (Hash.combine6 (Hash.poly start_value) (Hash.poly offset_on_reverse) (Hash.poly acceleration_init_long) (Hash.poly acceleration_long) (Hash.poly acceleration_max_long) (Hash.combine3 (Hash.poly acceleration_init_short) (Hash.poly acceleration_short) (Hash.poly acceleration_max_short)))
+    Hash.combine3 (Hash.string "Sar") (Hash.poly acceleration)
+      (Hash.poly maximum)
+  | Sarext
+      {
+        start_value;
+        offset_on_reverse;
+        acceleration_init_long;
+        acceleration_long;
+        acceleration_max_long;
+        acceleration_init_short;
+        acceleration_short;
+        acceleration_max_short;
+      } ->
+    Hash.combine2 (Hash.string "Sarext")
+      (Hash.combine6 (Hash.poly start_value)
+         (Hash.poly offset_on_reverse)
+         (Hash.poly acceleration_init_long)
+         (Hash.poly acceleration_long)
+         (Hash.poly acceleration_max_long)
+         (Hash.combine3
+            (Hash.poly acceleration_init_short)
+            (Hash.poly acceleration_short)
+            (Hash.poly acceleration_max_short)))
   | Sin () -> Hash.string "Sin"
   | Sinh () -> Hash.string "Sinh"
   | Sma { timeperiod } ->
     Hash.combine2 (Hash.string "Sma") (Hash.int timeperiod)
   | Sqrt () -> Hash.string "Sqrt"
   | Stddev { timeperiod; nb_dev } ->
-    Hash.combine3 (Hash.string "Stddev") (Hash.int timeperiod) (Hash.poly nb_dev)
-  | Stoch { fast_k_period; slow_k_period; slow_k_ma_type; slow_d_period; slow_d_ma_type } ->
-    Hash.combine6 (Hash.string "Stoch") (Hash.int fast_k_period) (Hash.int slow_k_period) (Hash.int (Ma_type.to_int slow_k_ma_type)) (Hash.int slow_d_period) (Hash.int (Ma_type.to_int slow_d_ma_type))
+    Hash.combine3 (Hash.string "Stddev") (Hash.int timeperiod)
+      (Hash.poly nb_dev)
+  | Stoch
+      {
+        fast_k_period;
+        slow_k_period;
+        slow_k_ma_type;
+        slow_d_period;
+        slow_d_ma_type;
+      } ->
+    Hash.combine6 (Hash.string "Stoch") (Hash.int fast_k_period)
+      (Hash.int slow_k_period)
+      (Hash.int (Ma_type.to_int slow_k_ma_type))
+      (Hash.int slow_d_period)
+      (Hash.int (Ma_type.to_int slow_d_ma_type))
   | Stochf { fast_k_period; fast_d_period; fast_d_ma_type } ->
-    Hash.combine4 (Hash.string "Stochf") (Hash.int fast_k_period) (Hash.int fast_d_period) (Hash.int (Ma_type.to_int fast_d_ma_type))
+    Hash.combine4 (Hash.string "Stochf") (Hash.int fast_k_period)
+      (Hash.int fast_d_period)
+      (Hash.int (Ma_type.to_int fast_d_ma_type))
   | Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type } ->
-    Hash.combine5 (Hash.string "Stochrsi") (Hash.int timeperiod) (Hash.int fast_k_period) (Hash.int fast_d_period) (Hash.int (Ma_type.to_int fast_d_ma_type))
+    Hash.combine5 (Hash.string "Stochrsi") (Hash.int timeperiod)
+      (Hash.int fast_k_period) (Hash.int fast_d_period)
+      (Hash.int (Ma_type.to_int fast_d_ma_type))
   | Sub () -> Hash.string "Sub"
   | Sum { timeperiod } ->
     Hash.combine2 (Hash.string "Sum") (Hash.int timeperiod)
@@ -653,7 +713,8 @@ let hash : type a b. (a, b) t -> int = function
     Hash.combine2 (Hash.string "Tsf") (Hash.int timeperiod)
   | Typprice () -> Hash.string "Typprice"
   | Ultosc { timeperiod1; timeperiod2; timeperiod3 } ->
-    Hash.combine4 (Hash.string "Ultosc") (Hash.int timeperiod1) (Hash.int timeperiod2) (Hash.int timeperiod3)
+    Hash.combine4 (Hash.string "Ultosc") (Hash.int timeperiod1)
+      (Hash.int timeperiod2) (Hash.int timeperiod3)
   | Var { timeperiod; nb_dev } ->
     Hash.combine3 (Hash.string "Var") (Hash.int timeperiod) (Hash.poly nb_dev)
   | Wclprice () -> Hash.string "Wclprice"
@@ -662,527 +723,566 @@ let hash : type a b. (a, b) t -> int = function
   | Wma { timeperiod } ->
     Hash.combine2 (Hash.string "Wma") (Hash.int timeperiod)
 
-let equal : type a b c d. (a, b) t -> (c, d) t -> bool = fun x y ->
+let equal : type a b c d. (a, b) t -> (c, d) t -> bool =
+ fun x y ->
   match (x, y) with
-  | (Accbands { timeperiod = t1 }, Accbands { timeperiod = t2 }) -> t1 = t2
-  | (Acos (), Acos ()) -> true
-  | (Ad (), Ad ()) -> true
-  | (Add (), Add ()) -> true
-  | (Adosc { fast_period = fp1; slow_period = sp1 }, Adosc { fast_period = fp2; slow_period = sp2 }) -> fp1 = fp2 && sp1 = sp2
-  | (Adx { timeperiod = t1 }, Adx { timeperiod = t2 }) -> t1 = t2
-  | (Adxr { timeperiod = t1 }, Adxr { timeperiod = t2 }) -> t1 = t2
-  | (Apo { fast_period = fp1; slow_period = sp1; ma_type = mt1 }, Apo { fast_period = fp2; slow_period = sp2; ma_type = mt2 }) -> fp1 = fp2 && sp1 = sp2 && Stdlib.(=) mt1 mt2
-  | (Aroon { timeperiod = t1 }, Aroon { timeperiod = t2 }) -> t1 = t2
-  | (Aroonosc { timeperiod = t1 }, Aroonosc { timeperiod = t2 }) -> t1 = t2
-  | (Asin (), Asin ()) -> true
-  | (Atan (), Atan ()) -> true
-  | (Atr { timeperiod = t1 }, Atr { timeperiod = t2 }) -> t1 = t2
-  | (Avgprice (), Avgprice ()) -> true
-  | (Avgdev { timeperiod = t1 }, Avgdev { timeperiod = t2 }) -> t1 = t2
-  | (Bbands { timeperiod = t1; nb_dev_up = ndu1; nb_dev_dn = ndd1; ma_type = mt1 }, Bbands { timeperiod = t2; nb_dev_up = ndu2; nb_dev_dn = ndd2; ma_type = mt2 }) -> t1 = t2 && Float.equal ndu1 ndu2 && Float.equal ndd1 ndd2 && Stdlib.(=) mt1 mt2
-  | (Beta { timeperiod = t1 }, Beta { timeperiod = t2 }) -> t1 = t2
-  | (Bop (), Bop ()) -> true
-  | (Cci { timeperiod = t1 }, Cci { timeperiod = t2 }) -> t1 = t2
-  | (Cdl2crows (), Cdl2crows ()) -> true
-  | (Cdl3blackcrows (), Cdl3blackcrows ()) -> true
-  | (Cdl3inside (), Cdl3inside ()) -> true
-  | (Cdl3linestrike (), Cdl3linestrike ()) -> true
-  | (Cdl3outside (), Cdl3outside ()) -> true
-  | (Cdl3starsinsouth (), Cdl3starsinsouth ()) -> true
-  | (Cdl3whitesoldiers (), Cdl3whitesoldiers ()) -> true
-  | (Cdlabandonedbaby { penetration = p1 }, Cdlabandonedbaby { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdladvanceblock (), Cdladvanceblock ()) -> true
-  | (Cdlbelthold (), Cdlbelthold ()) -> true
-  | (Cdlbreakaway (), Cdlbreakaway ()) -> true
-  | (Cdlclosingmarubozu (), Cdlclosingmarubozu ()) -> true
-  | (Cdlconcealbabyswall (), Cdlconcealbabyswall ()) -> true
-  | (Cdlcounterattack (), Cdlcounterattack ()) -> true
-  | (Cdldarkcloudcover { penetration = p1 }, Cdldarkcloudcover { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdldoji (), Cdldoji ()) -> true
-  | (Cdldojistar (), Cdldojistar ()) -> true
-  | (Cdldragonflydoji (), Cdldragonflydoji ()) -> true
-  | (Cdlengulfing (), Cdlengulfing ()) -> true
-  | (Cdleveningdojistar { penetration = p1 }, Cdleveningdojistar { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdleveningstar { penetration = p1 }, Cdleveningstar { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdlgapsidesidewhite (), Cdlgapsidesidewhite ()) -> true
-  | (Cdlgravestonedoji (), Cdlgravestonedoji ()) -> true
-  | (Cdlhammer (), Cdlhammer ()) -> true
-  | (Cdlhangingman (), Cdlhangingman ()) -> true
-  | (Cdlharami (), Cdlharami ()) -> true
-  | (Cdlharamicross (), Cdlharamicross ()) -> true
-  | (Cdlhighwave (), Cdlhighwave ()) -> true
-  | (Cdlhikkake (), Cdlhikkake ()) -> true
-  | (Cdlhikkakemod (), Cdlhikkakemod ()) -> true
-  | (Cdlhomingpigeon (), Cdlhomingpigeon ()) -> true
-  | (Cdlidentical3crows (), Cdlidentical3crows ()) -> true
-  | (Cdlinneck (), Cdlinneck ()) -> true
-  | (Cdlinvertedhammer (), Cdlinvertedhammer ()) -> true
-  | (Cdlkicking (), Cdlkicking ()) -> true
-  | (Cdlkickingbylength (), Cdlkickingbylength ()) -> true
-  | (Cdlladderbottom (), Cdlladderbottom ()) -> true
-  | (Cdllongleggeddoji (), Cdllongleggeddoji ()) -> true
-  | (Cdllongline (), Cdllongline ()) -> true
-  | (Cdlmarubozu (), Cdlmarubozu ()) -> true
-  | (Cdlmatchinglow (), Cdlmatchinglow ()) -> true
-  | (Cdlmathold { penetration = p1 }, Cdlmathold { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdlmorningdojistar { penetration = p1 }, Cdlmorningdojistar { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdlmorningstar { penetration = p1 }, Cdlmorningstar { penetration = p2 }) -> Float.equal p1 p2
-  | (Cdlonneck (), Cdlonneck ()) -> true
-  | (Cdlpiercing (), Cdlpiercing ()) -> true
-  | (Cdlrickshawman (), Cdlrickshawman ()) -> true
-  | (Cdlrisefall3methods (), Cdlrisefall3methods ()) -> true
-  | (Cdlseparatinglines (), Cdlseparatinglines ()) -> true
-  | (Cdlshootingstar (), Cdlshootingstar ()) -> true
-  | (Cdlshortline (), Cdlshortline ()) -> true
-  | (Cdlspinningtop (), Cdlspinningtop ()) -> true
-  | (Cdlstalledpattern (), Cdlstalledpattern ()) -> true
-  | (Cdlsticksandwich (), Cdlsticksandwich ()) -> true
-  | (Cdltakuri (), Cdltakuri ()) -> true
-  | (Cdltasukigap (), Cdltasukigap ()) -> true
-  | (Cdlthrusting (), Cdlthrusting ()) -> true
-  | (Cdltristar (), Cdltristar ()) -> true
-  | (Cdlunique3river (), Cdlunique3river ()) -> true
-  | (Cdlupsidegap2crows (), Cdlupsidegap2crows ()) -> true
-  | (Cdlxsidegap3methods (), Cdlxsidegap3methods ()) -> true
-  | (Ceil (), Ceil ()) -> true
-  | (Cmo { timeperiod = t1 }, Cmo { timeperiod = t2 }) -> t1 = t2
-  | (Correl { timeperiod = t1 }, Correl { timeperiod = t2 }) -> t1 = t2
-  | (Cos (), Cos ()) -> true
-  | (Cosh (), Cosh ()) -> true
-  | (Dema { timeperiod = t1 }, Dema { timeperiod = t2 }) -> t1 = t2
-  | (Div (), Div ()) -> true
-  | (Dx { timeperiod = t1 }, Dx { timeperiod = t2 }) -> t1 = t2
-  | (Ema { timeperiod = t1 }, Ema { timeperiod = t2 }) -> t1 = t2
-  | (Exp (), Exp ()) -> true
-  | (Floor (), Floor ()) -> true
-  | (Ht_dcperiod (), Ht_dcperiod ()) -> true
-  | (Ht_dcphase (), Ht_dcphase ()) -> true
-  | (Ht_phasor (), Ht_phasor ()) -> true
-  | (Ht_sine (), Ht_sine ()) -> true
-  | (Ht_trendline (), Ht_trendline ()) -> true
-  | (Ht_trendmode (), Ht_trendmode ()) -> true
-  | (Kama { timeperiod = t1 }, Kama { timeperiod = t2 }) -> t1 = t2
-  | (Linearreg { timeperiod = t1 }, Linearreg { timeperiod = t2 }) -> t1 = t2
-  | (Linearreg_angle { timeperiod = t1 }, Linearreg_angle { timeperiod = t2 }) -> t1 = t2
-  | (Linearreg_intercept { timeperiod = t1 }, Linearreg_intercept { timeperiod = t2 }) -> t1 = t2
-  | (Linearreg_slope { timeperiod = t1 }, Linearreg_slope { timeperiod = t2 }) -> t1 = t2
-  | (Ln (), Ln ()) -> true
-  | (Log10 (), Log10 ()) -> true
-  | (Ma { timeperiod = t1; ma_type = mt1 }, Ma { timeperiod = t2; ma_type = mt2 }) -> t1 = t2 && Stdlib.(=) mt1 mt2
-  | (Macd { fast_period = fp1; slow_period = sp1; signal_period = sigp1 }, Macd { fast_period = fp2; slow_period = sp2; signal_period = sigp2 }) -> fp1 = fp2 && sp1 = sp2 && sigp1 = sigp2
-  | (Macdext { fast_period = fp1; fast_ma_type = fmt1; slow_period = sp1; slow_ma_type = smt1; signal_period = sigp1; signal_ma_type = sigmt1 }, Macdext { fast_period = fp2; fast_ma_type = fmt2; slow_period = sp2; slow_ma_type = smt2; signal_period = sigp2; signal_ma_type = sigmt2 }) -> fp1 = fp2 && Stdlib.(=) fmt1 fmt2 && sp1 = sp2 && Stdlib.(=) smt1 smt2 && sigp1 = sigp2 && Stdlib.(=) sigmt1 sigmt2
-  | (Macdfix { signal_period = sp1 }, Macdfix { signal_period = sp2 }) -> sp1 = sp2
-  | (Mama { fast_limit = fl1; slow_limit = sl1 }, Mama { fast_limit = fl2; slow_limit = sl2 }) -> Float.equal fl1 fl2 && Float.equal sl1 sl2
-  | (Mavp { min_period = minp1; max_period = maxp1; ma_type = mt1 }, Mavp { min_period = minp2; max_period = maxp2; ma_type = mt2 }) -> minp1 = minp2 && maxp1 = maxp2 && Stdlib.(=) mt1 mt2
-  | (Max { timeperiod = t1 }, Max { timeperiod = t2 }) -> t1 = t2
-  | (Maxindex { timeperiod = t1 }, Maxindex { timeperiod = t2 }) -> t1 = t2
-  | (Medprice (), Medprice ()) -> true
-  | (Mfi { timeperiod = t1 }, Mfi { timeperiod = t2 }) -> t1 = t2
-  | (Midpoint { timeperiod = t1 }, Midpoint { timeperiod = t2 }) -> t1 = t2
-  | (Midprice { timeperiod = t1 }, Midprice { timeperiod = t2 }) -> t1 = t2
-  | (Min { timeperiod = t1 }, Min { timeperiod = t2 }) -> t1 = t2
-  | (Minindex { timeperiod = t1 }, Minindex { timeperiod = t2 }) -> t1 = t2
-  | (Minmax { timeperiod = t1 }, Minmax { timeperiod = t2 }) -> t1 = t2
-  | (Minmaxindex { timeperiod = t1 }, Minmaxindex { timeperiod = t2 }) -> t1 = t2
-  | (Minus_di { timeperiod = t1 }, Minus_di { timeperiod = t2 }) -> t1 = t2
-  | (Minus_dm { timeperiod = t1 }, Minus_dm { timeperiod = t2 }) -> t1 = t2
-  | (Mom { timeperiod = t1 }, Mom { timeperiod = t2 }) -> t1 = t2
-  | (Mult (), Mult ()) -> true
-  | (Natr { timeperiod = t1 }, Natr { timeperiod = t2 }) -> t1 = t2
-  | (Obv (), Obv ()) -> true
-  | (Plus_di { timeperiod = t1 }, Plus_di { timeperiod = t2 }) -> t1 = t2
-  | (Plus_dm { timeperiod = t1 }, Plus_dm { timeperiod = t2 }) -> t1 = t2
-  | (Ppo { fast_period = fp1; slow_period = sp1; ma_type = mt1 }, Ppo { fast_period = fp2; slow_period = sp2; ma_type = mt2 }) -> fp1 = fp2 && sp1 = sp2 && Stdlib.(=) mt1 mt2
-  | (Roc { timeperiod = t1 }, Roc { timeperiod = t2 }) -> t1 = t2
-  | (Rocp { timeperiod = t1 }, Rocp { timeperiod = t2 }) -> t1 = t2
-  | (Rocr { timeperiod = t1 }, Rocr { timeperiod = t2 }) -> t1 = t2
-  | (Rocr100 { timeperiod = t1 }, Rocr100 { timeperiod = t2 }) -> t1 = t2
-  | (Rsi { timeperiod = t1 }, Rsi { timeperiod = t2 }) -> t1 = t2
-  | (Sar { acceleration = a1; maximum = m1 }, Sar { acceleration = a2; maximum = m2 }) -> Float.equal a1 a2 && Float.equal m1 m2
-  | (Sarext { start_value = sv1; offset_on_reverse = oor1; acceleration_init_long = ail1; acceleration_long = al1; acceleration_max_long = aml1; acceleration_init_short = ais1; acceleration_short = as1; acceleration_max_short = ams1 }, Sarext { start_value = sv2; offset_on_reverse = oor2; acceleration_init_long = ail2; acceleration_long = al2; acceleration_max_long = aml2; acceleration_init_short = ais2; acceleration_short = as2; acceleration_max_short = ams2 }) -> Float.equal sv1 sv2 && Float.equal oor1 oor2 && Float.equal ail1 ail2 && Float.equal al1 al2 && Float.equal aml1 aml2 && Float.equal ais1 ais2 && Float.equal as1 as2 && Float.equal ams1 ams2
-  | (Sin (), Sin ()) -> true
-  | (Sinh (), Sinh ()) -> true
-  | (Sma { timeperiod = t1 }, Sma { timeperiod = t2 }) -> t1 = t2
-  | (Sqrt (), Sqrt ()) -> true
-  | (Stddev { timeperiod = t1; nb_dev = nd1 }, Stddev { timeperiod = t2; nb_dev = nd2 }) -> t1 = t2 && Float.equal nd1 nd2
-  | (Stoch { fast_k_period = fkp1; slow_k_period = skp1; slow_k_ma_type = skmt1; slow_d_period = sdp1; slow_d_ma_type = sdmt1 }, Stoch { fast_k_period = fkp2; slow_k_period = skp2; slow_k_ma_type = skmt2; slow_d_period = sdp2; slow_d_ma_type = sdmt2 }) -> fkp1 = fkp2 && skp1 = skp2 && Stdlib.(=) skmt1 skmt2 && sdp1 = sdp2 && Stdlib.(=) sdmt1 sdmt2
-  | (Stochf { fast_k_period = fkp1; fast_d_period = fdp1; fast_d_ma_type = fdmt1 }, Stochf { fast_k_period = fkp2; fast_d_period = fdp2; fast_d_ma_type = fdmt2 }) -> fkp1 = fkp2 && fdp1 = fdp2 && Stdlib.(=) fdmt1 fdmt2
-  | (Stochrsi { timeperiod = t1; fast_k_period = fkp1; fast_d_period = fdp1; fast_d_ma_type = fdmt1 }, Stochrsi { timeperiod = t2; fast_k_period = fkp2; fast_d_period = fdp2; fast_d_ma_type = fdmt2 }) -> t1 = t2 && fkp1 = fkp2 && fdp1 = fdp2 && Stdlib.(=) fdmt1 fdmt2
-  | (Sub (), Sub ()) -> true
-  | (Sum { timeperiod = t1 }, Sum { timeperiod = t2 }) -> t1 = t2
-  | (T3 { timeperiod = t1; v_factor = vf1 }, T3 { timeperiod = t2; v_factor = vf2 }) -> t1 = t2 && Float.equal vf1 vf2
-  | (Tan (), Tan ()) -> true
-  | (Tanh (), Tanh ()) -> true
-  | (Tema { timeperiod = t1 }, Tema { timeperiod = t2 }) -> t1 = t2
-  | (Trange (), Trange ()) -> true
-  | (Trima { timeperiod = t1 }, Trima { timeperiod = t2 }) -> t1 = t2
-  | (Trix { timeperiod = t1 }, Trix { timeperiod = t2 }) -> t1 = t2
-  | (Tsf { timeperiod = t1 }, Tsf { timeperiod = t2 }) -> t1 = t2
-  | (Typprice (), Typprice ()) -> true
-  | (Ultosc { timeperiod1 = t1_1; timeperiod2 = t2_1; timeperiod3 = t3_1 }, Ultosc { timeperiod1 = t1_2; timeperiod2 = t2_2; timeperiod3 = t3_2 }) -> t1_1 = t1_2 && t2_1 = t2_2 && t3_1 = t3_2
-  | (Var { timeperiod = t1; nb_dev = nd1 }, Var { timeperiod = t2; nb_dev = nd2 }) -> t1 = t2 && Float.equal nd1 nd2
-  | (Wclprice (), Wclprice ()) -> true
-  | (Willr { timeperiod = t1 }, Willr { timeperiod = t2 }) -> t1 = t2
-  | (Wma { timeperiod = t1 }, Wma { timeperiod = t2 }) -> t1 = t2
+  | Accbands { timeperiod = t1 }, Accbands { timeperiod = t2 } -> t1 = t2
+  | Acos (), Acos () -> true
+  | Ad (), Ad () -> true
+  | Add (), Add () -> true
+  | ( Adosc { fast_period = fp1; slow_period = sp1 },
+      Adosc { fast_period = fp2; slow_period = sp2 } ) ->
+    fp1 = fp2 && sp1 = sp2
+  | Adx { timeperiod = t1 }, Adx { timeperiod = t2 } -> t1 = t2
+  | Adxr { timeperiod = t1 }, Adxr { timeperiod = t2 } -> t1 = t2
+  | ( Apo { fast_period = fp1; slow_period = sp1; ma_type = mt1 },
+      Apo { fast_period = fp2; slow_period = sp2; ma_type = mt2 } ) ->
+    fp1 = fp2 && sp1 = sp2 && Stdlib.( = ) mt1 mt2
+  | Aroon { timeperiod = t1 }, Aroon { timeperiod = t2 } -> t1 = t2
+  | Aroonosc { timeperiod = t1 }, Aroonosc { timeperiod = t2 } -> t1 = t2
+  | Asin (), Asin () -> true
+  | Atan (), Atan () -> true
+  | Atr { timeperiod = t1 }, Atr { timeperiod = t2 } -> t1 = t2
+  | Avgprice (), Avgprice () -> true
+  | Avgdev { timeperiod = t1 }, Avgdev { timeperiod = t2 } -> t1 = t2
+  | ( Bbands
+        { timeperiod = t1; nb_dev_up = ndu1; nb_dev_dn = ndd1; ma_type = mt1 },
+      Bbands
+        { timeperiod = t2; nb_dev_up = ndu2; nb_dev_dn = ndd2; ma_type = mt2 } )
+    ->
+    t1 = t2 && Float.equal ndu1 ndu2 && Float.equal ndd1 ndd2
+    && Stdlib.( = ) mt1 mt2
+  | Beta { timeperiod = t1 }, Beta { timeperiod = t2 } -> t1 = t2
+  | Bop (), Bop () -> true
+  | Cci { timeperiod = t1 }, Cci { timeperiod = t2 } -> t1 = t2
+  | Cdl2crows (), Cdl2crows () -> true
+  | Cdl3blackcrows (), Cdl3blackcrows () -> true
+  | Cdl3inside (), Cdl3inside () -> true
+  | Cdl3linestrike (), Cdl3linestrike () -> true
+  | Cdl3outside (), Cdl3outside () -> true
+  | Cdl3starsinsouth (), Cdl3starsinsouth () -> true
+  | Cdl3whitesoldiers (), Cdl3whitesoldiers () -> true
+  | Cdlabandonedbaby { penetration = p1 }, Cdlabandonedbaby { penetration = p2 }
+    ->
+    Float.equal p1 p2
+  | Cdladvanceblock (), Cdladvanceblock () -> true
+  | Cdlbelthold (), Cdlbelthold () -> true
+  | Cdlbreakaway (), Cdlbreakaway () -> true
+  | Cdlclosingmarubozu (), Cdlclosingmarubozu () -> true
+  | Cdlconcealbabyswall (), Cdlconcealbabyswall () -> true
+  | Cdlcounterattack (), Cdlcounterattack () -> true
+  | ( Cdldarkcloudcover { penetration = p1 },
+      Cdldarkcloudcover { penetration = p2 } ) ->
+    Float.equal p1 p2
+  | Cdldoji (), Cdldoji () -> true
+  | Cdldojistar (), Cdldojistar () -> true
+  | Cdldragonflydoji (), Cdldragonflydoji () -> true
+  | Cdlengulfing (), Cdlengulfing () -> true
+  | ( Cdleveningdojistar { penetration = p1 },
+      Cdleveningdojistar { penetration = p2 } ) ->
+    Float.equal p1 p2
+  | Cdleveningstar { penetration = p1 }, Cdleveningstar { penetration = p2 } ->
+    Float.equal p1 p2
+  | Cdlgapsidesidewhite (), Cdlgapsidesidewhite () -> true
+  | Cdlgravestonedoji (), Cdlgravestonedoji () -> true
+  | Cdlhammer (), Cdlhammer () -> true
+  | Cdlhangingman (), Cdlhangingman () -> true
+  | Cdlharami (), Cdlharami () -> true
+  | Cdlharamicross (), Cdlharamicross () -> true
+  | Cdlhighwave (), Cdlhighwave () -> true
+  | Cdlhikkake (), Cdlhikkake () -> true
+  | Cdlhikkakemod (), Cdlhikkakemod () -> true
+  | Cdlhomingpigeon (), Cdlhomingpigeon () -> true
+  | Cdlidentical3crows (), Cdlidentical3crows () -> true
+  | Cdlinneck (), Cdlinneck () -> true
+  | Cdlinvertedhammer (), Cdlinvertedhammer () -> true
+  | Cdlkicking (), Cdlkicking () -> true
+  | Cdlkickingbylength (), Cdlkickingbylength () -> true
+  | Cdlladderbottom (), Cdlladderbottom () -> true
+  | Cdllongleggeddoji (), Cdllongleggeddoji () -> true
+  | Cdllongline (), Cdllongline () -> true
+  | Cdlmarubozu (), Cdlmarubozu () -> true
+  | Cdlmatchinglow (), Cdlmatchinglow () -> true
+  | Cdlmathold { penetration = p1 }, Cdlmathold { penetration = p2 } ->
+    Float.equal p1 p2
+  | ( Cdlmorningdojistar { penetration = p1 },
+      Cdlmorningdojistar { penetration = p2 } ) ->
+    Float.equal p1 p2
+  | Cdlmorningstar { penetration = p1 }, Cdlmorningstar { penetration = p2 } ->
+    Float.equal p1 p2
+  | Cdlonneck (), Cdlonneck () -> true
+  | Cdlpiercing (), Cdlpiercing () -> true
+  | Cdlrickshawman (), Cdlrickshawman () -> true
+  | Cdlrisefall3methods (), Cdlrisefall3methods () -> true
+  | Cdlseparatinglines (), Cdlseparatinglines () -> true
+  | Cdlshootingstar (), Cdlshootingstar () -> true
+  | Cdlshortline (), Cdlshortline () -> true
+  | Cdlspinningtop (), Cdlspinningtop () -> true
+  | Cdlstalledpattern (), Cdlstalledpattern () -> true
+  | Cdlsticksandwich (), Cdlsticksandwich () -> true
+  | Cdltakuri (), Cdltakuri () -> true
+  | Cdltasukigap (), Cdltasukigap () -> true
+  | Cdlthrusting (), Cdlthrusting () -> true
+  | Cdltristar (), Cdltristar () -> true
+  | Cdlunique3river (), Cdlunique3river () -> true
+  | Cdlupsidegap2crows (), Cdlupsidegap2crows () -> true
+  | Cdlxsidegap3methods (), Cdlxsidegap3methods () -> true
+  | Ceil (), Ceil () -> true
+  | Cmo { timeperiod = t1 }, Cmo { timeperiod = t2 } -> t1 = t2
+  | Correl { timeperiod = t1 }, Correl { timeperiod = t2 } -> t1 = t2
+  | Cos (), Cos () -> true
+  | Cosh (), Cosh () -> true
+  | Dema { timeperiod = t1 }, Dema { timeperiod = t2 } -> t1 = t2
+  | Div (), Div () -> true
+  | Dx { timeperiod = t1 }, Dx { timeperiod = t2 } -> t1 = t2
+  | Ema { timeperiod = t1 }, Ema { timeperiod = t2 } -> t1 = t2
+  | Exp (), Exp () -> true
+  | Floor (), Floor () -> true
+  | Ht_dcperiod (), Ht_dcperiod () -> true
+  | Ht_dcphase (), Ht_dcphase () -> true
+  | Ht_phasor (), Ht_phasor () -> true
+  | Ht_sine (), Ht_sine () -> true
+  | Ht_trendline (), Ht_trendline () -> true
+  | Ht_trendmode (), Ht_trendmode () -> true
+  | Kama { timeperiod = t1 }, Kama { timeperiod = t2 } -> t1 = t2
+  | Linearreg { timeperiod = t1 }, Linearreg { timeperiod = t2 } -> t1 = t2
+  | Linearreg_angle { timeperiod = t1 }, Linearreg_angle { timeperiod = t2 } ->
+    t1 = t2
+  | ( Linearreg_intercept { timeperiod = t1 },
+      Linearreg_intercept { timeperiod = t2 } ) ->
+    t1 = t2
+  | Linearreg_slope { timeperiod = t1 }, Linearreg_slope { timeperiod = t2 } ->
+    t1 = t2
+  | Ln (), Ln () -> true
+  | Log10 (), Log10 () -> true
+  | Ma { timeperiod = t1; ma_type = mt1 }, Ma { timeperiod = t2; ma_type = mt2 }
+    ->
+    t1 = t2 && Stdlib.( = ) mt1 mt2
+  | ( Macd { fast_period = fp1; slow_period = sp1; signal_period = sigp1 },
+      Macd { fast_period = fp2; slow_period = sp2; signal_period = sigp2 } ) ->
+    fp1 = fp2 && sp1 = sp2 && sigp1 = sigp2
+  | ( Macdext
+        {
+          fast_period = fp1;
+          fast_ma_type = fmt1;
+          slow_period = sp1;
+          slow_ma_type = smt1;
+          signal_period = sigp1;
+          signal_ma_type = sigmt1;
+        },
+      Macdext
+        {
+          fast_period = fp2;
+          fast_ma_type = fmt2;
+          slow_period = sp2;
+          slow_ma_type = smt2;
+          signal_period = sigp2;
+          signal_ma_type = sigmt2;
+        } ) ->
+    fp1 = fp2 && Stdlib.( = ) fmt1 fmt2 && sp1 = sp2 && Stdlib.( = ) smt1 smt2
+    && sigp1 = sigp2 && Stdlib.( = ) sigmt1 sigmt2
+  | Macdfix { signal_period = sp1 }, Macdfix { signal_period = sp2 } ->
+    sp1 = sp2
+  | ( Mama { fast_limit = fl1; slow_limit = sl1 },
+      Mama { fast_limit = fl2; slow_limit = sl2 } ) ->
+    Float.equal fl1 fl2 && Float.equal sl1 sl2
+  | ( Mavp { min_period = minp1; max_period = maxp1; ma_type = mt1 },
+      Mavp { min_period = minp2; max_period = maxp2; ma_type = mt2 } ) ->
+    minp1 = minp2 && maxp1 = maxp2 && Stdlib.( = ) mt1 mt2
+  | Max { timeperiod = t1 }, Max { timeperiod = t2 } -> t1 = t2
+  | Maxindex { timeperiod = t1 }, Maxindex { timeperiod = t2 } -> t1 = t2
+  | Medprice (), Medprice () -> true
+  | Mfi { timeperiod = t1 }, Mfi { timeperiod = t2 } -> t1 = t2
+  | Midpoint { timeperiod = t1 }, Midpoint { timeperiod = t2 } -> t1 = t2
+  | Midprice { timeperiod = t1 }, Midprice { timeperiod = t2 } -> t1 = t2
+  | Min { timeperiod = t1 }, Min { timeperiod = t2 } -> t1 = t2
+  | Minindex { timeperiod = t1 }, Minindex { timeperiod = t2 } -> t1 = t2
+  | Minmax { timeperiod = t1 }, Minmax { timeperiod = t2 } -> t1 = t2
+  | Minmaxindex { timeperiod = t1 }, Minmaxindex { timeperiod = t2 } -> t1 = t2
+  | Minus_di { timeperiod = t1 }, Minus_di { timeperiod = t2 } -> t1 = t2
+  | Minus_dm { timeperiod = t1 }, Minus_dm { timeperiod = t2 } -> t1 = t2
+  | Mom { timeperiod = t1 }, Mom { timeperiod = t2 } -> t1 = t2
+  | Mult (), Mult () -> true
+  | Natr { timeperiod = t1 }, Natr { timeperiod = t2 } -> t1 = t2
+  | Obv (), Obv () -> true
+  | Plus_di { timeperiod = t1 }, Plus_di { timeperiod = t2 } -> t1 = t2
+  | Plus_dm { timeperiod = t1 }, Plus_dm { timeperiod = t2 } -> t1 = t2
+  | ( Ppo { fast_period = fp1; slow_period = sp1; ma_type = mt1 },
+      Ppo { fast_period = fp2; slow_period = sp2; ma_type = mt2 } ) ->
+    fp1 = fp2 && sp1 = sp2 && Stdlib.( = ) mt1 mt2
+  | Roc { timeperiod = t1 }, Roc { timeperiod = t2 } -> t1 = t2
+  | Rocp { timeperiod = t1 }, Rocp { timeperiod = t2 } -> t1 = t2
+  | Rocr { timeperiod = t1 }, Rocr { timeperiod = t2 } -> t1 = t2
+  | Rocr100 { timeperiod = t1 }, Rocr100 { timeperiod = t2 } -> t1 = t2
+  | Rsi { timeperiod = t1 }, Rsi { timeperiod = t2 } -> t1 = t2
+  | ( Sar { acceleration = a1; maximum = m1 },
+      Sar { acceleration = a2; maximum = m2 } ) ->
+    Float.equal a1 a2 && Float.equal m1 m2
+  | ( Sarext
+        {
+          start_value = sv1;
+          offset_on_reverse = oor1;
+          acceleration_init_long = ail1;
+          acceleration_long = al1;
+          acceleration_max_long = aml1;
+          acceleration_init_short = ais1;
+          acceleration_short = as1;
+          acceleration_max_short = ams1;
+        },
+      Sarext
+        {
+          start_value = sv2;
+          offset_on_reverse = oor2;
+          acceleration_init_long = ail2;
+          acceleration_long = al2;
+          acceleration_max_long = aml2;
+          acceleration_init_short = ais2;
+          acceleration_short = as2;
+          acceleration_max_short = ams2;
+        } ) ->
+    Float.equal sv1 sv2 && Float.equal oor1 oor2 && Float.equal ail1 ail2
+    && Float.equal al1 al2 && Float.equal aml1 aml2 && Float.equal ais1 ais2
+    && Float.equal as1 as2 && Float.equal ams1 ams2
+  | Sin (), Sin () -> true
+  | Sinh (), Sinh () -> true
+  | Sma { timeperiod = t1 }, Sma { timeperiod = t2 } -> t1 = t2
+  | Sqrt (), Sqrt () -> true
+  | ( Stddev { timeperiod = t1; nb_dev = nd1 },
+      Stddev { timeperiod = t2; nb_dev = nd2 } ) ->
+    t1 = t2 && Float.equal nd1 nd2
+  | ( Stoch
+        {
+          fast_k_period = fkp1;
+          slow_k_period = skp1;
+          slow_k_ma_type = skmt1;
+          slow_d_period = sdp1;
+          slow_d_ma_type = sdmt1;
+        },
+      Stoch
+        {
+          fast_k_period = fkp2;
+          slow_k_period = skp2;
+          slow_k_ma_type = skmt2;
+          slow_d_period = sdp2;
+          slow_d_ma_type = sdmt2;
+        } ) ->
+    fkp1 = fkp2 && skp1 = skp2 && Stdlib.( = ) skmt1 skmt2 && sdp1 = sdp2
+    && Stdlib.( = ) sdmt1 sdmt2
+  | ( Stochf
+        { fast_k_period = fkp1; fast_d_period = fdp1; fast_d_ma_type = fdmt1 },
+      Stochf
+        { fast_k_period = fkp2; fast_d_period = fdp2; fast_d_ma_type = fdmt2 } )
+    ->
+    fkp1 = fkp2 && fdp1 = fdp2 && Stdlib.( = ) fdmt1 fdmt2
+  | ( Stochrsi
+        {
+          timeperiod = t1;
+          fast_k_period = fkp1;
+          fast_d_period = fdp1;
+          fast_d_ma_type = fdmt1;
+        },
+      Stochrsi
+        {
+          timeperiod = t2;
+          fast_k_period = fkp2;
+          fast_d_period = fdp2;
+          fast_d_ma_type = fdmt2;
+        } ) ->
+    t1 = t2 && fkp1 = fkp2 && fdp1 = fdp2 && Stdlib.( = ) fdmt1 fdmt2
+  | Sub (), Sub () -> true
+  | Sum { timeperiod = t1 }, Sum { timeperiod = t2 } -> t1 = t2
+  | ( T3 { timeperiod = t1; v_factor = vf1 },
+      T3 { timeperiod = t2; v_factor = vf2 } ) ->
+    t1 = t2 && Float.equal vf1 vf2
+  | Tan (), Tan () -> true
+  | Tanh (), Tanh () -> true
+  | Tema { timeperiod = t1 }, Tema { timeperiod = t2 } -> t1 = t2
+  | Trange (), Trange () -> true
+  | Trima { timeperiod = t1 }, Trima { timeperiod = t2 } -> t1 = t2
+  | Trix { timeperiod = t1 }, Trix { timeperiod = t2 } -> t1 = t2
+  | Tsf { timeperiod = t1 }, Tsf { timeperiod = t2 } -> t1 = t2
+  | Typprice (), Typprice () -> true
+  | ( Ultosc { timeperiod1 = t1_1; timeperiod2 = t2_1; timeperiod3 = t3_1 },
+      Ultosc { timeperiod1 = t1_2; timeperiod2 = t2_2; timeperiod3 = t3_2 } ) ->
+    t1_1 = t1_2 && t2_1 = t2_2 && t3_1 = t3_2
+  | Var { timeperiod = t1; nb_dev = nd1 }, Var { timeperiod = t2; nb_dev = nd2 }
+    ->
+    t1 = t2 && Float.equal nd1 nd2
+  | Wclprice (), Wclprice () -> true
+  | Willr { timeperiod = t1 }, Willr { timeperiod = t2 } -> t1 = t2
+  | Wma { timeperiod = t1 }, Wma { timeperiod = t2 } -> t1 = t2
   | _ -> false
 
 (* Specialization functions for immediate type resolution *)
-let accbands ~timeperiod : (Ohlcv.t, float_ba * float_ba * float_ba) t = 
+let accbands ~timeperiod : (Ohlcv.t, float_ba * float_ba * float_ba) t =
   Accbands { timeperiod }
 
 let acos () : (float_ba, float_ba) t = Acos ()
-
 let ad () : (Ohlcv.t, float_ba) t = Ad ()
-
 let add () : (float_ba * float_ba, float_ba) t = Add ()
 
-let adosc ~fast_period ~slow_period : (Ohlcv.t, float_ba) t = 
+let adosc ~fast_period ~slow_period : (Ohlcv.t, float_ba) t =
   Adosc { fast_period; slow_period }
 
 let adx ~timeperiod : (Ohlcv.t, float_ba) t = Adx { timeperiod }
-
 let adxr ~timeperiod : (Ohlcv.t, float_ba) t = Adxr { timeperiod }
 
-let apo ~fast_period ~slow_period ~ma_type : (Ohlcv.t, float_ba) t = 
+let apo ~fast_period ~slow_period ~ma_type : (Ohlcv.t, float_ba) t =
   Apo { fast_period; slow_period; ma_type }
 
-let aroon ~timeperiod : (Ohlcv.t, float_ba * float_ba) t = 
-  Aroon { timeperiod }
-
-let aroonosc ~timeperiod : (Ohlcv.t, float_ba) t = 
-  Aroonosc { timeperiod }
-
+let aroon ~timeperiod : (Ohlcv.t, float_ba * float_ba) t = Aroon { timeperiod }
+let aroonosc ~timeperiod : (Ohlcv.t, float_ba) t = Aroonosc { timeperiod }
 let asin () : (float_ba, float_ba) t = Asin ()
-
 let atan () : (float_ba, float_ba) t = Atan ()
-
 let atr ~timeperiod : (Ohlcv.t, float_ba) t = Atr { timeperiod }
-
 let avgprice () : (Ohlcv.t, float_ba) t = Avgprice ()
-
 let avgdev ~timeperiod : (Ohlcv.t, float_ba) t = Avgdev { timeperiod }
 
-let bbands ~timeperiod ~nb_dev_up ~nb_dev_dn ~ma_type : (Ohlcv.t, float_ba * float_ba * float_ba) t = 
+let bbands ~timeperiod ~nb_dev_up ~nb_dev_dn ~ma_type :
+    (Ohlcv.t, float_ba * float_ba * float_ba) t =
   Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type }
 
 let beta ~timeperiod : (float_ba * float_ba, float_ba) t = Beta { timeperiod }
-
 let bop () : (Ohlcv.t, float_ba) t = Bop ()
-
 let cci ~timeperiod : (Ohlcv.t, float_ba) t = Cci { timeperiod }
-
 let cdl2crows () : (Ohlcv.t, int_ba) t = Cdl2crows ()
-
 let cdl3blackcrows () : (Ohlcv.t, int_ba) t = Cdl3blackcrows ()
-
 let cdl3inside () : (Ohlcv.t, int_ba) t = Cdl3inside ()
-
 let cdl3linestrike () : (Ohlcv.t, int_ba) t = Cdl3linestrike ()
-
 let cdl3outside () : (Ohlcv.t, int_ba) t = Cdl3outside ()
-
 let cdl3starsinsouth () : (Ohlcv.t, int_ba) t = Cdl3starsinsouth ()
-
 let cdl3whitesoldiers () : (Ohlcv.t, int_ba) t = Cdl3whitesoldiers ()
 
-let cdlabandonedbaby ~penetration : (Ohlcv.t, int_ba) t = 
+let cdlabandonedbaby ~penetration : (Ohlcv.t, int_ba) t =
   Cdlabandonedbaby { penetration }
 
 let cdladvanceblock () : (Ohlcv.t, int_ba) t = Cdladvanceblock ()
-
 let cdlbelthold () : (Ohlcv.t, int_ba) t = Cdlbelthold ()
-
 let cdlbreakaway () : (Ohlcv.t, int_ba) t = Cdlbreakaway ()
-
 let cdlclosingmarubozu () : (Ohlcv.t, int_ba) t = Cdlclosingmarubozu ()
-
 let cdlconcealbabyswall () : (Ohlcv.t, int_ba) t = Cdlconcealbabyswall ()
-
 let cdlcounterattack () : (Ohlcv.t, int_ba) t = Cdlcounterattack ()
 
-let cdldarkcloudcover ~penetration : (Ohlcv.t, int_ba) t = 
+let cdldarkcloudcover ~penetration : (Ohlcv.t, int_ba) t =
   Cdldarkcloudcover { penetration }
 
 let cdldoji () : (Ohlcv.t, int_ba) t = Cdldoji ()
-
 let cdldojistar () : (Ohlcv.t, int_ba) t = Cdldojistar ()
-
 let cdldragonflydoji () : (Ohlcv.t, int_ba) t = Cdldragonflydoji ()
-
 let cdlengulfing () : (Ohlcv.t, int_ba) t = Cdlengulfing ()
 
-let cdleveningdojistar ~penetration : (Ohlcv.t, int_ba) t = 
+let cdleveningdojistar ~penetration : (Ohlcv.t, int_ba) t =
   Cdleveningdojistar { penetration }
 
-let cdleveningstar ~penetration : (Ohlcv.t, int_ba) t = 
+let cdleveningstar ~penetration : (Ohlcv.t, int_ba) t =
   Cdleveningstar { penetration }
 
 let cdlgapsidesidewhite () : (Ohlcv.t, int_ba) t = Cdlgapsidesidewhite ()
-
 let cdlgravestonedoji () : (Ohlcv.t, int_ba) t = Cdlgravestonedoji ()
-
 let cdlhammer () : (Ohlcv.t, int_ba) t = Cdlhammer ()
-
 let cdlhangingman () : (Ohlcv.t, int_ba) t = Cdlhangingman ()
-
 let cdlharami () : (Ohlcv.t, int_ba) t = Cdlharami ()
-
 let cdlharamicross () : (Ohlcv.t, int_ba) t = Cdlharamicross ()
-
 let cdlhighwave () : (Ohlcv.t, int_ba) t = Cdlhighwave ()
-
 let cdlhikkake () : (Ohlcv.t, int_ba) t = Cdlhikkake ()
-
 let cdlhikkakemod () : (Ohlcv.t, int_ba) t = Cdlhikkakemod ()
-
 let cdlhomingpigeon () : (Ohlcv.t, int_ba) t = Cdlhomingpigeon ()
-
 let cdlidentical3crows () : (Ohlcv.t, int_ba) t = Cdlidentical3crows ()
-
 let cdlinneck () : (Ohlcv.t, int_ba) t = Cdlinneck ()
-
 let cdlinvertedhammer () : (Ohlcv.t, int_ba) t = Cdlinvertedhammer ()
-
 let cdlkicking () : (Ohlcv.t, int_ba) t = Cdlkicking ()
-
 let cdlkickingbylength () : (Ohlcv.t, int_ba) t = Cdlkickingbylength ()
-
 let cdlladderbottom () : (Ohlcv.t, int_ba) t = Cdlladderbottom ()
-
 let cdllongleggeddoji () : (Ohlcv.t, int_ba) t = Cdllongleggeddoji ()
-
 let cdllongline () : (Ohlcv.t, int_ba) t = Cdllongline ()
-
 let cdlmarubozu () : (Ohlcv.t, int_ba) t = Cdlmarubozu ()
-
 let cdlmatchinglow () : (Ohlcv.t, int_ba) t = Cdlmatchinglow ()
+let cdlmathold ~penetration : (Ohlcv.t, int_ba) t = Cdlmathold { penetration }
 
-let cdlmathold ~penetration : (Ohlcv.t, int_ba) t = 
-  Cdlmathold { penetration }
-
-let cdlmorningdojistar ~penetration : (Ohlcv.t, int_ba) t = 
+let cdlmorningdojistar ~penetration : (Ohlcv.t, int_ba) t =
   Cdlmorningdojistar { penetration }
 
-let cdlmorningstar ~penetration : (Ohlcv.t, int_ba) t = 
+let cdlmorningstar ~penetration : (Ohlcv.t, int_ba) t =
   Cdlmorningstar { penetration }
 
 let cdlonneck () : (Ohlcv.t, int_ba) t = Cdlonneck ()
-
 let cdlpiercing () : (Ohlcv.t, int_ba) t = Cdlpiercing ()
-
 let cdlrickshawman () : (Ohlcv.t, int_ba) t = Cdlrickshawman ()
-
 let cdlrisefall3methods () : (Ohlcv.t, int_ba) t = Cdlrisefall3methods ()
-
 let cdlseparatinglines () : (Ohlcv.t, int_ba) t = Cdlseparatinglines ()
-
 let cdlshootingstar () : (Ohlcv.t, int_ba) t = Cdlshootingstar ()
-
 let cdlshortline () : (Ohlcv.t, int_ba) t = Cdlshortline ()
-
 let cdlspinningtop () : (Ohlcv.t, int_ba) t = Cdlspinningtop ()
-
 let cdlstalledpattern () : (Ohlcv.t, int_ba) t = Cdlstalledpattern ()
-
 let cdlsticksandwich () : (Ohlcv.t, int_ba) t = Cdlsticksandwich ()
-
 let cdltakuri () : (Ohlcv.t, int_ba) t = Cdltakuri ()
-
 let cdltasukigap () : (Ohlcv.t, int_ba) t = Cdltasukigap ()
-
 let cdlthrusting () : (Ohlcv.t, int_ba) t = Cdlthrusting ()
-
 let cdltristar () : (Ohlcv.t, int_ba) t = Cdltristar ()
-
 let cdlunique3river () : (Ohlcv.t, int_ba) t = Cdlunique3river ()
-
 let cdlupsidegap2crows () : (Ohlcv.t, int_ba) t = Cdlupsidegap2crows ()
-
 let cdlxsidegap3methods () : (Ohlcv.t, int_ba) t = Cdlxsidegap3methods ()
-
 let ceil () : (float_ba, float_ba) t = Ceil ()
-
 let cmo ~timeperiod : (Ohlcv.t, float_ba) t = Cmo { timeperiod }
 
-let correl ~timeperiod : (float_ba * float_ba, float_ba) t = 
+let correl ~timeperiod : (float_ba * float_ba, float_ba) t =
   Correl { timeperiod }
 
 let cos () : (float_ba, float_ba) t = Cos ()
-
 let cosh () : (float_ba, float_ba) t = Cosh ()
-
 let dema ~timeperiod : (Ohlcv.t, float_ba) t = Dema { timeperiod }
-
 let div () : (float_ba * float_ba, float_ba) t = Div ()
-
 let dx ~timeperiod : (Ohlcv.t, float_ba) t = Dx { timeperiod }
-
 let ema ~timeperiod : (Ohlcv.t, float_ba) t = Ema { timeperiod }
-
 let exp () : (float_ba, float_ba) t = Exp ()
-
 let floor () : (float_ba, float_ba) t = Floor ()
-
 let ht_dcperiod () : (Ohlcv.t, float_ba) t = Ht_dcperiod ()
-
 let ht_dcphase () : (Ohlcv.t, float_ba) t = Ht_dcphase ()
-
 let ht_phasor () : (Ohlcv.t, float_ba * float_ba) t = Ht_phasor ()
-
 let ht_sine () : (Ohlcv.t, float_ba * float_ba) t = Ht_sine ()
-
 let ht_trendline () : (Ohlcv.t, float_ba) t = Ht_trendline ()
-
 let ht_trendmode () : (Ohlcv.t, int_ba) t = Ht_trendmode ()
-
 let imi ~timeperiod : (Ohlcv.t, float_ba) t = Imi { timeperiod }
-
 let kama ~timeperiod : (Ohlcv.t, float_ba) t = Kama { timeperiod }
+let linearreg ~timeperiod : (Ohlcv.t, float_ba) t = Linearreg { timeperiod }
 
-let linearreg ~timeperiod : (Ohlcv.t, float_ba) t = 
-  Linearreg { timeperiod }
-
-let linearreg_angle ~timeperiod : (Ohlcv.t, float_ba) t = 
+let linearreg_angle ~timeperiod : (Ohlcv.t, float_ba) t =
   Linearreg_angle { timeperiod }
 
-let linearreg_intercept ~timeperiod : (Ohlcv.t, float_ba) t = 
+let linearreg_intercept ~timeperiod : (Ohlcv.t, float_ba) t =
   Linearreg_intercept { timeperiod }
 
-let linearreg_slope ~timeperiod : (Ohlcv.t, float_ba) t = 
+let linearreg_slope ~timeperiod : (Ohlcv.t, float_ba) t =
   Linearreg_slope { timeperiod }
 
 let ln () : (float_ba, float_ba) t = Ln ()
-
 let log10 () : (float_ba, float_ba) t = Log10 ()
+let ma ~timeperiod ~ma_type : (Ohlcv.t, float_ba) t = Ma { timeperiod; ma_type }
 
-let ma ~timeperiod ~ma_type : (Ohlcv.t, float_ba) t = 
-  Ma { timeperiod; ma_type }
-
-let macd ~fast_period ~slow_period ~signal_period : (Ohlcv.t, float_ba * float_ba * float_ba) t = 
+let macd ~fast_period ~slow_period ~signal_period :
+    (Ohlcv.t, float_ba * float_ba * float_ba) t =
   Macd { fast_period; slow_period; signal_period }
 
-let macdext ~fast_period ~fast_ma_type ~slow_period ~slow_ma_type ~signal_period ~signal_ma_type : (Ohlcv.t, float_ba * float_ba * float_ba) t = 
-  Macdext { fast_period; fast_ma_type; slow_period; slow_ma_type; signal_period; signal_ma_type }
+let macdext ~fast_period ~fast_ma_type ~slow_period ~slow_ma_type ~signal_period
+    ~signal_ma_type : (Ohlcv.t, float_ba * float_ba * float_ba) t =
+  Macdext
+    {
+      fast_period;
+      fast_ma_type;
+      slow_period;
+      slow_ma_type;
+      signal_period;
+      signal_ma_type;
+    }
 
-let macdfix ~signal_period : (Ohlcv.t, float_ba * float_ba * float_ba) t = 
+let macdfix ~signal_period : (Ohlcv.t, float_ba * float_ba * float_ba) t =
   Macdfix { signal_period }
 
-let mama ~fast_limit ~slow_limit : (Ohlcv.t, float_ba * float_ba) t = 
+let mama ~fast_limit ~slow_limit : (Ohlcv.t, float_ba * float_ba) t =
   Mama { fast_limit; slow_limit }
 
-let mavp ~min_period ~max_period ~ma_type : (float_ba * float_ba, float_ba) t = 
+let mavp ~min_period ~max_period ~ma_type : (float_ba * float_ba, float_ba) t =
   Mavp { min_period; max_period; ma_type }
 
 let max ~timeperiod : (float_ba, float_ba) t = Max { timeperiod }
-
 let maxindex ~timeperiod : (float_ba, int_ba) t = Maxindex { timeperiod }
-
 let medprice () : (Ohlcv.t, float_ba) t = Medprice ()
-
 let mfi ~timeperiod : (Ohlcv.t, float_ba) t = Mfi { timeperiod }
-
 let midpoint ~timeperiod : (float_ba, float_ba) t = Midpoint { timeperiod }
-
 let midprice ~timeperiod : (Ohlcv.t, float_ba) t = Midprice { timeperiod }
-
 let min ~timeperiod : (float_ba, float_ba) t = Min { timeperiod }
-
 let minindex ~timeperiod : (float_ba, int_ba) t = Minindex { timeperiod }
 
-let minmax ~timeperiod : (float_ba, float_ba * float_ba) t = 
+let minmax ~timeperiod : (float_ba, float_ba * float_ba) t =
   Minmax { timeperiod }
 
-let minmaxindex ~timeperiod : (float_ba, int_ba * int_ba) t = 
+let minmaxindex ~timeperiod : (float_ba, int_ba * int_ba) t =
   Minmaxindex { timeperiod }
 
 let minus_di ~timeperiod : (Ohlcv.t, float_ba) t = Minus_di { timeperiod }
-
 let minus_dm ~timeperiod : (Ohlcv.t, float_ba) t = Minus_dm { timeperiod }
-
 let mom ~timeperiod : (Ohlcv.t, float_ba) t = Mom { timeperiod }
-
 let mult () : (float_ba * float_ba, float_ba) t = Mult ()
-
 let natr ~timeperiod : (Ohlcv.t, float_ba) t = Natr { timeperiod }
-
 let obv () : (Ohlcv.t, float_ba) t = Obv ()
-
 let plus_di ~timeperiod : (Ohlcv.t, float_ba) t = Plus_di { timeperiod }
-
 let plus_dm ~timeperiod : (Ohlcv.t, float_ba) t = Plus_dm { timeperiod }
 
-let ppo ~fast_period ~slow_period ~ma_type : (Ohlcv.t, float_ba) t = 
+let ppo ~fast_period ~slow_period ~ma_type : (Ohlcv.t, float_ba) t =
   Ppo { fast_period; slow_period; ma_type }
 
 let roc ~timeperiod : (Ohlcv.t, float_ba) t = Roc { timeperiod }
-
 let rocp ~timeperiod : (Ohlcv.t, float_ba) t = Rocp { timeperiod }
-
 let rocr ~timeperiod : (Ohlcv.t, float_ba) t = Rocr { timeperiod }
-
 let rocr100 ~timeperiod : (Ohlcv.t, float_ba) t = Rocr100 { timeperiod }
-
 let rsi ~timeperiod : (Ohlcv.t, float_ba) t = Rsi { timeperiod }
 
-let sar ~acceleration ~maximum : (Ohlcv.t, float_ba) t = 
+let sar ~acceleration ~maximum : (Ohlcv.t, float_ba) t =
   Sar { acceleration; maximum }
 
-let sarext ~start_value ~offset_on_reverse ~acceleration_init_long ~acceleration_long ~acceleration_max_long ~acceleration_init_short ~acceleration_short ~acceleration_max_short : (Ohlcv.t, float_ba) t = 
-  Sarext { start_value; offset_on_reverse; acceleration_init_long; acceleration_long; acceleration_max_long; acceleration_init_short; acceleration_short; acceleration_max_short }
+let sarext ~start_value ~offset_on_reverse ~acceleration_init_long
+    ~acceleration_long ~acceleration_max_long ~acceleration_init_short
+    ~acceleration_short ~acceleration_max_short : (Ohlcv.t, float_ba) t =
+  Sarext
+    {
+      start_value;
+      offset_on_reverse;
+      acceleration_init_long;
+      acceleration_long;
+      acceleration_max_long;
+      acceleration_init_short;
+      acceleration_short;
+      acceleration_max_short;
+    }
 
 let sin () : (float_ba, float_ba) t = Sin ()
-
 let sinh () : (float_ba, float_ba) t = Sinh ()
-
 let sma ~timeperiod : (Ohlcv.t, float_ba) t = Sma { timeperiod }
-
 let sqrt () : (float_ba, float_ba) t = Sqrt ()
 
-let stddev ~timeperiod ~nb_dev : (float_ba, float_ba) t = 
+let stddev ~timeperiod ~nb_dev : (float_ba, float_ba) t =
   Stddev { timeperiod; nb_dev }
 
-let stoch ~fast_k_period ~slow_k_period ~slow_k_ma_type ~slow_d_period ~slow_d_ma_type : (Ohlcv.t, float_ba * float_ba) t = 
-  Stoch { fast_k_period; slow_k_period; slow_k_ma_type; slow_d_period; slow_d_ma_type }
+let stoch ~fast_k_period ~slow_k_period ~slow_k_ma_type ~slow_d_period
+    ~slow_d_ma_type : (Ohlcv.t, float_ba * float_ba) t =
+  Stoch
+    {
+      fast_k_period;
+      slow_k_period;
+      slow_k_ma_type;
+      slow_d_period;
+      slow_d_ma_type;
+    }
 
-let stochf ~fast_k_period ~fast_d_period ~fast_d_ma_type : (Ohlcv.t, float_ba * float_ba) t = 
+let stochf ~fast_k_period ~fast_d_period ~fast_d_ma_type :
+    (Ohlcv.t, float_ba * float_ba) t =
   Stochf { fast_k_period; fast_d_period; fast_d_ma_type }
 
-let stochrsi ~timeperiod ~fast_k_period ~fast_d_period ~fast_d_ma_type : (Ohlcv.t, float_ba * float_ba) t = 
+let stochrsi ~timeperiod ~fast_k_period ~fast_d_period ~fast_d_ma_type :
+    (Ohlcv.t, float_ba * float_ba) t =
   Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type }
 
 let sub () : (float_ba * float_ba, float_ba) t = Sub ()
-
 let sum ~timeperiod : (Ohlcv.t, float_ba) t = Sum { timeperiod }
 
-let t3 ~timeperiod ~v_factor : (Ohlcv.t, float_ba) t = 
+let t3 ~timeperiod ~v_factor : (Ohlcv.t, float_ba) t =
   T3 { timeperiod; v_factor }
 
 let tan () : (float_ba, float_ba) t = Tan ()
-
 let tanh () : (float_ba, float_ba) t = Tanh ()
-
 let tema ~timeperiod : (Ohlcv.t, float_ba) t = Tema { timeperiod }
-
 let trange () : (Ohlcv.t, float_ba) t = Trange ()
-
 let trima ~timeperiod : (Ohlcv.t, float_ba) t = Trima { timeperiod }
-
 let trix ~timeperiod : (Ohlcv.t, float_ba) t = Trix { timeperiod }
-
 let tsf ~timeperiod : (Ohlcv.t, float_ba) t = Tsf { timeperiod }
-
 let typprice () : (Ohlcv.t, float_ba) t = Typprice ()
 
-let ultosc ~timeperiod1 ~timeperiod2 ~timeperiod3 : (Ohlcv.t, float_ba) t = 
+let ultosc ~timeperiod1 ~timeperiod2 ~timeperiod3 : (Ohlcv.t, float_ba) t =
   Ultosc { timeperiod1; timeperiod2; timeperiod3 }
 
-let var ~timeperiod ~nb_dev : (Ohlcv.t, float_ba) t = 
-  Var { timeperiod; nb_dev }
-
+let var ~timeperiod ~nb_dev : (Ohlcv.t, float_ba) t = Var { timeperiod; nb_dev }
 let wclprice () : (Ohlcv.t, float_ba) t = Wclprice ()
-
 let willr ~timeperiod : (Ohlcv.t, float_ba) t = Willr { timeperiod }
-
 let wma ~timeperiod : (Ohlcv.t, float_ba) t = Wma { timeperiod }
 
 let lookback : type a b. (a, b) t -> int =

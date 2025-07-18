@@ -1,66 +1,149 @@
 module Float = struct
   type t =
-    | UpperBBand
-    | MiddleBBand
-    | LowerBBand
-    | Dema
-    | Ema
+    | UpperBBand of {
+        timeperiod : int;
+        nb_dev_up : float;
+        nb_dev_dn : float;
+        ma_type : Ma_type.t;
+      }
+    | MiddleBBand of {
+        timeperiod : int;
+        nb_dev_up : float;
+        nb_dev_dn : float;
+        ma_type : Ma_type.t;
+      }
+    | LowerBBand of {
+        timeperiod : int;
+        nb_dev_up : float;
+        nb_dev_dn : float;
+        ma_type : Ma_type.t;
+      }
+    | Dema of { timeperiod : int }
+    | Ema of { timeperiod : int }
     | HtTrendline
-    | Kama
-    | Ma
-    | Mama
-    | Mavp
-    | Midpoint
-    | Midprice
-    | Sar
-    | Sarext
-    | Sma
-    | T3
-    | Tema
-    | Trima
-    | Wma
-    | Adx
-    | Adxr
-    | Apo
-    | AroonOsc
-    | Cci
-    | Cmo
-    | Dx
-    | Macd_MACD
-    | Macd_MACDSignal
-    | Macd_MACDHist
-    | MacdExt_MACD
-    | MacdExt_MACDSignal
-    | MacdExt_MACDHist
-    | MacdFix_MACD
-    | MacdFix_MACDSignal
-    | MacdFix_MACDHist
-    | Mfi
-    | MinusDI
-    | MinusDM
-    | Mom
-    | PlusDI
-    | PlusDM
-    | Ppo
-    | Roc
-    | Rocp
-    | Rocr
-    | Rocr100
-    | Rsi
-    | Stoch_SlowK
-    | Stoch_SlowD
-    | StochF_FastK
-    | StochF_FastD
-    | StochRsi_FastK
-    | StochRsi_FastD
-    | Trix
-    | Ultosc
-    | Willr
+    | Kama of { timeperiod : int }
+    | Ma of { timeperiod : int; ma_type : Ma_type.t }
+    | Mama of { fast_limit : float; slow_limit : float }
+    | Mavp of { min_period : int; max_period : int; ma_type : Ma_type.t }
+    | Midpoint of { timeperiod : int }
+    | Midprice of { timeperiod : int }
+    | Sar of { acceleration : float; maximum : float }
+    | Sarext of {
+        start_value : float;
+        offset_on_reverse : float;
+        acceleration_init_long : float;
+        acceleration_long : float;
+        acceleration_max_long : float;
+        acceleration_init_short : float;
+        acceleration_short : float;
+        acceleration_max_short : float;
+      }
+    | Sma of { timeperiod : int }
+    | T3 of { timeperiod : int; v_factor : float }
+    | Tema of { timeperiod : int }
+    | Trima of { timeperiod : int }
+    | Wma of { timeperiod : int }
+    | Adx of { timeperiod : int }
+    | Adxr of { timeperiod : int }
+    | Apo of { fast_period : int; slow_period : int; ma_type : Ma_type.t }
+    | AroonOsc of { timeperiod : int }
+    | Cci of { timeperiod : int }
+    | Cmo of { timeperiod : int }
+    | Dx of { timeperiod : int }
+    | Macd_MACD of { fast_period : int; slow_period : int; signal_period : int }
+    | Macd_MACDSignal of {
+        fast_period : int;
+        slow_period : int;
+        signal_period : int;
+      }
+    | Macd_MACDHist of {
+        fast_period : int;
+        slow_period : int;
+        signal_period : int;
+      }
+    | MacdExt_MACD of {
+        fast_period : int;
+        fast_ma_type : Ma_type.t;
+        slow_period : int;
+        slow_ma_type : Ma_type.t;
+        signal_period : int;
+        signal_ma_type : Ma_type.t;
+      }
+    | MacdExt_MACDSignal of {
+        fast_period : int;
+        fast_ma_type : Ma_type.t;
+        slow_period : int;
+        slow_ma_type : Ma_type.t;
+        signal_period : int;
+        signal_ma_type : Ma_type.t;
+      }
+    | MacdExt_MACDHist of {
+        fast_period : int;
+        fast_ma_type : Ma_type.t;
+        slow_period : int;
+        slow_ma_type : Ma_type.t;
+        signal_period : int;
+        signal_ma_type : Ma_type.t;
+      }
+    | MacdFix_MACD of { signal_period : int }
+    | MacdFix_MACDSignal of { signal_period : int }
+    | MacdFix_MACDHist of { signal_period : int }
+    | Mfi of { timeperiod : int }
+    | MinusDI of { timeperiod : int }
+    | MinusDM of { timeperiod : int }
+    | Mom of { timeperiod : int }
+    | PlusDI of { timeperiod : int }
+    | PlusDM of { timeperiod : int }
+    | Ppo of { fast_period : int; slow_period : int; ma_type : Ma_type.t }
+    | Roc of { timeperiod : int }
+    | Rocp of { timeperiod : int }
+    | Rocr of { timeperiod : int }
+    | Rocr100 of { timeperiod : int }
+    | Rsi of { timeperiod : int }
+    | Stoch_SlowK of {
+        fast_k_period : int;
+        slow_k_period : int;
+        slow_k_ma_type : Ma_type.t;
+        slow_d_period : int;
+        slow_d_ma_type : Ma_type.t;
+      }
+    | Stoch_SlowD of {
+        fast_k_period : int;
+        slow_k_period : int;
+        slow_k_ma_type : Ma_type.t;
+        slow_d_period : int;
+        slow_d_ma_type : Ma_type.t;
+      }
+    | StochF_FastK of {
+        fast_k_period : int;
+        fast_d_period : int;
+        fast_d_ma_type : Ma_type.t;
+      }
+    | StochF_FastD of {
+        fast_k_period : int;
+        fast_d_period : int;
+        fast_d_ma_type : Ma_type.t;
+      }
+    | StochRsi_FastK of {
+        timeperiod : int;
+        fast_k_period : int;
+        fast_d_period : int;
+        fast_d_ma_type : Ma_type.t;
+      }
+    | StochRsi_FastD of {
+        timeperiod : int;
+        fast_k_period : int;
+        fast_d_period : int;
+        fast_d_ma_type : Ma_type.t;
+      }
+    | Trix of { timeperiod : int }
+    | Ultosc of { timeperiod1 : int; timeperiod2 : int; timeperiod3 : int }
+    | Willr of { timeperiod : int }
     | Ad
-    | Adosc
+    | Adosc of { fast_period : int; slow_period : int }
     | Obv
-    | Atr
-    | Natr
+    | Atr of { timeperiod : int }
+    | Natr of { timeperiod : int }
     | Trange
     | AvgPrice
     | MedPrice
@@ -72,19 +155,19 @@ module Float = struct
     | HtPhasor_Quadrature
     | HtSine_Sine
     | HtSine_LeadSine
-    | Aroon_Down
-    | Aroon_Up
-    | Beta
-    | Correl
-    | Linearreg
-    | LinearregAngle
-    | LinearregIntercept
-    | LinearregSlope
-    | MinMax_Min
-    | MinMax_Max
-    | Stddev
-    | Tsf
-    | Var
+    | Aroon_Down of { timeperiod : int }
+    | Aroon_Up of { timeperiod : int }
+    | Beta of { timeperiod : int }
+    | Correl of { timeperiod : int }
+    | Linearreg of { timeperiod : int }
+    | LinearregAngle of { timeperiod : int }
+    | LinearregIntercept of { timeperiod : int }
+    | LinearregSlope of { timeperiod : int }
+    | MinMax_Min of { timeperiod : int }
+    | MinMax_Max of { timeperiod : int }
+    | Stddev of { timeperiod : int; nb_dev : float }
+    | Tsf of { timeperiod : int }
+    | Var of { timeperiod : int; nb_dev : float }
     | Acos
     | Asin
     | Atan
@@ -102,295 +185,79 @@ module Float = struct
     | Tanh
     | Add
     | Div
-    | Max
-    | Min
+    | Max of { timeperiod : int }
+    | Min of { timeperiod : int }
     | Mult
     | Sub
-    | Sum
-
-  let of_int = function
-    | 0 -> UpperBBand
-    | 1 -> MiddleBBand
-    | 2 -> LowerBBand
-    | 3 -> Dema
-    | 4 -> Ema
-    | 5 -> HtTrendline
-    | 6 -> Kama
-    | 7 -> Ma
-    | 8 -> Mama
-    | 9 -> Mavp
-    | 10 -> Midpoint
-    | 11 -> Midprice
-    | 12 -> Sar
-    | 13 -> Sarext
-    | 14 -> Sma
-    | 15 -> T3
-    | 16 -> Tema
-    | 17 -> Trima
-    | 18 -> Wma
-    | 19 -> Adx
-    | 20 -> Adxr
-    | 21 -> Apo
-    | 22 -> AroonOsc
-    | 23 -> Cci
-    | 24 -> Cmo
-    | 25 -> Dx
-    | 26 -> Macd_MACD
-    | 27 -> Macd_MACDSignal
-    | 28 -> Macd_MACDHist
-    | 29 -> MacdExt_MACD
-    | 30 -> MacdExt_MACDSignal
-    | 31 -> MacdExt_MACDHist
-    | 32 -> MacdFix_MACD
-    | 33 -> MacdFix_MACDSignal
-    | 34 -> MacdFix_MACDHist
-    | 35 -> Mfi
-    | 36 -> MinusDI
-    | 37 -> MinusDM
-    | 38 -> Mom
-    | 39 -> PlusDI
-    | 40 -> PlusDM
-    | 41 -> Ppo
-    | 42 -> Roc
-    | 43 -> Rocp
-    | 44 -> Rocr
-    | 45 -> Rocr100
-    | 46 -> Rsi
-    | 47 -> Stoch_SlowK
-    | 48 -> Stoch_SlowD
-    | 49 -> StochF_FastK
-    | 50 -> StochF_FastD
-    | 51 -> StochRsi_FastK
-    | 52 -> StochRsi_FastD
-    | 53 -> Trix
-    | 54 -> Ultosc
-    | 55 -> Willr
-    | 56 -> Ad
-    | 57 -> Adosc
-    | 58 -> Obv
-    | 59 -> Atr
-    | 60 -> Natr
-    | 61 -> Trange
-    | 62 -> AvgPrice
-    | 63 -> MedPrice
-    | 64 -> TypPrice
-    | 65 -> WclPrice
-    | 66 -> HtDcPeriod
-    | 67 -> HtDcPhase
-    | 68 -> HtPhasor_InPhase
-    | 69 -> HtPhasor_Quadrature
-    | 70 -> HtSine_Sine
-    | 71 -> HtSine_LeadSine
-    (* | 72 -> HtTrendMode *)
-    | 73 -> Aroon_Down
-    | 74 -> Aroon_Up
-    | 75 -> Beta
-    | 76 -> Correl
-    | 77 -> Linearreg
-    | 78 -> LinearregAngle
-    | 79 -> LinearregIntercept
-    | 80 -> LinearregSlope
-    | 81 -> MinMax_Min
-    | 82 -> MinMax_Max
-    | 83 -> Stddev
-    | 84 -> Tsf
-    | 85 -> Var
-    | 86 -> Acos
-    | 87 -> Asin
-    | 88 -> Atan
-    | 89 -> Ceil
-    | 90 -> Cos
-    | 91 -> Cosh
-    | 92 -> Exp
-    | 93 -> Floor
-    | 94 -> Ln
-    | 95 -> Log10
-    | 96 -> Sin
-    | 97 -> Sinh
-    | 98 -> Sqrt
-    | 99 -> Tan
-    | 100 -> Tanh
-    | 101 -> Add
-    | 102 -> Div
-    | 103 -> Max
-    | 104 -> Min
-    | 105 -> Mult
-    | 106 -> Sub
-    | 107 -> Sum
-    | _ -> failwith "Unknown float indicator"
-
-  let to_int = function
-    | UpperBBand -> 0
-    | MiddleBBand -> 1
-    | LowerBBand -> 2
-    | Dema -> 3
-    | Ema -> 4
-    | HtTrendline -> 5
-    | Kama -> 6
-    | Ma -> 7
-    | Mama -> 8
-    | Mavp -> 9
-    | Midpoint -> 10
-    | Midprice -> 11
-    | Sar -> 12
-    | Sarext -> 13
-    | Sma -> 14
-    | T3 -> 15
-    | Tema -> 16
-    | Trima -> 17
-    | Wma -> 18
-    | Adx -> 19
-    | Adxr -> 20
-    | Apo -> 21
-    | AroonOsc -> 22
-    | Cci -> 23
-    | Cmo -> 24
-    | Dx -> 25
-    | Macd_MACD -> 26
-    | Macd_MACDSignal -> 27
-    | Macd_MACDHist -> 28
-    | MacdExt_MACD -> 29
-    | MacdExt_MACDSignal -> 30
-    | MacdExt_MACDHist -> 31
-    | MacdFix_MACD -> 32
-    | MacdFix_MACDSignal -> 33
-    | MacdFix_MACDHist -> 34
-    | Mfi -> 35
-    | MinusDI -> 36
-    | MinusDM -> 37
-    | Mom -> 38
-    | PlusDI -> 39
-    | PlusDM -> 40
-    | Ppo -> 41
-    | Roc -> 42
-    | Rocp -> 43
-    | Rocr -> 44
-    | Rocr100 -> 45
-    | Rsi -> 46
-    | Stoch_SlowK -> 47
-    | Stoch_SlowD -> 48
-    | StochF_FastK -> 49
-    | StochF_FastD -> 50
-    | StochRsi_FastK -> 51
-    | StochRsi_FastD -> 52
-    | Trix -> 53
-    | Ultosc -> 54
-    | Willr -> 55
-    | Ad -> 56
-    | Adosc -> 57
-    | Obv -> 58
-    | Atr -> 59
-    | Natr -> 60
-    | Trange -> 61
-    | AvgPrice -> 62
-    | MedPrice -> 63
-    | TypPrice -> 64
-    | WclPrice -> 65
-    | HtDcPeriod -> 66
-    | HtDcPhase -> 67
-    | HtPhasor_InPhase -> 68
-    | HtPhasor_Quadrature -> 69
-    | HtSine_Sine -> 70
-    | HtSine_LeadSine -> 71
-    (* | HtTrendMode -> 72 *)
-    | Aroon_Down -> 73
-    | Aroon_Up -> 74
-    | Beta -> 75
-    | Correl -> 76
-    | Linearreg -> 77
-    | LinearregAngle -> 78
-    | LinearregIntercept -> 79
-    | LinearregSlope -> 80
-    | MinMax_Min -> 81
-    | MinMax_Max -> 82
-    | Stddev -> 83
-    | Tsf -> 84
-    | Var -> 85
-    | Acos -> 86
-    | Asin -> 87
-    | Atan -> 88
-    | Ceil -> 89
-    | Cos -> 90
-    | Cosh -> 91
-    | Exp -> 92
-    | Floor -> 93
-    | Ln -> 94
-    | Log10 -> 95
-    | Sin -> 96
-    | Sinh -> 97
-    | Sqrt -> 98
-    | Tan -> 99
-    | Tanh -> 100
-    | Add -> 101
-    | Div -> 102
-    | Max -> 103
-    | Min -> 104
-    | Mult -> 105
-    | Sub -> 106
-    | Sum -> 107
+    | Sum of { timeperiod : int }
+    | Avgdev of { timeperiod : int }
+    | Bop
+    | Imi of { timeperiod : int }
+    | Mama_MAMA of { fast_limit : float; slow_limit : float }
+    | Mama_FAMA of { fast_limit : float; slow_limit : float }
 
   let to_string = function
-    | UpperBBand -> "UpperBBand"
-    | MiddleBBand -> "MiddleBBand"
-    | LowerBBand -> "LowerBBand"
-    | Dema -> "Dema"
-    | Ema -> "Ema"
+    | UpperBBand _ -> "UpperBBand"
+    | MiddleBBand _ -> "MiddleBBand"
+    | LowerBBand _ -> "LowerBBand"
+    | Dema _ -> "Dema"
+    | Ema _ -> "Ema"
     | HtTrendline -> "HtTrendline"
-    | Kama -> "Kama"
-    | Ma -> "Ma"
-    | Mama -> "Mama"
-    | Mavp -> "Mavp"
-    | Midpoint -> "Midpoint"
-    | Midprice -> "Midprice"
-    | Sar -> "Sar"
-    | Sarext -> "Sarext"
-    | Sma -> "Sma"
-    | T3 -> "T3"
-    | Tema -> "Tema"
-    | Trima -> "Trima"
-    | Wma -> "Wma"
-    | Adx -> "Adx"
-    | Adxr -> "Adxr"
-    | Apo -> "Apo"
-    | AroonOsc -> "AroonOsc"
-    | Cci -> "Cci"
-    | Cmo -> "Cmo"
-    | Dx -> "Dx"
-    | Macd_MACD -> "Macd_MACD"
-    | Macd_MACDSignal -> "Macd_MACDSignal"
-    | Macd_MACDHist -> "Macd_MACDHist"
-    | MacdExt_MACD -> "MacdExt_MACD"
-    | MacdExt_MACDSignal -> "MacdExt_MACDSignal"
-    | MacdExt_MACDHist -> "MacdExt_MACDHist"
-    | MacdFix_MACD -> "MacdFix_MACD"
-    | MacdFix_MACDSignal -> "MacdFix_MACDSignal"
-    | MacdFix_MACDHist -> "MacdFix_MACDHist"
-    | Mfi -> "Mfi"
-    | MinusDI -> "MinusDI"
-    | MinusDM -> "MinusDM"
-    | Mom -> "Mom"
-    | PlusDI -> "PlusDI"
-    | PlusDM -> "PlusDM"
-    | Ppo -> "Ppo"
-    | Roc -> "Roc"
-    | Rocp -> "Rocp"
-    | Rocr -> "Rocr"
-    | Rocr100 -> "Rocr100"
-    | Rsi -> "Rsi"
-    | Stoch_SlowK -> "Stoch_SlowK"
-    | Stoch_SlowD -> "Stoch_SlowD"
-    | StochF_FastK -> "StochF_FastK"
-    | StochF_FastD -> "StochF_FastD"
-    | StochRsi_FastK -> "StochRsi_FastK"
-    | StochRsi_FastD -> "StochRsi_FastD"
-    | Trix -> "Trix"
-    | Ultosc -> "Ultosc"
-    | Willr -> "Willr"
+    | Kama _ -> "Kama"
+    | Ma _ -> "Ma"
+    | Mama _ -> "Mama"
+    | Mavp _ -> "Mavp"
+    | Midpoint _ -> "Midpoint"
+    | Midprice _ -> "Midprice"
+    | Sar _ -> "Sar"
+    | Sarext _ -> "Sarext"
+    | Sma _ -> "Sma"
+    | T3 _ -> "T3"
+    | Tema _ -> "Tema"
+    | Trima _ -> "Trima"
+    | Wma _ -> "Wma"
+    | Adx _ -> "Adx"
+    | Adxr _ -> "Adxr"
+    | Apo _ -> "Apo"
+    | AroonOsc _ -> "AroonOsc"
+    | Cci _ -> "Cci"
+    | Cmo _ -> "Cmo"
+    | Dx _ -> "Dx"
+    | Macd_MACD _ -> "Macd_MACD"
+    | Macd_MACDSignal _ -> "Macd_MACDSignal"
+    | Macd_MACDHist _ -> "Macd_MACDHist"
+    | MacdExt_MACD _ -> "MacdExt_MACD"
+    | MacdExt_MACDSignal _ -> "MacdExt_MACDSignal"
+    | MacdExt_MACDHist _ -> "MacdExt_MACDHist"
+    | MacdFix_MACD _ -> "MacdFix_MACD"
+    | MacdFix_MACDSignal _ -> "MacdFix_MACDSignal"
+    | MacdFix_MACDHist _ -> "MacdFix_MACDHist"
+    | Mfi _ -> "Mfi"
+    | MinusDI _ -> "MinusDI"
+    | MinusDM _ -> "MinusDM"
+    | Mom _ -> "Mom"
+    | PlusDI _ -> "PlusDI"
+    | PlusDM _ -> "PlusDM"
+    | Ppo _ -> "Ppo"
+    | Roc _ -> "Roc"
+    | Rocp _ -> "Rocp"
+    | Rocr _ -> "Rocr"
+    | Rocr100 _ -> "Rocr100"
+    | Rsi _ -> "Rsi"
+    | Stoch_SlowK _ -> "Stoch_SlowK"
+    | Stoch_SlowD _ -> "Stoch_SlowD"
+    | StochF_FastK _ -> "StochF_FastK"
+    | StochF_FastD _ -> "StochF_FastD"
+    | StochRsi_FastK _ -> "StochRsi_FastK"
+    | StochRsi_FastD _ -> "StochRsi_FastD"
+    | Trix _ -> "Trix"
+    | Ultosc _ -> "Ultosc"
+    | Willr _ -> "Willr"
     | Ad -> "Ad"
-    | Adosc -> "Adosc"
+    | Adosc _ -> "Adosc"
     | Obv -> "Obv"
-    | Atr -> "Atr"
-    | Natr -> "Natr"
+    | Atr _ -> "Atr"
+    | Natr _ -> "Natr"
     | Trange -> "Trange"
     | AvgPrice -> "AvgPrice"
     | MedPrice -> "MedPrice"
@@ -402,20 +269,19 @@ module Float = struct
     | HtPhasor_Quadrature -> "HtPhasor_Quadrature"
     | HtSine_Sine -> "HtSine_Sine"
     | HtSine_LeadSine -> "HtSine_LeadSine"
-    (* | HtTrendMode -> "HtTrendMode" *)
-    | Aroon_Down -> "Aroon_Down"
-    | Aroon_Up -> "Aroon_Up"
-    | Beta -> "Beta"
-    | Correl -> "Correl"
-    | Linearreg -> "Linearreg"
-    | LinearregAngle -> "LinearregAngle"
-    | LinearregIntercept -> "LinearregIntercept"
-    | LinearregSlope -> "LinearregSlope"
-    | MinMax_Min -> "MinMax_Min"
-    | MinMax_Max -> "MinMax_Max"
-    | Stddev -> "Stddev"
-    | Tsf -> "Tsf"
-    | Var -> "Var"
+    | Aroon_Down _ -> "Aroon_Down"
+    | Aroon_Up _ -> "Aroon_Up"
+    | Beta _ -> "Beta"
+    | Correl _ -> "Correl"
+    | Linearreg _ -> "Linearreg"
+    | LinearregAngle _ -> "LinearregAngle"
+    | LinearregIntercept _ -> "LinearregIntercept"
+    | LinearregSlope _ -> "LinearregSlope"
+    | MinMax_Min _ -> "MinMax_Min"
+    | MinMax_Max _ -> "MinMax_Max"
+    | Stddev _ -> "Stddev"
+    | Tsf _ -> "Tsf"
+    | Var _ -> "Var"
     | Acos -> "Acos"
     | Asin -> "Asin"
     | Atan -> "Atan"
@@ -433,11 +299,16 @@ module Float = struct
     | Tanh -> "Tanh"
     | Add -> "Add"
     | Div -> "Div"
-    | Max -> "Max"
-    | Min -> "Min"
+    | Max _ -> "Max"
+    | Min _ -> "Min"
     | Mult -> "Mult"
     | Sub -> "Sub"
-    | Sum -> "Sum"
+    | Sum _ -> "Sum"
+    | Avgdev _ -> "Avgdev"
+    | Bop -> "Bop"
+    | Imi _ -> "Imi"
+    | Mama_MAMA _ -> "Mama_MAMA"
+    | Mama_FAMA _ -> "Mama_FAMA"
 end
 
 module Int = struct
@@ -450,20 +321,20 @@ module Int = struct
     | Cdl3Outside
     | Cdl3StarsInSouth
     | Cdl3WhiteSoldiers
-    | CdlAbandonedBaby
+    | CdlAbandonedBaby of { penetration : float }
     | CdlAdvanceBlock
     | CdlBeltHold
     | CdlBreakaway
     | CdlClosingMarubozu
     | CdlConcealBabySwall
     | CdlCounterAttack
-    | CdlDarkCloudCover
+    | CdlDarkCloudCover of { penetration : float }
     | CdlDoji
     | CdlDojiStar
     | CdlDragonflyDoji
     | CdlEngulfing
-    | CdlEveningDojiStar
-    | CdlEveningStar
+    | CdlEveningDojiStar of { penetration : float }
+    | CdlEveningStar of { penetration : float }
     | CdlGapSideSideWhite
     | CdlGravestoneDoji
     | CdlHammer
@@ -484,9 +355,9 @@ module Int = struct
     | CdlLongLine
     | CdlMarubozu
     | CdlMatchingLow
-    | CdlMatHold
-    | CdlMorningDojiStar
-    | CdlMorningStar
+    | CdlMatHold of { penetration : float }
+    | CdlMorningDojiStar of { penetration : float }
+    | CdlMorningStar of { penetration : float }
     | CdlOnNeck
     | CdlPiercing
     | CdlRickshawMan
@@ -504,147 +375,10 @@ module Int = struct
     | CdlUnique3River
     | CdlUpsideGap2Crows
     | CdlXSideGap3Methods
-    | MaxIndex
-    | MinIndex
-    | MinMaxIndex_Min
-    | MinMaxIndex_Max
-
-  let of_int = function
-    | 0 -> Cdl2Crows
-    | 1 -> Cdl3BlackCrows
-    | 2 -> Cdl3Inside
-    | 3 -> Cdl3LineStrike
-    | 4 -> Cdl3Outside
-    | 5 -> Cdl3StarsInSouth
-    | 6 -> Cdl3WhiteSoldiers
-    | 7 -> CdlAbandonedBaby
-    | 8 -> CdlAdvanceBlock
-    | 9 -> CdlBeltHold
-    | 10 -> CdlBreakaway
-    | 11 -> CdlClosingMarubozu
-    | 12 -> CdlConcealBabySwall
-    | 13 -> CdlCounterAttack
-    | 14 -> CdlDarkCloudCover
-    | 15 -> CdlDoji
-    | 16 -> CdlDojiStar
-    | 17 -> CdlDragonflyDoji
-    | 18 -> CdlEngulfing
-    | 19 -> CdlEveningDojiStar
-    | 20 -> CdlEveningStar
-    | 21 -> CdlGapSideSideWhite
-    | 22 -> CdlGravestoneDoji
-    | 23 -> CdlHammer
-    | 24 -> CdlHangingMan
-    | 25 -> CdlHarami
-    | 26 -> CdlHaramiCross
-    | 27 -> CdlHighWave
-    | 28 -> CdlHikkake
-    | 29 -> CdlHikkakeMod
-    | 30 -> CdlHomingPigeon
-    | 31 -> CdlIdentical3Crows
-    | 32 -> CdlInNeck
-    | 33 -> CdlInvertedHammer
-    | 34 -> CdlKicking
-    | 35 -> CdlKickingByLength
-    | 36 -> CdlLadderBottom
-    | 37 -> CdlLongLeggedDoji
-    | 38 -> CdlLongLine
-    | 39 -> CdlMarubozu
-    | 40 -> CdlMatchingLow
-    | 41 -> CdlMatHold
-    | 42 -> CdlMorningDojiStar
-    | 43 -> CdlMorningStar
-    | 44 -> CdlOnNeck
-    | 45 -> CdlPiercing
-    | 46 -> CdlRickshawMan
-    | 47 -> CdlRiseFall3Methods
-    | 48 -> CdlSeparatingLines
-    | 49 -> CdlShootingStar
-    | 50 -> CdlShortLine
-    | 51 -> CdlSpinningTop
-    | 52 -> CdlStalledPattern
-    | 53 -> CdlStickSandwich
-    | 54 -> CdlTakuri
-    | 55 -> CdlTasukiGap
-    | 56 -> CdlThrusting
-    | 57 -> CdlTristar
-    | 58 -> CdlUnique3River
-    | 59 -> CdlUpsideGap2Crows
-    | 60 -> CdlXSideGap3Methods
-    | 61 -> MaxIndex
-    | 62 -> MinIndex
-    | 63 -> MinMaxIndex_Min
-    | 64 -> MinMaxIndex_Max
-    | 65 -> HtTrendMode
-    | _ -> failwith "Unknown int indicator"
-
-  let to_int = function
-    | Cdl2Crows -> 0
-    | Cdl3BlackCrows -> 1
-    | Cdl3Inside -> 2
-    | Cdl3LineStrike -> 3
-    | Cdl3Outside -> 4
-    | Cdl3StarsInSouth -> 5
-    | Cdl3WhiteSoldiers -> 6
-    | CdlAbandonedBaby -> 7
-    | CdlAdvanceBlock -> 8
-    | CdlBeltHold -> 9
-    | CdlBreakaway -> 10
-    | CdlClosingMarubozu -> 11
-    | CdlConcealBabySwall -> 12
-    | CdlCounterAttack -> 13
-    | CdlDarkCloudCover -> 14
-    | CdlDoji -> 15
-    | CdlDojiStar -> 16
-    | CdlDragonflyDoji -> 17
-    | CdlEngulfing -> 18
-    | CdlEveningDojiStar -> 19
-    | CdlEveningStar -> 20
-    | CdlGapSideSideWhite -> 21
-    | CdlGravestoneDoji -> 22
-    | CdlHammer -> 23
-    | CdlHangingMan -> 24
-    | CdlHarami -> 25
-    | CdlHaramiCross -> 26
-    | CdlHighWave -> 27
-    | CdlHikkake -> 28
-    | CdlHikkakeMod -> 29
-    | CdlHomingPigeon -> 30
-    | CdlIdentical3Crows -> 31
-    | CdlInNeck -> 32
-    | CdlInvertedHammer -> 33
-    | CdlKicking -> 34
-    | CdlKickingByLength -> 35
-    | CdlLadderBottom -> 36
-    | CdlLongLeggedDoji -> 37
-    | CdlLongLine -> 38
-    | CdlMarubozu -> 39
-    | CdlMatchingLow -> 40
-    | CdlMatHold -> 41
-    | CdlMorningDojiStar -> 42
-    | CdlMorningStar -> 43
-    | CdlOnNeck -> 44
-    | CdlPiercing -> 45
-    | CdlRickshawMan -> 46
-    | CdlRiseFall3Methods -> 47
-    | CdlSeparatingLines -> 48
-    | CdlShootingStar -> 49
-    | CdlShortLine -> 50
-    | CdlSpinningTop -> 51
-    | CdlStalledPattern -> 52
-    | CdlStickSandwich -> 53
-    | CdlTakuri -> 54
-    | CdlTasukiGap -> 55
-    | CdlThrusting -> 56
-    | CdlTristar -> 57
-    | CdlUnique3River -> 58
-    | CdlUpsideGap2Crows -> 59
-    | CdlXSideGap3Methods -> 60
-    | MaxIndex -> 61
-    | MinIndex -> 62
-    | MinMaxIndex_Min -> 63
-    | MinMaxIndex_Max -> 64
-    | HtTrendMode -> 65
+    | MaxIndex of { timeperiod : int }
+    | MinIndex of { timeperiod : int }
+    | MinMaxIndex_Min of { timeperiod : int }
+    | MinMaxIndex_Max of { timeperiod : int }
 
   let to_string = function
     | HtTrendMode -> "HtTrendMode"
@@ -655,20 +389,20 @@ module Int = struct
     | Cdl3Outside -> "Cdl3Outside"
     | Cdl3StarsInSouth -> "Cdl3StarsInSouth"
     | Cdl3WhiteSoldiers -> "Cdl3WhiteSoldiers"
-    | CdlAbandonedBaby -> "CdlAbandonedBaby"
+    | CdlAbandonedBaby _ -> "CdlAbandonedBaby"
     | CdlAdvanceBlock -> "CdlAdvanceBlock"
     | CdlBeltHold -> "CdlBeltHold"
     | CdlBreakaway -> "CdlBreakaway"
     | CdlClosingMarubozu -> "CdlClosingMarubozu"
     | CdlConcealBabySwall -> "CdlConcealBabySwall"
     | CdlCounterAttack -> "CdlCounterAttack"
-    | CdlDarkCloudCover -> "CdlDarkCloudCover"
+    | CdlDarkCloudCover _ -> "CdlDarkCloudCover"
     | CdlDoji -> "CdlDoji"
     | CdlDojiStar -> "CdlDojiStar"
     | CdlDragonflyDoji -> "CdlDragonflyDoji"
     | CdlEngulfing -> "CdlEngulfing"
-    | CdlEveningDojiStar -> "CdlEveningDojiStar"
-    | CdlEveningStar -> "CdlEveningStar"
+    | CdlEveningDojiStar _ -> "CdlEveningDojiStar"
+    | CdlEveningStar _ -> "CdlEveningStar"
     | CdlGapSideSideWhite -> "CdlGapSideSideWhite"
     | CdlGravestoneDoji -> "CdlGravestoneDoji"
     | CdlHammer -> "CdlHammer"
@@ -689,9 +423,9 @@ module Int = struct
     | CdlLongLine -> "CdlLongLine"
     | CdlMarubozu -> "CdlMarubozu"
     | CdlMatchingLow -> "CdlMatchingLow"
-    | CdlMatHold -> "CdlMatHold"
-    | CdlMorningDojiStar -> "CdlMorningDojiStar"
-    | CdlMorningStar -> "CdlMorningStar"
+    | CdlMatHold _ -> "CdlMatHold"
+    | CdlMorningDojiStar _ -> "CdlMorningDojiStar"
+    | CdlMorningStar _ -> "CdlMorningStar"
     | CdlOnNeck -> "CdlOnNeck"
     | CdlPiercing -> "CdlPiercing"
     | CdlRickshawMan -> "CdlRickshawMan"
@@ -709,10 +443,10 @@ module Int = struct
     | CdlUnique3River -> "CdlUnique3River"
     | CdlUpsideGap2Crows -> "CdlUpsideGap2Crows"
     | CdlXSideGap3Methods -> "CdlXSideGap3Methods"
-    | MaxIndex -> "MaxIndex"
-    | MinIndex -> "MinIndex"
-    | MinMaxIndex_Min -> "MinMaxIndex_Min"
-    | MinMaxIndex_Max -> "MinMaxIndex_Max"
+    | MaxIndex _ -> "MaxIndex"
+    | MinIndex _ -> "MinIndex"
+    | MinMaxIndex_Min _ -> "MinMaxIndex_Min"
+    | MinMaxIndex_Max _ -> "MinMaxIndex_Max"
 end
 
 type t = F of Float.t | I of Int.t

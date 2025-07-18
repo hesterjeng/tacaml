@@ -511,35 +511,69 @@ let input_flag_from_wrapper : t -> Input.Flag.t =
 let output_flag_from_wrapper : t -> Output.Flag.t =
  fun (Pack wrapper_params) ->
   match wrapper_params with
-  | S.Accbands _ ->
+  | S.Accbands { timeperiod } ->
     Output.Flag.FloatBA3Flag
-      ( F Indicator.Float.UpperBBand,
-        F Indicator.Float.MiddleBBand,
-        F Indicator.Float.LowerBBand )
+      ( F
+          (Indicator.Float.UpperBBand
+             {
+               timeperiod;
+               nb_dev_up = 2.0;
+               nb_dev_dn = 2.0;
+               ma_type = Ma_type.Sma;
+             }),
+        F
+          (Indicator.Float.MiddleBBand
+             {
+               timeperiod;
+               nb_dev_up = 2.0;
+               nb_dev_dn = 2.0;
+               ma_type = Ma_type.Sma;
+             }),
+        F
+          (Indicator.Float.LowerBBand
+             {
+               timeperiod;
+               nb_dev_up = 2.0;
+               nb_dev_dn = 2.0;
+               ma_type = Ma_type.Sma;
+             }) )
   | S.Acos _ -> FloatBAFlag (F Indicator.Float.Acos)
   | S.Ad _ -> FloatBAFlag (F Indicator.Float.Ad)
   | S.Add _ -> FloatBAFlag (F Indicator.Float.Add)
-  | S.Adosc _ -> FloatBAFlag (F Indicator.Float.Adosc)
-  | S.Adx _ -> FloatBAFlag (F Indicator.Float.Adx)
-  | S.Adxr _ -> FloatBAFlag (F Indicator.Float.Adxr)
-  | S.Apo _ -> FloatBAFlag (F Indicator.Float.Apo)
-  | S.Aroon _ ->
+  | S.Adosc { fast_period; slow_period } ->
+    FloatBAFlag (F (Indicator.Float.Adosc { fast_period; slow_period }))
+  | S.Adx { timeperiod } -> FloatBAFlag (F (Indicator.Float.Adx { timeperiod }))
+  | S.Adxr { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Adxr { timeperiod }))
+  | S.Apo { fast_period; slow_period; ma_type } ->
+    FloatBAFlag (F (Indicator.Float.Apo { fast_period; slow_period; ma_type }))
+  | S.Aroon { timeperiod } ->
     Output.Flag.FloatBA2Flag
-      (F Indicator.Float.Aroon_Down, F Indicator.Float.Aroon_Up)
-  | S.Aroonosc _ -> FloatBAFlag (F Indicator.Float.AroonOsc)
+      ( F (Indicator.Float.Aroon_Down { timeperiod }),
+        F (Indicator.Float.Aroon_Up { timeperiod }) )
+  | S.Aroonosc { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.AroonOsc { timeperiod }))
   | S.Asin _ -> FloatBAFlag (F Indicator.Float.Asin)
   | S.Atan _ -> FloatBAFlag (F Indicator.Float.Atan)
-  | S.Atr _ -> FloatBAFlag (F Indicator.Float.Atr)
+  | S.Atr { timeperiod } -> FloatBAFlag (F (Indicator.Float.Atr { timeperiod }))
   | S.Avgprice _ -> FloatBAFlag (F Indicator.Float.AvgPrice)
-  | S.Avgdev _ -> FloatBAFlag (F Indicator.Float.Stddev)
-  | S.Bbands _ ->
+  | S.Avgdev { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Avgdev { timeperiod }))
+  | S.Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type } ->
     Output.Flag.FloatBA3Flag
-      ( F Indicator.Float.UpperBBand,
-        F Indicator.Float.MiddleBBand,
-        F Indicator.Float.LowerBBand )
-  | S.Beta _ -> FloatBAFlag (F Indicator.Float.Beta)
-  | S.Bop _ -> FloatBAFlag (F Indicator.Float.Willr)
-  | S.Cci _ -> FloatBAFlag (F Indicator.Float.Cci)
+      ( F
+          (Indicator.Float.UpperBBand
+             { timeperiod; nb_dev_up; nb_dev_dn; ma_type }),
+        F
+          (Indicator.Float.MiddleBBand
+             { timeperiod; nb_dev_up; nb_dev_dn; ma_type }),
+        F
+          (Indicator.Float.LowerBBand
+             { timeperiod; nb_dev_up; nb_dev_dn; ma_type }) )
+  | S.Beta { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Beta { timeperiod }))
+  | S.Bop _ -> FloatBAFlag (F Indicator.Float.Bop)
+  | S.Cci { timeperiod } -> FloatBAFlag (F (Indicator.Float.Cci { timeperiod }))
   | S.Cdl2crows _ -> IntBAFlag (I Indicator.Int.Cdl2Crows)
   | S.Cdl3blackcrows _ -> IntBAFlag (I Indicator.Int.Cdl3BlackCrows)
   | S.Cdl3inside _ -> IntBAFlag (I Indicator.Int.Cdl3Inside)
@@ -547,20 +581,24 @@ let output_flag_from_wrapper : t -> Output.Flag.t =
   | S.Cdl3outside _ -> IntBAFlag (I Indicator.Int.Cdl3Outside)
   | S.Cdl3starsinsouth _ -> IntBAFlag (I Indicator.Int.Cdl3StarsInSouth)
   | S.Cdl3whitesoldiers _ -> IntBAFlag (I Indicator.Int.Cdl3WhiteSoldiers)
-  | S.Cdlabandonedbaby _ -> IntBAFlag (I Indicator.Int.CdlAbandonedBaby)
+  | S.Cdlabandonedbaby { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlAbandonedBaby { penetration }))
   | S.Cdladvanceblock _ -> IntBAFlag (I Indicator.Int.CdlAdvanceBlock)
   | S.Cdlbelthold _ -> IntBAFlag (I Indicator.Int.CdlBeltHold)
   | S.Cdlbreakaway _ -> IntBAFlag (I Indicator.Int.CdlBreakaway)
   | S.Cdlclosingmarubozu _ -> IntBAFlag (I Indicator.Int.CdlClosingMarubozu)
   | S.Cdlconcealbabyswall _ -> IntBAFlag (I Indicator.Int.CdlConcealBabySwall)
   | S.Cdlcounterattack _ -> IntBAFlag (I Indicator.Int.CdlCounterAttack)
-  | S.Cdldarkcloudcover _ -> IntBAFlag (I Indicator.Int.CdlDarkCloudCover)
+  | S.Cdldarkcloudcover { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlDarkCloudCover { penetration }))
   | S.Cdldoji _ -> IntBAFlag (I Indicator.Int.CdlDoji)
   | S.Cdldojistar _ -> IntBAFlag (I Indicator.Int.CdlDojiStar)
   | S.Cdldragonflydoji _ -> IntBAFlag (I Indicator.Int.CdlDragonflyDoji)
   | S.Cdlengulfing _ -> IntBAFlag (I Indicator.Int.CdlEngulfing)
-  | S.Cdleveningdojistar _ -> IntBAFlag (I Indicator.Int.CdlEveningDojiStar)
-  | S.Cdleveningstar _ -> IntBAFlag (I Indicator.Int.CdlEveningStar)
+  | S.Cdleveningdojistar { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlEveningDojiStar { penetration }))
+  | S.Cdleveningstar { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlEveningStar { penetration }))
   | S.Cdlgapsidesidewhite _ -> IntBAFlag (I Indicator.Int.CdlGapSideSideWhite)
   | S.Cdlgravestonedoji _ -> IntBAFlag (I Indicator.Int.CdlGravestoneDoji)
   | S.Cdlhammer _ -> IntBAFlag (I Indicator.Int.CdlHammer)
@@ -581,9 +619,12 @@ let output_flag_from_wrapper : t -> Output.Flag.t =
   | S.Cdllongline _ -> IntBAFlag (I Indicator.Int.CdlLongLine)
   | S.Cdlmarubozu _ -> IntBAFlag (I Indicator.Int.CdlMarubozu)
   | S.Cdlmatchinglow _ -> IntBAFlag (I Indicator.Int.CdlMatchingLow)
-  | S.Cdlmathold _ -> IntBAFlag (I Indicator.Int.CdlMatHold)
-  | S.Cdlmorningdojistar _ -> IntBAFlag (I Indicator.Int.CdlMorningDojiStar)
-  | S.Cdlmorningstar _ -> IntBAFlag (I Indicator.Int.CdlMorningStar)
+  | S.Cdlmathold { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlMatHold { penetration }))
+  | S.Cdlmorningdojistar { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlMorningDojiStar { penetration }))
+  | S.Cdlmorningstar { penetration } ->
+    IntBAFlag (I (Indicator.Int.CdlMorningStar { penetration }))
   | S.Cdlonneck _ -> IntBAFlag (I Indicator.Int.CdlOnNeck)
   | S.Cdlpiercing _ -> IntBAFlag (I Indicator.Int.CdlPiercing)
   | S.Cdlrickshawman _ -> IntBAFlag (I Indicator.Int.CdlRickshawMan)
@@ -602,14 +643,16 @@ let output_flag_from_wrapper : t -> Output.Flag.t =
   | S.Cdlupsidegap2crows _ -> IntBAFlag (I Indicator.Int.CdlUpsideGap2Crows)
   | S.Cdlxsidegap3methods _ -> IntBAFlag (I Indicator.Int.CdlXSideGap3Methods)
   | S.Ceil _ -> FloatBAFlag (F Indicator.Float.Ceil)
-  | S.Cmo _ -> FloatBAFlag (F Indicator.Float.Cmo)
-  | S.Correl _ -> FloatBAFlag (F Indicator.Float.Correl)
+  | S.Cmo { timeperiod } -> FloatBAFlag (F (Indicator.Float.Cmo { timeperiod }))
+  | S.Correl { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Correl { timeperiod }))
   | S.Cos _ -> FloatBAFlag (F Indicator.Float.Cos)
   | S.Cosh _ -> FloatBAFlag (F Indicator.Float.Cosh)
-  | S.Dema _ -> FloatBAFlag (F Indicator.Float.Dema)
+  | S.Dema { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Dema { timeperiod }))
   | S.Div _ -> FloatBAFlag (F Indicator.Float.Div)
-  | S.Dx _ -> FloatBAFlag (F Indicator.Float.Dx)
-  | S.Ema _ -> FloatBAFlag (F Indicator.Float.Ema)
+  | S.Dx { timeperiod } -> FloatBAFlag (F (Indicator.Float.Dx { timeperiod }))
+  | S.Ema { timeperiod } -> FloatBAFlag (F (Indicator.Float.Ema { timeperiod }))
   | S.Exp _ -> FloatBAFlag (F Indicator.Float.Exp)
   | S.Floor _ -> FloatBAFlag (F Indicator.Float.Floor)
   | S.Ht_dcperiod _ -> FloatBAFlag (F Indicator.Float.HtDcPeriod)
@@ -622,101 +665,228 @@ let output_flag_from_wrapper : t -> Output.Flag.t =
       (F Indicator.Float.HtSine_Sine, F Indicator.Float.HtSine_LeadSine)
   | S.Ht_trendline _ -> FloatBAFlag (F Indicator.Float.HtTrendline)
   | S.Ht_trendmode _ -> IntBAFlag (I Indicator.Int.HtTrendMode)
-  | S.Imi _ -> FloatBAFlag (F Indicator.Float.Mom)
-  | S.Kama _ -> FloatBAFlag (F Indicator.Float.Kama)
-  | S.Linearreg _ -> FloatBAFlag (F Indicator.Float.Linearreg)
-  | S.Linearreg_angle _ -> FloatBAFlag (F Indicator.Float.LinearregAngle)
-  | S.Linearreg_intercept _ ->
-    FloatBAFlag (F Indicator.Float.LinearregIntercept)
-  | S.Linearreg_slope _ -> FloatBAFlag (F Indicator.Float.LinearregSlope)
+  | S.Imi { timeperiod } -> FloatBAFlag (F (Indicator.Float.Imi { timeperiod }))
+  | S.Kama { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Kama { timeperiod }))
+  | S.Linearreg { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Linearreg { timeperiod }))
+  | S.Linearreg_angle { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.LinearregAngle { timeperiod }))
+  | S.Linearreg_intercept { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.LinearregIntercept { timeperiod }))
+  | S.Linearreg_slope { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.LinearregSlope { timeperiod }))
   | S.Ln _ -> FloatBAFlag (F Indicator.Float.Ln)
   | S.Log10 _ -> FloatBAFlag (F Indicator.Float.Log10)
-  | S.Ma _ -> FloatBAFlag (F Indicator.Float.Ma)
-  | S.Macd _ ->
+  | S.Ma { timeperiod; ma_type } ->
+    FloatBAFlag (F (Indicator.Float.Ma { timeperiod; ma_type }))
+  | S.Macd { fast_period; slow_period; signal_period } ->
     Output.Flag.FloatBA3Flag
-      ( F Indicator.Float.Macd_MACD,
-        F Indicator.Float.Macd_MACDSignal,
-        F Indicator.Float.Macd_MACDHist )
-  | S.Macdext _ ->
+      ( F (Indicator.Float.Macd_MACD { fast_period; slow_period; signal_period }),
+        F
+          (Indicator.Float.Macd_MACDSignal
+             { fast_period; slow_period; signal_period }),
+        F
+          (Indicator.Float.Macd_MACDHist
+             { fast_period; slow_period; signal_period }) )
+  | S.Macdext
+      {
+        fast_period;
+        fast_ma_type;
+        slow_period;
+        slow_ma_type;
+        signal_period;
+        signal_ma_type;
+      } ->
     Output.Flag.FloatBA3Flag
-      ( F Indicator.Float.MacdExt_MACD,
-        F Indicator.Float.MacdExt_MACDSignal,
-        F Indicator.Float.MacdExt_MACDHist )
-  | S.Macdfix _ ->
+      ( F
+          (Indicator.Float.MacdExt_MACD
+             {
+               fast_period;
+               fast_ma_type;
+               slow_period;
+               slow_ma_type;
+               signal_period;
+               signal_ma_type;
+             }),
+        F
+          (Indicator.Float.MacdExt_MACDSignal
+             {
+               fast_period;
+               fast_ma_type;
+               slow_period;
+               slow_ma_type;
+               signal_period;
+               signal_ma_type;
+             }),
+        F
+          (Indicator.Float.MacdExt_MACDHist
+             {
+               fast_period;
+               fast_ma_type;
+               slow_period;
+               slow_ma_type;
+               signal_period;
+               signal_ma_type;
+             }) )
+  | S.Macdfix { signal_period } ->
     Output.Flag.FloatBA3Flag
-      ( F Indicator.Float.MacdFix_MACD,
-        F Indicator.Float.MacdFix_MACDSignal,
-        F Indicator.Float.MacdFix_MACDHist )
-  | S.Mama _ ->
-    Output.Flag.FloatBA2Flag (F Indicator.Float.Mama, F Indicator.Float.Mama)
-  | S.Mavp _ -> FloatBAFlag (F Indicator.Float.Mavp)
-  | S.Max _ -> FloatBAFlag (F Indicator.Float.Max)
-  | S.Maxindex _ -> IntBAFlag (I Indicator.Int.MaxIndex)
-  | S.Medprice _ -> FloatBAFlag (F Indicator.Float.MedPrice)
-  | S.Mfi _ -> FloatBAFlag (F Indicator.Float.Mfi)
-  | S.Midpoint _ -> FloatBAFlag (F Indicator.Float.Midpoint)
-  | S.Midprice _ -> FloatBAFlag (F Indicator.Float.Midprice)
-  | S.Min _ -> FloatBAFlag (F Indicator.Float.Min)
-  | S.Minindex _ -> IntBAFlag (I Indicator.Int.MinIndex)
-  | S.Minmax _ ->
+      ( F (Indicator.Float.MacdFix_MACD { signal_period }),
+        F (Indicator.Float.MacdFix_MACDSignal { signal_period }),
+        F (Indicator.Float.MacdFix_MACDHist { signal_period }) )
+  | S.Mama { fast_limit; slow_limit } ->
     Output.Flag.FloatBA2Flag
-      (F Indicator.Float.MinMax_Min, F Indicator.Float.MinMax_Max)
-  | S.Minmaxindex _ ->
+      ( F (Indicator.Float.Mama_MAMA { fast_limit; slow_limit }),
+        F (Indicator.Float.Mama_FAMA { fast_limit; slow_limit }) )
+  | S.Mavp { min_period; max_period; ma_type } ->
+    FloatBAFlag (F (Indicator.Float.Mavp { min_period; max_period; ma_type }))
+  | S.Max { timeperiod } -> FloatBAFlag (F (Indicator.Float.Max { timeperiod }))
+  | S.Maxindex { timeperiod } ->
+    IntBAFlag (I (Indicator.Int.MaxIndex { timeperiod }))
+  | S.Medprice _ -> FloatBAFlag (F Indicator.Float.MedPrice)
+  | S.Mfi { timeperiod } -> FloatBAFlag (F (Indicator.Float.Mfi { timeperiod }))
+  | S.Midpoint { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Midpoint { timeperiod }))
+  | S.Midprice { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Midprice { timeperiod }))
+  | S.Min { timeperiod } -> FloatBAFlag (F (Indicator.Float.Min { timeperiod }))
+  | S.Minindex { timeperiod } ->
+    IntBAFlag (I (Indicator.Int.MinIndex { timeperiod }))
+  | S.Minmax { timeperiod } ->
+    Output.Flag.FloatBA2Flag
+      ( F (Indicator.Float.MinMax_Min { timeperiod }),
+        F (Indicator.Float.MinMax_Max { timeperiod }) )
+  | S.Minmaxindex { timeperiod } ->
     Output.Flag.IntBA2Flag
-      (I Indicator.Int.MinMaxIndex_Min, I Indicator.Int.MinMaxIndex_Max)
-  | S.Minus_di _ -> FloatBAFlag (F Indicator.Float.MinusDI)
-  | S.Minus_dm _ -> FloatBAFlag (F Indicator.Float.MinusDM)
-  | S.Mom _ -> FloatBAFlag (F Indicator.Float.Mom)
+      ( I (Indicator.Int.MinMaxIndex_Min { timeperiod }),
+        I (Indicator.Int.MinMaxIndex_Max { timeperiod }) )
+  | S.Minus_di { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.MinusDI { timeperiod }))
+  | S.Minus_dm { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.MinusDM { timeperiod }))
+  | S.Mom { timeperiod } -> FloatBAFlag (F (Indicator.Float.Mom { timeperiod }))
   | S.Mult _ -> FloatBAFlag (F Indicator.Float.Mult)
-  | S.Natr _ -> FloatBAFlag (F Indicator.Float.Natr)
+  | S.Natr { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Natr { timeperiod }))
   | S.Obv _ -> FloatBAFlag (F Indicator.Float.Obv)
-  | S.Plus_di _ -> FloatBAFlag (F Indicator.Float.PlusDI)
-  | S.Plus_dm _ -> FloatBAFlag (F Indicator.Float.PlusDM)
-  | S.Ppo _ -> FloatBAFlag (F Indicator.Float.Ppo)
-  | S.Roc _ -> FloatBAFlag (F Indicator.Float.Roc)
-  | S.Rocp _ -> FloatBAFlag (F Indicator.Float.Rocp)
-  | S.Rocr _ -> FloatBAFlag (F Indicator.Float.Rocr)
-  | S.Rocr100 _ -> FloatBAFlag (F Indicator.Float.Rocr100)
-  | S.Rsi _ -> FloatBAFlag (F Indicator.Float.Rsi)
-  | S.Sar _ -> FloatBAFlag (F Indicator.Float.Sar)
-  | S.Sarext _ -> FloatBAFlag (F Indicator.Float.Sarext)
+  | S.Plus_di { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.PlusDI { timeperiod }))
+  | S.Plus_dm { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.PlusDM { timeperiod }))
+  | S.Ppo { fast_period; slow_period; ma_type } ->
+    FloatBAFlag (F (Indicator.Float.Ppo { fast_period; slow_period; ma_type }))
+  | S.Roc { timeperiod } -> FloatBAFlag (F (Indicator.Float.Roc { timeperiod }))
+  | S.Rocp { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Rocp { timeperiod }))
+  | S.Rocr { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Rocr { timeperiod }))
+  | S.Rocr100 { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Rocr100 { timeperiod }))
+  | S.Rsi { timeperiod } -> FloatBAFlag (F (Indicator.Float.Rsi { timeperiod }))
+  | S.Sar { acceleration; maximum } ->
+    FloatBAFlag (F (Indicator.Float.Sar { acceleration; maximum }))
+  | S.Sarext
+      {
+        start_value;
+        offset_on_reverse;
+        acceleration_init_long;
+        acceleration_long;
+        acceleration_max_long;
+        acceleration_init_short;
+        acceleration_short;
+        acceleration_max_short;
+      } ->
+    FloatBAFlag
+      (F
+         (Indicator.Float.Sarext
+            {
+              start_value;
+              offset_on_reverse;
+              acceleration_init_long;
+              acceleration_long;
+              acceleration_max_long;
+              acceleration_init_short;
+              acceleration_short;
+              acceleration_max_short;
+            }))
   | S.Sin _ -> FloatBAFlag (F Indicator.Float.Sin)
   | S.Sinh _ -> FloatBAFlag (F Indicator.Float.Sinh)
-  | S.Sma _ -> FloatBAFlag (F Indicator.Float.Sma)
+  | S.Sma { timeperiod } -> FloatBAFlag (F (Indicator.Float.Sma { timeperiod }))
   | S.Sqrt _ -> FloatBAFlag (F Indicator.Float.Sqrt)
-  | S.Stddev _ -> FloatBAFlag (F Indicator.Float.Stddev)
-  | S.Stoch _ ->
+  | S.Stddev { timeperiod; nb_dev } ->
+    FloatBAFlag (F (Indicator.Float.Stddev { timeperiod; nb_dev }))
+  | S.Stoch
+      {
+        fast_k_period;
+        slow_k_period;
+        slow_k_ma_type;
+        slow_d_period;
+        slow_d_ma_type;
+      } ->
     Output.Flag.FloatBA2Flag
-      (F Indicator.Float.Stoch_SlowK, F Indicator.Float.Stoch_SlowD)
-  | S.Stochf _ ->
+      ( F
+          (Indicator.Float.Stoch_SlowK
+             {
+               fast_k_period;
+               slow_k_period;
+               slow_k_ma_type;
+               slow_d_period;
+               slow_d_ma_type;
+             }),
+        F
+          (Indicator.Float.Stoch_SlowD
+             {
+               fast_k_period;
+               slow_k_period;
+               slow_k_ma_type;
+               slow_d_period;
+               slow_d_ma_type;
+             }) )
+  | S.Stochf { fast_k_period; fast_d_period; fast_d_ma_type } ->
     Output.Flag.FloatBA2Flag
-      (F Indicator.Float.StochF_FastK, F Indicator.Float.StochF_FastD)
-  | S.Stochrsi _ ->
+      ( F
+          (Indicator.Float.StochF_FastK
+             { fast_k_period; fast_d_period; fast_d_ma_type }),
+        F
+          (Indicator.Float.StochF_FastD
+             { fast_k_period; fast_d_period; fast_d_ma_type }) )
+  | S.Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type } ->
     Output.Flag.FloatBA2Flag
-      (F Indicator.Float.StochRsi_FastK, F Indicator.Float.StochRsi_FastD)
+      ( F
+          (Indicator.Float.StochRsi_FastK
+             { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type }),
+        F
+          (Indicator.Float.StochRsi_FastD
+             { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type }) )
   | S.Sub _ -> FloatBAFlag (F Indicator.Float.Sub)
-  | S.Sum _ -> FloatBAFlag (F Indicator.Float.Sum)
-  | S.T3 _ -> FloatBAFlag (F Indicator.Float.T3)
+  | S.Sum { timeperiod } -> FloatBAFlag (F (Indicator.Float.Sum { timeperiod }))
+  | S.T3 { timeperiod; v_factor } ->
+    FloatBAFlag (F (Indicator.Float.T3 { timeperiod; v_factor }))
   | S.Tan _ -> FloatBAFlag (F Indicator.Float.Tan)
   | S.Tanh _ -> FloatBAFlag (F Indicator.Float.Tanh)
-  | S.Tema _ -> FloatBAFlag (F Indicator.Float.Tema)
+  | S.Tema { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Tema { timeperiod }))
   | S.Trange _ -> FloatBAFlag (F Indicator.Float.Trange)
-  | S.Trima _ -> FloatBAFlag (F Indicator.Float.Trima)
-  | S.Trix _ -> FloatBAFlag (F Indicator.Float.Trix)
-  | S.Tsf _ -> FloatBAFlag (F Indicator.Float.Tsf)
+  | S.Trima { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Trima { timeperiod }))
+  | S.Trix { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Trix { timeperiod }))
+  | S.Tsf { timeperiod } -> FloatBAFlag (F (Indicator.Float.Tsf { timeperiod }))
   | S.Typprice _ -> FloatBAFlag (F Indicator.Float.TypPrice)
-  | S.Ultosc _ -> FloatBAFlag (F Indicator.Float.Ultosc)
-  | S.Var _ -> FloatBAFlag (F Indicator.Float.Var)
+  | S.Ultosc { timeperiod1; timeperiod2; timeperiod3 } ->
+    FloatBAFlag
+      (F (Indicator.Float.Ultosc { timeperiod1; timeperiod2; timeperiod3 }))
+  | S.Var { timeperiod; nb_dev } ->
+    FloatBAFlag (F (Indicator.Float.Var { timeperiod; nb_dev }))
   | S.Wclprice _ -> FloatBAFlag (F Indicator.Float.WclPrice)
-  | S.Willr _ -> FloatBAFlag (F Indicator.Float.Willr)
-  | S.Wma _ -> FloatBAFlag (F Indicator.Float.Wma)
+  | S.Willr { timeperiod } ->
+    FloatBAFlag (F (Indicator.Float.Willr { timeperiod }))
+  | S.Wma { timeperiod } -> FloatBAFlag (F (Indicator.Float.Wma { timeperiod }))
 
 let to_string (Pack x : t) =
   let str = Safe.to_string x in
   str
 
 let pp = fun fmt (Pack x : t) -> Format.fprintf fmt "%a" Safe.pp x
-
 let hash (Pack x : t) = Safe.hash x
-
 let equal (Pack x : t) (Pack y : t) = Safe.equal x y

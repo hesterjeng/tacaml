@@ -1,5 +1,4 @@
 open Safe
-open Ma_type
 open Pack
 
 let accbands = Pack (Accbands { timeperiod = 20 })
@@ -9,7 +8,10 @@ let add = Pack (Add ())
 let adosc = Pack (Adosc { fast_period = 12; slow_period = 26 })
 let adx = Pack (Adx { timeperiod = 14 })
 let adxr = Pack (Adxr { timeperiod = 14 })
-let apo = Pack (Apo { fast_period = 12; slow_period = 26; ma_type = EMA })
+
+let apo =
+  Pack (Apo { fast_period = 12; slow_period = 26; ma_type = Ma_type.Ema })
+
 let aroon = Pack (Aroon { timeperiod = 14 })
 let aroonosc = Pack (Aroonosc { timeperiod = 14 })
 let asin = Pack (Asin ())
@@ -20,7 +22,13 @@ let avgdev = Pack (Avgdev { timeperiod = 14 })
 
 let bbands =
   Pack
-    (Bbands { timeperiod = 20; nb_dev_up = 2.0; nb_dev_dn = 2.0; ma_type = SMA })
+    (Bbands
+       {
+         timeperiod = 20;
+         nb_dev_up = 2.0;
+         nb_dev_dn = 2.0;
+         ma_type = Ma_type.Sma;
+       })
 
 let beta = Pack (Beta { timeperiod = 14 })
 let bop = Pack (Bop ())
@@ -111,7 +119,7 @@ let linearreg_intercept = Pack (Linearreg_intercept { timeperiod = 14 })
 let linearreg_slope = Pack (Linearreg_slope { timeperiod = 14 })
 let ln = Pack (Ln ())
 let log10 = Pack (Log10 ())
-let ma = Pack (Ma { timeperiod = 14; ma_type = EMA })
+let ma = Pack (Ma { timeperiod = 14; ma_type = Ma_type.Ema })
 let macd = Pack (Macd { fast_period = 12; slow_period = 26; signal_period = 9 })
 
 let macdext =
@@ -119,16 +127,19 @@ let macdext =
     (Macdext
        {
          fast_period = 12;
-         fast_ma_type = EMA;
+         fast_ma_type = Ma_type.Ema;
          slow_period = 26;
-         slow_ma_type = EMA;
+         slow_ma_type = Ma_type.Ema;
          signal_period = 9;
-         signal_ma_type = EMA;
+         signal_ma_type = Ma_type.Ema;
        })
 
 let macdfix = Pack (Macdfix { signal_period = 9 })
 let mama = Pack (Mama { fast_limit = 0.5; slow_limit = 0.05 })
-let mavp = Pack (Mavp { min_period = 2; max_period = 30; ma_type = EMA })
+
+let mavp =
+  Pack (Mavp { min_period = 2; max_period = 30; ma_type = Ma_type.Ema })
+
 let max = Pack (Max { timeperiod = 14 })
 let maxindex = Pack (Maxindex { timeperiod = 14 })
 let medprice = Pack (Medprice ())
@@ -147,7 +158,10 @@ let natr = Pack (Natr { timeperiod = 14 })
 let obv = Pack (Obv ())
 let plus_di = Pack (Plus_di { timeperiod = 14 })
 let plus_dm = Pack (Plus_dm { timeperiod = 14 })
-let ppo = Pack (Ppo { fast_period = 12; slow_period = 26; ma_type = EMA })
+
+let ppo =
+  Pack (Ppo { fast_period = 12; slow_period = 26; ma_type = Ma_type.Ema })
+
 let roc = Pack (Roc { timeperiod = 10 })
 let rocp = Pack (Rocp { timeperiod = 10 })
 let rocr = Pack (Rocr { timeperiod = 10 })
@@ -181,13 +195,15 @@ let stoch =
        {
          fast_k_period = 5;
          slow_k_period = 3;
-         slow_k_ma_type = SMA;
+         slow_k_ma_type = Ma_type.Sma;
          slow_d_period = 3;
-         slow_d_ma_type = SMA;
+         slow_d_ma_type = Ma_type.Sma;
        })
 
 let stochf =
-  Pack (Stochf { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = SMA })
+  Pack
+    (Stochf
+       { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = Ma_type.Sma })
 
 let stochrsi =
   Pack
@@ -196,7 +212,7 @@ let stochrsi =
          timeperiod = 14;
          fast_k_period = 5;
          fast_d_period = 3;
-         fast_d_ma_type = EMA;
+         fast_d_ma_type = Ma_type.Ema;
        })
 
 let sub = Pack (Sub ())

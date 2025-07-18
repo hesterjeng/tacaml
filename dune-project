@@ -19,7 +19,7 @@
  (homepage "https://github.com/hesterjeng/longleaf")
  (description "A longer description")
  (bug_reports "Github Issue")
- (depends ocaml ctypes)
+ (depends ocaml ctypes containers)
 )
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

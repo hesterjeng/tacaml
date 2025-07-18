@@ -1,6 +1,7 @@
 module F = C.Functions
 module C = Ctypes
 module T = Type_description.Types
+module Hash = CCHash
 
 let ta_initialize () =
   let ret_code = F.initialize () in

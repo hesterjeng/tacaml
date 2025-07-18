@@ -1,3 +1,5 @@
+module Hash = CCHash
+
 module Float = struct
   type t =
     | UpperBBand of {

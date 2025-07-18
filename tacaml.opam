@@ -11,6 +11,7 @@ depends: [
   "dune" {>= "3.17"}
   "ocaml"
   "ctypes"
+  "containers"
   "odoc" {with-doc}
 ]
 build: [

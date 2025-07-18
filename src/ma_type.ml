@@ -11,6 +11,7 @@
 (* ENUM_END( MAType ) *)
 
 type t = Sma | Ema | Wma | Dema | Tema | Trima | Kama | Mama | T3
+[@@deriving hash, compare, show]
 
 let to_int = function
   | Sma -> 0

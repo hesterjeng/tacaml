@@ -2,6 +2,8 @@
  (name tacaml)
  (public_name tacaml)
  (libraries containers)
+ (preprocess
+  (pps ppx_deriving.std ppx_hash ppx_compare))
  (ctypes
   (external_library_name ta-lib)
   (build_flags_resolver pkg_config)

@@ -5,6 +5,9 @@ let compare_float = Float.compare
 
 module Float = struct
   type t =
+    | UpperAccBand of { timeperiod : int }
+    | MiddleAccBand of { timeperiod : int }
+    | LowerAccBand of { timeperiod : int }
     | UpperBBand of {
         timeperiod : int;
         nb_dev_up : float;
@@ -638,3 +641,12 @@ let min_max_index_min ?(timeperiod = 30) () =
 
 let min_max_index_max ?(timeperiod = 30) () =
   I (Int.MinMaxIndex_Max { timeperiod })
+
+let accbands_upper ?(timeperiod = 20) () =
+  F (Float.UpperAccBand { timeperiod })
+
+let accbands_middle ?(timeperiod = 20) () =
+  F (Float.MiddleAccBand { timeperiod })
+
+let accbands_lower ?(timeperiod = 20) () =
+  F (Float.LowerAccBand { timeperiod })

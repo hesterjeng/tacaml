@@ -6,30 +6,9 @@ module S = Safe
 let safe_to_indicators : type a b. (a, b) S.t -> Indicator.t list = function
   | S.Accbands { timeperiod } ->
     [
-      F
-        (Indicator.Float.UpperBBand
-           {
-             timeperiod;
-             nb_dev_up = 2.0;
-             nb_dev_dn = 2.0;
-             ma_type = Ma_type.Sma;
-           });
-      F
-        (Indicator.Float.MiddleBBand
-           {
-             timeperiod;
-             nb_dev_up = 2.0;
-             nb_dev_dn = 2.0;
-             ma_type = Ma_type.Sma;
-           });
-      F
-        (Indicator.Float.LowerBBand
-           {
-             timeperiod;
-             nb_dev_up = 2.0;
-             nb_dev_dn = 2.0;
-             ma_type = Ma_type.Sma;
-           });
+      F (Indicator.Float.UpperAccBand { timeperiod });
+      F (Indicator.Float.MiddleAccBand { timeperiod });
+      F (Indicator.Float.LowerAccBand { timeperiod });
     ]
   | S.Acos _ -> [ F Indicator.Float.Acos ]
   | S.Ad _ -> [ F Indicator.Float.Ad ]
@@ -368,6 +347,12 @@ let safe_to_indicators : type a b. (a, b) S.t -> Indicator.t list = function
 
 (** Convert an Indicator.t back to its corresponding Safe.t *)
 let indicator_to_safe : Indicator.t -> Pack.t = function
+  | F (Indicator.Float.UpperAccBand { timeperiod }) ->
+    Pack.pack (S.Accbands { timeperiod })
+  | F (Indicator.Float.MiddleAccBand { timeperiod }) ->
+    Pack.pack (S.Accbands { timeperiod })
+  | F (Indicator.Float.LowerAccBand { timeperiod }) ->
+    Pack.pack (S.Accbands { timeperiod })
   | F (Indicator.Float.UpperBBand { timeperiod; nb_dev_up; nb_dev_dn; ma_type })
     ->
     Pack.pack (S.Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type })

@@ -1,7 +1,7 @@
 open Safe
 open Pack
 
-let accbands = Conv.indicator_to_safe (Indicator.accbands_upper ())
+let accbands = Pack (Accbands { timeperiod = 20 })
 let acos = Conv.indicator_to_safe (Indicator.acos ())
 let ad = Conv.indicator_to_safe (Indicator.ad ())
 let add = Conv.indicator_to_safe (Indicator.add ())
@@ -16,6 +16,7 @@ let atan = Conv.indicator_to_safe (Indicator.atan ())
 let atr = Conv.indicator_to_safe (Indicator.atr ())
 let avgprice = Conv.indicator_to_safe (Indicator.avg_price ())
 let avgdev = Conv.indicator_to_safe (Indicator.avgdev ())
+
 let bbands =
   Pack
     (Bbands
@@ -25,6 +26,7 @@ let bbands =
          nb_dev_dn = 2.0;
          ma_type = Ma_type.Sma;
        })
+
 let beta = Conv.indicator_to_safe (Indicator.beta ())
 let bop = Conv.indicator_to_safe (Indicator.bop ())
 let cci = Conv.indicator_to_safe (Indicator.cci ())
@@ -39,17 +41,28 @@ let cdlabandonedbaby = Conv.indicator_to_safe (Indicator.cdl_abandonedbaby ())
 let cdladvanceblock = Conv.indicator_to_safe (Indicator.cdl_advanceblock ())
 let cdlbelthold = Conv.indicator_to_safe (Indicator.cdl_belthold ())
 let cdlbreakaway = Conv.indicator_to_safe (Indicator.cdl_breakaway ())
-let cdlclosingmarubozu = Conv.indicator_to_safe (Indicator.cdl_closingmarubozu ())
-let cdlconcealbabyswall = Conv.indicator_to_safe (Indicator.cdl_concealbabyswall ())
+
+let cdlclosingmarubozu =
+  Conv.indicator_to_safe (Indicator.cdl_closingmarubozu ())
+
+let cdlconcealbabyswall =
+  Conv.indicator_to_safe (Indicator.cdl_concealbabyswall ())
+
 let cdlcounterattack = Conv.indicator_to_safe (Indicator.cdl_counterattack ())
 let cdldarkcloudcover = Conv.indicator_to_safe (Indicator.cdl_darkcloudcover ())
 let cdldoji = Conv.indicator_to_safe (Indicator.cdl_doji ())
 let cdldojistar = Conv.indicator_to_safe (Indicator.cdl_dojistar ())
 let cdldragonflydoji = Conv.indicator_to_safe (Indicator.cdl_dragonflydoji ())
 let cdlengulfing = Conv.indicator_to_safe (Indicator.cdl_engulfing ())
-let cdleveningdojistar = Conv.indicator_to_safe (Indicator.cdl_eveningdojistar ())
+
+let cdleveningdojistar =
+  Conv.indicator_to_safe (Indicator.cdl_eveningdojistar ())
+
 let cdleveningstar = Conv.indicator_to_safe (Indicator.cdl_eveningstar ())
-let cdlgapsidesidewhite = Conv.indicator_to_safe (Indicator.cdl_gap_side_side_white ())
+
+let cdlgapsidesidewhite =
+  Conv.indicator_to_safe (Indicator.cdl_gap_side_side_white ())
+
 let cdlgravestonedoji = Conv.indicator_to_safe (Indicator.cdl_gravestonedoji ())
 let cdlhammer = Conv.indicator_to_safe (Indicator.cdl_hammer ())
 let cdlhangingman = Conv.indicator_to_safe (Indicator.cdl_hangingman ())
@@ -59,24 +72,38 @@ let cdlhighwave = Conv.indicator_to_safe (Indicator.cdl_highwave ())
 let cdlhikkake = Conv.indicator_to_safe (Indicator.cdl_hikkake ())
 let cdlhikkakemod = Conv.indicator_to_safe (Indicator.cdl_hikkakemod ())
 let cdlhomingpigeon = Conv.indicator_to_safe (Indicator.cdl_homingpigeon ())
-let cdlidentical3crows = Conv.indicator_to_safe (Indicator.cdl_identical3crows ())
+
+let cdlidentical3crows =
+  Conv.indicator_to_safe (Indicator.cdl_identical3crows ())
+
 let cdlinneck = Conv.indicator_to_safe (Indicator.cdl_inneck ())
 let cdlinvertedhammer = Conv.indicator_to_safe (Indicator.cdl_invertedhammer ())
 let cdlkicking = Conv.indicator_to_safe (Indicator.cdl_kicking ())
-let cdlkickingbylength = Conv.indicator_to_safe (Indicator.cdl_kickingbylength ())
+
+let cdlkickingbylength =
+  Conv.indicator_to_safe (Indicator.cdl_kickingbylength ())
+
 let cdlladderbottom = Conv.indicator_to_safe (Indicator.cdl_ladderbottom ())
 let cdllongleggeddoji = Conv.indicator_to_safe (Indicator.cdl_longleggedDoji ())
 let cdllongline = Conv.indicator_to_safe (Indicator.cdl_longline ())
 let cdlmarubozu = Conv.indicator_to_safe (Indicator.cdl_marubozu ())
 let cdlmatchinglow = Conv.indicator_to_safe (Indicator.cdl_matchinglow ())
 let cdlmathold = Conv.indicator_to_safe (Indicator.cdl_mathold ())
-let cdlmorningdojistar = Conv.indicator_to_safe (Indicator.cdl_morningdojistar ())
+
+let cdlmorningdojistar =
+  Conv.indicator_to_safe (Indicator.cdl_morningdojistar ())
+
 let cdlmorningstar = Conv.indicator_to_safe (Indicator.cdl_morningstar ())
 let cdlonneck = Conv.indicator_to_safe (Indicator.cdl_onneck ())
 let cdlpiercing = Conv.indicator_to_safe (Indicator.cdl_piercing ())
 let cdlrickshawman = Conv.indicator_to_safe (Indicator.cdl_rickshawman ())
-let cdlrisefall3methods = Conv.indicator_to_safe (Indicator.cdl_risefall3methods ())
-let cdlseparatinglines = Conv.indicator_to_safe (Indicator.cdl_separatinglines ())
+
+let cdlrisefall3methods =
+  Conv.indicator_to_safe (Indicator.cdl_risefall3methods ())
+
+let cdlseparatinglines =
+  Conv.indicator_to_safe (Indicator.cdl_separatinglines ())
+
 let cdlshootingstar = Conv.indicator_to_safe (Indicator.cdl_shootingstar ())
 let cdlshortline = Conv.indicator_to_safe (Indicator.cdl_shortline ())
 let cdlspinningtop = Conv.indicator_to_safe (Indicator.cdl_spinningtop ())
@@ -87,8 +114,13 @@ let cdltasukigap = Conv.indicator_to_safe (Indicator.cdl_tasukigap ())
 let cdlthrusting = Conv.indicator_to_safe (Indicator.cdl_thrusting ())
 let cdltristar = Conv.indicator_to_safe (Indicator.cdl_tristar ())
 let cdlunique3river = Conv.indicator_to_safe (Indicator.cdl_unique3river ())
-let cdlupsidegap2crows = Conv.indicator_to_safe (Indicator.cdl_upsidegap2crows ())
-let cdlxsidegap3methods = Conv.indicator_to_safe (Indicator.cdl_xsidegap3methods ())
+
+let cdlupsidegap2crows =
+  Conv.indicator_to_safe (Indicator.cdl_upsidegap2crows ())
+
+let cdlxsidegap3methods =
+  Conv.indicator_to_safe (Indicator.cdl_xsidegap3methods ())
+
 let ceil = Conv.indicator_to_safe (Indicator.ceil ())
 let cmo = Conv.indicator_to_safe (Indicator.cmo ())
 let correl = Conv.indicator_to_safe (Indicator.correl ())
@@ -110,12 +142,16 @@ let imi = Conv.indicator_to_safe (Indicator.imi ())
 let kama = Conv.indicator_to_safe (Indicator.kama ())
 let linearreg = Conv.indicator_to_safe (Indicator.linearreg ())
 let linearreg_angle = Conv.indicator_to_safe (Indicator.linearreg_angle ())
-let linearreg_intercept = Conv.indicator_to_safe (Indicator.linearreg_intercept ())
+
+let linearreg_intercept =
+  Conv.indicator_to_safe (Indicator.linearreg_intercept ())
+
 let linearreg_slope = Conv.indicator_to_safe (Indicator.linearreg_slope ())
 let ln = Conv.indicator_to_safe (Indicator.ln ())
 let log10 = Conv.indicator_to_safe (Indicator.log10 ())
 let ma = Conv.indicator_to_safe (Indicator.ma ())
 let macd = Pack (Macd { fast_period = 12; slow_period = 26; signal_period = 9 })
+
 let macdext =
   Pack
     (Macdext
@@ -127,6 +163,7 @@ let macdext =
          signal_period = 9;
          signal_ma_type = Ma_type.Ema;
        })
+
 let macdfix = Pack (Macdfix { signal_period = 9 })
 let mama = Pack (Mama { fast_limit = 0.5; slow_limit = 0.05 })
 let mavp = Conv.indicator_to_safe (Indicator.mavp ())
@@ -161,6 +198,7 @@ let sinh = Conv.indicator_to_safe (Indicator.sinh ())
 let sma = Conv.indicator_to_safe (Indicator.sma ())
 let sqrt = Conv.indicator_to_safe (Indicator.sqrt ())
 let stddev = Conv.indicator_to_safe (Indicator.stddev ())
+
 let stoch =
   Pack
     (Stoch
@@ -171,10 +209,12 @@ let stoch =
          slow_d_period = 3;
          slow_d_ma_type = Ma_type.Sma;
        })
+
 let stochf =
   Pack
     (Stochf
        { fast_k_period = 5; fast_d_period = 3; fast_d_ma_type = Ma_type.Sma })
+
 let stochrsi =
   Pack
     (Stochrsi
@@ -184,6 +224,7 @@ let stochrsi =
          fast_d_period = 3;
          fast_d_ma_type = Ma_type.Ema;
        })
+
 let sub = Conv.indicator_to_safe (Indicator.sub ())
 let sum = Conv.indicator_to_safe (Indicator.sum ())
 let t3 = Conv.indicator_to_safe (Indicator.t3 ())

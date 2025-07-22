@@ -424,7 +424,269 @@ let to_string : type a b. (a, b) t -> string = function
   | Willr _ -> "Willr"
   | Wma _ -> "Wma"
 
-let pp = fun fmt x -> Format.fprintf fmt "@[%s@]" (to_string x)
+let pp : type a b. Format.formatter -> (a, b) t -> unit = fun fmt x ->
+  let format_params params =
+    match params with
+    | [] -> ""
+    | _ -> "(" ^ (String.concat ", " params) ^ ")"
+  in
+  let name, params = match x with
+    | Accbands { timeperiod } -> "Accbands", ["timeperiod=" ^ string_of_int timeperiod]
+    | Acos _ -> "Acos", []
+    | Ad _ -> "Ad", []
+    | Add _ -> "Add", []
+    | Adosc { fast_period; slow_period } -> "Adosc", [
+        "fast_period=" ^ string_of_int fast_period;
+        "slow_period=" ^ string_of_int slow_period
+      ]
+    | Adx { timeperiod } -> "Adx", ["timeperiod=" ^ string_of_int timeperiod]
+    | Adxr { timeperiod } -> "Adxr", ["timeperiod=" ^ string_of_int timeperiod]
+    | Apo { fast_period; slow_period; ma_type } -> "Apo", [
+        "fast_period=" ^ string_of_int fast_period;
+        "slow_period=" ^ string_of_int slow_period;
+        "ma_type=" ^ Ma_type.show ma_type
+      ]
+    | Aroon { timeperiod } -> "Aroon", ["timeperiod=" ^ string_of_int timeperiod]
+    | Aroonosc { timeperiod } -> "Aroonosc", ["timeperiod=" ^ string_of_int timeperiod]
+    | Asin _ -> "Asin", []
+    | Atan _ -> "Atan", []
+    | Atr { timeperiod } -> "Atr", ["timeperiod=" ^ string_of_int timeperiod]
+    | Avgprice _ -> "Avgprice", []
+    | Avgdev { timeperiod } -> "Avgdev", ["timeperiod=" ^ string_of_int timeperiod]
+    | Bbands { timeperiod; nb_dev_up; nb_dev_dn; ma_type } -> "Bbands", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "nb_dev_up=" ^ string_of_float nb_dev_up;
+        "nb_dev_dn=" ^ string_of_float nb_dev_dn;
+        "ma_type=" ^ Ma_type.show ma_type
+      ]
+    | Beta { timeperiod } -> "Beta", ["timeperiod=" ^ string_of_int timeperiod]
+    | Bop _ -> "Bop", []
+    | Cci { timeperiod } -> "Cci", ["timeperiod=" ^ string_of_int timeperiod]
+    | Cdl2crows _ -> "Cdl2crows", []
+    | Cdl3blackcrows _ -> "Cdl3blackcrows", []
+    | Cdl3inside _ -> "Cdl3inside", []
+    | Cdl3linestrike _ -> "Cdl3linestrike", []
+    | Cdl3outside _ -> "Cdl3outside", []
+    | Cdl3starsinsouth _ -> "Cdl3starsinsouth", []
+    | Cdl3whitesoldiers _ -> "Cdl3whitesoldiers", []
+    | Cdlabandonedbaby { penetration } -> "Cdlabandonedbaby", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdladvanceblock _ -> "Cdladvanceblock", []
+    | Cdlbelthold _ -> "Cdlbelthold", []
+    | Cdlbreakaway _ -> "Cdlbreakaway", []
+    | Cdlclosingmarubozu _ -> "Cdlclosingmarubozu", []
+    | Cdlconcealbabyswall _ -> "Cdlconcealbabyswall", []
+    | Cdlcounterattack _ -> "Cdlcounterattack", []
+    | Cdldarkcloudcover { penetration } -> "Cdldarkcloudcover", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdldoji _ -> "Cdldoji", []
+    | Cdldojistar _ -> "Cdldojistar", []
+    | Cdldragonflydoji _ -> "Cdldragonflydoji", []
+    | Cdlengulfing _ -> "Cdlengulfing", []
+    | Cdleveningdojistar { penetration } -> "Cdleveningdojistar", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdleveningstar { penetration } -> "Cdleveningstar", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdlgapsidesidewhite _ -> "Cdlgapsidesidewhite", []
+    | Cdlgravestonedoji _ -> "Cdlgravestonedoji", []
+    | Cdlhammer _ -> "Cdlhammer", []
+    | Cdlhangingman _ -> "Cdlhangingman", []
+    | Cdlharami _ -> "Cdlharami", []
+    | Cdlharamicross _ -> "Cdlharamicross", []
+    | Cdlhighwave _ -> "Cdlhighwave", []
+    | Cdlhikkake _ -> "Cdlhikkake", []
+    | Cdlhikkakemod _ -> "Cdlhikkakemod", []
+    | Cdlhomingpigeon _ -> "Cdlhomingpigeon", []
+    | Cdlidentical3crows _ -> "Cdlidentical3crows", []
+    | Cdlinneck _ -> "Cdlinneck", []
+    | Cdlinvertedhammer _ -> "Cdlinvertedhammer", []
+    | Cdlkicking _ -> "Cdlkicking", []
+    | Cdlkickingbylength _ -> "Cdlkickingbylength", []
+    | Cdlladderbottom _ -> "Cdlladderbottom", []
+    | Cdllongleggeddoji _ -> "Cdllongleggeddoji", []
+    | Cdllongline _ -> "Cdllongline", []
+    | Cdlmarubozu _ -> "Cdlmarubozu", []
+    | Cdlmatchinglow _ -> "Cdlmatchinglow", []
+    | Cdlmathold { penetration } -> "Cdlmathold", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdlmorningdojistar { penetration } -> "Cdlmorningdojistar", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdlmorningstar { penetration } -> "Cdlmorningstar", [
+        "penetration=" ^ string_of_float penetration
+      ]
+    | Cdlonneck _ -> "Cdlonneck", []
+    | Cdlpiercing _ -> "Cdlpiercing", []
+    | Cdlrickshawman _ -> "Cdlrickshawman", []
+    | Cdlrisefall3methods _ -> "Cdlrisefall3methods", []
+    | Cdlseparatinglines _ -> "Cdlseparatinglines", []
+    | Cdlshootingstar _ -> "Cdlshootingstar", []
+    | Cdlshortline _ -> "Cdlshortline", []
+    | Cdlspinningtop _ -> "Cdlspinningtop", []
+    | Cdlstalledpattern _ -> "Cdlstalledpattern", []
+    | Cdlsticksandwich _ -> "Cdlsticksandwich", []
+    | Cdltakuri _ -> "Cdltakuri", []
+    | Cdltasukigap _ -> "Cdltasukigap", []
+    | Cdlthrusting _ -> "Cdlthrusting", []
+    | Cdltristar _ -> "Cdltristar", []
+    | Cdlunique3river _ -> "Cdlunique3river", []
+    | Cdlupsidegap2crows _ -> "Cdlupsidegap2crows", []
+    | Cdlxsidegap3methods _ -> "Cdlxsidegap3methods", []
+    | Ceil _ -> "Ceil", []
+    | Cmo { timeperiod } -> "Cmo", ["timeperiod=" ^ string_of_int timeperiod]
+    | Correl { timeperiod } -> "Correl", ["timeperiod=" ^ string_of_int timeperiod]
+    | Cos _ -> "Cos", []
+    | Cosh _ -> "Cosh", []
+    | Dema { timeperiod } -> "Dema", ["timeperiod=" ^ string_of_int timeperiod]
+    | Div _ -> "Div", []
+    | Dx { timeperiod } -> "Dx", ["timeperiod=" ^ string_of_int timeperiod]
+    | Ema { timeperiod } -> "Ema", ["timeperiod=" ^ string_of_int timeperiod]
+    | Exp _ -> "Exp", []
+    | Floor _ -> "Floor", []
+    | Ht_dcperiod _ -> "Ht_dcperiod", []
+    | Ht_dcphase _ -> "Ht_dcphase", []
+    | Ht_phasor _ -> "Ht_phasor", []
+    | Ht_sine _ -> "Ht_sine", []
+    | Ht_trendline _ -> "Ht_trendline", []
+    | Ht_trendmode _ -> "Ht_trendmode", []
+    | Imi { timeperiod } -> "Imi", ["timeperiod=" ^ string_of_int timeperiod]
+    | Kama { timeperiod } -> "Kama", ["timeperiod=" ^ string_of_int timeperiod]
+    | Linearreg { timeperiod } -> "Linearreg", ["timeperiod=" ^ string_of_int timeperiod]
+    | Linearreg_angle { timeperiod } -> "Linearreg_angle", ["timeperiod=" ^ string_of_int timeperiod]
+    | Linearreg_intercept { timeperiod } -> "Linearreg_intercept", ["timeperiod=" ^ string_of_int timeperiod]
+    | Linearreg_slope { timeperiod } -> "Linearreg_slope", ["timeperiod=" ^ string_of_int timeperiod]
+    | Ln _ -> "Ln", []
+    | Log10 _ -> "Log10", []
+    | Ma { timeperiod; ma_type } -> "Ma", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "ma_type=" ^ Ma_type.show ma_type
+      ]
+    | Macd { fast_period; slow_period; signal_period } -> "Macd", [
+        "fast_period=" ^ string_of_int fast_period;
+        "slow_period=" ^ string_of_int slow_period;
+        "signal_period=" ^ string_of_int signal_period
+      ]
+    | Macdext { fast_period; fast_ma_type; slow_period; slow_ma_type; signal_period; signal_ma_type } -> "Macdext", [
+        "fast_period=" ^ string_of_int fast_period;
+        "fast_ma_type=" ^ Ma_type.show fast_ma_type;
+        "slow_period=" ^ string_of_int slow_period;
+        "slow_ma_type=" ^ Ma_type.show slow_ma_type;
+        "signal_period=" ^ string_of_int signal_period;
+        "signal_ma_type=" ^ Ma_type.show signal_ma_type
+      ]
+    | Macdfix { signal_period } -> "Macdfix", [
+        "signal_period=" ^ string_of_int signal_period
+      ]
+    | Mama { fast_limit; slow_limit } -> "Mama", [
+        "fast_limit=" ^ string_of_float fast_limit;
+        "slow_limit=" ^ string_of_float slow_limit
+      ]
+    | Mavp { min_period; max_period; ma_type } -> "Mavp", [
+        "min_period=" ^ string_of_int min_period;
+        "max_period=" ^ string_of_int max_period;
+        "ma_type=" ^ Ma_type.show ma_type
+      ]
+    | Max { timeperiod } -> "Max", ["timeperiod=" ^ string_of_int timeperiod]
+    | Maxindex { timeperiod } -> "Maxindex", ["timeperiod=" ^ string_of_int timeperiod]
+    | Medprice _ -> "Medprice", []
+    | Mfi { timeperiod } -> "Mfi", ["timeperiod=" ^ string_of_int timeperiod]
+    | Midpoint { timeperiod } -> "Midpoint", ["timeperiod=" ^ string_of_int timeperiod]
+    | Midprice { timeperiod } -> "Midprice", ["timeperiod=" ^ string_of_int timeperiod]
+    | Min { timeperiod } -> "Min", ["timeperiod=" ^ string_of_int timeperiod]
+    | Minindex { timeperiod } -> "Minindex", ["timeperiod=" ^ string_of_int timeperiod]
+    | Minmax { timeperiod } -> "Minmax", ["timeperiod=" ^ string_of_int timeperiod]
+    | Minmaxindex { timeperiod } -> "Minmaxindex", ["timeperiod=" ^ string_of_int timeperiod]
+    | Minus_di { timeperiod } -> "Minus_di", ["timeperiod=" ^ string_of_int timeperiod]
+    | Minus_dm { timeperiod } -> "Minus_dm", ["timeperiod=" ^ string_of_int timeperiod]
+    | Mom { timeperiod } -> "Mom", ["timeperiod=" ^ string_of_int timeperiod]
+    | Mult _ -> "Mult", []
+    | Natr { timeperiod } -> "Natr", ["timeperiod=" ^ string_of_int timeperiod]
+    | Obv _ -> "Obv", []
+    | Plus_di { timeperiod } -> "Plus_di", ["timeperiod=" ^ string_of_int timeperiod]
+    | Plus_dm { timeperiod } -> "Plus_dm", ["timeperiod=" ^ string_of_int timeperiod]
+    | Ppo { fast_period; slow_period; ma_type } -> "Ppo", [
+        "fast_period=" ^ string_of_int fast_period;
+        "slow_period=" ^ string_of_int slow_period;
+        "ma_type=" ^ Ma_type.show ma_type
+      ]
+    | Roc { timeperiod } -> "Roc", ["timeperiod=" ^ string_of_int timeperiod]
+    | Rocp { timeperiod } -> "Rocp", ["timeperiod=" ^ string_of_int timeperiod]
+    | Rocr { timeperiod } -> "Rocr", ["timeperiod=" ^ string_of_int timeperiod]
+    | Rocr100 { timeperiod } -> "Rocr100", ["timeperiod=" ^ string_of_int timeperiod]
+    | Rsi { timeperiod } -> "Rsi", ["timeperiod=" ^ string_of_int timeperiod]
+    | Sar { acceleration; maximum } -> "Sar", [
+        "acceleration=" ^ string_of_float acceleration;
+        "maximum=" ^ string_of_float maximum
+      ]
+    | Sarext { start_value; offset_on_reverse; acceleration_init_long; acceleration_long; acceleration_max_long; acceleration_init_short; acceleration_short; acceleration_max_short } -> "Sarext", [
+        "start_value=" ^ string_of_float start_value;
+        "offset_on_reverse=" ^ string_of_float offset_on_reverse;
+        "acceleration_init_long=" ^ string_of_float acceleration_init_long;
+        "acceleration_long=" ^ string_of_float acceleration_long;
+        "acceleration_max_long=" ^ string_of_float acceleration_max_long;
+        "acceleration_init_short=" ^ string_of_float acceleration_init_short;
+        "acceleration_short=" ^ string_of_float acceleration_short;
+        "acceleration_max_short=" ^ string_of_float acceleration_max_short
+      ]
+    | Sin _ -> "Sin", []
+    | Sinh _ -> "Sinh", []
+    | Sma { timeperiod } -> "Sma", ["timeperiod=" ^ string_of_int timeperiod]
+    | Sqrt _ -> "Sqrt", []
+    | Stddev { timeperiod; nb_dev } -> "Stddev", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "nb_dev=" ^ string_of_float nb_dev
+      ]
+    | Stoch { fast_k_period; slow_k_period; slow_k_ma_type; slow_d_period; slow_d_ma_type } -> "Stoch", [
+        "fast_k_period=" ^ string_of_int fast_k_period;
+        "slow_k_period=" ^ string_of_int slow_k_period;
+        "slow_k_ma_type=" ^ Ma_type.show slow_k_ma_type;
+        "slow_d_period=" ^ string_of_int slow_d_period;
+        "slow_d_ma_type=" ^ Ma_type.show slow_d_ma_type
+      ]
+    | Stochf { fast_k_period; fast_d_period; fast_d_ma_type } -> "Stochf", [
+        "fast_k_period=" ^ string_of_int fast_k_period;
+        "fast_d_period=" ^ string_of_int fast_d_period;
+        "fast_d_ma_type=" ^ Ma_type.show fast_d_ma_type
+      ]
+    | Stochrsi { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type } -> "Stochrsi", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "fast_k_period=" ^ string_of_int fast_k_period;
+        "fast_d_period=" ^ string_of_int fast_d_period;
+        "fast_d_ma_type=" ^ Ma_type.show fast_d_ma_type
+      ]
+    | Sub _ -> "Sub", []
+    | Sum { timeperiod } -> "Sum", ["timeperiod=" ^ string_of_int timeperiod]
+    | T3 { timeperiod; v_factor } -> "T3", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "v_factor=" ^ string_of_float v_factor
+      ]
+    | Tan _ -> "Tan", []
+    | Tanh _ -> "Tanh", []
+    | Tema { timeperiod } -> "Tema", ["timeperiod=" ^ string_of_int timeperiod]
+    | Trange _ -> "Trange", []
+    | Trima { timeperiod } -> "Trima", ["timeperiod=" ^ string_of_int timeperiod]
+    | Trix { timeperiod } -> "Trix", ["timeperiod=" ^ string_of_int timeperiod]
+    | Tsf { timeperiod } -> "Tsf", ["timeperiod=" ^ string_of_int timeperiod]
+    | Typprice _ -> "Typprice", []
+    | Ultosc { timeperiod1; timeperiod2; timeperiod3 } -> "Ultosc", [
+        "timeperiod1=" ^ string_of_int timeperiod1;
+        "timeperiod2=" ^ string_of_int timeperiod2;
+        "timeperiod3=" ^ string_of_int timeperiod3
+      ]
+    | Var { timeperiod; nb_dev } -> "Var", [
+        "timeperiod=" ^ string_of_int timeperiod;
+        "nb_dev=" ^ string_of_float nb_dev
+      ]
+    | Wclprice _ -> "Wclprice", []
+    | Willr { timeperiod } -> "Willr", ["timeperiod=" ^ string_of_int timeperiod]
+    | Wma { timeperiod } -> "Wma", ["timeperiod=" ^ string_of_int timeperiod]
+  in
+  Format.fprintf fmt "@[%s%s@]" name (format_params params)
 
 let hash : type a b. (a, b) t -> int = function
   | Accbands { timeperiod } -> Hash.combine2 (Hash.int 0) (Hash.int timeperiod)

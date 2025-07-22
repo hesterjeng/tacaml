@@ -6,6 +6,7 @@ module Output = Output
 module Defaults = Defaults
 module Indicator = Indicator
 module Parser = Parser
+module Conv = Conv
 
 type t = Pack.t
 

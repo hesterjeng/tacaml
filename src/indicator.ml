@@ -203,7 +203,7 @@ module Float = struct
     | Imi of { timeperiod : int }
     | Mama_MAMA of { fast_limit : float; slow_limit : float }
     | Mama_FAMA of { fast_limit : float; slow_limit : float }
-  [@@deriving hash, compare, show]
+  [@@deriving hash, compare, show { with_path = false }]
 end
 
 module Int = struct
@@ -274,10 +274,15 @@ module Int = struct
     | MinIndex of { timeperiod : int }
     | MinMaxIndex_Min of { timeperiod : int }
     | MinMaxIndex_Max of { timeperiod : int }
-  [@@deriving hash, compare, show]
+  [@@deriving hash, compare, show { with_path = false }]
 end
 
 type t = F of Float.t | I of Int.t [@@deriving hash, compare, show]
+
+let show x =
+  match x with
+  | F x -> Float.show x
+  | I x -> Int.show x
 
 let equal x y = compare x y = 0
 

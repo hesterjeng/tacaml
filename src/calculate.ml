@@ -11,9 +11,12 @@ let range ?i x =
 exception BadInput
 
 let iba :
-    (int, Bigarray.int_elt, Bigarray.c_layout) Bigarray.Array1.t ->
+    (int32, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t ->
     int Ctypes.ptr =
-  C.bigarray_start C.array1
+ fun arr ->
+  (* Cast the int32 array to int array for C compatibility *)
+  let int_arr = Obj.magic arr in
+  C.bigarray_start C.array1 int_arr
 
 let calculate : type a b.
     (a, b) t -> ?i:int -> a -> b -> (int * int, [> `TALibCode of int ]) result =

@@ -7,6 +7,7 @@ module Defaults = Defaults
 module Indicator = Indicator
 module Parser = Parser
 module Conv = Conv
+module Pack = Pack
 
 type t = Pack.t
 

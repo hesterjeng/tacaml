@@ -32,6 +32,7 @@ module Output : module type of Output
 module Defaults : module type of Defaults
 module Indicator : module type of Indicator
 module Conv : module type of Conv
+module Pack : module type of Pack
 
 (**/**)
 

@@ -11,3 +11,4 @@ let to_string (Pack x : t) =
 let pp = fun fmt (Pack x : t) -> Format.fprintf fmt "%a" Safe.pp x
 let hash (Pack x : t) = Safe.hash x
 let equal (Pack x : t) (Pack y : t) = Safe.equal x y
+

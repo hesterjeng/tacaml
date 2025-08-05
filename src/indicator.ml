@@ -653,3 +653,349 @@ let accbands_middle ?(timeperiod = 20) () =
   F (Float.MiddleAccBand { timeperiod })
 
 let accbands_lower ?(timeperiod = 20) () = F (Float.LowerAccBand { timeperiod })
+
+module Raw = struct
+  let upper_bband timeperiod nb_dev_up nb_dev_dn =
+    F (Float.UpperBBand { timeperiod; nb_dev_up; nb_dev_dn; ma_type = Ma_type.Ema })
+
+  let middle_bband timeperiod nb_dev_up nb_dev_dn =
+    F (Float.MiddleBBand { timeperiod; nb_dev_up; nb_dev_dn; ma_type = Ma_type.Ema })
+
+  let lower_bband timeperiod nb_dev_up nb_dev_dn =
+    F (Float.LowerBBand { timeperiod; nb_dev_up; nb_dev_dn; ma_type = Ma_type.Ema })
+
+  let dema timeperiod = F (Float.Dema { timeperiod })
+  let ema timeperiod = F (Float.Ema { timeperiod })
+  let ht_trendline = F Float.HtTrendline
+  let kama timeperiod = F (Float.Kama { timeperiod })
+
+  let ma timeperiod =
+    F (Float.Ma { timeperiod; ma_type = Ma_type.Ema })
+
+  let mama fast_limit slow_limit =
+    F (Float.Mama { fast_limit; slow_limit })
+
+  let mavp min_period max_period =
+    F (Float.Mavp { min_period; max_period; ma_type = Ma_type.Ema })
+
+  let midpoint timeperiod = F (Float.Midpoint { timeperiod })
+  let midprice timeperiod = F (Float.Midprice { timeperiod })
+
+  let sar acceleration maximum =
+    F (Float.Sar { acceleration; maximum })
+
+  let sarext start_value offset_on_reverse acceleration_init_long acceleration_long acceleration_max_long acceleration_init_short acceleration_short acceleration_max_short =
+    F
+      (Float.Sarext
+         {
+           start_value;
+           offset_on_reverse;
+           acceleration_init_long;
+           acceleration_long;
+           acceleration_max_long;
+           acceleration_init_short;
+           acceleration_short;
+           acceleration_max_short;
+         })
+
+  let sma timeperiod = F (Float.Sma { timeperiod })
+
+  let t3 timeperiod v_factor =
+    F (Float.T3 { timeperiod; v_factor })
+
+  let tema timeperiod = F (Float.Tema { timeperiod })
+  let trima timeperiod = F (Float.Trima { timeperiod })
+  let wma timeperiod = F (Float.Wma { timeperiod })
+  let adx timeperiod = F (Float.Adx { timeperiod })
+  let adxr timeperiod = F (Float.Adxr { timeperiod })
+
+  let apo fast_period slow_period =
+    F (Float.Apo { fast_period; slow_period; ma_type = Ma_type.Ema })
+
+  let aroon_osc timeperiod = F (Float.AroonOsc { timeperiod })
+  let cci timeperiod = F (Float.Cci { timeperiod })
+  let cmo timeperiod = F (Float.Cmo { timeperiod })
+  let dx timeperiod = F (Float.Dx { timeperiod })
+
+  let macd_macd fast_period slow_period signal_period =
+    F (Float.Macd_MACD { fast_period; slow_period; signal_period })
+
+  let macd_signal fast_period slow_period signal_period =
+    F (Float.Macd_MACDSignal { fast_period; slow_period; signal_period })
+
+  let macd_hist fast_period slow_period signal_period =
+    F (Float.Macd_MACDHist { fast_period; slow_period; signal_period })
+
+  let macd_ext_macd fast_period slow_period signal_period =
+    F
+      (Float.MacdExt_MACD
+         {
+           fast_period;
+           fast_ma_type = Ma_type.Ema;
+           slow_period;
+           slow_ma_type = Ma_type.Ema;
+           signal_period;
+           signal_ma_type = Ma_type.Ema;
+         })
+
+  let macd_ext_signal fast_period slow_period signal_period =
+    F
+      (Float.MacdExt_MACDSignal
+         {
+           fast_period;
+           fast_ma_type = Ma_type.Ema;
+           slow_period;
+           slow_ma_type = Ma_type.Ema;
+           signal_period;
+           signal_ma_type = Ma_type.Ema;
+         })
+
+  let macd_ext_hist fast_period slow_period signal_period =
+    F
+      (Float.MacdExt_MACDHist
+         {
+           fast_period;
+           fast_ma_type = Ma_type.Ema;
+           slow_period;
+           slow_ma_type = Ma_type.Ema;
+           signal_period;
+           signal_ma_type = Ma_type.Ema;
+         })
+
+  let macd_fix_macd signal_period =
+    F (Float.MacdFix_MACD { signal_period })
+
+  let macd_fix_signal signal_period =
+    F (Float.MacdFix_MACDSignal { signal_period })
+
+  let macd_fix_hist signal_period =
+    F (Float.MacdFix_MACDHist { signal_period })
+
+  let mfi timeperiod = F (Float.Mfi { timeperiod })
+  let minus_di timeperiod = F (Float.MinusDI { timeperiod })
+  let minus_dm timeperiod = F (Float.MinusDM { timeperiod })
+  let mom timeperiod = F (Float.Mom { timeperiod })
+  let plus_di timeperiod = F (Float.PlusDI { timeperiod })
+  let plus_dm timeperiod = F (Float.PlusDM { timeperiod })
+
+  let ppo fast_period slow_period =
+    F (Float.Ppo { fast_period; slow_period; ma_type = Ma_type.Ema })
+
+  let roc timeperiod = F (Float.Roc { timeperiod })
+  let rocp timeperiod = F (Float.Rocp { timeperiod })
+  let rocr timeperiod = F (Float.Rocr { timeperiod })
+  let rocr100 timeperiod = F (Float.Rocr100 { timeperiod })
+  let rsi timeperiod = F (Float.Rsi { timeperiod })
+
+  let stoch_slow_k fast_k_period slow_k_period slow_d_period =
+    F
+      (Float.Stoch_SlowK
+         {
+           fast_k_period;
+           slow_k_period;
+           slow_k_ma_type = Ma_type.Ema;
+           slow_d_period;
+           slow_d_ma_type = Ma_type.Ema;
+         })
+
+  let stoch_slow_d fast_k_period slow_k_period slow_d_period =
+    F
+      (Float.Stoch_SlowD
+         {
+           fast_k_period;
+           slow_k_period;
+           slow_k_ma_type = Ma_type.Ema;
+           slow_d_period;
+           slow_d_ma_type = Ma_type.Ema;
+         })
+
+  let stoch_f_fast_k fast_k_period fast_d_period =
+    F (Float.StochF_FastK { fast_k_period; fast_d_period; fast_d_ma_type = Ma_type.Ema })
+
+  let stoch_f_fast_d fast_k_period fast_d_period =
+    F (Float.StochF_FastD { fast_k_period; fast_d_period; fast_d_ma_type = Ma_type.Ema })
+
+  let stoch_rsi_fast_k timeperiod fast_k_period fast_d_period =
+    F
+      (Float.StochRsi_FastK
+         { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type = Ma_type.Ema })
+
+  let stoch_rsi_fast_d timeperiod fast_k_period fast_d_period =
+    F
+      (Float.StochRsi_FastD
+         { timeperiod; fast_k_period; fast_d_period; fast_d_ma_type = Ma_type.Ema })
+
+  let trix timeperiod = F (Float.Trix { timeperiod })
+
+  let ultosc timeperiod1 timeperiod2 timeperiod3 =
+    F (Float.Ultosc { timeperiod1; timeperiod2; timeperiod3 })
+
+  let willr timeperiod = F (Float.Willr { timeperiod })
+  let ad = F Float.Ad
+
+  let adosc fast_period slow_period =
+    F (Float.Adosc { fast_period; slow_period })
+
+  let obv = F Float.Obv
+  let atr timeperiod = F (Float.Atr { timeperiod })
+  let natr timeperiod = F (Float.Natr { timeperiod })
+  let trange = F Float.Trange
+  let avg_price = F Float.AvgPrice
+  let med_price = F Float.MedPrice
+  let typ_price = F Float.TypPrice
+  let wcl_price = F Float.WclPrice
+  let ht_dc_period = F Float.HtDcPeriod
+  let ht_dc_phase = F Float.HtDcPhase
+  let ht_phasor_inphase = F Float.HtPhasor_InPhase
+  let ht_phasor_quadrature = F Float.HtPhasor_Quadrature
+  let ht_sine_sine = F Float.HtSine_Sine
+  let ht_sine_leadsine = F Float.HtSine_LeadSine
+  let aroon_down timeperiod = F (Float.Aroon_Down { timeperiod })
+  let aroon_up timeperiod = F (Float.Aroon_Up { timeperiod })
+  let beta timeperiod = F (Float.Beta { timeperiod })
+  let correl timeperiod = F (Float.Correl { timeperiod })
+  let linearreg timeperiod = F (Float.Linearreg { timeperiod })
+
+  let linearreg_angle timeperiod =
+    F (Float.LinearregAngle { timeperiod })
+
+  let linearreg_intercept timeperiod =
+    F (Float.LinearregIntercept { timeperiod })
+
+  let linearreg_slope timeperiod =
+    F (Float.LinearregSlope { timeperiod })
+
+  let min_max_min timeperiod = F (Float.MinMax_Min { timeperiod })
+  let min_max_max timeperiod = F (Float.MinMax_Max { timeperiod })
+
+  let stddev timeperiod nb_dev =
+    F (Float.Stddev { timeperiod; nb_dev })
+
+  let tsf timeperiod = F (Float.Tsf { timeperiod })
+
+  let var timeperiod nb_dev =
+    F (Float.Var { timeperiod; nb_dev })
+
+  let acos = F Float.Acos
+  let asin = F Float.Asin
+  let atan = F Float.Atan
+  let ceil = F Float.Ceil
+  let cos = F Float.Cos
+  let cosh = F Float.Cosh
+  let exp = F Float.Exp
+  let floor = F Float.Floor
+  let ln = F Float.Ln
+  let log10 = F Float.Log10
+  let sin = F Float.Sin
+  let sinh = F Float.Sinh
+  let sqrt = F Float.Sqrt
+  let tan = F Float.Tan
+  let tanh = F Float.Tanh
+  let add = F Float.Add
+  let div = F Float.Div
+  let max timeperiod = F (Float.Max { timeperiod })
+  let min timeperiod = F (Float.Min { timeperiod })
+  let mult = F Float.Mult
+  let sub = F Float.Sub
+  let sum timeperiod = F (Float.Sum { timeperiod })
+  let avgdev timeperiod = F (Float.Avgdev { timeperiod })
+  let bop = F Float.Bop
+  let imi timeperiod = F (Float.Imi { timeperiod })
+
+  let mama_mama fast_limit slow_limit =
+    F (Float.Mama_MAMA { fast_limit; slow_limit })
+
+  let mama_fama fast_limit slow_limit =
+    F (Float.Mama_FAMA { fast_limit; slow_limit })
+
+  let accbands_upper timeperiod = F (Float.UpperAccBand { timeperiod })
+  let accbands_middle timeperiod = F (Float.MiddleAccBand { timeperiod })
+  let accbands_lower timeperiod = F (Float.LowerAccBand { timeperiod })
+
+  let ht_trend_mode = I Int.HtTrendMode
+  let cdl_2crows = I Int.Cdl2Crows
+  let cdl_3blackcrows = I Int.Cdl3BlackCrows
+  let cdl_3inside = I Int.Cdl3Inside
+  let cdl_3linestrike = I Int.Cdl3LineStrike
+  let cdl_3outside = I Int.Cdl3Outside
+  let cdl_3starsinsouth = I Int.Cdl3StarsInSouth
+  let cdl_3whitesoldiers = I Int.Cdl3WhiteSoldiers
+
+  let cdl_abandonedbaby penetration =
+    I (Int.CdlAbandonedBaby { penetration })
+
+  let cdl_advanceblock = I Int.CdlAdvanceBlock
+  let cdl_belthold = I Int.CdlBeltHold
+  let cdl_breakaway = I Int.CdlBreakaway
+  let cdl_closingmarubozu = I Int.CdlClosingMarubozu
+  let cdl_concealbabyswall = I Int.CdlConcealBabySwall
+  let cdl_counterattack = I Int.CdlCounterAttack
+
+  let cdl_darkcloudcover penetration =
+    I (Int.CdlDarkCloudCover { penetration })
+
+  let cdl_doji = I Int.CdlDoji
+  let cdl_dojistar = I Int.CdlDojiStar
+  let cdl_dragonflydoji = I Int.CdlDragonflyDoji
+  let cdl_engulfing = I Int.CdlEngulfing
+
+  let cdl_eveningdojistar penetration =
+    I (Int.CdlEveningDojiStar { penetration })
+
+  let cdl_eveningstar penetration =
+    I (Int.CdlEveningStar { penetration })
+
+  let cdl_gap_side_side_white = I Int.CdlGapSideSideWhite
+  let cdl_gravestonedoji = I Int.CdlGravestoneDoji
+  let cdl_hammer = I Int.CdlHammer
+  let cdl_hangingman = I Int.CdlHangingMan
+  let cdl_harami = I Int.CdlHarami
+  let cdl_haramicross = I Int.CdlHaramiCross
+  let cdl_highwave = I Int.CdlHighWave
+  let cdl_hikkake = I Int.CdlHikkake
+  let cdl_hikkakemod = I Int.CdlHikkakeMod
+  let cdl_homingpigeon = I Int.CdlHomingPigeon
+  let cdl_identical3crows = I Int.CdlIdentical3Crows
+  let cdl_inneck = I Int.CdlInNeck
+  let cdl_invertedhammer = I Int.CdlInvertedHammer
+  let cdl_kicking = I Int.CdlKicking
+  let cdl_kickingbylength = I Int.CdlKickingByLength
+  let cdl_ladderbottom = I Int.CdlLadderBottom
+  let cdl_longleggedDoji = I Int.CdlLongLeggedDoji
+  let cdl_longline = I Int.CdlLongLine
+  let cdl_marubozu = I Int.CdlMarubozu
+  let cdl_matchinglow = I Int.CdlMatchingLow
+  let cdl_mathold penetration = I (Int.CdlMatHold { penetration })
+
+  let cdl_morningdojistar penetration =
+    I (Int.CdlMorningDojiStar { penetration })
+
+  let cdl_morningstar penetration =
+    I (Int.CdlMorningStar { penetration })
+
+  let cdl_onneck = I Int.CdlOnNeck
+  let cdl_piercing = I Int.CdlPiercing
+  let cdl_rickshawman = I Int.CdlRickshawMan
+  let cdl_risefall3methods = I Int.CdlRiseFall3Methods
+  let cdl_separatinglines = I Int.CdlSeparatingLines
+  let cdl_shootingstar = I Int.CdlShootingStar
+  let cdl_shortline = I Int.CdlShortLine
+  let cdl_spinningtop = I Int.CdlSpinningTop
+  let cdl_stalledpattern = I Int.CdlStalledPattern
+  let cdl_sticksandwich = I Int.CdlStickSandwich
+  let cdl_takuri = I Int.CdlTakuri
+  let cdl_tasukigap = I Int.CdlTasukiGap
+  let cdl_thrusting = I Int.CdlThrusting
+  let cdl_tristar = I Int.CdlTristar
+  let cdl_unique3river = I Int.CdlUnique3River
+  let cdl_upsidegap2crows = I Int.CdlUpsideGap2Crows
+  let cdl_xsidegap3methods = I Int.CdlXSideGap3Methods
+  let max_index timeperiod = I (Int.MaxIndex { timeperiod })
+  let min_index timeperiod = I (Int.MinIndex { timeperiod })
+
+  let min_max_index_min timeperiod =
+    I (Int.MinMaxIndex_Min { timeperiod })
+
+  let min_max_index_max timeperiod =
+    I (Int.MinMaxIndex_Max { timeperiod })
+end

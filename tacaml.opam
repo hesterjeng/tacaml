@@ -12,6 +12,8 @@ depends: [
   "ocaml"
   "ctypes"
   "containers"
+  "ppx_deriving"
+  "ppx_hash"
   "odoc" {with-doc}
 ]
 build: [

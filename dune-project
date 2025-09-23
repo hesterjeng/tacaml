@@ -1,4 +1,5 @@
 (lang dune 3.17)
+
 (using ctypes 0.3)
 
 (generate_opam_files true)
@@ -19,7 +20,6 @@
  (homepage "https://github.com/hesterjeng/longleaf")
  (description "A longer description")
  (bug_reports "Github Issue")
- (depends ocaml ctypes containers)
-)
+ (depends ocaml ctypes containers ppx_deriving ppx_hash))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

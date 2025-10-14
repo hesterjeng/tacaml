@@ -12,9 +12,16 @@
 (package
   (name "tacaml")
   (version "1.0.0")
-  (source (local-file "." "tacaml"
-                      #:recursive? #t
-                      #:select? (git-predicate ".")))
+  (source (origin
+            (method git-fetch)
+            (uri (git-reference
+                  (url "https://github.com/hesterjeng/tacaml")
+                  (commit "HEAD")))
+            (file-name (git-file-name name version))
+            (sha256
+             (base32
+	      "0d45rjr2rc39i53fdsczd7pxw5rb5i2a2vcjd0k08vrjxac5ys0s"
+	      ))))
   (build-system dune-build-system)
   (arguments
    `(#:test-target "."))
@@ -23,6 +30,7 @@
   (propagated-inputs
    (list ocaml
          dune
+	 ocaml-containers
          ocaml-ctypes
          ocaml-ppx-deriving
          ocaml-ppx-hash

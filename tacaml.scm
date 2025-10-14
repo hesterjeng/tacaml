@@ -11,15 +11,15 @@
 
 (package
   (name "tacaml")
-  (version "0.1.0")
-  (source (local-file "." "tacaml-checkout"
+  (version "1.0.0")
+  (source (local-file "." "tacaml"
                       #:recursive? #t
                       #:select? (git-predicate ".")))
   (build-system dune-build-system)
   (arguments
    `(#:test-target "."))
-  (native-inputs
-   (list ocaml-odoc))
+  ;; (native-inputs
+  ;;  (list ocaml-odoc))
   (propagated-inputs
    (list ocaml
          dune
